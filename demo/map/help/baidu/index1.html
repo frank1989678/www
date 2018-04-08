@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>百度地图-路书</title>
+    <style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    #map {
+        height: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script src="/static/js/jquery191.js"></script>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=pcExWaLfoopv7vZ5hO1B8ej8"></script>
+    <script src="LuShu.js"></script>
+    <script src="points.js"></script>
+    <script>
+
+    // arrPois = arrPois.slice(0, 6);
+
+    var carPlace = {
+        init: function() {
+            var rhat = this;
+            this.initMap();
+            this.driving();
+            // this.driving2();
+        },
+        initMap: function() {
+            this.map = new BMap.Map('map');
+            this.map.centerAndZoom(arrPois[0], 14);
+
+            // 启用滚轮放大缩小
+            this.map.enableScrollWheelZoom();
+            // this.map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+
+            // 左上角，添加比例尺
+            var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});
+            // this.map.addControl(top_left_control);
+        },
+        driving2: function() {
+            var that = this;
+            var carIcon = new BMap.Icon('http://lbsyun.baidu.com/jsdemo/img/car.png', new BMap.Size(52,26),{anchor: new BMap.Size(27, 13)});
+
+            var lushu2 = new LuShu(that.map, arrPois,{
+                defaultContent: '鄂A39202',
+                showPath: true,
+                icon: carIcon,
+                duration: arrPois.length * 1e3
+            });
+            lushu2.move(arrPois);
+        },
+        driving: function() {
+            var that = this,
+                i = 1,
+                len = arrPois.length,
+                duration = 2e3;
+
+            var point = [arrPois[0]];
+            var carIcon = new BMap.Icon('http://lbsyun.baidu.com/jsdemo/img/car.png', new BMap.Size(52,26),{anchor: new BMap.Size(27, 13)});
+
+            var lushu = new LuShu(that.map, point,{
+                defaultContent: '鄂A39201',
+                showPath: true,
+                icon: carIcon,
+                duration: duration
+            });
+
+            var timer = setInterval(function() {
+                if (++i < len) {
+                    point[0] = point[1] || point[0];
+                    point[1] = arrPois[i];
+                    lushu.move(point);
+                } else {
+                    clearInterval(timer);
+                }
+            }, duration);
+        }
+    }
+
+    carPlace.init();
+    </script>
+</body>
+
+</html>

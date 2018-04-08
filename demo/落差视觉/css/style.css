@@ -1,0 +1,79 @@
+@charset "utf-8";
+body,html{width:100%;height:100%;background-color:#fff;}
+body,div,ul,ol,li,h1,h2,h3,h4,h5,h6,p{padding:0;margin:0}
+ol,ul{list-style:none}
+h1,h2,h3,h4,h5,h6{font-weight:bold;font-size:100%}
+body,textarea,select,input{line-height:1.5;font-size:12px;font-family:"Microsoft Yahei",verdana;color:#000}
+fieldset,img {border:0;}   
+address,caption,cite,code,dfn,em,th,var {font-style:normal;font-weight:normal;}   
+em {font-style:normal} 
+small{font-size:12px} 
+
+.header{position:fixed;top:0;left:0;z-index:8;width:100%;height:115px;background-color:#fff;overflow:hidden;}
+.nav{position:relative;width:1200px;margin:0 auto;text-align:center;}
+.nav a{font-size:18px;border-radius:4px;}
+.nav a:hover{color:#fff;background-color:#ec4415;text-decoration:none;}
+.nav li{display:inline-block;*display:inline;width:14%;}
+.nav li a{display:inline-block;padding:5px 20px;color:#ec4415;}
+.nav li a.current{position:relative;color:#fff;background-color:#ec4415;}
+.nav li a.current:after{content:"";position:absolute;bottom:-10px;left:50%;margin-left:-5px;border:5px dashed transparent;border-top:5px solid #ec4415;}
+.nav .login{position:absolute;top:20px;right:52px;}
+.nav .login a{margin-left:20px;padding:5px 20px;color:#fff;}
+.nav .login .log{background-color:#ec4415;}
+.nav .login .reg{background-color:#ffa700;}
+
+.header{background:url(../images/head.jpg) 50% 0 no-repeat;}
+.nav{display:none;}
+
+
+.area{position:absolute;left:0;top:0;z-index:4;}
+
+.pages{position:relative;background-repeat:no-repeat;background-position:50%;overflow:hidden;}
+.pages .inner{position:relative;width:1200px;height:950px;margin:0 auto;*zoom:1;}
+.pages .mid{position:absolute;top:50%;left:50%;}
+
+.page1{background-image:url(../images/page1/bg.jpg);}
+.page1 .icon{position:absolute;top:230px;left:160px;width:265px;}
+.page1 .area{width:530px;left:460px;top:330px;font-size:18px;color:#fff;}
+.page1 .area h2{margin-bottom:10px;line-height:1.2;font-size:30px;color:#fff;}
+.page1 .area h2 strong{display:block;font-size:48px;}
+
+.page2{background-image:url(../images/page2/bg.jpg);}
+.page2 .area{width:100%;left:0;top:200px;}
+.page2 .area h2{position:absolute;top:0;left:0;width:100%;text-align:center;}
+.page2 .area ul{position:absolute;top:260px;width:100%;text-align:center;}
+.page2 .area li{position:absolute;top:0;width:33%;text-align:center;}
+.page2 .area li.li1{left:0;}
+.page2 .area li.li2{left:33%;}
+.page2 .area li.li3{left:66%;}
+.page4 .area li img{min-width:100%;height:auto;}
+
+.page3{background-image:url(../images/page3/bg.jpg);}
+.page3 .area{width:100%;left:0;top:200px;}
+.page3 .area h2{position:absolute;top:0;left:0;width:100%;text-align:center;}
+.page3 .area ul{position:absolute;top:260px;width:100%;text-align:center;}
+.page3 .area li{position:absolute;top:0;width:33%;text-align:center;}
+.page3 .area li.li1{left:0;}
+.page3 .area li.li2{left:33%;}
+.page3 .area li.li3{left:66%;}
+.page4 .area li img{min-width:100%;height:auto;}
+
+.page4{background-image:url(../images/page4/bg.jpg);}
+.page4 .area{width:100%;left:0;top:300px;}
+.page4 .area h2{position:absolute;top:0;left:0;width:100%;text-align:center;}
+.page4 .area ul{position:absolute;top:160px;width:100%;text-align:center;}
+.page4 .area li{position:absolute;top:0;width:33%;text-align:center;}
+.page4 .area li.li1{left:0;}
+.page4 .area li.li2{left:33%;}
+.page4 .area li.li3{left:66%;}
+.page4 .area li img{min-width:100%;height:auto;}
+
+
+.sideNav{position:fixed;top:40%;right:40px;z-index:9;}
+.sideNav li{position:relative;width:140px;height:40px;line-height:20px;text-align:right;cursor:pointer;*zoom:1;}
+.sideNav li span{position:absolute;top:0;right:10px;padding:0 9px;;color:#fff;background-color:#eeb693;opacity:0;filter:alpha(opacity=0);-webkit-transition:all .3s;transition:all .3s;}
+.sideNav li b{position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:100%;background-color:#eeb693;}
+.sideNav li:hover span{opacity:1;filter:alpha(opacity=100);}
+.sideNav li:hover b{top:0;right:0;width:14px;height:14px;border:3px solid #eeb693;background:none;}
+
+

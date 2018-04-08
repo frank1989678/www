@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <style>
+    	.wrap{position:relative;width:1200px;margin:20px auto;}
+    	h2{height:60px;margin:0;text-align:center;font:700 20px "Microsoft Yahei";}
+    	ul{margin:0;padding:0;}
+		li{float:left;width:10%;margin-bottom:28px;text-align:center;list-style:none;}
+		li .avatar{width:90px;margin:0 auto;padding-top:2px;}
+		li .avatar img{width:60px;height:60px;-webkit-border-radius:50%;border-radius:50%;}
+		li .cnt{line-height:24px;}
+		li .cnt .uname{display:block;color:#5c92cf;font-size:12px;}
+		li .cnt .words{color:#666;}
+		li em{display:inline-block;margin-left:10px;font:14px/23px arial;vertical-align:top;}
+		.face{display:inline-block;width:23px;height:23px;background:url(img/3.png) no-repeat;}
+		.pig{display:inline-block;width:23px;height:23px;background:url(img/2.png) repeat-y;}
+		.pig img{width:23px;height:23px;}
+		.dot{display:block;height:20px;background:url(img/dot.png) no-repeat 50% 50%;}
+		.li0 .avatar{background:url(img/bg.png) no-repeat;}
+		dl,dt,dd{margin:0;padding:0;}
+		dl{position:absolute;top:-4px;right:0;padding:9px;font-size:12px;line-height:30px;background:#fff;border:1px solid #fff;}
+		dl dd{display:none;max-height:300px;overflow:hidden;overflow-y:auto;}
+		dl dt{margin:0;font:14px/24px "Microsoft Yahei";cursor:default;text-align:right;}
+		dl dt:after{content:"▼";}
+		dl a{display:block;}
+		dl a:hover{color:#b22222;}
+		dl:hover{border:1px solid #e7e7e7;}
+		dl:hover dd{display:block;-wenkit-animation:fadeIn.3s both;animation:fadeIn.3s both;}
+		dl:hover dt:after{content:"▲";}
+
+
+::-webkit-scrollbar-track-piece{background:#f0f0f0;-webkit-border-radius:5px;border-radius:5px;}
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-thumb{background:#ccc;background-clip:padding-box;min-height:28px}
+::-webkit-scrollbar-thumb:hover{background:#aaa;}
+::-webkit-scrollbar-thumb{-webkit-border-radius:5px;border-radius:5px;border:5px solid transparent;}
+  
+
+@-webkit-keyframes fadeIn{
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
+@keyframes fadeIn{
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
+
+    </style>
+</head>
+
+<body>
+	<div class="wrap">
+		<h2></h2>
+		<ul></ul>
+		<dl></dl>
+	</div>
+    <script src="jquery191.js"></script>
+    <script>
+    !(function() {
+    	_global = {
+    		init: function() {
+    			this.getHis();
+    			this.handel();
+    		},
+    		getData: function(id) {
+    			var that = this;
+    			$.ajax({
+		    		url: 'data/' + id + '.json',
+		    		cache: false,
+		    		success: function(res) {
+		    			that.toHtml(res);
+		    		}
+		    	})
+    		},
+    		toHtml: function(res) {
+	    		var model = [],
+					json = res.list,
+					sort = Object.keys(json).sort(function(a, b){return json[b].total - json[a].total});
+
+				$.each(sort, function(i, item) {
+					var total = json[item].total;
+					model.push('<li class="li', i, '">');
+			        model.push('<div class="avatar"><img src="', json[item].avatar, '"></div>');
+			        model.push('<div class="cnt">');
+			        model.push('<span class="uname">', item, '<em>(', total, ')</em></span>');
+
+			        if (total == 0) {
+			        	model.push('<span class="face"></span></em>');
+			        } else {
+			        	model.push('<span class="pig" style="height:', (Math.min(total, 30) * 23), 'px;"></span>');
+			        }
+			        if (total > 30) {
+			        	model.push('<span class="dot"></span>');
+			        }
+			        model.push('</div>');
+			        model.push('</li>');
+				})
+				$('h2').html(res.title + '(' + res.time  + ')');
+				$('ul').html(model.join(''));
+	    	},
+	    	getHis: function() {
+	    		var that = this;
+	    		$.ajax({
+	    			url: 'data/his.json',
+	    			success: function(res) {
+	    				var model = [],
+	    					date = 0;
+
+						model.push('<dt>历史榜单</dt>');
+						model.push('<dd>');
+						$.each(res, function(i, item) {
+							model.push('<a href="javascript:;" id="', item.id, '">', item.title, '</a>');
+							date = Math.max(item.id, date);
+						})
+						model.push('</dd>');
+						$('dl').html(model.join(''));
+						that.getData(date);
+	    			}
+	    		})
+	    		
+	    	},
+	    	handel: function() {
+	    		var that = this;
+		    	$('body').on('click', 'a', function() {
+		    		that.getData(this.id);
+		    	})
+	    	}
+    	}
+    	_global.init();
+
+    })();
+    </script>
+</body>
+
+</html>

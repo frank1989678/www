@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>商品详情-药优优</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="body1 body-gray">
+    <header class="ui-header">
+        <div class="title">商品详情</div>
+        <div class="abs-l mid">
+            <a href="javascript:history.back();" class="ico ico-back"></a>
+        </div>
+    </header><!-- /ui-header -->
+
+    <footer class="ui-footer">
+        <nav class="nav extra">
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <i class="home"></i>
+                        <span>首页</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="product_list.html">
+                        <i class="menu"></i>
+                        <span>列表</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pick.html">
+                        <i class="cart"></i>
+                        <span>采购单</span>
+                        <b id="cartNum">99</b>
+                    </a>
+                </li>
+                <li class="wide">
+                    <!-- <a class="cart" href="javascript:;" id="addCommodity">加入采购单</a> -->
+                    <a class="out" href="javascript:;" id="addCommodity">已售罄</a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+
+    <section class="ui-content">
+        <div class="ui-slide ui-slide-b" id="slide1">
+            <ul>
+                <li><a href="#"><img src="uploads/p11.jpg" alt=""></a></li>
+                <li><a href="#"><img src="uploads/p11.jpg" alt=""></a></li>
+                <li><a href="#"><img src="uploads/p11.jpg" alt=""></a></li>
+                <li><a href="#"><img src="uploads/p11.jpg" alt=""></a></li>
+            </ul>
+        </div>
+
+        <div class="pinfo">
+            <h1 class="title">白芍  安徽白芍  选货  过6-8号筛<em>50公斤起购</em></h1>
+            <div class="tag">商品标语</div>
+            <div class="norms">
+                <a href="product_detail.html">过8号筛</a>
+                <a href="product_detail.html">过10号筛</a>
+                <a href="product_detail.html" class="current">过12号筛</a>
+                <a href="product_detail.html">过14号筛</a>
+                <a href="product_detail.html">过16号筛</a>
+            </div>
+            <div class="price">
+                <i>&yen;</i>
+                <em>140</em>
+                <b>元/公斤</b>
+                <!-- <span>量大价优</span> -->
+
+                <div class="ui-quantity" id="quantity">
+                    <button type="button" class="fa fa-reduce op"></button>
+                    <input type="tel" class="ipt" id="num" value="1" data-min="20" autocomplete="off">
+                    <button type="button" class="fa fa-plus op"></button>
+                    <b>公斤</b>
+                </div>
+
+                <div class="tel">
+                    <i class="fa fa-tel"></i>
+                </div>
+            </div>
+
+            <div class="attention">
+                <a href="javascript:;"><i class="fa fa-heart"></i>关注该商品报价</a>
+            </div>
+            <div class="his">
+                <a href="price_his.html">查看历史价格</a>
+                <span>价格更新时间：2016-10-27</span>
+            </div>
+            <!-- <div class="sales">
+                <dl>
+                    <dt>1-499公斤</dt>
+                    <dd>140元/公斤</dd>
+                </dl>
+                <dl>
+                    <dt>500-999公斤</dt>
+                    <dd>120元/公斤</dd>
+                </dl>
+                <dl>
+                    <dt>1000公斤以上</dt>
+                    <dd>100元/公斤</dd>
+                </dl>
+                <p>价格更新时间 2016年10月27日</p>
+            </div> -->
+        </div>
+
+        <div class="pdetail">
+            <div class="tab">
+                <ul>
+                    <li class="current">产品详情</li>
+                    <li>药材规格</li>
+                    <li>质量保证</li>
+                </ul>
+            </div>
+            <div class="tabcont">
+                <div class="detailCont">
+                    <div class="item">
+                        <p><img src="http://static.yaobest.com/ueditor/2016/11/204534f3-2364-4a88-967d-ecf8882101cb.jpg" _src="http://static.yaobest.com/ueditor/2016/11/204534f3-2364-4a88-967d-ecf8882101cb.jpg" style=""></p><p><img src="http://static.yaobest.com/ueditor/2016/11/942af4f3-a99b-43f9-8526-a54cd40959e2.jpg" _src="http://static.yaobest.com/ueditor/2016/11/942af4f3-a99b-43f9-8526-a54cd40959e2.jpg" style=""></p><p><img src="http://static.yaobest.com/ueditor/2016/11/9ea385e4-2e65-411d-b5d1-e54d2ea2d536.jpg" _src="http://static.yaobest.com/ueditor/2016/11/9ea385e4-2e65-411d-b5d1-e54d2ea2d536.jpg" style=""></p><p><br></p>
+                    </div>
+                    <div class="item" id="attributeItem">
+                        <table>
+                            <tr>
+                                <td class="tit">商品名称</td>
+                                <td>三棱</td>
+                            </tr>
+                            <tr>
+                                <td class="tit">品种</td>
+                                <td>三棱</td>
+                            </tr>
+                            <tr>
+                                <td class="tit">切制规格</td>
+                                <td>过20号筛，直径2cm以上</td>
+                            </tr>
+                            <tr>
+                                <td class="tit">产地</td>
+                                <td>浙江</td>
+                            </tr>
+                            <tr>
+                                <td class="tit">加工方式</td>
+                                <td>去毛、干燥</td>
+                            </tr>
+                            <tr>
+                                <td class="tit">生长年限</td>
+                                <td>1年</td>
+                            </tr>
+                            <tr>
+                                <td class="tit">采收时间</td>
+                                <td>2016.10</td>
+                            </tr>
+                            <tr>
+                                <td class="tit">含硫情况</td>
+                                <td>无硫</td>
+                            </tr>
+                            <tr>
+                                <td class="tit">性状</td>
+                                <td>圆锥形，略扁，长2-6cm直径2-4cm，表面黄白色或灰黄色，有刀削痕，须根痕小点呈横向排列</td>
+                            </tr>
+                            <tr>
+                                <td class="tit">质量规范</td>
+                                <td>2015年版药典</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="item">
+                        <p>
+                            我们平台具有从源头产地到加工储运到质量检测都是有严格的管理体系。
+                        </p>
+                        <p>
+                            产地：我们是联合道地产区的药农种植，采用适宜时间采收，确保了货源的品质。
+                        </p>
+                        <p>
+                            加工：趁鲜加工，严格按照药典要求生产，确保各项指标均超过先行版药典。
+                        </p>
+                        <p>
+                            检测：我们有三大企业沪谯，美誉，天济的检测支撑，做到入库品种批批检测。确保了入库品种100%全检合格。
+                        </p>
+                        <p>
+                            储运：我们有10多万平方的仓储达到国家要求，以及严格的养护体系。
+                        </p>
+                        <p>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- /ui-content -->
+
+    <section class="fixedbar">
+        <a href="mqqwpa://im/chat?chat_type=wpa&uin=1340296820" class="fa fa-qq qq"></a>  
+    </section>
+
+
+    <script src="assets/js/zepto.min.js"></script>
+    <script src="assets/js/layer.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/dragloader.min.js"></script>
+    <script>
+
+    var _global = {
+        v: {
+            tel: ['18056796628', '0558-5120088']
+        },
+        fn: {
+            init: function() {
+                this.slide();
+                this.tab();
+                this.quantity();
+                this.addCommodity();
+                this.attention();
+                this.change();
+            },
+            slide: function() {
+                var $slide = $('#slide1'),
+                    $nav,
+                    length = $slide.find('li').length;
+
+                var nav = ['<div class="nav"><b>1</b>/', length, '</div>'];
+                $slide.append(nav.join(''));
+                $nav = $slide.find('.nav b');
+
+                length > 2 && $slide.swipeSlide({
+                    callback : function(i){
+                        $nav.html(++i);
+                    }
+                });
+            },
+            // 详情内容
+            tab: function() {
+                var self = this,
+                    $tab = $('.tab'),
+                    $tabcont = $('.tabcont'),
+                    $item = $tabcont.find('.item'),
+                    $detailCont = $('.detailCont'),
+                    _distance = $tab.offset().top,
+                    timer = 0;
+
+                $tab.on('click', 'li', function() {
+                    var idx = $(this).index(),
+                        distance = idx * $tabcont.width();
+
+                    self.dragger.setDragUpDisabled(idx == 2);
+                    // window.scrollTo(0, _distance);
+                    $(this).addClass('current').siblings().removeClass('current');
+                    $item.css('position','absolute').eq(idx).css('position','relative');
+                    $detailCont.css({
+                        '-webkit-transition':'all .3s ease',
+                        'transition':'all .3s ease',
+                        '-webkit-transform':'translate3d(-' + distance + 'px,0,0)',
+                        'transform':'translate3d(-' + distance + 'px,0,0)'
+                    });
+                })
+
+                var tabFix = function() {
+                    var st = document.body.scrollTop || document.documentElement.scrollTop;
+                    if (st >= _distance) {
+                        $tab.addClass('tab-fix');
+                        $('.ui-header').addClass('ui-header-hide');
+                    } else {
+                        $tab.removeClass('tab-fix');
+                        $('.ui-header').removeClass('ui-header-hide');
+                    }
+                }
+
+                $(window).on('scroll', function() {
+                    timer && clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        tabFix();
+                    }, 50);
+                })
+            },
+            // 加减数量
+            quantity: function() {
+                var $quantity = $('#quantity'), 
+                    $ipt = $quantity.find('.ipt'),
+                    min = $ipt.data('min') || 1,
+                    num = Math.max($ipt.val() || 1, min);
+
+                $quantity.on('click', '.fa-plus', function() {
+                    $ipt.val(++num);
+                })
+                $quantity.on('click', '.fa-reduce', function() {
+                    num > min && $ipt.val(--num);
+                })
+                // 只能输入数字
+                $ipt.on('blur', function() {
+                    var val = this.value;
+                    if (val) {
+                        val = (!isNaN(val = parseInt(val, 10)) && val) > 0 ? val : min;
+                        this.value = Math.max(val, min);
+                    } else {
+                        this.value = min;
+                    }
+                    num = this.value;
+                }).val(min);
+
+                // 联系我们
+                var tel = [];
+                $.each(_global.v.tel, function(i, val) {
+                    tel.push('<dd><a href="tel:' , val , '">' , val , '</a></dd>');
+                })
+                tel.push('</dl>');
+                tel.unshift('<dl><dt>拨打电话：</dt>');
+                $quantity.next().on('click', '.fa-tel', function() {
+                    layer.open({
+                        // shade: false,
+                        className: 'layer-custom',
+                        content: tel.join('')
+                    });
+                })
+            },
+            addCommodity:function(){
+                var self = this;
+                $('#addCommodity').on('click', function (){
+                    var id = 1021;
+                    var num = parseInt($('#num').val(), 10);
+                    !isNaN(num) && self.cartAnim(id, num);
+                    return false;
+                })
+            },
+            cartAnim: function(id, num) {
+                var offset1 = $('.norms .current').offset(),
+                    offset2 = $('#cartNum').offset(),
+                    width = 20,
+                    st = document.body.scrollTop || document.documentElement.scrollTop,
+                    flyer = $('<div class="cartAnim"><i class="fa fa-cart"></i></div>');
+                flyer.fly({
+                    start: {
+                        left: offset1.left + width/2,
+                        top: offset1.top - st
+                    },
+                    end: {
+                        left: offset2.left,
+                        top: offset2.top - st,
+                        width: 20,
+                        height: 20
+                    },
+                    onEnd: function(){
+                        pickCommodity(id, num);
+                        this.destroy();
+                    }
+                });
+            },
+            // 关注商品价格
+            attention: function() {
+                var id = 1021;
+                var timer = 0;
+                $('.attention').on('click', 'a', function() {
+                    var faved = true;
+                    if (this.className) {
+                        this.className = '';
+                        this.innerHTML = '<i class="fa fa-heart"></i>关注该商品报价';
+                        faved = false;
+                    } else {
+                        this.className = 'faved';
+                        this.innerHTML = '<i class="fa fa-heart"></i>已关注';
+                        faved = true;
+                    }
+                    clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        $.ajax({
+                            url: '',
+                            data: {faved: faved, pid: id},
+                            success: function() {
+
+                            }
+                        })
+                    }, 300);
+                })
+            },
+            change: function() {
+                var self = this;
+                self.dragger = new DragLoader(document.body, {
+                    disableDragDown: true,
+                    dragUpLoadFn: function() {
+                        setTimeout(function() {
+                            $('.tab').find('.current').next().trigger('click')
+                        }, 200);
+                    },
+                    dragUpDom: {
+                        before : '继续上拉切换下一页',
+                        prepare : '释放切换下一页',
+                        load: ''
+                    }
+                });
+                self.dragger.on('dragUpLoad', function() {
+                    self.dragger.reset();
+                });
+            }
+        }
+    }
+
+    $(function(){
+        _global.fn.init();
+    });
+
+</script>
+</body>
+</html>

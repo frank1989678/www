@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=360,user-scalable=no">
+    <title>你和我的7年小故事 偷偷告诉你</title>
+    <style>
+    /* This is a compiled file, you should be editing the file in the templates directory */
+
+    .pace {
+        -webkit-pointer-events: none;
+        pointer-events: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    .pace.pace-inactive .pace-progress {
+        display: none;
+    }
+
+    .pace .pace-progress {
+        position: fixed;
+        z-index: 2000;
+        top: 50%;
+        left: 0;
+        height: 5rem;
+        margin-top: -2.5rem;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translate3d(0, 0, 0) !important;
+        -ms-transform: translate3d(0, 0, 0) !important;
+        transform: translate3d(0, 0, 0) !important;
+    }
+
+    .pace .pace-progress:after {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: center;
+        content: attr(data-progress-text);
+        font-family: "Helvetica Neue", sans-serif;
+        font-weight: 100;
+        font-size: 3rem;
+        line-height: 1;
+        width: 100%;
+        color: #fff;
+    }
+
+    .pace-running {
+        background-color: #000;
+    }
+
+    .pace-running .swiper-container {
+        opacity: 0;
+    }
+    </style>
+    <script>
+    window.paceOptions = { ajax: false, eventLag: false, elements: true, document: true, elements: { selectors: ['.swiper-container'] } }
+    </script>
+    <script src="074db52f036dec40225d6ff532004ad7b5c40eff3"></script>
+    <script src="jweixin-1.0.0.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="commons_6f848051.js"></script>
+    <script src="index_1540bdb4.js"></script>
+</body>
+
+</html>

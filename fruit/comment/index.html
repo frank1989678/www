@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>评论模块</title>
+<link rel="stylesheet" type="text/css" href="css.css" />
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="core.js"></script>
+<script type="text/javascript">
+try {
+	COMMENT.COMMENT_SIZE = window.parent.COMMENT.COMMENT_SIZE;
+} catch(e) {
+	// 重新定义每页显示的评论数量
+}
+</script>
+</head>
+
+<body>
+
+<div class="ui_comment">
+    <div class="ui_comment_publish">
+    	<div class="ui_avatar">
+        	<img id="comment_avatar" src="../style/images/avatar.gif" alt="我的头像" />
+        </div>
+        <div class="ui_input">
+            <div class="ui_login">
+                请先 <a href="#">登录</a>，我还不是淘果铺会员，点此 <a href="#">注册</a>
+            </div>
+            <div class="ui_textarea_box">
+                <div class="ui_textarea">
+                    <textarea id="comment_text" onblur="comments.blur(this)" onfocus="comments.focus(this, 'comment')" onkeyup="comments.text(this, 'comment')"></textarea>
+                </div>
+                <div class="ui_tips" id="comment_tips">发布成功！</div>
+            </div>
+            <div class="ui_submit">
+                <span id="comment_beyond">还能输入<i>200</i>个字</span><span class="red"></span>
+                <a class="ui_btn_submit" href="javascript:;" onclick="comments.publish(this, 'comment', 179523)">发布评论</a>
+            </div>
+        </div>
+        
+        <!--登录后
+        <div class="ui_userinfo">
+        	<b id="ui_name">用户</b> 您好！<a href="#">退出</a>
+        </div>
+        -->
+    </div>
+    
+    <div class="ui_comment_tab">
+    	<span>当前共有<i id="comment_count">0</i>条评论</span>
+        <span class="ui_sort" id="comment_sort">
+        	<a class="curr" href="javascript:;" data-sort="newest">最新</a>
+            <a href="javascript:;" data-sort="oldest">最早</a>
+            <a href="javascript:;" data-sort="hottest">最热</a>            
+        </span>
+    </div>
+    
+    <div class="ui_comment_list" id="comments">
+        <div class="null">暂无商品评论</div>
+        <div class="loader hide">评论加载中...</div>
+    </div>
+
+</div>
+
+<!--
+
+    	<div class="ui_list"  id="comment_111">
+            <div class="ui_avatar">
+                <img id="" src="images/avatar.gif" alt="我的头像" />
+            </div>
+            <div class="ui_input">
+                <div class="ui_userinfo">
+                    <a href="javascript:;">匿名</a>
+                </div>
+                <div class="ui_content">
+                    <p>这里是一段评论，你可以是一个汉字，一个英文字母，甚至是一个字母；但是你输入的这段话不能超过200个字</p>
+                </div>
+                <div class="ui_footer">
+                    <div class="ui_msg">
+                        <span>2013-08-20</span>
+                        <span><i id="vote_111" class="red">29991</i>人喜欢</span>           	
+                    </div>
+                    <div class="ui_control">
+                        <a href="javascript:;" onclick="comments.reply(111)">回复</a>
+                        <a href="javascript:;" onclick="comments.like(111,this);">喜欢<i>+1</i></a>              
+                    </div>
+                </div>
+                <div id="reply_111" class="ui_reply_list">                
+                    <div id="reply_list_111">
+                        <div class="ui_list">
+                            <div class="ui_avatar">
+                                <img id="" src="images/avatar.gif" alt="我的头像" />
+                            </div>
+                            <div class="ui_input">
+                                <div class="ui_userinfo">
+                                    <a href="javascript:;">匿名</a>
+                                </div>
+                                <div class="ui_content">
+                                    <p>这里是一段评论，你可以是一个汉字，一个英文字母，甚至是一个字母；但是你输入的这段话不能超过200个字</p>
+                                </div>
+                                <div class="ui_footer">
+                                    <div class="ui_msg">
+                                        <span>2013-08-20</span>             	
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui_list">
+                            <div class="ui_avatar">
+                                <img id="" src="images/avatar.gif" alt="我的头像" />
+                            </div>
+                            <div class="ui_input">
+                                <div class="ui_userinfo">
+                                    <a href="javascript:;">匿名</a>
+                                </div>
+                                <div class="ui_content">
+                                    <p>这里是一段评论，你可以是一个汉字，一个英文字母，甚至是一个字母；但是你输入的这段话不能超过200个字</p>
+                                </div>
+                                <div class="ui_footer">
+                                    <div class="ui_msg">
+                                        <span>2013-08-20</span>             	
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui_page">
+                        <a href="#">首页</a>
+                        <a href="#">上一页</a>
+                        <a class="p_hov">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">下一页</a>
+                        <a href="#">末页</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    	<div class="ui_list" id="comment_222">
+            <div class="ui_avatar">
+                <img id="" src="images/avatar.gif" alt="我的头像" />
+            </div>
+            <div class="ui_input">
+                <div class="ui_userinfo">
+                    <a href="javascript:;">匿名</a>
+                </div>
+                <div class="ui_content">
+                    <p>这里是一段评论，你可以是一个汉字，一个英文字母，甚至是一个字母；但是你输入的这段话不能超过200个字</p>
+                </div>
+                <div class="ui_footer">
+                    <div class="ui_msg">
+                        <span>2013-08-20</span>
+                        <span><i id="vote_222" class="red">999</i>人喜欢</span>                	
+                    </div>
+                    <div class="ui_control">
+                        <a href="javascript:;" onclick="comments.reply(222)">回复</a>
+                        <a href="javascript:;" onclick="comments.like(222,this)">喜欢<i>+1</i></a>               
+                    </div>
+                </div>
+                <div id="reply_222" class="ui_reply_list">
+                	<div id="reply_list_222"></div>
+                </div>
+            </div>
+        </div>
+        
+        
+    	<div class="ui_list" id="comment_333">
+            <div class="ui_avatar">
+                <img id="" src="images/avatar.gif" alt="我的头像" />
+            </div>
+            <div class="ui_input">
+                <div class="ui_userinfo">
+                    <a href="javascript:;">匿名</a>
+                </div>
+                <div class="ui_content">
+                    <p>这里是一段评论，你可以是一个汉字，一个英文字母，甚至是一个字母；但是你输入的这段话不能超过200个字</p>
+                </div>
+                <div class="ui_footer">
+                    <div class="ui_msg">
+                        <span>2013-08-20</span>
+                        <span><i id="vote_333" class="red">99</i>人喜欢</span>                	
+                    </div>
+                    <div class="ui_control">
+                        <a href="javascript:;" onclick="comments.reply(333)">回复</a>
+                        <a href="javascript:;" onclick="comments.like(333,this)">喜欢<i>+1</i></a>                  
+                    </div>
+                </div>
+                <div id="reply_333" class="ui_reply_list">
+                    <div id="reply_list_333"></div>
+                </div>
+            </div>
+        </div>
+        
+
+
+-->
+
+</body>
+</html>

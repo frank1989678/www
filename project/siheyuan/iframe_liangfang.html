@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>免费量房</title>
+    <meta name="renderer" content="webkit" />
+    <meta name="keywords" content="" /> 
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+<div class="form">
+<div class="title">免费量房</div>
+<form name="form1" class="myform" action="url" onsubmit="return false;">
+    <input type="hidden" name="formType" value="liangfang">
+    <div class="group">
+        <label>您的姓名：</label>
+        <input type="text" name="userName" class="ipt" />
+    </div>
+    <div class="group">
+        <label>居住小区：</label>
+        <input type="text" name="address" class="ipt" />
+    </div>
+    <div class="group">
+        <label>联系电话：</label>
+        <input type="text" name="tel" class="ipt" data-rule="required;mobile" data-msg="请填写手机号" />
+    </div>
+    <div class="buttons">
+        <button type="submit" class="ubtn ubtn-primary">马上预约</button>
+    </div>
+</form>
+</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.validator.min.js"></script>
+<script>
+    $(function() {
+        $('.myform').validator({
+            timely: 0,
+            valid: function(form) {
+                var data = $(form).serialize();
+                console.log(data)
+                parent.closeIframe(); // 关闭弹层
+                parent.dialog({
+                    content: '<div class="layer-msg">提交成功</div>',
+                    cancel: false
+                })
+
+                return false;
+            }
+        })
+    })
+</script>
+</body>
+</html>

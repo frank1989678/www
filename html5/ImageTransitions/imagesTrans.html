@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+
+<style>
+*{margin:0;padding:0;}
+.box{position:relative;margin:20px auto;
+	width: 329px;
+	height: 425px;
+	-webkit-perspective:1000px;
+			perspective:1000px;
+	
+}
+.wrap{width:329px;height:425px;margin:0 auto;
+	-webkit-transform: rotate3d(1,0,0,45deg);
+			transform: rotate3d(1,0,0,45deg);
+	-webkit-transform-style:preserve-3d;
+			transform-style:preserve-3d;
+	-webkit-transition:all 0.5s;
+			transition:all 0.5s;
+}
+.front ,.bottom{
+	-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: block;
+	overflow: hidden;
+}
+.front{
+	-webkit-transform: scale3d(.825,.825,.825) translate3d(0,0,212px);
+			transform: scale3d(.825,.825,.825) translate3d(0,0,212px);
+}
+.bottom{
+	-webkit-transform: scale3d(.825,.825,.825) rotate3d(1,0,0,-90deg) translate3d(0,0,212px);
+			transform: scale3d(.825,.825,.825) rotate3d(1,0,0,-90deg) translate3d(0,0,212px);
+}
+
+.flip-container{perspective:1000;transform-style:preserve-3d;}
+.flip-container:hover .back{transform:rotateY(0deg);}
+.flip-container:hover .front{transform:rotateY(180deg);}
+.flip-container,.front,.back{width:320px;height:480px;}
+.flipper{transition:0.6s;transform-style:preserve-3d;position:relative;}
+.front,.back{backface-visibility:hidden;transition:0.6s;transform-style:preserve-3d;position:absolute;top:0;left:0;}
+.front{z-index:2;transform:rotateY(0deg);}
+.back{transform:rotateY(-180deg);}
+.vertical.flip-container{position:relative;}
+.vertical .back{transform:rotateX(180deg);}
+.vertical.flip-container:hover .back{transform:rotateX(0deg);}
+.vertical.flip-container:hover .front{transform:rotateX(180deg);}
+
+</style>
+</head>
+<body>
+
+<div class="box">
+	<div class="wrap">
+		<div class="front"><img src="images/4.jpg"></div>
+		<div class="bottom"><img src="images/2.jpg"></div>
+	</div>
+</div>	
+
+<div class="flip-container vertical">
+	<div class="flipper">
+		<div class="front">
+			<img src="images/4.jpg">
+		</div>
+		<div class="back">
+			<img src="images/2.jpg">
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+
+/* 本地导航样式 */
+.content{margin:10px;font:18px/58px "Helvetica Neue", Helvetica;color:#999;}
+.caption{padding:10px;background-color:#f56a00;color:#fff;display:none;}
+.nav li{float:left;width:20%;list-style:inside decimal-leading-zero;}
+.nav li a{color:#000;}
+.nav li a:hover{color:#f56a00;}
+/*.nav li:nth-child(10n+1) {background-color:#eee;}
+.nav li:nth-child(10n+2) {background-color:#eee;}
+.nav li:nth-child(10n+3) {background-color:#eee;}
+.nav li:nth-child(10n+4) {background-color:#eee;}
+.nav li:nth-child(10n+5) {background-color:#eee;}
+*/
+@media (max-width:720px) {
+	.nav li{width:100%;}
+}

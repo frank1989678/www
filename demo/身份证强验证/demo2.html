@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>js身份证验证</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/static/js/jquery191.js"></script>
+</head>
+
+<body>
+    <ul class="nav">
+        <li><a href="index.html" title="">身份证强验证</a></li>
+        <li><a class="on" href="demo2.html" title="">身份证弱验证</a></li>
+    </ul>
+    <div class="box">
+        <h1 class="caption">身份证查询</h1>
+        <div class="form">
+            <div class="item">
+                <label class="lab">身份证号码：</label>
+                <input class="ipt" type="text" value="220821197407119272" id="cardNum" />
+                <button class="btn" type="button" id="check">查询</button>
+                <span class="msg" id="error"></span>
+            </div>
+        </div>
+    </div>
+    <div id="show"></div>
+    <script>
+    var city = {
+        11: "北京",
+        12: "天津",
+        13: "河北",
+        14: "山西",
+        15: "内蒙古",
+        21: "辽宁",
+        22: "吉林",
+        23: "黑龙江 ",
+        31: "上海",
+        32: "江苏",
+        33: "浙江",
+        34: "安徽",
+        35: "福建",
+        36: "江西",
+        37: "山东",
+        41: "河南",
+        42: "湖北 ",
+        43: "湖南",
+        44: "广东",
+        45: "广西",
+        46: "海南",
+        50: "重庆",
+        51: "四川",
+        52: "贵州",
+        53: "云南",
+        54: "西藏 ",
+        61: "陕西",
+        62: "甘肃",
+        63: "青海",
+        64: "宁夏",
+        65: "新疆",
+        71: "台湾",
+        81: "香港",
+        82: "澳门",
+        91: "国外 "
+    };
+
+    // 540125198201111554
+    // 420984198906070410
+    function isCardID(code) {
+        var reg = /(^\d{15}$)|(^\d{17}(\d|X|x)$)/;
+        if (typeof city[code.substr(0, 2)] === "undefined") {
+            return false;
+        } else if (reg.test(code) === false) {
+            return false;
+        }
+        return true;
+    }
+
+    function check() {
+        var sId = $$("cardNum").value.replace(/(^\s*)|(\s*$)/g, "");
+        $$("error").innerHTML = isCardID(sId) ? "<font color='blue'>身份证号码正确</font>" : "身份证号码错误";
+    }
+
+    var $$ = function(id) {
+        return document.getElementById(id);
+    }
+
+    $$("check").onclick = check;
+    $$("cardNum").onfocus = function() {
+        this.select();
+    }
+    $$("cardNum").click = function() {
+        this.select();
+    }
+    </script>
+</body>
+
+</html>

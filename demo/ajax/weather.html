@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>js_ajax</title>
+	<link rel="stylesheet" href="../css/layout.css" />
+	<link rel="stylesheet" href="css/form.css" />
+	<script type="text/javascript" src="../js/jquery191.js"></script>
+</head>
+<body>
+	
+<div class="wrap">
+	<input type="text" id="aaa" />
+	<label for="aaa">我是文字</label>
+
+</div>
+<script type="text/javascript">
+
+
+// onload
+$(function() {
+// 	$.ajax({
+// 		url: "http://192.168.11.83/develop/js_ajax/php/print.php",
+// 		data: {page: 2},
+// 		type: "get",
+// 		success: function(data) {
+// 			console.log("1")
+// 		},
+// 		error: function() {
+// 			console.log(2)
+// 		}
+// 	})
+// 	// return false
+
+
+	$.ajax({
+		url: "http://wthrcdn.etouch.cn/weather_mini",
+		// dataType: "json",
+		// dataType: "jsonp",
+		// jsonp: 'aa', 
+		data: {citykey: "101010100"},
+		success: function(data) {
+			// alert(data)
+			var html = '';
+
+		},
+		error: function() {
+			alert("net error")
+		}
+	})
+})
+</script>
+</body>
+</html>

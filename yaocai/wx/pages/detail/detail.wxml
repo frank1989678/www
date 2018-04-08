@@ -1,0 +1,97 @@
+<view hidden="{{empty}}">
+<view class="pslide">
+	<image src="{{banner}}" />
+</view>
+
+<view class="pinfo">
+	<view class="title">{{info.title}}<text class="em">{{min}}{{unit[info.unit]}}起购</text></view>
+	<view class="norms">
+		<block wx:for="{{info.norms}}">
+			<block wx:if="{{index == id}}">
+				<text class="link cur">{{item}}</text>
+			</block>
+			<block wx:else>
+				<navigator class="link" url="/pages/detail/detail?id={{index}}" open-type="redirect">{{item}}</navigator>
+			</block>
+		</block>
+
+	</view>
+
+	<view class="price">
+        <text class="rmb">{{info.price}}</text>
+        <text class="unit">元/{{unit[info.unit]}}</text>
+        <view class="quantity">
+	        <button class="ico ico-minus" disabled="{{disabled}}" bindtap="minus"></button>
+	        <input type="number" class="ipt" value="{{inputValue}}" bindinput="quantityBlur" data-min="{{min}}" />
+	        <button class="ico ico-plus" bindtap="plus"></button>
+	    </view>
+        <image src="/images/tel.png" class="tel" bindtap="call" />
+    </view>
+
+    <view class="attention">
+        <text hidden="{{faved != 0}}" bindtap="fav">关注该商品报价</text>
+        <text hidden="{{faved == 0}}" bindtap="unfav">已关注</text>
+    </view>
+    <view class="his">
+        <text class="em">查看历史价格</text>
+        <text class="time" wx:if="{{info.update_time[0]}}">价格更新时间：{{info.update_time[0]}}</text>
+    </view>
+
+</view>
+
+<view class="pdetail">
+	<view class="swiper-tab"> 
+	  <view class="li {{currentTab == 0 ? 'cur' : ''}}" data-current="0" bindtap="swichNav">产品详情</view> 
+	  <view class="li {{currentTab == 1 ? 'cur' : ''}}" data-current="1" bindtap="swichNav">药材规格</view> 
+	  <view class="li {{currentTab == 2 ? 'cur' : ''}}" data-current="2" bindtap="swichNav">质量保证</view> 
+	</view> 
+
+	<view class="swiper-box">
+		<view class="item" hidden="{{currentTab != 0}}">
+			<block wx:for="{{info.detail}}">
+			<image src="{{item}}" mode="widthFix" />
+			</block>
+		</view>
+	  	<view class="item" hidden="{{currentTab != 1}}">
+	  		<view class="tr">
+	  			<text class="td tit">商品名称</text>
+				<text class="td txt">{{info.name}}</text>
+	  		</view>
+	  		<view class="tr">
+	  			<text class="td tit">品名</text>
+				<text class="td txt">{{info.categoryName}}</text>
+	  		</view>
+	  		<view class="tr">
+	  			<text class="td tit">切制规格</text>
+				<text class="td txt">{{info.spec}}</text>
+	  		</view>
+	  		<view class="tr">
+	  			<text class="td tit">产地</text>
+				<text class="td txt">{{info.origin}}</text>
+	  		</view>
+	  		<view class="tr">
+	  			<text class="td tit">采收时间</text>
+				<text class="td txt">{{info.har_year}}</text>
+	  		</view>
+	  		<block wx:for="{{attr}}" wx:for-item="item" wx:for-index="k">
+	  		<view class="tr">
+				<text class="td tit">{{k}}</text>
+				<text class="td txt">{{item}}</text>
+			</view>
+			</block>
+	  	</view>
+	  	<view class="item" hidden="{{currentTab != 2}}">
+	  		<block wx:for="{{info.quality}}">
+				<text class="p">{{item}}</text>
+			</block>
+	  	</view>
+	</view>
+</view>
+</view>
+
+<view class="foot">
+	<navigator class="li i i2" open-type="redirect" url="/pages/category/category">品种列表</navigator>
+	<navigator class="li i i3" open-type="redirect" url="/pages/cart/cart">购物车<text hidden="{{total == 0}}" class="sup">{{total}}</text></navigator>
+	<navigator class="li sample" url="/pages/cart/cart">免费寄样</navigator>
+	<text class="li addcart" bindtap="addCart">加入购物车</text>
+</view>

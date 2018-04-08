@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>报价</title>
+    <meta name="renderer" content="webkit" />
+    <meta name="keywords" content="" /> 
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+
+<!-- top statr -->
+<div class="top">
+    <div class="wrap">
+        <div class="top1">
+            <a href="javascript:;" class="wechat">关注我们<span><img src="images/qrcode.jpg" /></span></a>
+            <a href="javascript:;" onclick="showPup('iframeYangbanjian');">参观样板间</a>
+            <em>|</em>
+            <a href="#">联系客服</a>
+        </div>
+        <div class="top2">
+            <a href="javascript:;" class="free" onclick="showPup('frameLiangfang');">免费量房</a>
+            <a href="javascript:;" class="meet" onclick="showPup('iframeSjs');">预约设计</a>
+            <a href="#" class="service">在线客服</a>
+        </div>
+    </div>
+</div><!-- top end -->
+
+
+<!-- header statr -->
+<div class="header">
+    <div class="wrap">
+        <div class="logo">四合院装修</div>
+        <div class="welcome">健康智慧幸福家</div>
+        <div class="search">
+            <form action="" name="formsearch">
+                <div class="select">
+                    <label>设计师</label>
+                    <span>
+                        <em value="设计师">设计师</em>
+                        <em value="装修案例">装修案例</em>
+                        <em value="在建工程">在建工程</em>
+                    </span>
+                    <input type="hidden" value="设计师" name="key" />
+                </div>
+                <input type="text" class="ipt" placeholder="关键字">
+                <button type="submit" class="ubtn ubtn-primary">搜索</button>
+            </form>
+        </div>
+        <div class="tel">
+            027-88865999
+        </div>
+    </div>
+</div><!-- header end -->
+
+
+<!-- nav statr -->
+<div class="nav-wrap">
+<div class="nav">
+    <div class="wrap">
+        <ul>
+            <li><a href="index.html" class="on">首页</a></li>
+            <li><a href="promise.html">保障承诺</a></li>
+            <li><a href="youhui.html">最新优惠</a></li>
+            <li><a href="taocan.html">套餐随心选</a></li>
+            <li><a href="case.html">装修案例</a></li>
+            <li><a href="sjc.html">设计师团队</a></li>
+            <li><a href="ybj.html">样板间展示</a></li>
+            <li><a href="gcgl.html">工程管理</a></li>
+            <li><a href="#">施工团队</a></li>
+            <li><a href="zxdt.html">装修教学</a></li>
+            <li><a href="about.html">关于四合院</a></li>
+        </ul>
+    </div>
+</div><!-- nav end -->
+</div>
+
+
+<!-- banner statr -->
+<div class="banner" style="height:230px;padding:15px 0;background-image:url(images/bj/banner.jpg)">
+    <h2><img src="images/bj/banner1.png" alt="免费快速报价" height="230px"></h2>
+</div>
+<!-- banner end -->
+
+
+<!-- maincontent statr -->
+<div class="wrap">
+    <div class="title">
+        获取靠谱装修预算
+        <em>近期已有<span>32281</span>位业主成功申请报价服务</em>
+    </div>
+    <div class="calc">
+        <form></form>
+        <form name="form1" action="url" class="myform2" onsubmit="return false;">
+            <div class="form">
+                <input type="hidden" name="formType" value="cost">
+                <div class="group">
+                    <label>您的姓名：</label>
+                    <input type="text" name="userName" class="ipt">
+                </div>
+                <div class="group">
+                    <label>房屋面积：</label>
+                    <input type="text" name="area" class="ipt ipt-area" />
+                </div>
+                <div class="group" style="margin-bottom:0;">
+                    <label>您的电话：</label>
+                    <input type="text" name="tel" class="ipt" data-rule="required;mobile" data-msg="请填写手机号">
+                </div>
+                <!-- <div class="group short">
+                    <label>&#12288;验证码：</label>
+                    <input type="text" name="code" class="ipt">
+                    <button type="button"  class="ubtn ubtn-cyan getcode">获取验证码</button>
+                </div> -->
+            </div>
+            <div class="start">
+                <button type="submit" class="btn">立刻计算</button>
+            </div>
+            <div class="result">
+                <h3>您的装修预算为<em>？</em>元</h3>
+                <p>装修人工费：<em>？</em>元</p>
+                <p>装修材料费：<em>？</em>元</p>
+                <p>定 制 家 具：<em>？</em>元</p>
+                <p>全 屋 软 装：<em>？</em>元</p>
+            </div>
+        </form>
+    </div>
+</div><!-- maincontent end -->
+
+
+<div class="wrap">
+    <div class="title">申请报价的同时您还将获得</div>
+    <div class="main4">
+        <img src="images/bj/main4.jpg" height="354px" width="1200px">
+        <p class="mian4_pab1">免费设计咨询</p>
+        <p class="mian4_pab2">免费量房服务</p>
+        <p class="mian4_pab3">免费户型规划</p>
+    </div>
+</div>
+
+<div class="wrap">
+    <div class="title">四合院完美家装</div>
+    <div class="main5">
+        <ul>
+            <li><img src="images/bj/keting.jpg"  /></li>
+            <li><img src="images/bj/canting.jpg" /></li>
+            <li><img src="images/bj/woshi.jpg" /></li>
+            <li><img src="images/bj/chufang.jpg" /></li>
+            <li><img src="images/bj/weishengjian.jpg" /></li>
+            <li><img src="images/bj/yangtai.jpg" /></li>
+            <li><img src="images/bj/menting.jpg" /></li>
+        </ul>
+        <div class="prev"></div>
+        <div class="next"></div>
+    </div>
+</div>
+
+<div class="wrap">
+    <div class="title">
+        全责环保
+        <em>6大方案解决家装污染</em>
+    </div>
+    <div class="main6">
+        <img src="images/bj/main6.jpg" width="957px" height="473px">
+        <div class="main6_pab1">
+            <h3>主材</h3>
+            <p>全球甄选优质主材产品施</p>
+            <p>工源头把控</p>
+        </div>
+        <div class="main6_pab2">
+            <h3>基础施工</h3>
+            <p>精选国际国内优质品牌辅</p>
+            <p>材，严苛施工标准施工</p>
+        </div>
+        <div class="main6_pab3">
+            <h3>墙漆</h3>
+            <p>西班牙堤丹、丹麦福乐阁</p>
+            <p>墙漆，欧洲品牌</p>
+        </div>
+        <div class="main6_pab4">
+            <h3>板材</h3>
+            <p>泰国进口实木颗粒板，国</p>
+            <p>家E1级环保标准</p>
+        </div>
+        <div class="main6_pab5">
+            <h3>密封胶</h3>
+            <p>用于香港国际金融中心</p>
+            <p>VOC含量优于国标12倍</p>
+        </div>
+        <div class="main6_pab6">
+            <h3>封堵</h3>
+            <p>德国瑞好PVC封边带，高</p>
+            <p>效抑制甲醛外泄</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer">
+    <div class="wrap">
+        <div class="divider">
+            <h3>武汉四合院装饰工程有限公司</h3>
+            <p>地址：武汉市武昌区友谊大道才茂街万科金域华府商务中心9-10楼</p>
+            <p>公交：392,502,515,540,542,588,610,702,709,719,795,811路，友谊大道才华街站下车。</p>
+            <p>咨询电话：027-88865999</p>
+        </div>
+        <div class="divider">
+            <h3>友情链接</h3>
+            <div class="link">
+                <a href="#">友情链接</a>
+                <a href="#">友情链接</a>
+                <a href="#">友情链接</a>
+                <a href="#">友情链接</a>
+            </div>
+        </div>
+        <div class="contact">
+            <a href="#" target="_blank" class="hotline"><img src="images/contact.png" /></a>
+            <a href="#" class="brands wechat"><img src="images/qrcode.jpg"></a>
+            <a href="http://weibo.com/6292732308/profile?topnav=1&wvr=6" target="_blank" class="brands sina"></a>
+            <a href="tencent://message/?uin=1522781859&amp;Menu=yes" target="_blank" class="brands qq"></a>
+        </div>
+    </div>
+</div>
+
+<!-- 参观样板间-->
+<div class="layer-form" id="iframeYangbanjian" style="margin-top:-160px;">
+    <div class="inner">
+        <iframe marginwidth="0" marginheight="0" frameborder="0" scrolling="no" src="iframe_yangbanjian.html" style="width:100%;height:280px;"></iframe>
+        <div class="layer-close" title="关闭">X</div>
+    </div>
+    <div class="mask"></div>
+</div>
+
+<!-- 免费量房-->
+<div class="layer-form" id="frameLiangfang" style="margin-top:-140px;">
+    <div class="inner">
+        <iframe marginwidth="0" marginheight="0" frameborder="0" scrolling="no" src="iframe_liangfang.html" style="width:100%;height:240px;"></iframe>
+        <div class="layer-close" title="关闭">X</div>
+    </div>
+    <div class="mask"></div>
+</div>
+
+<!-- 预约设计-->
+<div class="layer-form" id="iframeSjs" style="margin-top:-180px;">
+    <div class="inner">
+        <iframe marginwidth="0" marginheight="0" frameborder="0" scrolling="no" src="iframe_sjs.html" style="width:100%;height:320px;"></iframe>
+        <div class="layer-close" title="关闭">X</div>
+    </div>
+    <div class="mask"></div>
+</div>
+
+<div class="hide" id="estimate">
+<div class="estimate">
+    <p>根据您提供的信息，您装修的初步费用为</p>
+    <p><strong>222119元</strong></p>
+    <p>四合院将有客服人员与您电话联系，确认您的具体要求</p>
+    <div class="tips">
+        <p>四合院装饰，世界500强旗下企业</p>
+        <p>四合院装饰，专注大户豪宅设计23年</p>
+    </div>
+</div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="js/jquery.validator.min.js"></script>
+<script src="js/common.js"></script>
+<script>
+
+$(function() {
+    $('.main5').slide({
+        mainCell: 'ul',
+        effect: 'leftLoop'
+    });
+
+    $('.myform2').validator({
+        valid: function(form) {
+            var data = $(form).serialize();
+            $('#estimate').find('strong').html('价格' + '元');
+            dialog({
+                content: '<div class="layer-msg">提交成功</div>',
+                content: $('#estimate').html(),
+                width: 380,
+                cancel: false,
+                ok: false
+            })
+        }
+    })
+})
+
+</script>
+</body>
+</html>

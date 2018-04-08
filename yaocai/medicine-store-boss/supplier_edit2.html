@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  	
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>供应商名单-boss</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+  	<link rel="stylesheet" href="assets/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<div class="wrapper">
+	<div class="content">
+		<div class="breadcrumb">
+			<ul>
+                <li>供应商管理</li>
+                <li>供应商名单</li>
+    		</ul>
+		</div>
+
+		<div class="box fa-form">
+			<div class="hd">基本信息</div>
+            <form id="myform">
+                <div class="item">
+                    <div class="txt">供应商编号：</div>
+                    <div class="val">1144574174</div>
+                </div>
+				<div class="item">
+					<div class="txt"><i>*</i>姓名：</div>
+					<div class="cnt">
+						<input type="text" name="username" class="ipt" placeholder="请输入姓名" autocomplete="off">
+					</div>
+				</div>
+				<div class="item">
+					<div class="txt"><i>*</i>手机号：</div>
+					<div class="cnt">
+						<input type="text" name="mobile" class="ipt" placeholder="请输入手机号" autocomplete="off">
+					</div>
+				</div>
+                <div class="item">
+                    <div class="txt"><i>*</i>经营品种：</div>
+                    <div class="cnt">
+                        <div class="choose" id="chooseBreeds"></div>
+                        <input type="text" name="breeds" id="breeds" class="ipt" placeholder="请输入入驻品种" autocomplete="off">
+                        <input type="hidden" value="" name="breedsId" id="breedsId">
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="txt">公司：</div>
+                    <div class="cnt">
+                        <input type="text" name="company" class="ipt" placeholder="请输入手机号" autocomplete="off">
+                    </div>
+                </div>
+				<div class="item">
+					<div class="txt">地区：</div>
+					<div class="cnt">
+                        <select class="slt" name="province" id="province">
+                            <option value="">-省-</option>
+                        </select>
+                        <select class="slt" name="city" id="city">
+                            <option value="">-市-</option>
+                        </select>
+					</div>
+				</div>
+                <div class="item">
+                    <div class="txt">邮箱：</div>
+                    <div class="cnt">
+                        <input type="text" name="email" class="ipt" placeholder="请输入邮箱" autocomplete="off">
+                    </div>
+                </div>
+				<div class="item">
+					<div class="txt">信息来源：</div>
+					<div class="val">系统录入</div>
+				</div>
+				<div class="item">
+					<div class="txt">备注：</div>
+					<div class="cnt">
+                        <textarea name="note" class="ipt ipt-mul" cols="30" rows="10"></textarea>
+					</div>
+				</div>
+
+				<div class="ft">
+					<button type="submit" class="ubtn ubtn-blue" id="jsubmit">保存</button>
+				</div>
+            </form>
+
+            <div class="ab">
+                <div class="block"><span>微信绑定：</span><em class="c-red">未绑定</em></div>
+                <div class="block"><span>最后登录时间：</span><em class="c-red">未登录</em></div>
+                <div class="block"><span>微信绑定：</span>bin <img src="https://avatar.tower.im/6d941fe33b084e528ce3cda3bedd4fd0"> <a href="javascript:;" class="c-blue ml" id="jwechat">取消绑定</a></div>
+                <div class="block"><span>最后登录时间：</span>2017年3月2日  12：30</div>
+            </div>
+		</div>
+
+        <div class="box fa-form">
+            <div class="hd">商品调价</div>
+            <div class="list">
+                <ul>
+                    <li>
+                        <div class="pimg">
+                            <img class="" src="http://static.yaobest.com/commodity/2016/11/71a7db7b-f381-4874-9f7a-95e13f0bd24bCrop.jpg" width="100" alt="">
+                        </div>
+                        <div class="info">
+                            <strong>三棱</strong>
+                            <span>去毛统个、长2cm-6cm、直径2cm-4cm</span>
+                        </div>
+                        <div class="edit">
+                            <a href="javascript:;" class="ubtn ubtn-blue jsave" data-id="1">保存</a>
+                        </div>
+                        <div class="price">
+                            库存<input type="text" value="15" class="ipt inventory">
+                            <input type="text" value="15" class="ipt unitprice">元/公斤
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="box fa-form">
+            <div class="hd">跟踪记录</div>
+            <ol class="trace" id="trace">
+                <li>
+                    <span>李笑</span>
+                    <span>2017年3月1日 11：30</span>
+                    <span>到访该供应商加工厂地，达成初步合作意向。</span>
+                </li>
+            </ol>
+            <form action="" id="traceForm">
+                <div class="item">
+                    <div class="txt">跟踪记录：</div>
+                    <div class="cnt">
+                        <textarea name="consigneeNote" class="ipt ipt-mul" placeholder="跟踪记录"></textarea>
+                    </div>
+                </div>
+                <div class="ft">
+                    <button type="button" class="ubtn ubtn-blue submit">提交</button>
+                </div>
+            </form>
+        </div>
+        
+	</div>
+</div>
+
+<!-- 快速调价弹出框 -->
+<form id="priceForm" class="hide">
+    <div class="fa-form fa-form-layer">
+        <div class="item" style="max-height:300px;overflow:hidden;overflow-y:auto;">
+        </div>
+        <div class="button">
+            <button type="submit" class="ubtn ubtn-blue">保存</button>
+            <button type="button" class="ubtn ubtn-gray">取消</button>
+        </div>
+    </div>
+</form>
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/jquery.autocomplete.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script src="assets/js/area.js"></script>
+<script>
+	var _global = {
+        v: {
+            flag: false
+        },
+		fn: {
+			init: function() {
+                this.checkForm();
+                this.searchBreeds();
+                this.submitEvent();
+			},
+            checkForm: function() {
+            	// 表单验证
+                $("#myform").validator({
+                    fields: {
+                    	username: '姓名: required',
+                    	mobile: '手机号: required; mobile',
+                    	breedsId: '经营品种: required',
+                        email: '邮箱: email'
+                    },
+                    valid: function(form) {
+                        // 验证成功
+                        // 成功提示
+                        $.notify({
+                            type: 'success', 
+                            title: '操作成功'
+                        });
+                    }
+                });
+            },
+            // 查询品种
+            searchBreeds: function() {
+                var self = this;
+                    vals = [],
+                    timer = 0,
+                    $breeds = $('#breeds'),
+                    $breedsId = $('#breedsId'),
+                    $chooseBreeds = $('#chooseBreeds'),
+                    $breedsSuggestions = $('#breedsSuggestions');
+
+                $breeds.autocomplete({
+                    serviceUrl: 'json/breedlist.json',
+                    paramName: 'name',
+                    deferRequestBy: 100,
+                    showNoSuggestionNotice: true,
+                    noSuggestionNotice: '没有该品种',
+                    transformResult: function (response) {
+                        response = JSON.parse(response);
+                        if (response.status == "y") {
+                            return {
+                                suggestions: $.map(response.data, function (dataItem) {
+                                    return {value: dataItem.name, data: dataItem.id};
+                                })
+                            };
+                        } else {
+                            return {
+                                suggestions: []
+                            }
+                        }
+                    },
+                    onSelect: function (suggestion) {
+                        var id = suggestion.data,
+                            val = suggestion.value;
+                        if (self.inArray(id, vals)) {
+                            $.notify({
+                                type: 'error', 
+                                title: '商品添加失败',
+                                text: '此商品已在添加列表', 
+                                delay: 3e3
+                            });
+                        } else {
+                            vals.push(id);
+                            $chooseBreeds.show().append('<span>' + val + '<i data-id="' + id + '"></i></span>');
+                            $breedsId.val(vals.join(','));
+                            $breeds.val(''); // 清空输入框
+                            $breedsSuggestions.hide();
+                        }
+                    }
+                });
+
+                // 删除品种
+                $chooseBreeds.on('click', 'i', function() {
+                    var id = $(this).data('id');
+                    $(this).parent().remove();
+                    self.inArray(id, vals, true); // 删除当前id
+                    $breedsId.val(vals.join(','));
+                })
+            },
+            /**
+             * [inArray 查询数组元素]
+             * @param  {[string]} needle [查询值]
+             * @param  {[Array]} array  [查询数组]
+             * @param  {[bollen]} del    [选填，为true时删除该值]
+             * @return {[bollen]}        [true or false]
+             */
+            inArray: function(needle, array, del) {
+                if (typeof needle == 'string' || typeof needle == 'number') {
+                    for (var i in array) {
+                        if (array[i] == needle) {
+                            del && array.splice(i, 1);
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            },
+            submitEvent: function() {
+                var self = this,
+                    $trace = $('#trace'),
+                    $pa = $trace.parent();
+
+                // 提交记录
+                $pa.on('click', '.submit', function(){
+                    var text = $('#traceForm').find('.ipt').val();
+                    $.ajax({
+                        url: '',
+                        data: {msg: text},
+                        success: function(data) {
+                            data = {
+                                date: '2016年10月20日 15:20',
+                                operator: 'frank',
+                                msg: text
+                            }
+                            $('#traceForm').find('.ipt').val('');
+                            self.addNewRevord(data);
+                        }
+                    })
+                })
+
+                // 库存输入框
+                $('.list').on('keyup', '.inventory', function() {
+                    var val = this.value;
+                    if (val) {
+                        val = (!isNaN(val = parseInt(val, 10)) && val) > 0 ? val : '';
+                        this.value = val;
+                    }
+                })
+                // 单价输入框
+                $('.list').on('keyup', '.unitprice', function() {
+                    var val = this.value;
+                    if (!/^\d+\.?\d*$/.test(val)) {
+                        val = Math.abs(parseFloat(val));
+                        this.value = isNaN(val) ? '' : val;
+                    }
+                })
+
+                // 保存价格
+                $('.list').on('click', '.jsave', function() {
+                    var $pa = $(this).closest('li'),
+                        $number = $pa.find('.inventory'),
+                        $price = $pa.find('.unitprice');
+                        
+                    $.ajax({
+                        url: '',
+                        data: {number: $number.val(), price: $price.val()},
+                        success: function() {
+                            $.notify({
+                                type: 'success', 
+                                title: '保存成功'
+                            })
+                        }
+                    })
+                })
+                
+
+                // 微信绑定
+                $('#jwechat').on('click', function() {
+                    alert('取消成功')
+                })
+            },
+            // 添加记录
+            addNewRevord: function(data) {
+                var html = [];
+                $.each(data, function(i, item) {
+                    html.push('<span>' + item + '</span>');
+                })
+                html.length > 1 && $('#trace').append('<li>' + html.join('') + '</li>');
+            } 
+		}
+	}
+
+	$(function() {
+		_global.fn.init();
+	})
+</script>
+</body>
+</html>

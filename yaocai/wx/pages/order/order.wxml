@@ -1,0 +1,20 @@
+<view wx:if="{{empty}}" class="notice">
+	<text>暂时没有订单</text>
+	<button class="ubtn ubtn-primary" bindtap="goIndex">返回首页</button>
+</view>
+
+<view wx:else class="order-list">
+	<view class="li" wx:for="{{order}}" wx:for-item="i" bindtap="linkto" data-id="{{i.id}}">
+		<view class="wrap {{i.expand}}">
+			<view class="dt">状态：<text class="stauts">{{i.status}}</text><text class="time">{{i.time}}</text> </view>
+
+			<view class="dd" wx:for="{{i.list}}" wx:for-item="j">
+				<text class="name">{{j.name}}</text>
+				<text class="norms">{{j.norms}}</text>
+			</view>
+		</view>
+
+		<view class="more" wx:if="{{i.list.length > 5}}">更多</view>
+	</view>
+</view>
+

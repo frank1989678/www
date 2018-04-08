@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <title>注册2-药材购</title>
+    <!-- 浏览器高速模式 -->
+    <meta name="renderer" content="webkit" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<section class="sec">
+    <div class="wraper">
+        <div class="reg-box reg-form">
+            <div class="hd cf">
+                <h1><i class="iconfont icon-arrow"></i>免费注册</h1>
+            </div>
+
+            <div class="step">
+                <ul class="yc-ul">
+                    <li>
+                        <span>1</span>
+                        <strong>验证手机</strong>
+                        <i class="iconfont icon-arrow"></i>
+                    </li>
+                    <li class="curr">
+                        <span>2</span>
+                        <strong>完善账户信息</strong>
+                        <i class="iconfont icon-arrow"></i>
+                    </li>
+                    <li>
+                        <span>3</span>
+                        <strong>注册成功</strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="form">
+            <form  action="" id="myform">
+                <div class="group">
+                    <div class="txt">
+                        <span>登录手机</span>
+                    </div>
+                    <div class="cont">
+                        <span>13512345678</span>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="txt mid">
+                        <span>*登录密码</span>
+                    </div>
+                    <div class="cont">
+                        <input class="ipt" type="password" autocomplete="off" placeholder="6-20位字母、数字" name="password" id="password">
+                        <span class="Validform_checktip"></span>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="txt mid">
+                        <span>*确认</span>
+                    </div>
+                    <div class="cont">
+                        <input class="ipt" type="password" autocomplete="off" placeholder="确认您输入的密码" name="pwdRepeat" id="pwdRepeat">
+                        <span class="Validform_checktip"></span>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="txt mid">
+                        <span>*会员名</span>
+                    </div>
+                    <div class="cont">
+                        <input class="ipt" type="text" autocomplete="off" placeholder="3-20位字母、数字" name="username" id="username">
+                        <span class="Validform_checktip"></span>
+                        <span class="tips">可用于登录，一旦设定即不可修改</span>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="txt">
+                        <span>*经营主体</span>
+                    </div>
+                    <div class="cont">
+                        <span class="warn">请真实选择、填写以下信息，药材购倡导诚信交易，越诚信，越有价值~</span>
+                        <label class="sub-title"><input class="cbx" name="type" type="radio" value="7" iname="compname" checked>注册企业帐户</label>
+                        <div class="group">
+                            <div class="txt">
+                                <span>单位全称</span>
+                            </div>
+                            <div class="cont">
+                                <input class="ipt" type="text" autocomplete="off" placeholder="例：毫州永刚中药饮片有限公司" name="company" id="compname">
+                                <span class="Validform_checktip"></span>
+                                <span class="tips">填写工商注册登记的企业名称</span>
+                            </div>
+                            <div class="yc-bubble">
+                                <dl>
+                                    <dt>适用：</dt>
+                                    <dd>拥有营业执照的主体，包括饮片厂、药厂、药材经营公司、合作社、种植地基、个体工商户等</dd>
+                                    <dt>更多权益：</dt>
+                                    <dd>优先展示、子账号等高级功能</dd>
+                                    <dt>身份核定：</dt>
+                                    <dd>后续需提供工商营业执照等信息来核定身份</dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <label class="sub-title"><input class="cbx" name="type" type="radio" value="8" iname="name">注册个人帐户</label>
+                        <div class="group">
+                            <div class="txt">
+                                <span>真实姓名</span>
+                            </div>
+                            <div class="cont">
+                                <input class="ipt" type="text" autocomplete="off" placeholder="" name="name" id="name">
+                                <span class="Validform_checktip"></span>
+                            </div>
+                            <div class="yc-bubble">
+                                <dl>
+                                    <dt>适用：</dt>
+                                    <dd>无营业执照的经营个人、或企业采购经理/业务员个人注册</dd>
+                                    <dt>身份核定：</dt>
+                                    <dd>后续需提供身份证来核定身份，以名片、单位授权书等来核定工作身份</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="txt mid">
+                        <span>*个人称呼</span>
+                    </div>
+                    <div class="cont">
+                        <input class="ipt" type="text" autocomplete="off" name="nickname" id="nickname">
+                        <span class="Validform_checktip"></span>
+                        <span class="tips">请填写您的姓名或称呼、用于联系</span>
+                    </div>
+                </div>
+
+                <div class="button">
+                    <button class="btn btn-orange" type="submit" id="jSubmit" class="submit">提交</button>
+                </div>
+
+            </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/validform.min.js"></script>
+<script>
+var registerPage = {
+    //定义全局变量区
+    v: {
+    },
+    //定义方法区
+    fn: {
+        //初始化方法区
+        init: function () {
+            this.fillNickname()
+            .formValidate()
+            .switchCategory();
+        },
+        // 输入真实姓名，自动填入到个人称呼
+        fillNickname: function() {
+            $('#name').on('blur', function() {
+                $('#nickname').val($(this).val());
+            })
+            return this;
+        },
+        //切换经营主体
+        switchCategory: function() {
+            var $cbxs = $('.cbx');
+            var setCat = function() {
+                $cbxs.each(function() {
+                    var flag = this.checked;
+                    var val = $(this).attr("iname");
+                    var $ipt = $('#' + val);
+                    if (flag) {
+                        registerPage.v.myformValidate.unignore($ipt);
+                    } else {
+                        registerPage.v.myformValidate.ignore($ipt);
+                        $ipt.nextAll('.Validform_checktip').removeClass('Validform_wrong').html('');
+                    }
+                    $ipt.prop('disabled', !flag);
+                })
+            }
+            $cbxs.on('click', setCat);
+            setCat();
+            return this;
+        },
+        // 表单验证
+        formValidate: function() {
+            var myformValidate = $("#myform").Validform({
+                beforeSubmit: function() {
+                    alert(0)
+                    return false;
+                }
+            });
+
+            myformValidate.addRule([
+                {
+                    ele: '#password',
+                    datatype: 's6-20',
+                    nullmsg: '请输入密码',
+                    errormsg: '6-20位字母、数字'
+                },
+                {
+                    ele: '#pwdRepeat',
+                    datatype: '*',
+                    recheck: 'password',
+                    nullmsg: '请输入确认密码',
+                    errormsg: '两次输入的密码不一致'
+                },
+                {
+                    ele: '#username',
+                    datatype: 's3-20',
+                    nullmsg: '请输入会员名',
+                    errormsg: '3-20位字母、数字'
+                },
+                {
+                    ele: '#compname',
+                    datatype: '*',
+                    nullmsg: '请输入单位全称'
+                },
+                {
+                    ele: '#name',
+                    datatype: '*',
+                    nullmsg: '请输入真实姓名'
+                },
+                {
+                    ele: '#nickname',
+                    datatype: '*',
+                    nullmsg: '请输入个人称呼'
+                }
+            ])
+            registerPage.v.myformValidate = myformValidate;
+            return this;
+        }
+
+    }
+}
+
+
+$(function() {
+    registerPage.fn.init();
+})
+</script>
+<script>
+    var ran = (new Date).getTime();
+    $.get('header.html?ran=' + ran, function(data) {
+        $('body').prepend(data);
+    })
+    $.get('footer.html?ran=' + ran, function(data) {
+        $('body').append(data);
+    })
+</script>
+</body>
+
+</html>

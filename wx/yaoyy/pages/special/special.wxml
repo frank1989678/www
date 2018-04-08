@@ -1,0 +1,19 @@
+<view wx:if="{{special != ''}}">
+	<image src="{{banner}}" class="banner" mode="widthFix" />
+</view>
+
+<view class="plist">
+	<view class="li" wx:for="{{list}}" bindtap="linkto" data-id="{{item.id}}">
+		<view class="cnt">
+			<text class="title">{{item.name}}</text>
+			<text class="summary">{{item.title}}</text>
+		    <text class="rmb">{{item.price}}</text>
+			<text class="unit" wx:if="{{unit[item.unit]}}">元/{{unit[item.unit]}}</text>
+		</view>
+		<image src="{{item.thumbnail_url}}" class="pic" />
+	</view>
+</view>
+
+<view hidden="{{!loadingHidden}}">
+<include src="/pages/common/loadmore.wxml"/>
+</view>

@@ -1,0 +1,24 @@
+/* 代码整理：大头网 www.datouwang.com */
+@charset "utf-8";
+/*基本框架CSS*/
+body{font:12px/18px "宋体",arial,sans-serif;color:#585858;}
+body,div,p,span,form,iframe,table,td,th,input,textarea,button,label,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6{font-size:100%; }
+ul,ol,li,dl{list-style-type:none;}
+em,i,dfn,cite,strong,small{font-style:normal;} 
+img{border:0;}
+/* color */
+a:link,a:visited{color:#575757;text-decoration:none;}
+a:hover{color:#ef4165;text-decoration:none;}
+a:active{color:#1d7400;}
+/*基本框架CSS结束，应用特效时，以上样式可删除*/
+
+/* 效果CSS开始 */
+.datouwang-list { width: 480px; height: 350px; overflow: hidden; margin: 20px auto 0 auto; }
+.datouwang-list li { float: left; width: 155px; margin: 0 4px 7px 0; display: inline; }
+.datouwang-list li a { position: relative; height: 104px; display: block; overflow: hidden; cursor: pointer; }
+.datouwang-list li a .title { z-index: 2; position: absolute; bottom: 10px; left: -160px; width: 150px; height: 20px; padding: 0 0 0 10px; color: #f1e8eb; line-height: 17px; background: url(../images/img_caption_bg.png) no-repeat; }
+.datouwang-list li a .shine { z-index: 3; position: absolute; top: 0; left: 0; width: 160px; height: 104px; background: url(../images/shine_datouwang.png) no-repeat -160px 0; }
+.datouwang-list li a .title { _background: none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='../images/img_caption_bg.png');}
+.datouwang-list li a .shine { _background: none; }
+/* 效果CSS结束 */

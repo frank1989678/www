@@ -1,0 +1,6 @@
+/**
+ * 添加删除classname
+ * @param  {Object} o     修改对象dom元素
+ * @param  {String} sCls  classname
+ * @param  {String} sFunc 修改classname方式：add/remove
+ */

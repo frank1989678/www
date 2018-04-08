@@ -1,0 +1,49 @@
+@charset "utf-8";
+*{-webkit-tap-highlight-color:rgba(255,0,0,0);}/* 1.去除android 标签被点击时产生的边框 2.去除ios a标签被点击时产生的半透明灰色背景 */
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0;}
+body{min-width:320px;font-family:"Microsoft Yahei";font-size:63%;line-height:1.25em;color:#000;-webkit-text-size-adjust:none;}
+img,fieldset{border:0;}
+ul,ol{list-style:none;}
+em,address{font-style:normal;}
+a{color:#000;text-decoration:none;}
+table{border-collapse:collapse;}
+input:focus, textarea:focus, a:focus{outline:none;}
+
+#wrap{margin:0 auto;background:url(../images/bg.png) no-repeat;background-size:100% 250px;}
+.header{height:67px;}
+.header .setting{float:right;margin:15px 15px 0 0;width:22px;height:22px;background:url(../images/btn-setting.png) no-repeat;background-size:cover;}
+.background{height:183px;border-radius:100%;background:url(../images/bg-avatar.png) no-repeat 50% 0;background-size:94px;}
+.background .avatar{height:70px;padding-top:25px;text-align:center;}
+.background .bar{position:relative;padding:10px 40px;text-align:center;color:#fff;}
+.background .bar .username{display:block;margin-bottom:6px;font-size:1.4em;font-weight:400;}
+.background .bar .integral{font-size:1em;font-weight:100;}
+.background .bar .fav{position:absolute;top:10px;left:40px;width:17px;height:16px;background:url(../images/fav.png) no-repeat;background-size:17px 16px;}
+.background .bar .msg{position:absolute;top:10px;right:40px;width:13px;height:9px;background:url(../images/msg.png) no-repeat;background-size:13px 9px;}
+.background .bar .msg em{position:absolute;top:-10px;left:8px;padding:1px 5px;background-color:#db242a;color:#fff;border-radius:9px;}
+
+.footer{width:100%;padding:10px 0;background-color:#fff;overflow:hidden;font-size:1em;}
+.footer a{float:left;width:25%;text-align:center;color:#b3b3b3;}
+.footer a:before{display:block;content:"";width:22px;height:22px;margin:0 auto 5px;}
+.footer a.home:before{background:url(../images/nav1.png) no-repeat 50% 0;background-size:22px;}
+.footer a.classify:before{background:url(../images/nav2.png) no-repeat 50% 0;background-size:22px;}
+.footer a.cart:before{background:url(../images/nav3.png) no-repeat 50% 0;background-size:22px;}
+.footer a.my:before{background:url(../images/nav4.png) no-repeat 50% 0;background-size:22px;}
+.footer a:hover{color:#2f87d4;}
+.footer a:hover:before{background-position:50% -23px !important;}
+
+/*.footer{position:fixed;bottom:0;left:0;}*/
+
+/*index*/
+.section-index{overflow:hidden;}
+.section-index .nav{padding:10px 0;background-color:#f5f9fc;border-bottom:1px solid #ced3d7;overflow:hidden;font-size:1.2em;}
+.section-index .nav a{float:left;width:20%;padding-top:24px;text-align:center;color:#b3b3b3;box-sizing:border-box;border-left:1px solid #ced3d7;color:#5c6466;}
+.section-index .nav .nav1{position:relative;border:0;background:url(../images/ico-01.png) no-repeat 50% 2px;background-size:15px;}
+.section-index .nav .nav1 em{position:absolute;top:-5px;left:50%;margin-left:10px;background-color:#db242a;color:#fff;border-radius:100%;padding:2px 5px;}
+.section-index .nav .nav2{background:url(../images/ico-02.png) no-repeat 50% 2px;background-size:16px 15px;}
+.section-index .nav .nav3{background:url(../images/ico-03.png) no-repeat 50% 2px;background-size:22px 15px;}
+.section-index .nav .nav4{background:url(../images/ico-04.png) no-repeat 50% 0;background-size:15px 19px;}
+.section-index .nav .nav5{background:url(../images/ico-05.png) no-repeat 50% 1px;background-size:14px 16px;}
+.section-index .list{padding:0 15px;border-bottom:1px solid #d0d3d8;background-color:#fff;}
+.section-index .list li{padding:20px 10px;border-top:1px solid #ecedf1;}
+.section-index .list li:first-child{border:0;}
+.section-index .list a{display:block;font-size:1.5em;color:#1a1a1a;background:url(../images/arrow.png) no-repeat right 50%;background-size:8px 13px;}

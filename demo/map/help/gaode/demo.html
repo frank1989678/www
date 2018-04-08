@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>轨迹展示巡航</title>
+    <style>
+    html,
+    body,
+    #container {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+    }
+    
+    #loadingTip {
+        position: absolute;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        padding: 3px 10px;
+        background: red;
+        color: #fff;
+        font-size: 14px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script src='//webapi.amap.com/maps?v=1.3&key=9d870244cd940650899a73c0566d7652'></script>
+    <!-- UI组件库 1.0 -->
+    <script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.10"></script>
+    <script type="text/javascript">
+    //创建地图
+    var map = new AMap.Map('container', {
+        zoom: 14
+    });
+
+    AMapUI.load(['ui/misc/PathSimplifier', 'lib/$'], function(PathSimplifier, $) {
+
+        if (!PathSimplifier.supportCanvas) {
+            alert('当前环境不支持 Canvas！');
+            return;
+        }
+
+        var pathSimplifierIns = new PathSimplifier({
+            zIndex: 100,
+            //autoSetFitView:false,
+            map: map, //所属的地图实例
+            getPath: function(pathData, pathIndex) {
+                return pathData.path;
+            },
+            getHoverTitle: function(pathData, pathIndex, pointIndex) {
+                if (pointIndex >= 0) {
+                    return pathData.name + '，点：' + pointIndex + '/' + pathData.path.length;
+                }
+
+                return pathData.name + '，点数量' + pathData.path.length;
+            },
+            renderOptions: {
+                pathLineStyle: {
+                    strokeStyle: 'red',
+                    lineWidth: 5,
+                    borderWidth: 0
+                }
+            }
+        });
+
+        $.getJSON('data.json', function(d) {
+            // pathSimplifierIns.setData(d);
+            var len = d[0].path.length;
+            var i = 0;
+            var duration = 2e3;
+
+            var point = [{
+                name: d[0].name,
+                path: d[0].path.slice(0, 2)
+            }];
+            pathSimplifierIns.setData(point);
+
+            var navg2 = pathSimplifierIns.createPathNavigator(0, {
+                loop: false,
+                speed: 100,
+                pathNavigatorStyle: {
+                    width: 16,
+                    height: 32,
+                    content: PathSimplifier.Render.Canvas.getImageContent('car.png'),
+                    strokeStyle: null,
+                    pathLinePassedStyle: {
+                        lineWidth:  0,   
+                        borderWidth: 0  
+                    },
+                    fillStyle: null
+                }
+            });
+            navg2.start();
+
+            var timer = setInterval(function() {
+                if (i < len) {
+                    point[0].path = d[0].path.slice(i, i + 2);
+                    pathSimplifierIns.setData(point);
+                    navg2.start();
+                    i++;
+                } else {
+                    clearInterval(timer);
+                }
+            }, duration);
+
+        });
+    });
+    </script>
+</body>
+
+</html>

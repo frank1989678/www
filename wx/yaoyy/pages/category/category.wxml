@@ -1,0 +1,22 @@
+<view class="search">
+	<navigator class="link" url="/pages/search/search"><text class="ico ico-search"></text>搜索</navigator>
+</view>
+<view class="plist">
+	<view class="li" wx:for="{{list}}" bindtap="linkto" data-id="{{item.id}}">
+		<view class="cnt">
+			<text class="title">{{item.name}}</text>
+			<text class="summary">{{item.title}}</text>
+		    <text class="rmb">{{item.price}}</text>
+			<text class="unit" wx:if="{{unit[item.unit]}}">元/{{unit[item.unit]}}</text>
+		</view>
+		<image src="{{item.thumbnail_url}}" class="pic" />
+	</view>
+</view>
+
+<view hidden="{{!loadingHidden}}">
+<include src="/pages/common/loadmore.wxml"/>
+</view>
+
+<import src="/pages/common/foot.wxml"/>
+<template is="foot" data="{{total: total, idx: 2}}"/>
+

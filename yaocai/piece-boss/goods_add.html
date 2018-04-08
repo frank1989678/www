@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>新增商品-boss-饮片B2B</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <!-- header start -->
+    <div class="header">
+        <div class="wrap">
+            <div class="logo">
+                <a href="home.html">药优优电子商务管理系统</a>
+            </div>
+            <div class="user">
+                <span>登录用户 hehuan</span>
+                <i>|</i>
+                <span>2016年6月20日 星期三</span>
+                <i>|</i>
+                <a href="logout.html">退出</a>
+            </div>
+        </div>
+    </div><!-- header end -->
+
+
+    <!-- nav start -->
+    <div class="nav">
+        <div class="wrap">
+            <ul>
+                <li><a href="home.html">首页</a></li>
+                <li>
+                    <a href="#!">销售</a>
+                    <div class="subnav">
+                        <a href="enquiry.html">询价管理</a>
+                        <a href="order.html">订单管理</a>
+                    </div>
+                </li>
+                <li>
+                    <a class="curr" href="#!">目录</a>
+                    <div class="subnav">
+                        <a href="goods.html">商品管理</a>
+                        <a class="on" href="category.html">分类管理</a>
+                        <a href="breed.html">品种管理</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#!">客户</a>
+                    <div class="subnav">
+                        <a href="customers.html">客户管理</a>
+                    </div>
+                </li>
+                <li><a href="#!">促销</a></li>
+                <li><a href="#!">邮件列表</a></li>
+                <li><a href="#!">CMS</a></li>
+                <li><a href="#!">报表</a></li>
+                <li>
+                    <a href="#!">系统</a>
+                    <div class="subnav">
+                        <a href="user.html">用户管理</a>
+                        <a href="role.html">角色管理</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div><!-- nav end -->
+
+
+    <!-- fa-floor start -->
+    <div class="fa-floor">
+        <div class="wrap">
+            <div class="side">
+                <dl>
+                    <dt>商品信息</dt>
+                    <dd>
+                        <a class="curr" href="goods.html">基本信息</a>
+                    </dd>
+                </dl>
+            </div>
+            <div class="main">
+                <form action="" id="myform">
+                    <div class="title">
+                        <h3><i class="fa fa-chevron-right"></i>新增商品</h3>
+                        <div class="extra">
+                            <button type="button" class="btn btn-gray" onclick="javascript:history.go(-1);">返回</button>
+                            <button type="submit" class="btn btn-red">保存</button>
+                        </div>
+                    </div>
+
+                    <div class="user-info">
+                        <h3>基本信息</h3>
+                        <div class="fa-form">
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>原药品种：
+                                </div>
+                                <div class="cnt">
+                                    <input type="text" class="ipt" value="" autocomplete="off" placeholder="">                            
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>商品名称：
+                                </div>
+                                <div class="cnt">
+                                    <input type="text" class="ipt" value="" autocomplete="off" placeholder="">                            
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>商品标题：
+                                </div>
+                                <div class="cnt">
+                                    <input type="text" class="ipt" value="" autocomplete="off" placeholder="">                            
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>规格等级：
+                                </div>
+                                <div class="cnt">
+                                    <input type="text" class="ipt" value="" autocomplete="off" placeholder="">                            
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>切制规格：
+                                </div>
+                                <div class="cnt">
+                                    <input type="text" class="ipt" value="" autocomplete="off" placeholder="">                            
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>指导价：
+                                </div>
+                                <div class="cnt">
+                                    <input type="text" class="ipt" id="price" value="" autocomplete="off" placeholder="">                            
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>原药产地：
+                                </div>
+                                <div class="cnt">
+                                    <select name="" id="" class="wide">
+                                        <option value=""></option>
+                                        <option value="">安徽省</option>
+                                    </select>                          
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>执行标准：
+                                </div>
+                                <div class="cnt">
+                                    <input type="text" class="ipt" value="" autocomplete="off" placeholder="">                            
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>性状描述：
+                                </div>
+                                <div class="cnt cnt-mul">
+                                    <textarea class="ipt ipt-mul" name=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="user-info">
+                        <h3>商品属性</h3>
+                        <div class="chart chart-form">
+                            <table id="attribute">
+                                <thead>
+                                    <tr>
+                                        <th width="200">属性名</th>
+                                        <th width="300">属性值</th>
+                                        <th width="80">排序</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4"><span class="c-blue" id="addAttribute">+增加新属性</span></td>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr>
+                                        <td><div class="inner"><input name="attrN_1" type="text" class="ipt" value="年限" data-rule="required;length[1~20]"></div></td>
+                                        <td><div class="inner"><input name="attrV_1" type="text" class="ipt" value="" data-rule="required;length[1~100]"></div></td>
+                                        <td><i class="up"></i><i class="down"></i></td>
+                                        <td><span class="c-red">删除</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="inner"><input name="attrN_2" type="text" class="ipt" value="采收时间" data-rule="required;length[1~20]"></div></td>
+                                        <td><div class="inner"><input name="attrV_2" type="text" class="ipt" value="" name="attr" data-rule="required;length[1~100]"></div></td>
+                                        <td><i class="up"></i><i class="down"></i></td>
+                                        <td><span class="c-red">删除</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="inner"><input name="attrN_3" type="text" class="ipt" value="加工方式" data-rule="required;length[1~20]"></div></td>
+                                        <td><div class="inner"><input name="attrV_3" type="text" class="ipt" value="" data-rule="required;length[1~100]"></div></td>
+                                        <td><i class="up"></i><i class="down"></i></td>
+                                        <td><span class="c-red">删除</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="inner"><input name="attrN_4" type="text" class="ipt" value="含硫情况" data-rule="required;length[1~20]"></div></td>
+                                        <td><div class="inner"><input name="attrV_4" type="text" class="ipt" value="" data-rule="required;length[1~100]"></div></td>
+                                        <td><i class="up"></i><i class="down"></i></td>
+                                        <td><span class="c-red">删除</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="inner"><input name="attrN_5" type="text" class="ipt" value="含量" data-rule="required;length[1~20]"></div></td>
+                                        <td><div class="inner"><input name="attrV_5" type="text" class="ipt" value="" data-rule="required;length[1~100]"></div></td>
+                                        <td><i class="up"></i><i class="down"></i></td>
+                                        <td><span class="c-red">删除</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="inner"><input name="attrN_6" type="text" class="ipt" value="生产厂家" data-rule="required;length[1~20]"></div></td>
+                                        <td><div class="inner"><input name="attrV_6" type="text" class="ipt" value="亳州市沪谯药业有限公司" data-rule="required;length[1~100]"></div></td>
+                                        <td><i class="up"></i><i class="down"></i></td>
+                                        <td><span class="c-red">删除</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="inner"><input name="attrN_7" type="text" class="ipt" value="袋装规格" data-rule="required;length[1~20]"></div></td>
+                                        <td><div class="inner"><input name="attrV_7" type="text" class="ipt" value="1公斤/袋" data-rule="required;length[1~100]"></div></td>
+                                        <td><i class="up"></i><i class="down"></i></td>
+                                        <td><span class="c-red">删除</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="user-info">
+                        <h3>商品图片与详情</h3>
+                        <div class="fa-form">
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>商品图片：
+                                </div>
+                                <div class="cnt cnt-mul">
+                                    <div class="goods-img">
+                                        <!-- <img src="images/blank.gif"><i class="del"></i> -->
+                                    </div>
+                                    <input type="hidden" value="" id="imgUrl">
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>详细信息：
+                                </div>
+                                <div class="cnt cnt-mul">
+                                    <img width="700" height="400" src="uploads/editor.jpg" alt="">
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                <div class="txt">
+                                    <i>*</i>状态：
+                                </div>
+                                <div class="cnt">
+                                    <select name="" id="" class="wide">
+                                        <option value=""></option>
+                                        <option value="">激活</option>
+                                        <option value="">禁用</option>
+                                    </select>                          
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="user-info">
+                        <h3>SEO信息</h3>
+                        <div class="fa-form">
+                            <div class="group">
+                                <div class="txt">
+                                    关键字：
+                                </div>
+                                <div class="cnt cnt-mul">
+                                    <textarea name="keywords" class="ipt ipt-mul"></textarea>
+                                    <span class="tips">关键字个数不超过5个，每个关键字不超过8个汉字</span>
+                                </div>
+                            </div>
+                            <div class="group">
+                                <div class="txt">
+                                    描述：
+                                </div>
+                                <div class="cnt cnt-mul">
+                                    <textarea name="description" class="ipt ipt-mul"></textarea>
+                                    <span class="tips">描述控制在80个汉字以内，160个字符之间</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- fa-floor end -->
+    </div>
+
+
+    <!-- footer start -->
+    <div class="footer">
+        <div class="wrap">            
+            <div class="copyright">
+                <p>药优优电商管理系统 版本 1.0  版权所有 &copy; 2016 药优优</p>
+            </div>
+        </div>
+    </div><!-- footer end -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/validator/jquery.validator.min.js?local=zh-CN"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/croppic.min.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+        var commodityAddPage = {
+            v: {
+                attr_index:9
+            },
+            fn: {
+                init: function() {
+                    this.formValidate();
+                    this.submitEvent();
+                    this.cropImg();
+                    this.parameter();
+                    this.updateTable();
+                },
+                formValidate: function() {
+                    $("#myform").validator({
+                        rules: {
+                            keywords: function(element) {
+                                var val = element.value.split(','),
+                                    length = val.length;
+
+                                if (val.length > 5) {
+                                    return '关键字个数不超过5个';
+                                }
+                                while (length --) {
+                                    if (val[length].length > 8) {
+                                        return '关键字不能超过8个字';
+                                    }   
+                                }  
+                                return true;
+                            }
+                        },
+                        fields: {
+                            username: "required",
+                            keywords: "keywords",
+                            description: "length(0~160, true)"
+                        }
+                    });
+
+                    $('#price').on('blur', function() {
+                        var val = this.value;
+                        if (!/^\d+\.?\d*$/.test(val)) {
+                            val = Math.abs(parseFloat(val));
+                        }
+                        val = Math.abs(parseFloat(val));
+                        this.value = isNaN(val) ? '' : parseFloat(val.toFixed(2));
+                    })
+                },
+                // 提交事件
+                submitEvent: function() {
+                    var self = this;
+                    $('button:submit').on('click', function() {
+                        $.notify({
+                            type: 'success', 
+                            title: '保存成功',
+                            text: '3秒后自动跳转到商品详情页', 
+                            delay: 3e3, 
+                            call: function() {
+                                setTimeout(function() {
+                                    location.href = 'goods.html';
+                                }, 3e3);
+                            }
+                        });
+                        return false;
+                    })
+                },
+                // 商品图片
+                cropImg: function() {
+                    var self = this;
+
+                    // 删除图片
+                    $('.goods-img').on('click', '.del', function() {
+                        var $self = $(this);
+                        layer.confirm('确认删除图片？', function(index){
+                            $self.parent().empty().next(':hidden').val('');
+                            layer.close(index);
+                        });
+                        return false;
+                    })
+
+                    // 图片裁剪弹层框
+                    $('.goods-img').on('click', function() {
+                        layer.open({
+                            skin: 'layui-layer-molv',
+                            area: ['600px'],
+                            closeBtn: 1,
+                            type: 1,
+                            moveType: 1,
+                            content: '<div class="img-upload-main"><div class="clip" id="imgCrop"></div></div>',
+                            title: '上传图片',
+                            cancel: function() {
+                                self.cropModal.destroy();
+                            }
+                        });
+                        self.croppic($(this));
+                    })
+                },
+                croppic: function($el) {
+                    var self = this;
+
+                    self.cropModal = new Croppic('imgCrop', {
+                        hideButton: true,
+                        uploadUrl:'img_save_to_file.php',
+                        cropUrl:'img_crop_to_file.php',
+                        onBeforeImgUpload: function() {
+                            $('#imgCrop').find('.upimg-msg').remove();
+                        },
+                        onBeforeImgCrop: function() {
+                            $('#imgCrop').append('<span class="upimg-msg">图片剪裁中...</span>');
+                        },
+                        onAfterImgCrop:function(response){ 
+                            if (response.status && response.status === 'success') {
+                                $el.html('<img src="' + response.url + '" /><i class="del" title="删除"></i>').next(':hidden').val(response.url);
+                                layer.closeAll();
+                            }
+                        },
+                        onError: function(msg) {
+                            $('#imgCrop').append('<span class="upimg-msg">' + msg + '</span>');
+                        }
+                    });
+                },
+                // 商品自定义参数
+                parameter: function() {
+                    var $table = $('#attribute').find('tbody');
+                    var self = this;
+
+                    // 新增
+                    $('#addAttribute').on('click', function () {
+                        var tr = '<tr> \n <td><div class="inner"><input name="attrN_'+commodityAddPage.v.attr_index+'" type="text" class="ipt" value="" data-rule="required;length[1~20]"></div></td> ' +
+                                '\n <td><div class="inner"><input name="attrV_'+commodityAddPage.v.attr_index+'" type="text" class="ipt" value="" data-rule="required;length[1~100]"></div></td> ' +
+                                '\n <td><i class="up"></i><i class="down"></i></td>' +
+                                '\n <td><span class="c-red">删除</span></td> \n </tr>';
+                        commodityAddPage.v.attr_index += 1;
+                        $table.append(tr);
+                        self.updateTable();
+                    })
+
+                    // 删除
+                    $table.on('click', '.c-red', function() {
+                        $(this).closest('tr').remove();
+                    })
+
+                    // 排序
+                    $table.on('click', '.up', function() {
+                        var $tr = $(this).closest('tr');
+                        $tr.prev().before($tr);
+                        self.updateTable();
+                    })
+                    $table.on('click', '.down', function() {
+                        var $tr = $(this).closest('tr');
+                        $tr.next().after($tr);
+                        self.updateTable();
+
+                    })
+                },
+                updateTable: function() {
+                    var $table = $('#attribute').find('tbody');
+                    $table.find('i').show();
+                    $table.find('tr:first').find('.up').hide();
+                    $table.find('tr:last').find('.down').hide();
+                }       
+            }
+        }
+        $(function() {
+            commodityAddPage.fn.init();
+        })
+    </script>
+</body>
+</html>
+
+<script>
+// 以下js为本地导航模板代码，上线时请删掉
+$(function() {
+    $.ajax({
+        url: 'nav.html',
+        success: function(menu) {
+            $('.nav').html(menu);
+
+            var $side = $('.nav'),
+                URL = document.URL.split('#')[0].split('?')[0].toLowerCase();
+
+            $side.find('a').each(function() {
+                if (URL === this.href.toLowerCase()) {
+                    $(this).addClass("on").parent().prev().addClass('curr');
+                    return false; // break
+                }
+            }) 
+        }
+    })
+})
+</script>

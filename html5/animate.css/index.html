@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Animate.css</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, minimal-ui" />
+    <link rel="stylesheet" href="animate.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <h3 id="demo">Animate.css</h3>
+
+    <ul class="list">
+
+        <li><span>bounceIn</span></li>
+        <li><span>bounceInDown</span></li>
+        <li><span>bounceInLeft</span></li>
+        <li><span>bounceInRight</span></li>
+        <li><span>bounceInUp</span></li>
+        <li><span>fadeIn</span></li>
+        <li><span>fadeInDown</span></li>
+        <li><span>fadeInDownBig</span></li>
+        <li><span>fadeInLeft</span></li>
+        <li><span>fadeInLeftBig</span></li>
+        <li><span>fadeInRight</span></li>
+        <li><span>fadeInRightBig</span></li>
+        <li><span>fadeInUp</span></li>
+        <li><span>fadeInUpBig</span></li>
+        <li><span>flipInX</span></li>
+        <li><span>flipInY</span></li>
+        <li><span>lightSpeedIn</span></li>
+        <li><span>rotateIn</span></li>
+        <li><span>rotateInDownLeft</span></li>
+        <li><span>rotateInDownRight</span></li>
+        <li><span>rotateInUpLeft</span></li>
+        <li><span>rotateInUpRight</span></li>
+        <li><span>slideInUp</span></li>
+        <li><span>slideInDown</span></li>
+        <li><span>slideInLeft</span></li>
+        <li><span>slideInRight</span></li>
+        <li><span>zoomIn</span></li>
+        <li><span>zoomInDown</span></li>
+        <li><span>zoomInLeft</span></li>
+        <li><span>zoomInRight</span></li>
+        <li><span>zoomInUp</span></li>
+        <li><span>rollIn</span></li>
+    </ul>
+    
+    <ul class="list">
+        <li><span>bounce</span></li>
+        <li><span>flash</span></li>
+        <li><span>pulse</span></li>
+        <li><span>rubberBand</span></li>
+        <li><span>shake</span></li>
+        <li><span>swing</span></li>
+        <li><span>tada</span></li>
+        <li><span>wobble</span></li>
+        <li><span>jello</span></li>
+    </ul>
+
+    <ul class="list">
+        <li><span>bounceOut</span></li>
+        <li><span>bounceOutDown</span></li>
+        <li><span>bounceOutLeft</span></li>
+        <li><span>bounceOutRight</span></li>
+        <li><span>bounceOutUp</span></li>
+
+        <li><span>fadeOut</span></li>
+        <li><span>fadeOutDown</span></li>
+        <li><span>fadeOutDownBig</span></li>
+        <li><span>fadeOutLeft</span></li>
+        <li><span>fadeOutLeftBig</span></li>
+        <li><span>fadeOutRight</span></li>
+        <li><span>fadeOutRightBig</span></li>
+        <li><span>fadeOutUp</span></li>
+        <li><span>fadeOutUpBig</span></li>
+
+        <li><span>flip</span></li>
+        
+        <li><span>flipOutX</span></li>
+        <li><span>flipOutY</span></li>
+        
+        <li><span>lightSpeedOut</span></li>
+        <li><span>rotateOut</span></li>
+        <li><span>rotateOutDownLeft</span></li>
+        <li><span>rotateOutDownRight</span></li>
+        <li><span>rotateOutUpLeft</span></li>
+        <li><span>rotateOutUpRight</span></li>
+        <li><span>slideOutUp</span></li>
+        <li><span>slideOutDown</span></li>
+        <li><span>slideOutLeft</span></li>
+        <li><span>slideOutRight</span></li>
+
+        <li><span>zoomOut</span></li>
+        <li><span>zoomOutDown</span></li>
+        <li><span>zoomOutLeft</span></li>
+        <li><span>zoomOutRight</span></li>
+        <li><span>zoomOutUp</span></li>
+
+        <li><span>hinge</span></li>
+        
+        <li><span>rollOut</span></li>
+    </ul>
+    <script src="/static/js/jquery191.js"></script>
+    <script>
+    var $demo = $("#demo");
+    function testAnim(x) {
+        $demo.removeClass().addClass(x + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            $(this).removeClass();
+        });
+    };
+
+    $(document).ready(function() {
+        $(".list").on("click", "span", function() {
+            var anim = $(this).text();
+            $(this).closest("li").addClass("curr").siblings().removeClass("curr");
+            testAnim(anim);
+        });
+    });
+    </script>
+</body>
+
+</html>

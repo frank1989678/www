@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>车辆位置-江城巴士</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+
+<header>
+    <div class="title">车辆位置</div>
+</header>
+
+
+<section class="wrap location-box">
+    <div class="location">
+        <ul id="line">
+            <li>
+                <i class="arrow"></i>
+                <em>武丰村</em>
+            </li>
+            <li>
+                <i class="arrow"></i>
+                <em>园林路瑞丰路</em>
+            </li>
+            <li class="current">
+                <i class="arrow"></i>
+                <em>园林路钢都花园</em>
+            </li>
+            <li>
+                <i class="arrow"></i>
+                <em>友谊大道柴林花园</em>
+            </li>
+            <li>
+                <i class="arrow"></i>
+                <em>友谊大道华城广场</em>
+            </li>
+            <li>
+                <i class="arrow"></i>
+                <em>友谊大道铁机路</em>
+            </li>
+            <li>
+                <i class="arrow"></i>
+                <em>友谊大道才茂街</em>
+            </li>
+            <li>
+                <i class="arrow"></i>
+                <em>友谊大道才华街</em>
+            </li>
+            <li>
+                <i class="arrow"></i>
+                <em>徐东大街徐东村</em>
+            </li>
+            <li>
+                <i class="arrow"></i>
+                <em>徐东大街汪家墩</em>
+            </li>
+        </ul>
+    </div>
+
+    <div class="departure">
+        <h2><img src="images/clock.png" />发车时间</h2>
+
+        <dl>
+            <dt><img src="images/time1.png" />徐东大街徐东村</dt>
+            <dd class="time1">
+                <span><em>7:30</em></span>
+                <span><em>8:30</em></span>
+                <span><em>9:30</em></span>
+                <span><em>10:30</em></span>
+                <span><em>11:30</em></span>
+                <span><em>11:30</em></span>
+                <span><em>11:30</em></span>
+
+                <span class="fix"></span>
+                <span class="fix"></span>
+                <span class="fix"></span>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt><img src="images/time2.png" />徐东大街徐东村</dt>
+            <dd class="time2">
+                <span><em>7:30</em></span>
+                <span><em>8:30</em></span>
+                <span><em>9:30</em></span>
+                <span><em>10:30</em></span>
+                <span><em>11:30</em></span>
+                <span><em>11:30</em></span>
+                <span><em>11:30</em></span>
+
+                <span class="fix"></span>
+                <span class="fix"></span>
+                <span class="fix"></span>
+            </dd>
+        </dl>
+
+    </div>
+
+</section>
+
+
+<script src="js/zepto.min.js"></script>
+<script>
+$(function() {
+    var $line = $('#line'),
+        count = $line.find('li').length;
+
+        $('#line').width(56 * count - 10);
+})
+</script>
+
+</body>
+</html>

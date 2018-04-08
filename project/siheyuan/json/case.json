@@ -1,0 +1,22 @@
+{
+      "totalSize": "260",
+      "list": [{
+          "href": "#",
+          "img": "uploads/a.jpg",
+          "price": 20,
+          "name": "金地自在城",
+          "style": "商品房商品房"
+      },{
+          "href": "#",
+          "img": "uploads/a.jpg",
+          "price": 11,
+          "name": "绿地国际",
+          "style": "别墅"
+      },{
+          "href": "#",
+          "img": "uploads/a.jpg",
+          "price": 33,
+          "name": "万科花园",
+          "style": "别墅"
+      }]
+  }

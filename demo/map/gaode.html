@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>高德地图</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <link rel="stylesheet" href="css/drawingManager.css" />
+</head>
+<body>
+<div id="container"></div>
+
+<script src="http://webapi.amap.com/maps?v=1.3&key=9d870244cd940650899a73c0566d7652"></script>
+<script src="js/gaode.pois.js"></script>
+<script src="js/gaode.tools.js"></script>
+<script src="js/jquery191.js"></script>
+<script>
+    var i = 0,
+        len = arrPois.length,
+        duration = 2e3;
+
+    var map = new AMap.Map('container');
+    var carRed = 'images/car1.png';
+    var carGray = 'images/car2.png';
+
+    // 小车
+    var car1 = new Car({
+        position: arrPois[0],
+        icon: carRed,
+        offset: new AMap.Pixel(-26, -13),
+        autoRotation: true,
+        defaultContent: {
+            content: '鄂A39201', 
+            offset: new AMap.Pixel(-8, -26)
+        },
+        crossFn: function(isCross, overlay, car) {
+            if (isCross) {
+                car.setIcon(carGray);
+                console.log('鄂A39201离开' + overlay.name);
+            } else {
+                car.setIcon(carRed);
+                console.log('鄂A39201进入' + overlay.name);
+            }
+        },
+        change: function(car) {
+            car.setIcon(carRed);
+        }
+    })
+    map.setFitView();
+
+    // 实时定位车辆
+    function callback(i, time1) {
+        var res = {
+            0: arrPois[i-1],
+            1: arrPois[i]
+        }
+        var k = res[0];
+        var lnglat = new AMap.LngLat(k[0], k[1]);
+        var distance = lnglat.distance(res[1]);
+        var time2 = (new Date).getTime();
+        var time = (time2 - time1);
+        var speed = 1e3 * 3.6 * distance / (duration - time);
+        car1.moveTo(res[1], speed);
+    }
+
+    // 定时器
+    var timer = setInterval(function() {
+        if (++i < len) {
+            var time1 = (new Date).getTime();
+            // $.ajax({
+            //     url: '../ajax.php',
+            //     data: {time: Math.round(Math.random() * 1000)},
+            //     success: function(res) {
+                    callback(i, time1);
+                // } 
+            // })
+        } else {
+            clearInterval(timer);
+        }
+    }, duration);
+
+    // 鼠标工具，绘制圆形、矩形、多边形
+    var drawingManager = new DrawingManager(map, {
+        enableDrawingTool: true,
+        drawingModes: [
+            'circle',
+            'rectangle',
+            'polygon'
+        ]
+    });
+
+
+</script>
+</body>
+</html>

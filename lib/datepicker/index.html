@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>demo</title>
+    <script src="WdatePicker.js"></script>
+
+</head>
+<body>
+<input type="text" name="queryStartTime" id="queryStartTime" class="ipt date" autocomplete="off" onclick="WdatePicker({autoPickDate:true, minDate:'%y-%M-%d %H:%m:%s', maxDate:'#F{$dp.$D(\'queryEndTime\')}', dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+<em>-</em>
+<input type="text" name="queryEndTime" id="queryEndTime" class="ipt date" autocomplete="off" onclick="WdatePicker({autoPickDate:true,minDate:'#F{$dp.$D(\'queryStartTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+</body>
+</html>

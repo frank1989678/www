@@ -1,0 +1,27 @@
+/* 测试区域，实际上是无用的css  */
+.content{background-color:#fff;height:2000px;}
+
+.w100{width:100px;}
+.w300{width:300px;}
+.ml100{margin-left:100px;}
+.clear{clear:both;}
+/* css 小图标 */
+.ui-arrow-up, .ui-arrow-down{display:inline-block;*display:inline;*zoom:1;width:0;height:0;margin-left:5px;overflow:hidden;vertical-align:middle}
+.ui-arrow-up{border:5px dashed transparent;border-top:0;border-bottom:5px solid #999}
+.ui-arrow-down{border:5px dashed transparent;border-bottom:0;border-top:5px solid #999}
+
+/*.ui-select, .ui-select div{display:inline-block;*display:inline;*zoom:1;}*/
+
+.ui-select{background-color:#fff;font:12px/24px simsun;}
+.ui-selected{height:24px;padding:0 15px;border:1px solid #ccc;cursor:default;overflow:hidden;}
+.ui-select-s{float:right;width:0;height:0;margin:9px 0 0 4px;border:5px dashed transparent;border-top:5px solid #999;overflow:hidden;}
+
+.ui-select-op{position:absolute;margin-top:-1px;background-color:#fff;visibility:hidden;border:1px solid #ccc;border-top:0}
+.ui-select-ovh{overflow:hidden;overflow-y:scroll;}
+.ui-select-op li{padding:0 35px 0 15px;border-top:1px solid #ccc;cursor:default;white-space:nowrap;}
+.ui-select-op li span{display:inline-block;}
+.ui-select-op .fore{border-top:0;}
+
+.ui-select-hover{background-color:#f0f0f0}
+.ui-select-hover .ui-select-op{visibility:visible;}
+.ui-select-curr{background-color:#c9c9c9}

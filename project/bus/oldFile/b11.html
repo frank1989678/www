@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>实时地图-江城巴士</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    
+    <link rel="stylesheet" href="css/app.css">
+    <style>
+    html,body{height:100%;}
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="title">班车线路</div>
+</header>
+
+
+<section class="map-box">
+    <div class="map-wrap" id="map"></div>
+    
+    <div class="button">
+        <button type="button" class="ubtn ubtn-blue">预定座位</button>
+    </div>
+</section>
+
+
+<script src="js/zepto.min.js"></script>
+<script src="http://api.map.baidu.com/api?v=2.0&ak=pcExWaLfoopv7vZ5hO1B8ej8"></script>
+<script>
+    // 百度地图API功能
+    var map = new BMap.Map("map");
+    var point = new BMap.Point(114.410231,30.481782);
+
+    // 创建标注   
+    var marker = new BMap.Marker(point);    
+    
+    // 将标注添加到地图中  
+    map.addOverlay(marker); 
+
+    marker.setAnimation(BMAP_ANIMATION_BOUNCE); // BMAP_ANIMATION_DROP
+    // marker.enableDragging(); // 标注可拖拽
+
+    map.centerAndZoom(point, 18); // 定位到中心点
+    
+    // 启用滚轮放大缩小
+    map.enableScrollWheelZoom(); 
+    map.enableContinuousZoom(); 
+
+    // 地图平移缩放控件，默认位于地图左上方，它包含控制地图的平移和缩放的功能。
+    map.addControl(new BMap.NavigationControl()); 
+
+    // 比例尺控件，默认位于地图左下方，显示地图的比例关系。
+    map.addControl(new BMap.ScaleControl()); 
+</script>
+
+</body>
+</html>

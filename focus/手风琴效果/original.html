@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>原版手风琴效果</title>
+<meta http-equiv="imagetoolbar" content="no">
+<link rel="stylesheet" type="text/css" href="/static/css/base.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript">
+/* ==== slider nameSpace ==== */
+var slider = function() {
+	/* ==== private methods ==== */
+	function getElementsByClass(object, tag, className) {
+		var o = object.getElementsByTagName(tag);
+		for ( var i = 0, n = o.length, ret = []; i < n; i++) {
+			if (o[i].className == className) ret.push(o[i]);
+		}
+		if (ret.length == 1) ret = ret[0];
+		return ret;
+	}
+	function setOpacity (obj,o) {
+		if (obj.filters) obj.filters.alpha.opacity = Math.round(o);
+		else obj.style.opacity = o / 100;
+	}
+	/* ==== Slider Constructor ==== */
+	function Slider(oCont, speed, iW, iH, oP) {
+		this.slides = [];
+		this.over   = false;
+		this.S      = this.S0 = speed;
+		this.iW     = iW;
+		this.iH     = iH;
+		this.oP     = oP;
+		this.oc     = document.getElementById(oCont);
+		this.frm    = getElementsByClass(this.oc, 'div', 'slide');
+		this.NF     = this.frm.length;
+		this.resize();
+		for (var i = 0; i < this.NF; i++) {
+			this.slides[i] = new Slide(this, i);
+		}
+		this.oc.parent = this;
+		this.view      = this.slides[0];
+		this.Z         = this.mx;
+		/* ==== on mouse out event ==== */
+		this.oc.onmouseout = function () {
+			this.parent.mouseout();
+			return false;
+		}
+	}
+	Slider.prototype = {
+		/* ==== animation loop ==== */
+		run : function () {
+			this.Z += this.over ? (this.mn - this.Z) * .5 : (this.mx - this.Z) * .5;
+			this.view.calc();
+			var i = this.NF;
+			while (i--) this.slides[i].move();
+		},
+		/* ==== resize  ==== */
+		resize : function () {
+			this.wh = this.oc.clientWidth;
+			this.ht = this.oc.clientHeight;
+			this.wr = this.wh * this.iW;
+			this.r  = this.ht / this.wr;
+			this.mx = this.wh / this.NF;
+			this.mn = (this.wh * (1 - this.iW)) / (this.NF - 1);
+		},
+		/* ==== rest  ==== */
+		mouseout : function () {
+			this.over      = false;
+			setOpacity(this.view.img, this.oP);
+		}
+	}
+	/* ==== Slide Constructor ==== */
+	Slide = function (parent, N) {
+		this.parent = parent;
+		this.N      = N;
+		this.x0     = this.x1 = N * parent.mx;
+		this.v      = 0;
+		this.loaded = false;
+		this.cpt    = 0;
+		this.start  = new Date();
+		this.obj    = parent.frm[N];
+		this.txt    = getElementsByClass(this.obj, 'div', 'text');
+		this.img    = getElementsByClass(this.obj, 'img', 'diapo');
+		this.bkg    = document.createElement('div');
+		this.bkg.className = 'backgroundText';
+		this.obj.insertBefore(this.bkg, this.txt);
+		if (N == 0) this.obj.style.borderLeft = 'none';
+		this.obj.style.left = Math.floor(this.x0) + 'px';
+		setOpacity(this.img, parent.oP);
+		/* ==== mouse events ==== */
+		this.obj.parent = this;
+		this.obj.onmouseover = function() {
+			this.parent.over();
+			return false;
+		}
+	}
+	Slide.prototype = {
+		/* ==== target positions ==== */
+		calc : function() {
+			var that = this.parent;
+			// left slides
+			for (var i = 0; i <= this.N; i++) {
+				that.slides[i].x1 = i * that.Z;
+			}
+			// right slides
+			for (var i = this.N + 1; i < that.NF; i++) {
+				that.slides[i].x1 = that.wh - (that.NF - i) * that.Z;
+			}
+		},
+		/* ==== HTML animation : move slides ==== */
+		move : function() {
+			var that = this.parent;
+			var s = (this.x1 - this.x0) / that.S;
+			/* ==== lateral slide ==== */
+			if (this.N && Math.abs(s) > .5) {
+				this.obj.style.left = Math.floor(this.x0 += s) + 'px';
+			}
+			/* ==== vertical text ==== */
+			var v = (this.N < that.NF - 1) ? that.slides[this.N + 1].x0 - this.x0 : that.wh - this.x0;
+			if (Math.abs(v - this.v) > .5) {
+				this.bkg.style.top = this.txt.style.top = Math.floor(2 + that.ht - (v - that.Z) * that.iH * that.r) + 'px';
+				this.v = v;
+				this.cpt++;
+			} else {
+				if (!this.pro) {
+					/* ==== adjust speed ==== */
+					this.pro = true;
+					var tps = new Date() - this.start;
+					if(this.cpt > 1) {
+						that.S = Math.max(2, (28 / (tps / this.cpt)) * that.S0);
+					}
+				}
+			}
+			if (!this.loaded) {
+				if (this.img.complete) {
+					this.img.style.visibility = 'visible';
+					this.loaded = true;
+				}
+			}
+		},
+		/* ==== light ==== */
+		over : function () {
+			this.parent.resize();
+			this.parent.over = true;
+			setOpacity(this.parent.view.img, this.parent.oP);
+			this.parent.view = this;
+			this.start = new Date();
+			this.cpt = 0;
+			this.pro = false;
+			this.calc();
+			setOpacity(this.img, 100);
+		}
+	}
+	/* ==== public method - script initialization ==== */
+	return {
+		init : function() {
+			// create instances of sliders here
+			// parameters : HTMLcontainer name, speed (2 fast - 20 slow), Horizontal ratio, vertical text ratio, opacity
+			this.s1 = new Slider("slider", 12, 1.84/3, 1/3.2, 70);
+			setInterval("slider.s1.run();", 16);
+		}
+	}
+}();
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<body>
+
+	<div id="sliderWrap" class="wrap mt10">
+		<div id="slider">
+			<div class="slide">
+				<a href="#"><img class="diapo" src="/static/uploads/sf10.jpg" alt=""></a>
+				<div class="text">
+					  <span class="title">华南宠物网</span>
+					  华南宠物网为您提供各种各种关于宠物狗以及其他宠物的资讯信息。您在里面能够找到关于宠物狗生病、宠物狗美容、宠物狗训练、宠物狗饲养等资讯。通过进行宠物狗训练、宠物狗美容、与合理的宠物狗饲养方法，让您的宠物狗远离宠物狗生病。
+				</div>
+			</div>
+			<div class="slide">
+				<a href="#"><img class="diapo" src="/static/uploads/sf14.jpg" alt=""></a>
+				<div class="text">
+					<span class="title">中国私募网</span>
+					 中国私募网汇集了大量私募内参，并提供科学的阳光私募基金排行及专户理财、私募股权基金私募内参资讯，中国私募网帮助投资人选择优秀的阳光私募基金。中国私募网定期举办各种大型私募内参峰会，打造阳光私募基金经理和大额投资者沟通和高效务实的平台。
+				</div>
+			</div>
+			<div class="slide">
+				<a href="#"><img class="diapo" src="/static/uploads/sf24.jpg" alt=""></a>
+				<div class="text">
+					  <span class="title">人和成</span>
+					   广州人和成事业发展有限公司主要经营德夫人（dewomen）产品，产品范围包括德夫人（dewomen）光瓷电热水龙头、德夫人电热水器、德夫人光瓷恒温热水器、德夫人光瓷变频热水器等。德夫人（dewomen）是您生活中最好的电热水器专家。
+				</div>
+			</div>
+			<div class="slide">
+				<a href="#"><img class="diapo" src="/static/uploads/sf04.jpg" alt=""></a>
+				<div class="text">
+					<span class="title">广州简美</span>
+					 广州简美旨在帮客户用好网站，建设能赚钱的网站。团队曾服务：广汽丰田、德邦物流、中国人寿、广东建行、广交会、广州供电局等。天河金山大厦，020-87554998。网站建设专家：简美网络。
+				</div>
+			</div>
+			<div class="slide">
+				<a href="#"><img class="diapo" src="/static/uploads/sf01.jpg" alt=""></a>
+				<div class="text">
+					  <span class="title">网聚重构设计</span>
+					   网聚重构为您提供专业的广州网页制作,CSS教程和JS特效大全,帮助企业实现标准的div+css页面及网页js特效。联系ＱＱ：410694255
+				</div>
+			</div>
+			<div class="slide">
+				<a href="#"><img class="diapo" src="/static/uploads/sf15.jpg" alt=""></a>
+				<div class="text">
+					  <span class="title">现代食品网</span>
+					  现代食品网（www.modernfood.cn）由华南理工大学所属《现代食品科技》编辑部主办，广州峰凌文化传播有限公司和广州美简美网络科技有限公司共同承建的集食品资讯与服务为一体的数字化平台。
+				</div>
+			</div>
+			<div class="slide">
+				<a href="#"><img class="diapo" src="/static/uploads/sf41.jpg" alt=""></a>
+				<div class="text">
+					  <span class="title">田野风贸易有限公司</span>
+					   田野风贸易有限公司是一家在广州销售草坪种子、花卉种子、灌木种子、牧草种子、野花种子及相关草坪资材、边坡绿化资材、园林器械、园艺资材销售的种子批发公司。
+				</div>
+			</div>
+			<div class="slide">
+				<a href="#"><img class="diapo" src="/static/uploads/sf26.jpg" alt=""></a>
+				<div class="text">
+					  <span class="title">东莞百业国际汽配城</span>
+					   东莞百业国际汽配城是东莞市政府市政规划汽车发展的大型汽配专业市场，百业汽配网集合了百业汽配城的所有商家产品及商家信息，包括汽车配件、汽车用品、汽车改装、汽车改装美容及快修等产品及相关的汽配资讯，汽配问答等，是国内最专业的汽配网站。
+				</div>
+			</div>
+			<div class="slide">
+				<a href="#"><img class="diapo" src="/static/uploads/sf50.jpg" alt=""></a>
+				<div class="text">
+					  <span class="title">乾朝珠宝</span>
+					  广州乾朝珠宝有限公司是一家在广州经营翡翠销售、玉器销售的企业。销售产品包括翡翠摆件、翡翠挂件、翡翠手镯、翡翠玩件。同时，其公司网站提供有关翡翠鉴赏、玉器鉴赏，及相关翡翠行业知识。
+				</div>
+			</div>
+			<div class="slide">
+				<a href="#"><img class="diapo" src="/static/uploads/sf19.jpg" alt=""></a>
+				<div class="text">
+					  <a class="title" href="http://www.dhteumeuleu.com">捷成汽车</a>
+					  广州物建·捷成汽车装饰有限公司专业生产销售汽车真皮椅套、汽车真皮方向盘，汽车真皮档拉杆等产品，捷成提供中巴改装，汽车内饰改装等各式服务，捷成是汽车改装行业的元老。
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	/* ==== start script ==== */
+	slider.init();
+	</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>弹幕机</title>
+    <style>
+    *{margin:0;padding:0;}
+    html,body{height:100%;}
+    body{overflow:hidden;background:#fff;}
+    .wrap{width:70%;height:500px;margin:10px auto;padding:20px;box-shadow:0 0 9px #222;border-radius:20px;overflow:hidden;}
+    .wrap .box{position:relative;width:100%;height:100%;background:#000;overflow:hidden;}
+    .wrap .box span{position:absolute;top:10px;left:20px;color:#368;}
+    .wrap .send{position:relative;margin-top:-38px;text-align:center;}
+    .wrap .send .con{width:320px;height:28px;border:0;outline:0;border-radius:5px 0 0 5px;box-shadow:0 0 5px #d9d9d9;text-indent:1em;background:#fff;}
+    .wrap .send .send-btn{width:80px;height:28px;background:#fe943b;color:#fff;border-radius:0 5px 5px 0;cursor:pointer;border:0;}
+    .wrap .send .send-btn:hover{box-shadow:0 0 50px rgba(255,255,255,0.3) inset;}
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="box"></div>
+    <div class="send">
+        <form>
+            <input type="text" placeholder="弹幕发送" class="con"><button type="submit" class="send-btn">发送</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    var oBox = document.querySelector('.box');
+    var oCon = document.querySelector('.con');
+    var oBtn = document.querySelector('.send-btn');
+    var cW = oBox.offsetWidth;
+    var cH = oBox.offsetHeight;
+    var message = '';
+    oBtn.onclick = send;
+    oCon.onkeydown = function(e){
+        e = e||window.event;
+        if (e.keyCode === 13) {
+            send();
+        }
+    }
+    var count = 0;
+    setInterval(function() {
+        count ++;
+        console.log(count)
+        createEle(Math.random().toString(36).substr(2));
+    }, 1e3)
+    function send() {
+        message = oCon.value;
+        if (message.length <= 0 || (/^\s+$/).test(message)) {
+            console.log('请输入弹幕内容');
+            return false;
+        }
+        createEle(message);
+        oCon.value = '';
+        return false;
+    }
+    function createEle(txt) {
+        var oMessage = document.createElement('span');
+        oMessage.innerHTML = txt;
+        oMessage.style.left = cW + 'px';
+        oBox.appendChild(oMessage);
+        roll.call(oMessage, {
+            timing: ['linear', 'ease-out'][~~(Math.random() * 2)],
+            color: '#' + (~~(Math.random() * (1 << 24))).toString(16),
+            top: random(0, cH - 50),
+            fontSize: random(16, 32)
+        })
+    }
+    function roll(opt) {
+        opt.timing = opt.timing || 'linear';
+        opt.color = opt.color || '#fff';
+        opt.top = opt.top || 0;
+        opt.fontSize = opt.fontSize || 16;
+        this.style.color = opt.color
+        this.style.top = opt.top + 'px';
+        this.style.fontSize = opt.fontSize + 'px';
+        this._left = parseInt(this.offsetLeft);
+        this._width = this.offsetWidth;
+        this.timer = setInterval(function() {
+            if (this._left <= -this._width) {
+                clearInterval(this.timer);
+                this.parentNode.removeChild(this);
+                return;
+            }
+            switch(opt.timing) {
+                case 'linear':
+                    this._left += -4;
+                    break;
+                case 'ease-out':
+                    this._left -= (0 - this._left) * 0.1;
+                    break;
+            }
+            this.style.left = this._left + 'px';
+        }.bind(this), 1000/60)
+    }
+    function random(start, end) {
+        return start + ~~(Math.random() * (end - start));
+    }
+
+</script>
+</body>
+
+</html>

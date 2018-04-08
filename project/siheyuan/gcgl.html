@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>工程管理</title>
+    <meta name="renderer" content="webkit" />
+    <meta name="keywords" content="" /> 
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+<!-- top statr -->
+<div class="top">
+    <div class="wrap">
+        <div class="top1">
+            <a href="javascript:;" class="wechat">关注我们<span><img src="images/qrcode.jpg" /></span></a>
+            <a href="javascript:;" onclick="showPup('iframeYangbanjian');">参观样板间</a>
+            <em>|</em>
+            <a href="#">联系客服</a>
+        </div>
+        <div class="top2">
+            <a href="javascript:;" class="free" onclick="showPup('frameLiangfang');">免费量房</a>
+            <a href="javascript:;" class="meet" onclick="showPup('iframeSjs');">预约设计</a>
+            <a href="#" class="service">在线客服</a>
+        </div>
+    </div>
+</div><!-- top end -->
+
+
+<!-- header statr -->
+<div class="header">
+    <div class="wrap">
+        <div class="logo"></div>
+        <div class="search">
+            <form action="" name="formsearch">
+                <div class="select">
+                    <label>设计师</label>
+                    <span>
+                        <em value="设计师">设计师</em>
+                        <em value="装修案例">装修案例</em>
+                        <em value="在建工程">在建工程</em>
+                    </span>
+                    <input type="hidden" value="设计师" name="key" />
+                </div>
+                <input type="text" class="ipt" placeholder="关键字">
+                <button type="submit" class="ubtn ubtn-primary">搜索</button>
+            </form>
+        </div>
+        <div class="tel">
+            027-8718188
+        </div>
+    </div>
+</div><!-- header end -->
+
+
+<!-- nav statr -->
+<div class="nav-wrap">
+<div class="nav">
+    <div class="wrap">
+        <ul>
+            <li><a href="index.html" class="on">首页</a></li>
+            <li><a href="promise.html">保障承诺</a></li>
+            <li><a href="youhui.html">最新优惠</a></li>
+            <li><a href="taocan.html">套餐随心选</a></li>
+            <li><a href="case.html">装修案例</a></li>
+            <li><a href="sjc.html">设计师团队</a></li>
+            <li><a href="ybj.html">样板间展示</a></li>
+            <li><a href="gcgl.html">工程管理</a></li>
+            <li><a href="#">施工团队</a></li>
+            <li><a href="zxdt.html">装修教学</a></li>
+            <li><a href="about.html">关于四合院</a></li>
+        </ul>
+    </div>
+</div><!-- nav end -->
+</div>
+
+<!-- banner statr -->
+<div class="banner" style="height:360px;background-image:url(uploads/banner2.jpg);"></div>
+<!-- banner end -->
+
+
+<div class="wrap">
+
+    <div class="crumbs">
+        <a href="/">主页</a> &gt; 
+        <span>工程管理</span>
+    </div>
+
+    <div class="filter">
+        <dl>
+            <dt>装修风格：</dt>
+            <dd>
+                <a href="javascript:void(0)" class="on">不限</a>
+                <a href="javascript:void(0)">欧式风格</a>
+                <a href="javascript:void(0)">现代前卫</a>
+                <a href="javascript:void(0)">现代简约</a>
+                <a href="javascript:void(0)">新中式</a>
+                <a href="javascript:void(0)">美式乡村</a>
+                <a href="javascript:void(0)">地中海式</a>
+                <a href="javascript:void(0)">新古典</a>
+                <a href="javascript:void(0)">雅致主义</a>
+                <input type="hidden" name="style" value="不限">
+            </dd>
+        </dl>
+        <dl>
+            <dt>施工阶段：</dt>
+            <dd>
+                <a href="javascript:void(0)" class="on">不限</a>
+                <a href="javascript:void(0)">开工大吉</a>
+                <a href="javascript:void(0)">水电改造</a>
+                <a href="javascript:void(0)">泥瓦阶段</a>
+                <a href="javascript:void(0)">木工阶段</a>
+                <a href="javascript:void(0)">油漆阶段</a>
+                <a href="javascript:void(0)">安装阶段</a>
+                <a href="javascript:void(0)">验收完工</a>
+                <input type="hidden" name="stage" value="不限">
+            </dd>
+        </dl>
+        <dl>
+            <dt>工地位置：</dt>
+            <dd>
+                <a href="javascript:void(0)" class="on">不限</a>
+                <a href="javascript:void(0)">全部</a>
+                <a href="javascript:void(0)">西城区</a>
+                <a href="javascript:void(0)">廊坊市</a>
+                <a href="javascript:void(0)">房山区</a>
+                <a href="javascript:void(0)">昌平区</a>
+                <a href="javascript:void(0)">朝阳区</a>
+                <a href="javascript:void(0)">丰台区</a>
+                <a href="javascript:void(0)">海淀区</a>
+                <a href="javascript:void(0)">朝阳区</a>
+                <a href="javascript:void(0)">门头沟区</a>
+                <a href="javascript:void(0)">大兴区</a>
+                <input type="hidden" name="area" value="不限">
+            </dd>
+        </dl>
+    </div>
+
+    <div class="project">
+        <ul id="list">
+            <li>
+                <div class="img">
+                    <a href="gcgl_detail.html"><img src="uploads/01.jpg" alt=""></a>
+                </div>
+                <div class="desc">
+                    <div class="hd">
+                        <h3><a href="gcgl_detail.html">海鑫北路18号院</a></h3>
+                        <div class="date">
+                            <em>发布时间：</em>
+                            <span>2017-05-26 17:22:59</span>
+                        </div>
+                        <div>
+                            <a href="gcgl_detail.html" class="ubtn ubtn-primary yuyue">预约参观</a>
+                        </div>
+                    </div>
+                    <div class="bd">
+                        <label><em>装修风格：</em>现代前卫</label>
+                        <label><em>户型：</em>普通住宅</label>
+                        <label><em>所属区域：</em>洪山区</label>
+                        <label><em>面积：</em>118㎡</label>
+                    </div>
+                    <div class="schedule s1">
+                        <h3>施工进度：</h3>
+                        <div class="step">
+                            <span class="w1">开工大吉</span>
+                            <span class="w2">水电阶段</span>
+                            <span class="w3">瓦工阶段</span>
+                            <span class="w4">油漆阶段</span>
+                            <span class="w5">软装配饰</span>
+                            <span class="w6">完美入住</span>
+                        </div>
+                        <i></i>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <a href="gcgl_detail.html"><img src="uploads/01.jpg" alt=""></a>
+                </div>
+                <div class="desc">
+                    <div class="hd">
+                        <h3><a href="gcgl_detail.html">海鑫北路18号院</a></h3>
+                        <div class="date">
+                            <em>发布时间：</em>
+                            <span>2017-05-26 17:22:59</span>
+                        </div>
+                        <div>
+                            <a href="gcgl_detail.html" class="ubtn ubtn-primary yuyue">预约参观</a>
+                        </div>
+                    </div>
+                    <div class="bd">
+                        <label><em>装修风格：</em>现代前卫</label>
+                        <label><em>户型：</em>普通住宅</label>
+                        <label><em>所属区域：</em>洪山区</label>
+                        <label><em>面积：</em>118㎡</label>
+                    </div>
+                    <div class="schedule s1">
+                        <h3>施工进度：</h3>
+                        <div class="step">
+                            <span class="w1">开工大吉</span>
+                            <span class="w2">水电阶段</span>
+                            <span class="w3">瓦工阶段</span>
+                            <span class="w4">油漆阶段</span>
+                            <span class="w5">软装配饰</span>
+                            <span class="w6">完美入住</span>
+                        </div>
+                        <i></i>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <a href="gcgl_detail.html"><img src="uploads/01.jpg" alt=""></a>
+                </div>
+                <div class="desc">
+                    <div class="hd">
+                        <h3><a href="gcgl_detail.html">海鑫北路18号院</a></h3>
+                        <div class="date">
+                            <em>发布时间：</em>
+                            <span>2017-05-26 17:22:59</span>
+                        </div>
+                        <div>
+                            <a href="gcgl_detail.html" class="ubtn ubtn-primary yuyue">预约参观</a>
+                        </div>
+                    </div>
+                    <div class="bd">
+                        <label><em>装修风格：</em>现代前卫</label>
+                        <label><em>户型：</em>普通住宅</label>
+                        <label><em>所属区域：</em>洪山区</label>
+                        <label><em>面积：</em>118㎡</label>
+                    </div>
+                    <div class="schedule s1">
+                        <h3>施工进度：</h3>
+                        <div class="step">
+                            <span class="w1">开工大吉</span>
+                            <span class="w2">水电阶段</span>
+                            <span class="w3">瓦工阶段</span>
+                            <span class="w4">油漆阶段</span>
+                            <span class="w5">软装配饰</span>
+                            <span class="w6">完美入住</span>
+                        </div>
+                        <i></i>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <a href="gcgl_detail.html"><img src="uploads/01.jpg" alt=""></a>
+                </div>
+                <div class="desc">
+                    <div class="hd">
+                        <h3><a href="gcgl_detail.html">海鑫北路18号院</a></h3>
+                        <div class="date">
+                            <em>发布时间：</em>
+                            <span>2017-05-26 17:22:59</span>
+                        </div>
+                        <div>
+                            <a href="gcgl_detail.html" class="ubtn ubtn-primary yuyue">预约参观</a>
+                        </div>
+                    </div>
+                    <div class="bd">
+                        <label><em>装修风格：</em>现代前卫</label>
+                        <label><em>户型：</em>普通住宅</label>
+                        <label><em>所属区域：</em>洪山区</label>
+                        <label><em>面积：</em>118㎡</label>
+                    </div>
+                    <div class="schedule s1">
+                        <h3>施工进度：</h3>
+                        <div class="step">
+                            <span class="w1">开工大吉</span>
+                            <span class="w2">水电阶段</span>
+                            <span class="w3">瓦工阶段</span>
+                            <span class="w4">油漆阶段</span>
+                            <span class="w5">软装配饰</span>
+                            <span class="w6">完美入住</span>
+                        </div>
+                        <i></i>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img">
+                    <a href="gcgl_detail.html"><img src="uploads/01.jpg" alt=""></a>
+                </div>
+                <div class="desc">
+                    <div class="hd">
+                        <h3><a href="gcgl_detail.html">海鑫北路18号院</a></h3>
+                        <div class="date">
+                            <em>发布时间：</em>
+                            <span>2017-05-26 17:22:59</span>
+                        </div>
+                        <div>
+                            <a href="gcgl_detail.html" class="ubtn ubtn-primary yuyue">预约参观</a>
+                        </div>
+                    </div>
+                    <div class="bd">
+                        <label><em>装修风格：</em>现代前卫</label>
+                        <label><em>户型：</em>普通住宅</label>
+                        <label><em>所属区域：</em>洪山区</label>
+                        <label><em>面积：</em>118㎡</label>
+                    </div>
+                    <div class="schedule s1">
+                        <h3>施工进度：</h3>
+                        <div class="step">
+                            <span class="w1">开工大吉</span>
+                            <span class="w2">水电阶段</span>
+                            <span class="w3">瓦工阶段</span>
+                            <span class="w4">油漆阶段</span>
+                            <span class="w5">软装配饰</span>
+                            <span class="w6">完美入住</span>
+                        </div>
+                        <i></i>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="pagination"></div>
+
+<div class="wrap">
+        <div class="title">相关工地推荐</div>
+        <div class="case-eg">
+            <ul>
+                <li>
+                    <a href="#">
+                        <img src="uploads/a.jpg" alt="">
+                        <em>20万精装首开璞瑅墅332㎡简欧别墅</em>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="uploads/02.jpg" alt="">
+                        <em>20万精装首开璞瑅墅332㎡简欧别墅</em>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="uploads/03.jpg" alt="">
+                        <em>20万精装首开璞瑅墅332㎡简欧别墅</em>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="uploads/04.jpg" alt="">
+                        <em>20万精装首开璞瑅墅332㎡简欧别墅</em>
+                    </a>
+                </li>
+            </ul>               
+        </div>
+    </div>
+
+<div class="footer">
+    <div class="wrap">
+        <dl>
+            <dt>了解四合院</dt>
+            <dd><a href="#">关于我们</a></dd>
+            <dd><a href="#">联系我们</a></dd>
+            <dd><a href="#">隐私说明</a></dd>
+            <dd><a href="#">法律公告</a></dd>
+        </dl>
+        <dl>
+            <dt>友情链接</dt>
+            <dd><a href="#">友情链接</a></dd>
+            <dd><a href="#">友情链接</a></dd>
+            <dd><a href="#">友情链接</a></dd>
+            <dd><a href="#">友情链接</a></dd>
+        </dl>
+        <dl>
+            <dt>联系信息</dt>
+            <dd>电话：027-8718188</dd>
+            <dd>微博：<a href="http://weibo.com/6292732308/profile?topnav=1&wvr=6" target="_blank" class="brands sina">新浪微博</a></dd>
+            <dd>微信：<a href="#" class="brands wechat">微信<span><img src="images/qrcode.jpg" /></span></a></dd>
+            <dd>&#12288;qq：<a href="tencent://message/?uin=261561815&amp;Menu=yes" target="_blank" class="brands qq">261561815</a></dd>
+        </dl>
+    </div>
+</div>
+
+<!-- 参观样板间-->
+<div class="layer-form" id="iframeYangbanjian" style="margin-top:-160px;">
+    <div class="inner">
+        <iframe marginwidth="0" marginheight="0" frameborder="0" scrolling="no" src="iframe_yangbanjian.html" style="width:100%;height:280px;"></iframe>
+        <div class="layer-close" title="关闭">X</div>
+    </div>
+    <div class="mask"></div>
+</div>
+
+<!-- 免费量房-->
+<div class="layer-form" id="frameLiangfang" style="margin-top:-140px;">
+    <div class="inner">
+        <iframe marginwidth="0" marginheight="0" frameborder="0" scrolling="no" src="iframe_liangfang.html" style="width:100%;height:240px;"></iframe>
+        <div class="layer-close" title="关闭">X</div>
+    </div>
+    <div class="mask"></div>
+</div>
+
+<!-- 预约设计-->
+<div class="layer-form" id="iframeSjs" style="margin-top:-180px;">
+    <div class="inner">
+        <iframe marginwidth="0" marginheight="0" frameborder="0" scrolling="no" src="iframe_sjs.html" style="width:100%;height:320px;"></iframe>
+        <div class="layer-close" title="关闭">X</div>
+    </div>
+    <div class="mask"></div>
+</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.pagination.min.js"></script>
+<script src="js/common.js"></script>
+<script>
+    $(function() {
+        var $filter = $('.filter');
+        var keywords = '';
+
+        var page =  new Page({
+            pageIndex: 1, // 当前页
+            pageSize: 10, // 每页显示10条
+            url: 'json/case.json',
+            callback: function(res) {
+                templete(res.list);
+            }
+        })
+        page.totalSize = 40;
+        page.paginate();
+
+        $filter.on('click', 'a', function() {
+            var data = {};
+            $(this).addClass('on').siblings().removeClass('on');
+            $(this).siblings(':hidden').val($(this).html());
+            $filter.find(':hidden').each(function() {
+                data[this.name] = this.value;
+            })
+            page.request(true, data);
+            return false;
+        })
+
+        function templete(data) {
+            var model = [];
+            $.each(data, function(i, item) {
+                model.push('<li>');
+                model.push('<div class="img">')
+                model.push('    <a href="#"><img src="', item.img,'" /></a>')
+                model.push('</div>')
+                model.push('<div class="desc">')
+                model.push('    <div class="hd">')
+                model.push('        <h3><a href="#">海鑫北路18号院</a></h3>')
+                model.push('        <div class="date">')
+                model.push('            <em>发布时间：</em>')
+                model.push('            <span>2017-05-26 17:22:59</span>')
+                model.push('        </div>')
+                model.push('        <div>')
+                model.push('            <a href="#" class="ubtn ubtn-primary yuyue">预约参观</a>')
+                model.push('        </div>')
+                model.push('    </div>')
+                model.push('    <div class="bd">')
+                model.push('        <label><em>装修风格：</em>现代前卫</label>')
+                model.push('        <label><em>户型：</em>普通住宅</label>')
+                model.push('        <label><em>所属区域：</em>洪山区</label>')
+                model.push('        <label><em>面积：</em>118㎡</label>')
+                model.push('    </div>')
+                model.push('    <div class="schedule s1">')
+                model.push('        <h3>施工进度：</h3>')
+                model.push('        <div class="step">')
+                model.push('            <span class="w1">开工大吉</span>')
+                model.push('            <span class="w2">水电改造</span>')
+                model.push('            <span class="w3">泥瓦阶段</span>')
+                model.push('            <span class="w4">木工阶段</span>')
+                model.push('            <span class="w5">油漆阶段</span>')
+                model.push('            <span class="w6">安装阶段</span>')
+                model.push('            <span class="w7">验收完工</span>')
+                model.push('        </div>')
+                model.push('        <i></i>')
+                model.push('    </div>')
+                model.push('</div>')
+                model.push('</li>');
+            })
+            $('#list').html(model.join(''));
+            // window.scroll(0, 0); // 返回页面顶部
+        }
+    })
+</script>
+
+</body>
+</html>

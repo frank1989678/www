@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>焦点推荐</title>
+<style type="text/css">
+body,div,dl,dt,dd,ul,li,span{margin:0;padding:0;}
+body{color: #333333;font: 12px "宋体";background:#ccc}
+a{color: #333333;text-decoration: none;}
+a:hover{color: #004B78;text-decoration: underline;}
+/*以上公用样式不要*/
+
+.dmt{position:fixed;_position:absolute;right:5px;bottom:5px;width:215px;z-index:99999999;display:none;}
+.dmt_zm_mod,.dmt_m,.dmt {overflow: hidden;}
+.dmt_m{border:solid #CECECE;border-width:0 1px;background:#fff}
+.dmt_zm_mod {background: url("images/top.png") no-repeat;height: 33px;}
+.dmt_zm_mod a{height:10px;margin-right:10px;margin-top:12px;width:10px;float:right;background:url(images/btn.png)}
+.dmt_zm_mod .maximize{width:14px;background-position:-20px 0;display:none}
+.dmt_zm_mod .hide{background-position:-44px 0;display:block}
+.dmt_m{clear:both;display:block;padding:0 5px;}
+.dmt_m{padding-top:7px}
+.dmt dl{clear:both;padding:7px 0;overflow:hidden;line-height:17px;color:#000}
+.dmt dt{float:left;}
+.dmt dd{float:right;width:145px;overflow:hidden}
+.dmt .red{color:red}
+.dmt .blue{color:#3399CC}
+.dmt img{width:50px;height:50px;border:none;vertical-align: bottom;}
+.dmt_m span{display:block;width:145px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+.dmt_cont {background:url(images/bottom.png) no-repeat 0 bottom;padding-bottom:10px}
+.dmt_cont ul{padding:0 13px;background:url(images/xy.png) repeat-y;}
+.dmt_cont li {background: url("images/ico.png") no-repeat 0 16px;list-style:none;overflow: hidden;padding:10px 0 0 8px;text-overflow: ellipsis;white-space: nowrap;width:179px;}
+
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/dn.js?id"=Math.randow></script>
+ </head>
+
+ <body>
+	<div id="div_dn" class="dmt">
+		<div class="dmt_zm_mod">
+			<a class="hide" hidefocus="true" href="javascript:Dn('hide')" title="关闭"></a>
+			<a class="minimize" hidefocus="true" href="javascript:Dn('minimize')" title="最小化"></a>
+			<a class="maximize" hidefocus="true" href="javascript:Dn('maximize')" title="详细"></a>
+		</div>
+		<div class="dmt_m">
+			<dl>
+				<dt><a href="#"><img src="images/hot1.jpg" /></a></dt>
+				<dd>
+					<span><a class="blue" href="#">小猫斯兰德的逆袭</a></span>
+					<span class="red">[iphone免费，ipad免费]</span>
+					<span>类别：冒险 下载：5675226</span>
+				</dd>
+			</dl>
+			<dl>
+				<dt><a href="#"><img src="images/hot2.jpg" /></a></dt>
+				<dd>
+					<span><a class="blue" href="#">小猫斯兰德的逆袭</a></span>
+					<span class="red">[iphone免费，ipad免费]</span>
+					<span>类别：冒险 下载：5675226</span>
+				</dd>
+			</dl>
+		</div>
+
+		<div class="dmt_cont">
+			<ul>
+				<li><a href="http://iphone.265g.com/news/117203.html" target="_blank">iPhone版死亡空间3预告</a></li>
+				<li><a href="http://iphone.265g.com/news/117209.html" target="_blank">iPhone5比4S厚度少0.5mm</a></li>
+				<li><a href="http://iphone.265g.com/news/116325.html" target="_blank">iPhone狂野飙车7破解版下载</a></li>
+				<li><a href="http://iphone.265g.com/news/117463.html" target="_blank">ShowGirl带来清爽体验</a></li>
+			</ul>
+		</div>
+	</div>
+
+ </body>
+</html>

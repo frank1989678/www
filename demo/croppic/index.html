@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>上传图片</title>
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="plugins/lightbox/lightbox.css">
+</head>
+<body>
+	
+
+	<div class="goods-img imgZoom">
+        <!-- <img src="temp/temp_a15a254ff5732707f209189c2c1023e8.jpg"><i class="del"></i> -->
+    </div>
+    <input type="hidden" value="" id="imgUrl">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/croppic.js"></script>
+    <script src="plugins/layer/layer.js"></script>
+    <script src="plugins/lightbox/lightbox.js"></script>
+    <script>
+        var roleAddPage = {
+            v: {
+                // loadPicture: 'http://i.zeze.com/attachment/forum/201612/24/192142els7n77zhmhdeotu.jpg'
+                loadPicture: 'temp/2.png'
+            },
+            fn: {
+                init: function() {
+                    this.goodsImg();
+                },
+                showImg: function(url) {
+                     url && layer.open({
+                        type: 1,
+                        shade: .5,
+                        title: false, //不显示标题
+                        content: '<img src="' + url + '" alt="" />'
+                    });
+                },
+                // 商品图片
+                goodsImg: function() {
+                    var self = this;
+                    // 删除图片
+                    $('.goods-img').on('click', '.del', function() {
+                        var $self = $(this);
+                        layer.confirm('确认删除商品图片？', {
+                            btn: ['确认','取消'] //按钮
+                        }, function(index){
+                            $self.prev().remove();
+                            $self.prev().val('');
+                            $self.remove();
+                            layer.close(index);
+                        });
+                        return false;
+                    })
+
+                    // 图片裁剪弹层框
+                    $('.goods-img').on('click', function() {
+                        layer.open({
+                            skin: 'layui-layer-molv', 
+                            area: ['600px'],
+                            closeBtn: 1,
+                            type: 1,
+                            moveType: 1,
+                            content: '<div class="img-upload-main"><div class="clip" id="imgCrop"></div></div>',
+                            title: '上传图片',
+                            cancel: function() {
+                                self.cropModal.destroy();
+                            }
+                        });
+
+                        self.croppic();
+                    });
+                },
+                croppic: function() {
+                    var self = this;
+
+                    self.cropModal = new Croppic('imgCrop', {
+                        hideButton: true,
+                        uploadUrl:'img_save_to_file.php',
+                        cropUrl:'img_crop_to_file.php',
+                        // loadPicture: roleAddPage.v.loadPicture,
+                        onAfterImgUpload: function(response) {},
+                        onBeforeImgCrop: function() {
+                            $('#imgCrop').append('<span class="msg">图片剪裁中...</span>');
+                        },
+                        onAfterImgCrop:function(response){ 
+                            if (response.status && response.status === 'success') {
+                                $('.goods-img').html('<img src="' + response.url + '" /><i class="del" title="删除"></i>');
+                                self.cropModal.destroy();
+                                layer.closeAll();
+                            }
+                        },
+                        onReset:function(){ 
+                            roleAddPage.v.loadPicture = '';
+                        },
+                        onError:function(msg){
+                            $('#imgCrop').append('<span class="msg">' + msg + '</span>');
+                        }
+                    });
+                }            
+            }
+        }
+        $(function() {
+            roleAddPage.fn.init();
+        })
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>js_ajax</title>
+	<link rel="stylesheet" href="../css/layout.css" />
+	<link rel="stylesheet" href="../js_ajax/css/form.css" />
+	<script type="text/javascript" src="../js/jquery191.js"></script>
+</head>
+<body>
+<div class="wrap">
+	<div class="w700">
+		<table class="pct100 tc list" id="ajaxJosnp">
+			<tbody>
+				<tr class="tit">
+					<td>序号</td>
+					<td>iid</td>
+					<td class="tl">姓名</td>
+					<td>生日</td>
+					<td>电话</td>
+					<td class="tr">地址</td>
+				</tr>	
+			</tbody>
+			<tbody>
+				<tr>
+					<td colspan="6">
+						<div class="lh30">
+							<a href="javascript:;" class="f14" id="Jload" />加载数据</a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<script type="text/javascript">
+
+$(function() {
+	$("#Jload").on("click", function() {
+		// $.getJSON("js/member.json?k=" + new Date().getTime(), function(data) {
+		// 	alert(data)
+		// })
+		$.ajax({
+			url: "http://localhost/develop/js_ajax/js/member.json",
+			data: {k: new Date().getTime()},
+			success: function(data) { // 请求成功返回数据
+				var html = '';
+				$.each(data, function(i, item){
+					html += '<tr>';
+					html += '<td>' + (i + 1) + '</td>';
+					html += '<td>' + item.iid + '</td>';
+					html += '<td class="tl">' + item.name + '</td>';
+					html += '<td>' + item.tel + '</td>';
+					html += '<td>' + item.birthday + '</td>';
+					html += '<td class="tr">' + item.address + '</td>';
+					html += '</tr>';
+				})
+				$("#ajaxJosnp").append(html);
+				$("#Jload").off("click").closest("tr").remove();
+			}
+		})
+	})
+})	
+
+</script>
+
+</body>
+</html>

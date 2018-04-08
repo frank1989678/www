@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>二维码生成器</title>
+	<link rel="stylesheet" href="css.css">
+	<script src="../static/js/jquery191.js"></script>
+	<script src="jquery.qrcode.min.js"></script>
+</head>
+
+<body>
+	<div class="main">
+		<input class="ipt" type="text">
+		<button class="button" type="button">生成二维码</button>
+		<div class="qrcode"></div>
+	</div>
+	<script>
+    $(function() {
+        var $ipt = $('.ipt'),
+            $qrcode = $('.qrcode');
+        $ipt.on('focus', function() {
+            $(this).select()
+        });
+        $ipt.val(location.href.toString());
+        $('.button').on('click', function() {
+            var val = $ipt.val();
+            $qrcode.html('').qrcode({
+                width: 300,
+                height: 300,
+                text: val,
+                background: '#fff',
+                foreground: '#001f3f'
+            })
+        })
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>预定座位-江城巴士</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+
+<header>
+    <div class="title">班车线路</div>
+</header>
+
+
+<section class="wrap seat-box">
+    <div class="ui-hd">
+        <i class="ico ico-clock"></i>发车时间
+    </div>
+    <div class="ui-form">
+        <form>
+            <div class="form">
+                <div class="item">
+                    <label><input type="radio" name="time" checked class="rdo">8:30</label>
+                    <label><input type="radio" name="time" class="rdo">9:30</label>
+                    <label><input type="radio" name="time" class="rdo">10:30</label>
+                    <label><input type="radio" name="time" class="rdo">11:30</label>
+                    <label><input type="radio" name="time" class="rdo">12:30</label>
+                </div>
+            </div>
+            <div class="button">
+                <button type="submit" class="ubtn ubtn-blue" id="submit">预定座位</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+
+<script src="js/zepto.min.js"></script>
+<script src="js/layer/layer.js"></script>
+<script>
+    $(function() {
+        $('#submit').on('click', function() {
+            layer.open({
+                content: '当前座位已满，是否申请增派车辆？'
+                ,btn: ['申请', '取消']
+                ,yes: function(index){
+                    layer.close(index);
+                }
+            });
+
+            layer.open({
+                content: '<i class="ico ico-right2"></i><br /><br />预定成功！'
+                ,btn: '确定'
+            });
+            return false;
+        })
+    })
+
+</script>
+
+</body>
+</html>

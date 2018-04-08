@@ -1,0 +1,18 @@
+<view class="swiper-wrap">
+	<swiper indicator-dots="true" autoplay="true" interval="5000" duration="500" circular="true">
+	  <block wx:for="{{banner}}">
+	    <swiper-item>
+	      	<image src="{{item.picture_url}}" bindtap="linkto2" data-url="{{item.href}}" />
+	    </swiper-item>
+	  </block>
+	</swiper>
+</view>
+
+<block wx:for="{{special}}">
+	<view class="idx" bindtap="linkto" data-id="{{item.href}}">
+		<image src="{{item.picture_url}}" class="pic" />
+  	</view>
+</block>
+
+<import src="/pages/common/foot.wxml"/>
+<template is="foot" data="{{total: total, idx: 1}}"/>

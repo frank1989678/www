@@ -1,0 +1,158 @@
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+
+
+::-webkit-scrollbar{width:14px;height:14px;}
+::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:999px;border:5px solid transparent;}
+::-webkit-scrollbar-track{box-shadow:1px 1px 5px rgba(0,0,0,.2) inset;}
+::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0,0,0,.2) inset;background-color:rgba(80,102,127,0.7);}
+::-webkit-scrollbar-corner{background:transparent;}
+
+圆角：-moz-border-radius:6px; -khtml-border-radius:6px; -webkit-border-radius:6px; border-radius:6px;
+滤镜：filter:alpha(opacity=40);opacity:0.4;
+浮动：.clearfix{*zoom:1;}.clearfix:after{content:'\20';display:block;height:0;clear:both;}
+渐变：background:-webkit-linear-gradient(top,#ffffff 20%,#e4e4e4 100%);
+background:#d52b45;background-image:-webkit-gradient(linear, left top, left bottom, from( #d52b45 ), to( #bc1831 ));background-image:-webkit-linear-gradient( #d52b45, #bc1831);background-image:linear-gradient( #d52b45, #bc1831 );
+
+//css3动画
+@-webkit-keyframes rotate{from{-webkit-transform:rotate(0deg);}
+to{-webkit-transform:rotate(360deg);}
+}
+@-moz-keyframes rotate{from{-moz-transform:rotate(0deg);}
+to{-moz-transform:rotate(360deg);}
+}
+@-ms-keyframes rotate{from{-ms-transform:rotate(0deg);}
+to{-ms-transform:rotate(360deg);}
+}
+@keyframes rotate{from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+
+.rotate{width:121px;position:relative;-webkit-animation:rotate 10s linear infinite;-moz-animation:rotate 10s linear infinite;-ms-animation:rotate 10s linear infinite;animation:rotate 10s linear infinite;}
+.css3-pause{-webkit-animation-play-state:paused;-moz-animation-play-state:paused;-ms-animation-play-state:paused;animation-play-state:paused;}
+.css3-run{-webkit-animation-play-state:running;-moz-animation-play-state:running;-ms-animation-play-state:running;animation-play-state:running;}
+
+.aa{transition:all .5s ease 0s;}
+.aa{transition:height 1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s}
+
+预留的几个特效：
+    ease: cubic-bezier(0.25, 0.1, 0.25, 1.0)
+    linear: cubic-bezier(0.0, 0.0, 1.0, 1.0)
+    ease-in: cubic-bezier(0.42, 0, 1.0, 1.0)
+    ease-out: cubic-bezier(0, 0, 0.58, 1.0)
+    ease-in-out: cubic-bezier(0.42, 0, 0.58, 1.0)
+cubic-bezier(.175, .885, .485, 1.19)
+
+/* 上传控件 */
+.form-file{position:relative;display:inline-block;width:100px;height:30px;line-height:30px;color:#fff;text-align:center;background-color:#00a6c6;overflow:hidden;vertical-align:middle;}
+.form-file b{display:inline-block;vertical-align:top;}
+.form-file input{position:absolute;bottom:0;right:0;width:999px;height:999px;font-size:999px;opacity:0;filter:alpha(opacity=0);cursor:pointer;border:none;}
+
+css3 动画暂停的样式
+animation-fill-mode
+
+
+<a class="album-effect author-113" href="http://ued.taobao.org/blog/?author=113"><img class="avatar-113" src="http://ued.taobao.org/blog/wp-content/uploads/2012/12/113_avatar.png"><i></i></a>
+.album-effect {
+    position: relative
+}
+
+.album-effect i {
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: skewx(-25deg);
+    -o-transform: skewx(-25deg);
+    -moz-transform: skewx(-25deg);
+    -webkit-transform: skewx(-25deg);
+    background-image: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .5), rgba(255, 255, 255, 0))
+}
+
+.album-effect:hover i {
+    left: 100%;
+    transition: .5s;
+    -o-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s
+}
+
+li:hover .gift{-webkit-animation:gift 0.8s linear both;animation:gift 0.8s linear both;}
+@-webkit-keyframes gift{
+	0% {-webkit-transform:scale3d(1, 1, 1); }
+	30% {-webkit-transform:scale3d(1.25, 0.75, 1); }
+	40% {-webkit-transform:scale3d(0.75, 1.25, 1); }
+	50% {-webkit-transform:scale3d(1.15, 0.85, 1);}
+	65% {-webkit-transform:scale3d(.95, 1.05, 1); }
+	75% {-webkit-transform:scale3d(1.05, .95, 1);}
+	100% {-webkit-transform:scale3d(1, 1, 1); }
+}
+@keyframes gift{
+	0% {transform:scale3d(1, 1, 1); }
+	30% {transform:scale3d(1.25, 0.75, 1); }
+	40% {transform:scale3d(0.75, 1.25, 1); }
+	50% {transform:scale3d(1.15, 0.85, 1);}
+	65% {transform:scale3d(.95, 1.05, 1); }
+	75% {transform:scale3d(1.05, .95, 1);}
+	100% {transform:scale3d(1, 1, 1); }
+}
+
+@-webkit-keyframes appear3d {
+	0% {  opacity:0; -webkit-transform:translateY(50px) rotateY(-20deg); }
+	40% {  opacity: 1;-webkit-transform:translateY(0) rotateY(-20deg);}
+	100% {  -webkit-transform:rotateY(0) }
+}
+@keyframes appear3d {
+	0% {  opacity:0; transform:translateY(50px) rotateY(-20deg); }
+	40% {  opacity: 1;transform:translateY(0) rotateY(-20deg);}
+	100% {  transform:rotateY(0) }
+}
+
+/*Portrait:横向 landscape：纵向*/
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation : portrait) {
+/*iPhone 6 Portrait*/
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation : landscape) {
+/*iPhone 6 landscape*/
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation : portrait) {
+/*iPhone 6+ Portrait*/
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation : landscape) {
+/*iPhone 6+ landscape*/
+}
+
+@media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px){
+/*iPhone 6 and iPhone 6+ portrait and landscape*/
+}
+
+@media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) and (orientation : portrait){
+/*iPhone 6 and iPhone 6+ portrait*/
+}
+
+@media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) and (orientation : landscape){
+/*iPhone 6 and iPhone 6+ landscape*/
+
+
+ul li {
+    counter-increment:a;
+}
+ul li:after{
+    content: "我是第"counter(a)"个li";
+}
+
+
+/* 返回顶部 */
+.goTop{position:fixed;right:5px;bottom:75px;_top:expression(documentElement.scrollTop+documentElement.clientHeight-this.offsetHeight);_position:absolute;width:55px;}
+.goTop a{display:block;height:50px;width:54px;overflow:hidden;text-indent:-999px;background-position:-1px -118px;background:#666 url(../images/gotop.gif) no-repeat 0 0}
+.goTop a:focus{outline:none;}
+.goTop a:hover{background-color:#333}

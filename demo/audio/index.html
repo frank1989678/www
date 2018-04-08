@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+
+.animate{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);-webkit-animation-delay:0s;animation-delay:0s;-webkit-animation-duration:1.5s;animation-duration:1.5s;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out}
+
+.rotate2d{-webkit-animation-timing-function:linear;animation-timing-function:linear;-webkit-animation-name:rotate2d;animation-name:rotate2d}
+@-webkit-keyframes rotate2d{
+	from{-webkit-transform:rotate(0deg);transform:rotate(0deg)}
+	to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}
+}
+@keyframes rotate2d{
+	from{-webkit-transform:rotate(0deg);transform:rotate(0deg)}
+	to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}
+}
+.music{width:2rem;height:2rem;position:absolute;right:.5rem;top:.5rem;z-index:100}
+.music .control{width:2.5rem;height:2.5rem;background:url(music_c0fda01.gif) transparent no-repeat center center;background-size:contain}
+.music .control .control-after{width:1.5rem;height:1.5rem;position:absolute;top:50%;left:50%;margin-top:-.75rem;margin-left:-.75rem;background:url(music_off_8d94020.png) transparent no-repeat center center;background-size:100% 100%;-webkit-animation:rotate2d 1.2s linear infinite;animation:rotate2d 1.2s linear infinite;z-index:-1}
+.music.stopped .control{background:0 0}
+.music.stopped .control .control-after{-webkit-animation:none;animation:none}
+	</style>
+</head>
+<body>
+	
+	<div id="music" class="music">
+		<audio id="music-audio" class="audio" loop="" autoplay="autoplay" preload="" src="http://lxcdn.rabbitpre.com/f25d881e-decc-4a57-8c5c-6c6f7d3410bd-9291"></audio>
+		<div class="control">
+			<div class="control-after"></div>
+		</div>
+	</div>
+
+</body>
+</html>

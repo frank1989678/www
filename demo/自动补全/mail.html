@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>自动补全邮箱后缀名</title>
+<link rel="stylesheet" href="/static/css/layout.css" />
+<script src="/static/js/jquery191.js"></script>
+<script src="js/autoComplete.js"></script>
+<style>
+.autoComplete{position:relative;background-color:#fff;width:290px;height:26px;padding:0 5px;border:1px solid #ddd;}
+.autoComplete .ipt{width:290px;height:16px;line-height:16px;padding:5px 0;border:0;background-color:#fff;position:absolute;}
+/*IE6，IE7中，input元素会默认有一个margin:1px 0的bug，暂时只能通过float或者absolute解决*/
+.autoComplete ul{min-width:300px;position:absolute;top:26px;_top:24px;left:-1px;border:1px solid #ddd;border-top:0;display:none;background-color:#fff;}
+.autoComplete li{padding:0 5px;border-top:1px solid #ddd;cursor:pointer;white-space:nowrap;color:#333;}
+.autoComplete li.hover{background-color:#eee;}
+.autoComplete li.curr{background-color:#ddd;}
+.autoComplete li span{display:inline-block;_width:290px;}
+</style>
+</head>
+<body>
+<div class="auto mt20 autoComplete">
+	<input id="email" type="text" class="gray ipt db" autocomplete="off" value="请输入邮箱地址" />
+</div>
+</body>
+</html>

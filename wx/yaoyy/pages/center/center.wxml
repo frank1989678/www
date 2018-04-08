@@ -1,0 +1,17 @@
+<view class="uinfo">
+	<view class="inner mid">
+        <image class="avatar" src="{{userInfo.avatarUrl}}" />
+        <text class="uname">{{userInfo.nickName}}</text>
+    </view>
+</view>
+<view class="umenu">
+	<navigator class="li" url="/pages/order/order"><text class="ico ico-m1"></text>订单列表</navigator>
+	<navigator class="li" url="/pages/sample/sample"><text class="ico ico-m2"></text>我的寄样单</navigator>
+	<navigator class="li" url="/pages/pwd/pwd"><text class="ico ico-m3"></text>修改密码</navigator>
+	<navigator class="li" url="/pages/follow/follow"><text class="ico ico-m4"></text>商品关注</navigator>
+	<navigator class="li" url="/pages/address/address"><text class="ico ico-m5"></text>收货地址</navigator>
+	<navigator class="li" url="/pages/bill/bill"><text class="ico ico-m6"></text>我的账单</navigator>
+</view>
+
+<import src="/pages/common/foot.wxml"/>
+<template is="foot" data="{{total: total, idx: 5}}"/>

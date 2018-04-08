@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>品种列表-药优优</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="body1 body-gray">
+    <header class="ui-header">
+        <div class="title">品种列表</div>
+        <div class="abs-l mid">
+            <a href="javascript:history.back();" class="ico ico-back"></a>
+        </div>
+        <div class="abs-r mid search">
+            <form id="searchForm">
+                <input type="text" name="keyword" id="keyword" value="" class="ipt" />
+                <button type="submit" id="search" class="ico ico-search mid submit"></button>
+            </form>
+        </div>
+    </header><!-- /ui-header -->
+
+
+    <footer class="ui-footer">
+        <nav class="nav">
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <i class="home"></i>
+                        <span>首页</span>
+                        <b class="dot"></b>
+                    </a>
+                </li>
+                <li>
+                    <a href="product_list.html">
+                        <i class="menu"></i>
+                        <span>品种列表</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pick.html">
+                        <i class="cart"></i>
+                        <span>采购单</span>
+                        <b id="cartNum">99</b>
+                    </a>
+                </li>
+                <li>
+                    <a href="center.html">
+                        <i class="user"></i>
+                        <span>个人中心</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+
+    <section class="ui-content">
+        <div class="plist">
+            <dl class="side">
+                <dd>热销商品</dd>
+                <dd class="curr"><a href="#">白芍</a></dd>
+                <dd><a href="#">三棱</a></dd>
+                <dd><a href="#">天麻</a></dd>
+                <dd><a href="#">白术</a></dd>
+                <dd><a href="#">白前</a></dd>
+                <dd><a href="#">茯苓</a></dd>
+                <dd><a href="#">厚朴</a></dd>
+                <dd><a href="#">根茎</a></dd>
+                <dd><a href="#">果实籽仁</a></dd>
+                <dd><a href="#">全草花叶</a></dd>
+                <dd><a href="#">树脂菌藻</a></dd>
+                <dd><a href="#">矿石动物</a></dd>
+                <dd><a href="#">其他</a></dd>
+            </dl>
+            <ul id="plist"></ul>
+            <input type="hidden" id="categoryId" value=""/>
+        </div>
+    </section><!-- /ui-content -->
+
+    <script src="assets/js/zepto.min.js"></script>
+    <script src="assets/js/dropload.js"></script>
+    <script>
+
+    var _global = {
+        fn: {
+            init: function() {
+                this.bindEvent();
+                this.loadPlist();
+            },
+            bindEvent: function() {
+                var that = this,    
+                    $plist = $('#plist'),
+                    $keyword = $('#keyword'),
+                    $cid = $('#categoryId');
+
+                $('.side').on('click', 'a', function() {
+                    var cid = $(this).data('id') || 9;
+
+                    $(this).parent().addClass('curr').siblings().removeClass('curr');
+                    $keyword.val('');
+                    $cid.val(cid);
+                    $plist.empty();
+                    that.pageNum = 1;
+                    that.me.unlock();
+                    that.me.noData(false);
+                    console.log(that.me.isData)
+                    that.getData({categoryId: cid});
+                    return false;
+                })
+
+                // 搜索
+                $('#search').on('click', function(){
+                    $cid.val('');
+                    $plist.empty();
+                    that.pageNum = 1;
+                    that.me.unlock();
+                    that.me.noData(false);
+                    that.getData({keyword: $keyword.val()});
+                    return false;
+                });
+            },
+            loadPlist: function() {
+                var that = this;
+                that.pageNum = 1; // 当前页
+
+                that.me = $('.ui-content').dropload({
+                    scrollArea: window,
+                    threshold: 50,
+                    loadDownFn: function(){
+                        that.getData({
+                            pageNum: that.pageNum, 
+                            categoryId: $('#categoryId').val(), 
+                            keyword: $('#keyword').val()
+                        });
+                    }
+                });
+            },
+            getData: function(parameter) {
+                var that = this;
+                $.ajax({
+                    type: 'GET',
+                    url: 'json/plist.json',
+                    dataType: 'json',
+                    data: parameter,
+                    success: function(res){
+                        if (that.pageNum == 2) {
+                            res.isLastPage = true;
+                        }
+                        if (res.isLastPage) {
+                            that.me.lock();
+                            that.me.noData();
+                        }
+                        that.toHtml(res.list);
+                        that.pageNum ++;
+                    },
+                    error: function(xhr, type){
+                        popover('网络连接超时，请您稍后重试!');
+                    },
+                    complete: function() {
+                        that.me.resetload();
+                        // console.log(that.me)
+                    }
+                });
+            },
+            toHtml: function(data) {
+                var html = [];
+                $.each(data, function(i, item) {
+                    html.push('<li>\n');
+                    html.push( '<a href="' + item.href + '">\n');
+                    html.push(     '<div class="cnt">\n');
+                    html.push(         '<div class="title">', item.title, '<span class="ui-tag">特价</span></div>\n');
+                    html.push(         '<div class="summary">', item.summary, '</div>\n');
+                    html.push(         '<div class="price">\n');
+                    html.push(              '<i>&yen;</i>\n');
+                    html.push(              '<em>', item.price, '</em>\n');
+                    html.push(              '<b>', item.unit, '</b>\n');
+                    html.push(          '</div>\n');
+                    html.push(     '</div>');
+                    html.push(     '<div class="pic"><img src="', item.pic, '" width="110" height="90" alt="', item.title, '"></div>\n');
+                    html.push( '</a>\n');
+                    html.push('</li>');
+                })
+                $('#plist').append(html.join(''));
+            },
+            empty: function(isEmpty) {
+                if (isEmpty) {
+                    $('.ui-content').prepend('<div class="ui-notice ui-notice-extra"> \n 品种列表还没有商品，<br>去商品详情页面可以添加商品到选货单！ \n <a class="ubtn ubtn-primary" href="/">返回首页</a> \n </div>');
+                }
+            }
+        }
+    }
+
+    $(function(){
+        _global.fn.init();
+    });
+
+</script>
+</body>
+</html>

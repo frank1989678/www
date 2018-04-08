@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>首页-boss</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+  	<link rel="stylesheet" href="assets/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<div class='wrapper'>
+	<div class="content">
+		<div class="breadcrumb">
+			<ul>
+				<li>控制面板</li>
+    		</ul>
+		</div>
+
+		<div class="box">
+			<ul class="guide">
+				<li>
+					<div class="cnt bg-aqua">
+						<a href="sample_list.html"> <span><i class="fa fa-truck"></i></span> 寄样列表 <em id="sampleNum"></em></a>
+					</div>
+				</li>
+				<li>
+					<div class="cnt bg-green">
+						<a href="pick_list.html"><span><i class="fa fa-shopping-bag"></i></span> 订单列表 <em id="pickNum"></em></a>
+					</div>
+				</li>
+				<li>
+					<div class="cnt bg-yellow">
+						<a href="goods_list.html"><span><i class="fa fa-cart-plus"></i></span> 商品列表</a>
+					</div>
+				</li>
+				<li>
+					<div class="cnt bg-red">
+						<a href="supject_list.html"><span><i class="fa fa-star"></i></span> 专场列表</a>
+					</div>
+				</li>
+				<li>
+					<div class="cnt bg-purple">
+						<a href="adv_list.html"><span><i class="fa fa-audio-description"></i></span> 广告列表</a>
+					</div>
+				</li>
+				<li>
+					<div class="cnt bg-maroon">
+						<a href="CMS_list.html"><span><i class="fa fa-file-text"></i></span> CMS列表</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="box">
+			<p>扫码绑定微信号</p>
+        	<div class="qrcode"></div>
+		</div>
+	</div>
+</div>
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/jquery.qrcode.min.js"></script>
+<script>
+	var _global = {
+		v: {
+			deleteUrl: '',
+			flag: false
+		},
+		fn: {
+			init: function() {
+                this.newMsg();
+				this.createQrcode();
+			},
+            newMsg: function() {
+                var self = this;
+                $.ajax({
+                	url: '',
+                	success: function(result) {
+                		result = {"status":200,"msg":"","data":{"pick":0,"sample":3}};
+                		if (result.status == 200) {
+	                        var pickNum = result.data.pick || '',
+	                            sampleNum = result.data.sample || '';
+
+	                        if (pickNum) {
+	                            $("#pickNum").html('<i class="fa"></i><sup>' + pickNum + '</sup>');
+	                        } else {
+	                            $("#pickNum").empty();
+	                        }
+	                        if (sampleNum) {
+	                            $("#sampleNum").html('<i class="fa"></i><sup>' + sampleNum + '</sup>');
+	                        } else {
+	                            $("#sampleNum").empty();
+	                        }
+	                    }
+                	}
+                })
+
+                // 1分钟请求一次
+                setTimeout(function() {
+                    self.newMsg();
+                }, 3e5);
+            },
+            // 生成二维码
+            createQrcode:function() {
+                var canvasSupport = !!document.createElement('canvas').getContext;
+                $('.qrcode').qrcode({
+                    render: canvasSupport ? 'canvas' : 'table',
+                    width: 160,
+                    height: 160,
+                    text: 'http://127.0.0.1:8188//wechat/member?memberId=34'
+                })
+            }
+		}
+	}
+
+	$(function() {
+		_global.fn.init();
+	})
+</script>
+</body>
+</html>

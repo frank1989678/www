@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>jquery鼠标悬停图片放大跟随代码演示_大头网</title>
+<link href="css/datouwang.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script>
+ //<![CDATA[ 
+ $(function(){ 
+     var x = 22; 
+     var y = 20; 
+     $("a.smallimage").hover(function(e){  //绑定一个鼠标悬停时事件 
+     //新建一个p标签来存放大图片，this.rel就是获取到a标签的大图片的路径，然后追加到body中 
+         $("body").append('<p id="bigimage"><img src="'+ this.rel + '" alt="" /></p>');  
+     //改变小图片的透明度为0.5，结合上面的CSS，看起来就象是图片变暗了 
+         $(this).find('img').stop().fadeTo('slow',0.5); 
+    //将鼠标的坐标和声明的x，y做运算并赋值给大图片绝对定位的坐标，然后以fadeIn的效果显示 
+         $("#bigimage").css({top:(e.pageY - y ) + 'px',left:(e.pageX + x ) + 'px'}).fadeIn('fast'); 
+     },function(){ //鼠标离开后  
+     //将变暗的图片复原 
+        $(this).find('img').stop().fadeTo('slow',1); 
+     //移除新增的p标签 
+         $("#bigimage").remove(); 
+     }); 
+     $("a.smallimage").mousemove(function(e){  //绑定一个鼠标移动的事件 
+     //将鼠标的坐标和声明的x，y做运算并赋值给大图片绝对定位的坐标，这样大图片就能跟随图片而移动了 
+     $("#bigimage").css({top:(e.pageY -y ) + 'px',left:(e.pageX + x ) + 'px'}); 
+     }); 
+ }); 
+ //]]> 
+</script>
+
+</head>
+<body>
+<!-- 代码 开始 -->
+<ul id="gallery">
+	<li><a href="http://www.datouwang.com/" class="smallimage" rel="images/001_big.jpg"><img src="images/001_small.jpg" alt="" /></a></li>
+	<li><a href="http://www.datouwang.com/" class="smallimage" rel="images/002_big.jpg"><img src="images/002_small.jpg" alt="" /></a></li>
+	<li><a href="http://www.datouwang.com/" class="smallimage" rel="images/003_big.jpg"><img src="images/003_small.jpg" alt="" /></a></li>
+</ul>
+<!-- 代码 结束 -->
+
+
+</body>
+</html>

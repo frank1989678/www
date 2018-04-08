@@ -1,0 +1,14 @@
+
+/* filter */
+.filter{border-bottom:1px solid #2486c5;overflow:hidden;*zoom:1;}
+.filter .for,.filter i{display:inline-block;line-height:30px;vertical-align:top;}
+.filter .ipt, 
+.filter .slt, 
+.filter .ubtn, 
+.filter .for{vertical-align:top;}
+.filter .for{padding-left:20px;white-space:nowrap;margin-bottom:15px;}
+.filter .ubtn{min-width:85px;margin-left:10px;}
+.filter .ipt, .filter .slt{width:160px;}
+.filter .ipt-long{width:280px;}
+.filter em{margin:0 2px;color:#ff0;}
+.site{margin:0 5px;line-height:30px;font-size:16px;}

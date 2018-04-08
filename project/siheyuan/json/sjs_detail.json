@@ -1,0 +1,26 @@
+{
+      "totalSize": "130",
+      "list": [{
+          "href": "#",
+          "img": "uploads/01.jpg",
+          "name": 10,
+          "name": "金地自在城",
+          "area": 89,
+          "type": "两居",
+          "style": "现代暖色"
+      },{
+          "href": "#",
+          "img": "uploads/02.jpg",
+          "name": "绿地国际",
+          "area": 121,
+          "type": "三居",
+          "style": "现代暖色"
+      },{
+          "href": "#",
+          "img": "uploads/03.jpg",
+          "name": "万科花园",
+          "area": 169,
+          "type": "四两居",
+          "style": "现代暖色"
+      }]
+  }

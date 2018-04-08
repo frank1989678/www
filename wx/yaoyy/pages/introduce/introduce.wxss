@@ -1,0 +1,15 @@
+page{position:relative;width:100%;height:100%;overflow:hidden;}
+.page{background:no-repeat 50% 50% #eee7d7;background-size:100% auto;}
+.page0{background-image:url(http://192.168.1.28/php/img/p01.jpg);}
+.page1{background-image:url(http://192.168.1.28/php/img/p02.jpg);}
+.page2{background-image:url(http://192.168.1.28/php/img/p03.jpg);}
+.page3{background-image:url(http://192.168.1.28/php/img/p04.jpg);}
+.page4{background-image:url(http://192.168.1.28/php/img/p05.jpg);}
+.page5{background-image:url(http://192.168.1.28/php/img/p06.jpg);}
+.page6{background-image:url(http://192.168.1.28/php/img/p07.jpg);}
+.page7{background-image:url(http://192.168.1.28/php/img/p08.jpg);}
+.page8{background-image:url(http://192.168.1.28/php/img/p09.jpg);}
+.page9{background-image:url(http://192.168.1.28/php/img/p10.jpg);}
+swiper .wx-swiper-dots{width:9px;line-height:1;}
+swiper .wx-swiper-dot{display:block;margin:10px 0;overflow:hidden;}
+swiper .wx-swiper-dot-active{width:6px;}

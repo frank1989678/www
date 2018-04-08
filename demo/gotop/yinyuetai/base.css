@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* css reset */
+html{_background:url(about:blank) no-repeat fixed;}
+body,h1,h2,h3,h4,hr,p,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,table,th,td{margin:0;padding:0;}
+body,button,input,select,textarea{background-color:#fff;font:12px/1.5 "Microsoft Yahei",tahoma,arial,\5b8b\4f53;color:#464646}
+h1,h2,h3,h4{font-size:100%;font-weight:400}
+ul,ol{list-style:none;}
+a{color:#0074d9;text-decoration:none;outline:none}
+a:hover{color:#ff4200;text-decoration:underline}
+button,input,select,textarea{border:1px solid #ccc;outline:none}
+img{vertical-align:top;border:none}
+table{border-collapse:collapse;border-spacing:0}
+::selection{background:#3d9970;color:#fff;}
+::-moz-selection{background:#3d9970;color:#fff;}
+::-webkit-selection{background:#3d9970;color:#fff;}

@@ -1,0 +1,25 @@
+{
+      "totalSize": "130",
+      "list": [{
+          "href": "#",
+          "img": "uploads/avatar.jpg",
+          "experience": 10,
+          "production": 20,
+          "position": "高级主任",
+          "name": "涂小康"
+      },{
+          "href": "#",
+          "img": "uploads/b.jpg",
+          "experience": 7,
+          "production": 15,
+          "position": "设计四部组长",
+          "name": "杨博"
+      },{
+          "href": "#",
+          "img": "uploads/c.jpg",
+          "experience": 4,
+          "production": 8,
+          "position": "高级设计师",
+          "name": "易文婧"
+      }]
+  }

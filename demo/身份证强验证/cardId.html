@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>身份证强验证</title>
+	<script src="/static/js/cityforid.js"></script>
+</head>
+<body>
+	<ul id="ul">
+	<li>220821197407119272</li>
+	<li>420984198906070410</li>
+	<li>11010120010228001X</li>
+	<li>421125198807204919</li>
+	<li>420114199002092213</li>
+	<li>42011419900208431x</li>
+	<li>42070319910808272x</li>
+	<li>42010719881117101x</li>
+	<li>420112199003132747</li>
+	<li>420102199007173738</li>
+	<li>420106198901272475</li>
+	<li>420103198911030024</li>
+	<li>421381199002209428</li>
+	<li>42112719890615135x</li>
+	<li>420116198812011161</li>
+	<li>42098419900609143x</li>
+	<li>420102198908272835</li>
+	<li>420105198912050433</li>
+	<li>420921198905044610</li>
+	<li>420702199101206914</li>
+	<li>420114198912020054</li>
+	<li>421124198912040024</li>
+	<li>420104198907142716</li>
+	<li>420116199004025279</li>
+	<li>420102198911272457</li>
+	<li>421125198910140933</li>
+	<li>420104198907132411</li>
+	<li>420115199005153217</li>
+	<li>42011519890406511x</li>
+	<li>420202198909040011</li>
+	<li>420116198912057036</li>
+	<li>420113198812020034</li>
+	<li>360121199001033112</li>
+	<li>420116198806223053</li>
+	<li>421125198706190933</li>
+	<li>421126199008053510</li>
+	<li>420115199001069819</li>
+	<li>42900119890126314x</li>
+	<li>429004198901171930</li>
+	<li>420111199001256635</li>
+	<li>420116198906103796</li>
+	<li>421281199005274916</li>
+	<li>420984198903080031</li>
+	<li>420114199002065450</li>
+	<li>42108119890927549x</li>
+	<li>420102198908152454</li>
+	<li>420116199003185254</li>
+	<li>429005199005278562</li>
+	<li>420703198807254071</li>
+	<li>420703198901076371</li>
+	<li>420117198907213520</li>
+	<li>420984198910147310</li>
+	<li>420923198812070054</li>
+	<li>420105199005300421</li>
+	<li>420105198907250051</li>
+	<li>420982198902171959</li>
+	<li>43048219900401079x</li>
+	<li>420104198909271618</li>
+	<li>421023199003063723</li>
+	<li>422326198902140018</li>
+	<li>430482199011270397</li>
+	<li>420105198909122037</li>
+	<li>420111199010301020</li>
+	<li>420704198910016596</li>
+	<li>421181198908133110</li>
+	<li>420281198805172453</li>
+	<li>420116198812204553</li>
+	<li>421023198909166345</li>
+</ul>
+<input type="text" value="220821197407119272" id="aa" /> <span id="warn"></span><br />
+<p id="size">0</p>
+<input type="button" value="check" onclick="check()" />
+
+<script language="JavaScript">
+
+var aCity={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"} 
+
+//Wi: 7  9 10  5  8  4  2  1  6 3 7 9 10 5 8 4 2 1
+var Wi = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 ];// 加权因子   
+var ValideCode = [ 1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2 ];// 身份证验证位值.10代表X   
+
+function isCardID(sId){ 
+	var iSum = 0 ;
+	var info="" ;
+	if(!/^\d{17}(\d|x)$/i.test(sId)) return "你输入的身份证长度或格式错误"; 
+	sId=sId.replace(/x$/i,"a"); 
+	var address = city[sId.substr(0,6)]//.replace(/省/g,"省 ");
+	sId === "420984198906070410" && console.log(address)
+	if(address==null) return "你的身份证地区非法"; 
+	sBirthday=sId.substr(6,4)+"-"+Number(sId.substr(10,2))+"-"+Number(sId.substr(12,2)); 
+	birthday = sId.substr(6,4)+"-"+(sId.substr(10,2))+"-"+(sId.substr(12,2)); 
+	var d=new Date(sBirthday.replace(/-/g,"/")) ;
+	if(sBirthday!=(d.getFullYear()+"-"+ (d.getMonth()+1) + "-" + d.getDate()))return "身份证上的出生日期非法"; 
+	for(var i = 17;i>=0;i --) {
+		iSum += (Math.pow(2,i) % 11) * parseInt(sId.charAt(17 - i),11);
+	};
+	
+	if(iSum%11 != 1) {
+		return "你输入的身份证号非法" + iSum%11;
+	}
+	address = address.replace(/省/,"省 ").replace(/市/g,"市 ").replace(/县/g,"县 ")
+	return birthday+"&#12288;"+(sId.substr(16,1)%2?"男":"女") + "&#12288;" + address;
+} 
+String.prototype.trim = function() {
+	return this.replace(/(^\s*)|(\s*$)/g, "");
+};
+
+var ul = document.getElementById("ul").children;
+for(var i=0; i<ul.length;i++) {
+	var sid = ul[i].innerHTML.trim();
+	ul[i].innerHTML = sid + "&#12288;" + isCardID(sid)
+}
+
+
+function check() {
+	var sId = document.getElementById("aa").value.trim();
+	var error = document.getElementById("warn");
+	var size =  document.getElementById("size");
+	size.innerHTML = sId.length;
+	var str = isCardID(sId);
+	error.innerHTML = str
+}
+
+</script>
+</body>
+</html>

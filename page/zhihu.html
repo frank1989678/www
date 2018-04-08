@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <title>知乎</title>
+    <style>
+    [hidden] {
+        display: none!important
+    }
+    
+    html {
+        box-sizing: border-box
+    }
+    
+    ,
+    *,
+    :after,
+    :before {
+        box-sizing: inherit
+    }
+    
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent
+    }
+    
+    h1,
+    h2 {
+        margin: 0;
+        font: inherit
+    }
+    
+    a {
+        color: inherit;
+        text-decoration: none;
+        outline: 0
+    }
+    
+    @font-face {
+        font-family: ZhiFont;
+        src: local('-apple-system')
+    }
+    
+    @font-face {
+        font-family: ZhiFont;
+        src: local('PingFang SC');
+        unicode-range: U+4E00-9FFF
+    }
+    
+    @font-face {
+        font-family: ZhiFont;
+        src: local('-apple-system');
+        unicode-range: U+FF0C, U+FF1B, U+FF0E
+    }
+    
+    html {
+        height: 100%
+    }
+    
+    body {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        min-height: 100%;
+        color: #646464;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 1.5;
+        font-family: ZhiFont, 'Helvetica Neue', Roboto, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        background-color: #fff
+    }
+    
+    .Download-root {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center
+    }
+    
+    .Download-logo {
+        display: block;
+        width: 130px;
+        height: 130px;
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMwIiBoZWlnaHQ9IjEzMCIgdmlld0JveD0iMCAwIDEzMCAxMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjx0aXRsZT5Mb2dvPC90aXRsZT48ZGVmcz48bGluZWFyR3JhZGllbnQgeDE9IjUwJSIgeTE9IjAlIiB4Mj0iNTAlIiB5Mj0iMTAwJSIgaWQ9ImIiPjxzdG9wIHN0b3AtY29sb3I9IiNEMkUzRTciIG9mZnNldD0iMCUiLz48c3RvcCBzdG9wLWNvbG9yPSIjQUJCM0IzIiBvZmZzZXQ9IjEwMCUiLz48L2xpbmVhckdyYWRpZW50PjxwYXRoIGQ9Ik05OS4wMjMgMEMxMTcuODEzIDAgMTMwIDEyLjE4OCAxMzAgMzAuOTc3djY4LjA0NkMxMzAgMTE3LjgxMyAxMTcuODEyIDEzMCA5OS4wMjMgMTMwSDMwLjk3N0MxMi4xODcgMTMwIDAgMTE3LjgxMiAwIDk5LjAyM1YzMC45NzdDMCAxMi4xODcgMTIuMTg4IDAgMzAuOTc3IDBoNjguMDQ2eiIgaWQ9ImEiLz48L2RlZnM+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48bWFzayBpZD0iYyIgZmlsbD0iI2ZmZiI+PHVzZSB4bGluazpocmVmPSIjYSIvPjwvbWFzaz48dXNlIGZpbGw9InVybCgjYikiIHhsaW5rOmhyZWY9IiNhIi8+PGcgbWFzaz0idXJsKCNjKSI+PGcgZmlsbD0iIzBGODhFQiI+PHBhdGggZD0iTTk5LjAyMyAwQzExNy44MTMgMCAxMzAgMTIuMTg4IDEzMCAzMC45Nzd2NjguMDQ2QzEzMCAxMTcuODEzIDExNy44MTIgMTMwIDk5LjAyMyAxMzBIMzAuOTc3QzEyLjE4NyAxMzAgMCAxMTcuODEyIDAgOTkuMDIzVjMwLjk3N0MwIDEyLjE4NyAxMi4xODggMCAzMC45NzcgMGg2OC4wNDZ6Ii8+PHBhdGggZD0iTTAgMGgxMzB2MTMwSDB6Ii8+PC9nPjxwYXRoIGQ9Ik0wIDBoMTMwdjEzMEgweiIvPjxwYXRoIGQ9Ik02Ny4wMyA2Ny4yODVjMC0uMDc1LS4wMjQtNi43MzItMi4xMy02Ljg1NUg1MC4yMTZjLjQ5LTcuNTE1LjYxNi0xNC40Mi42MTYtMjAuNTY3aDE0LjM2YzAtLjAyLjU1Mi02LjM4LTIuNDA4LTYuMzQ3SDM3Ljk0N2MuOTc4LTMuNjYgMi4yMS03LjQ3OCAzLjY4LTExLjQyNiAwIDAtNi43NTQgMC05LjA1NiA2LjA4NS0uOTUgMi41MTMtMy43MDYgMTIuMTYzLTguNjE0IDIyLjAyMyAxLjY1NC0uMTc3IDcuMTItLjMzIDEwLjM0LTYuMjYuNTkyLTEuNjU1LjcwNS0xLjg3NyAxLjQ0LTQuMDc1aDguMWMwIDIuOTM4LS4zMzQgMTguODM1LS40NyAyMC41NjdIMjguNjljLTMuMjkzLjEyMy00LjM2NiA2Ljc4LTQuMzY2IDYuODU1aDE4LjQxYy0xLjIzMiAxMy45OC03Ljg2IDI1LjgyLTE5Ljg4MiAzNS4xODYgNS43NSAxLjY0OCAxMS40OC0uMjYyIDE0LjMxNC0yLjc5MiAwIDAgNi40NS01Ljg4NyA5Ljk4NS0xOS41MjRsMTUuMTQ3IDE4LjMxczIuMjItNy41OC0uMzQ4LTExLjI3NWMtMi4xMjgtMi41MTctNy44NzYtOS4zMi0xMC4zMjYtMTEuNzg4bC00LjEwNSAzLjI3M2MxLjIyNC0zLjk0IDEuOTYtNy43NjcgMi4yMDgtMTEuMzlINjcuMDN6TTcwLjg0IDMyLjV2NjEuMzdoNi41OTNsMi4xNyA3LjQ0IDExLjgyNi03LjQ0SDEwNS4zN1YzMi41SDcwLjg0em0yNy42NzYgNTQuNTloLTcuODlsLTcuODggNS4wNzgtMS40MzQtNS4wNzhINzcuOTVWMzkuMTAyaDIwLjU2NlY4Ny4wOXoiIGZpbGw9IiNGRkYiLz48L2c+PC9nPjwvc3ZnPgo=);
+        background-size: contain
+    }
+    
+    @media screen and (max-width:350px) {
+        .Download-logo {
+            width: 100px;
+            height: 100px
+        }
+    }
+    
+    .Download-slogan {
+        margin: 30px;
+        font-size: 20px
+    }
+    
+    @media screen and (max-width:350px) {
+        .Download-slogan {
+            margin: 24px 0;
+            font-size: 16px
+        }
+    }
+    
+    .Download-link {
+        display: block;
+        width: 184px;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 100px;
+        font-size: 20px;
+        color: #0f88eb;
+        text-align: center;
+        border: 1px solid rgba(15, 136, 235, .8)
+    }
+    
+    .Download-link:active {
+        opacity: .6
+    }
+    
+    .SmartBarTip-root {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        line-height: 38px;
+        background-image: -webkit-linear-gradient(left, #0F88EB, #1768EB);
+        background-image: linear-gradient(to right, #0F88EB, #1768EB)
+    }
+    
+    .OpenInBrowserTip-root {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, .7)
+    }
+    
+    .OpenInBrowserTip-arrow {
+        position: absolute;
+        padding-top: calc(99px - 18px / 2);
+        padding-right: calc(70px + 10px);
+        top: 15px;
+        right: 15px;
+        color: #fff;
+        font-size: 18px;
+        line-height: 1;
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTQiIGhlaWdodD0iMTMzIiB2aWV3Qm94PSIwIDAgOTQgMTMzIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDx0aXRsZT4KICAgIHNoYXJlCiAgPC90aXRsZT4KICA8cGF0aCBkPSJNODUuMTkgNC4yOTNsNi4wNTUgNy41MTRjMS4wNiAxLjMxNSAzLjE0LS4yOCAyLjA4LTEuNTkyLTIuNjEyLTMuMjQ3LTUuMjMtNi40OS03Ljg0Ni05LjczNi0uNDM2LS41MzgtMS4zNjQtLjY0OC0xLjg5NS0uMi0zLjEzNiAyLjYyNy02LjI3IDUuMjU1LTkuNDA0IDcuODgzLTEuMjkyIDEuMDgyLjQxMiAzLjA3NyAxLjcwOCAxLjk5bDYuNjktNS42MWMtLjIgMy4wOTYtLjU3NCA3LjA0LTEuMjUgMTEuNjQ0bDIuNjI1LjI3NmMuNTgzLTQuMDY1Ljk5LTguMTMgMS4yMzUtMTIuMTdsLS40NjUtLjU3OC40NjUuNTc3em0uMDgyLTEuMjQ1bC0yLjU5Ni0uMTM1Yy0uMDI1LjUxLS4wNiAxLjA2LS4wOTYgMS42My4wMzctLjU3LjA3LTEuMTIuMDk3LTEuNjNsMi41OTUuMTM1ek04Mi44MSA0LjM1bDEuMjE4LTEuMDItMS4yMiAxLjAyek0wIDEzMC4wNjNsMS4xNjQgMi4zMjRjMjcuODE0LTEzLjkzIDQ5LjQzMi0zNC40MjIgNjQuMjU1LTYwLjkwNEM3NC44IDU0LjcyIDgxLjIxIDM1LjU4NiA4My45NTIgMTYuNDY0bC0yLjYyNS0uMjc2Qzc3LjA5MyA0NS4wMzIgNjAuOTQgOTkuNTM4IDAgMTMwLjA2MnoiIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgo8L3N2Zz4K);
+        background-position-x: 100%;
+        background-repeat: no-repeat;
+        background-size: 70px 99px
+    }
+    </style>
+</head>
+
+<body>
+    <div id="smartBarTip" class="SmartBarTip-root" hidden>若已安装知乎，请下拉页面点击「打开」↑↑</div>
+    <div id="download" class="Download-root" hidden>
+        <div class="Download-logo"></div>
+        <div class="Download-slogan">与世界分享你的知识、经验和见解</div><a id="downloadLink" class="Download-link" href="http://www.zhihu.com/app">立即下载</a></div>
+    <div id="openInBrowserTip" class="OpenInBrowserTip-root" hidden>
+        <div class="OpenInBrowserTip-arrow"><span id="openInBrowserTipText"></span></div>
+    </div>
+    <script>
+    ! function(e) {
+        function t(o) {
+            if (n[o]) return n[o].exports;
+            var r = n[o] = {
+                i: o,
+                l: !1,
+                exports: {}
+            };
+            return e[o].call(r.exports, r, r.exports, t), r.l = !0, r.exports
+        }
+        var n = {};
+        return t.m = e, t.c = n, t.i = function(e) {
+            return e
+        }, t.d = function(e, t, n) {
+            Object.defineProperty(e, t, {
+                configurable: !1,
+                enumerable: !0,
+                get: n
+            })
+        }, t.n = function(e) {
+            var n = e && e.__esModule ? function() {
+                return e.default
+            } : function() {
+                return e
+            };
+            return t.d(n, "a", n), n
+        }, t.o = function(e, t) {
+            return Object.prototype.hasOwnProperty.call(e, t)
+        }, t.p = "/", t(t.s = 3)
+    }([function(e, t, n) {
+        "use strict";
+        var o = n(1),
+            r = n(2);
+        n.n(r);
+        window.document.addEventListener("touchstart", function() {}, !1);
+        var i = document.querySelector("#download"),
+            u = document.querySelector("#downloadLink"),
+            a = (document.querySelector("#smartBarTip"), document.querySelector("#openInBrowserTip")),
+            c = document.querySelector("#openInBrowserTipText"),
+            d = function() {
+                o.a.iOS ? c.textContent = "点击右上角用 Safari 打开" : c.textContent = "点击右上角用浏览器打开", a.hidden = !1
+            },
+            s = function() {
+                u.href = "itms-apps://itunes.apple.com/app/apple-store/id432274380", i.hidden = !1, location.href = "zhihu:/" + location.pathname
+            },
+            p = function() {
+                u.textContent = "打开 App";
+                var e = function() {
+                    return location.href = "zhihu:/" + location.pathname
+                };
+                u.addEventListener("click", function(t) {
+                    t.preventDefault(), e(), setTimeout(function() {
+                        return location.href = "http://api.zhihu.com/client/download/apk"
+                    }, 1e3)
+                }), i.hidden = !1, e()
+            },
+            f = function() {
+                o.a.iOSWebView || o.a.Wechat || o.a.Weibo ? d() : o.a.iOS ? s() : o.a.Android ? p() : i.hidden = !1
+            };
+        f()
+    }, function(e, t, n) {
+        "use strict";
+        var o = navigator.userAgent,
+            r = /Android/.test(o),
+            i = /iPhone|iPad/.test(o),
+            u = /MicroMessenger/.test(o),
+            a = /Weibo/.test(o),
+            c = i && !/Version.+Safari/.test(o);
+        t.a = {
+            iOS: i,
+            Android: r,
+            Wechat: true || u,
+            Weibo: a,
+            iOSWebView: c
+        }
+    }, function(e, t) {}, function(e, t, n) {
+        e.exports = n(0)
+    }])
+    </script>
+</body>
+
+</html>

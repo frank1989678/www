@@ -1,0 +1,91 @@
+@media (min-width:991px){
+    .yc-mobile .yc-header .logo{width:50px;}
+    .yc-mobile .yc-header .logo a{margin-left:-230px;}
+    .yc-mobile .yc-content{margin-left:50px;}
+    .yc-mobile .yc-side-menu{width:50px;}
+    .yc-mobile .yc-side-menu i,
+    .yc-mobile .yc-side-menu span{display:none;}
+    .yc-mobile .yc-side-menu dd{height:auto !important;display:none;padding-bottom:0;}
+    .yc-mobile .yc-side-menu dl:hover{width:230px;background:#222d32;}
+    .yc-mobile .yc-side-menu dl:hover dd{display:block !important;position:absolute;left:0;top:44px;width:100%;background:#222d32;}
+    .yc-mobile .yc-side-menu dl:hover span{display:inline-block;padding-left:20px;}
+
+}
+@media (max-width:480px){
+
+  /*.layui-layer{max-width:95%;}*/
+}
+
+@media (max-width:667px){
+    .yc-filter{line-height:1.5;}
+    .yc-filter label{display:block;}
+    .yc-filter .ubtn{width:30%;min-width:90px;padding:0;margin-top:8px;}
+    .ipt,.slt{width:100%;margin:0 0 8px 0;}
+    .ipt-area{width:100%;height:120px;}
+    
+    .yc-form .group .cont{position:relative;}
+    .yc-form .group .cont .error{position:absolute;top:41px;left:100px;z-index:2;line-height:28px;padding:0 5px;font-size:12px;background:#d14233;color:#fff;display:none;}
+    .yc-form .group .cont .error:after{content:"";position:absolute;top:-10px;left:10px;border:5px dashed transparent;border-bottom:5px solid #d14233;}
+    
+    .yc-form .group .cont label{display:block;margin:0 0 -6px;}
+    .yc-form .group .cont label .cbx{margin-left:10px;}
+    
+    .yc-tag-list .list{width:100%;margin-top:-8px;}
+    .yc-tag-list li{width:43%;}
+
+    .yc-form .ft .submit{width:100%;padding:0;}
+  /*.layui-layer{max-width:95%;}*/
+}
+
+@media (max-width:991px){
+    .yc-header .logo{width:100%;float:none;}
+    .yc-header .logo a{width:100%;}
+    .yc-header .logo span{width:100%;}
+    .yc-header .logo em{display:none;}
+    .yc-content{margin-left:0;}
+    .yc-side-menu{top:100px;-webkit-transform:translate(-230px,0);-ms-transform:translate(-230px,0);-o-transform:translate(-230px,0);transform:translate(-230px,0);}
+    .yc-mobile .yc-side-menu{-webkit-transform:translate(0,0);-ms-transform:translate(0,0);-o-transform:translate(0,0);transform:translate(0,0);}
+    .yc-mobile .yc-content{-webkit-transform:translate(230px,0);-ms-transform:translate(230px,0);-o-transform:translate(230px,0);transform:translate(230px,0);}
+
+    .table-responsive,
+    .yc-chart{width:100%;min-height:.01%;padding-bottom:2px;overflow-y:hidden;overflow-x:auto;-ms-overflow-style:-ms-autohiding-scrollbar;}
+    td,th{padding-left:5px !important;padding-right:5px !important;white-space:nowrap;}
+    .table-responsive td .ubtn{display:block;}
+    
+    .user-info{margin:15px 0;}
+    .user-info .bd{padding:10px;}
+    /*.yc-record{padding:0;}*/
+    .yc-record .col{width:100%;float:none;}
+    .yc-record .group{line-height:1.5;font-size:1.2rem;}
+    .yc-record .cnt{width:100%;float:none;border:none;margin:0;}
+    .yc-record .inner{padding:0 10px;}
+    .yc-record .expand{margin-bottom:20px;}
+    .yc-record .ipt{width:100px;}
+    .yc-record .ipt-mul{width:90%;}
+    .yc-record b{font-size:1.4rem;margin-left:0;}
+    .yc-record h2{margin:0 10px;}
+    .thumb img{margin-right:0;}
+    .lb-prev,.lb-next{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=1);opacity:1;}
+
+    .filter .input-group{display:block;margin-bottom:6px;overflow:hidden;}
+    .filter .btn{min-width:120px;}
+
+    .yc-form{padding:0;}
+    .yc-form .group .txt{text-align:left;}
+    .yc-form .group .btn-sm{margin-top:6px;}
+    .yc-form .ft{padding-left:0;text-align:center;}
+    .yc-result{margin:0;}
+    .supplier-list li{float:none;display:block;width:auto;margin-right:0;}
+
+}
+
+
+@media (max-width:991px){
+
+    /*.yc-form .group .cont .error{display:block;}*/
+    /*.yc-form .group .cont .ipt{width:90%;}*/
+ /*   .yc-form .group .cont .error{display:block;}
+    .yc-form .group .cont .slt li{width:90%;margin-bottom:6px;}
+    .yc-form .group .cont .slt li:after{content:"";position:absolute;top:50%;right:7px;width:7px;height:7px;border-top:solid 2px #999;border-right:solid 2px #999;-webkit-transform:rotate(135deg);-ms-transform:rotate(135deg);transform:rotate(135deg);margin-top:-7px;}
+    .yc-form .group .cont .slt li select{width:100%;}*/
+}

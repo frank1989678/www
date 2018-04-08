@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>css3 时钟</title>
+<meta name="viewport" content="width=device-width initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="email=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-title" content="EaseMobile" />
+<style>
+*{margin:0;padding:0;}
+#clock{position:fixed;top:50%;left:50%;width:600px;height:600px;margin:-300px 0 0 -300px;background:url(images/clockface.jpg) no-repeat 50% 50%;background-size:cover;}
+#second, #minute, #hour{position:absolute;width:30px;height:100%;top:0px;left:285px;}
+#hour{background:url(images/hourhand.png);}
+#minute{background:url(images/minhand.png);}
+#second{background:url(images/sechand.png);}
+#time{position:absolute;top:380px;left:0;width:100%;text-align:center;font-family;verdana;}
+@media (max-width:720px) {
+	#clock{width:300px;height:300px;margin:-150px 0 0 -150px;}
+	#second, #minute, #hour{width:15px;left:142.5px;background-size:cover;}
+	#time{top:180px;font-size:14px;}
+}
+@media (min-width:721px) {
+	#clock{width:600px;height:600px;margin:-300px 0 0 -300px;}
+	#second, #minute, #hour{width:30px;left:285px;}
+	#time{top:380px;font-size:22px;}
+}
+.starttime{position:absolute;bottom:-20px;left:0;width:100%;text-align:center;}
+</style>
+<script src="/static/js/jquery191.js"></script>
+</head>
+<body>
+<div id="clock">
+	<div id="hour"></div>
+	<div id="minute"></div>
+	<div id="second"></div>
+	<div id="time"></div>
+	<div class="starttime">
+		计时时间：<span id="starttime"></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+	var $hour 	= $("#hour"),
+		$minute = $("#minute"),
+		$second = $("#second"),
+		$time = $("#time"),
+		date 	= new Date(),
+		nHour	= date.getHours(),
+		nMinute	= date.getMinutes(),
+		nSecond	= date.getSeconds(),
+		nClock  = null;
+
+	var plusZore = function(number) {
+		return number < 10 ? "0" + number : number;
+	}
+
+	starttime.innerHTML = plusZore(nHour) + ":" + plusZore(nMinute) + ":" + plusZore(nSecond);
+	var setSrotate = function($ele, degree) {
+		$ele.css({
+			"-webkit-transform" : "rotate(" + degree + "deg)",
+			   "-moz-transform" : "rotate(" + degree + "deg)", 
+			    "-ms-transform" : "rotate(" + degree + "deg)", 
+			     "-o-transform" : "rotate(" + degree + "deg)", 
+			        "transform" : "rotate(" + degree + "deg)"
+		});
+	}
+	var fnSecond = function() {
+		setSrotate($second, nSecond * 6);
+		nSecond ++;
+		if (nSecond == 60) {
+			nSecond = 0;
+			nMinute ++;
+			if (nMinute == 60) {
+				nMinute = 0;
+				nHour ++;
+				if (nHour == 24) {
+					nHour = 0;
+				}
+			}
+		}
+		fnMinute();
+		fnHour();
+		showTime();
+	}
+
+	var fnMinute = function() {
+		var degree = (nMinute + nSecond/60) * 6;
+		setSrotate($minute, degree);
+	}
+
+	var fnHour =function() {
+		var degree = (nHour + nMinute/60) * 30;
+		setSrotate($hour, degree);
+	}
+
+	var showTime = function() {
+		$time.html(plusZore(nHour) + ":" + plusZore(nMinute) + ":" + plusZore(nSecond))
+	}
+
+	fnSecond();
+	setInterval(function() {
+		fnSecond();
+	}, 1000)
+}); 
+
+</script>
+</body>
+</html>

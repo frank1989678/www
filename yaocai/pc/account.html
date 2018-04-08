@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+    <title>用户中心-药材购</title>
+    <!-- 浏览器高速模式 -->
+    <meta name="renderer" content="webkit" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/center.css" />
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+<section class="sec">
+    <div class="main-cont">
+        <div class="menu">
+            <ul class="yc-ul">
+                <li class="curr"><a href="#" title=""><i class="icons pen"></i>账户资料</a></li>
+                <li><a href="molecular.html" title=""><i class="icons sub"></i>子账户</a></li>
+            </ul>
+        </div>
+        
+        <div class="box">
+            <div class="yc-form">
+                <div class="hd">基础信息</div>
+                <div class="bd">
+                    <div class="group">
+                        <div class="txt">
+                            <span>会员名</span>
+                        </div>
+                        <div class="cont">
+                            <span class="bold">boyyafee</span>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="txt">
+                            <span>密码</span>
+                        </div>
+                        <div class="cont">
+                            <a href="#" title="">修改密码</a>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="txt">
+                            <span>绑定手机</span>
+                        </div>
+                        <div class="cont">
+                            <span>159xxxx2545</span>
+                            <a href="#" title="">修改</a>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="txt">
+                            <span>个人称呼</span>
+                        </div>
+                        <div class="cont">
+                            <input class="ipt" name="username" id="jUsername" type="text" value="严飞">
+                            <span class="error"></span>
+                        </div>
+                    </div>
+                    <div class="ft">
+                        <button type="submit" id="jSave1" class="btn btn-orange submit">保存基础信息</button>
+                        <span class="msg hide"><i class="icons icons-ok"></i>操作成功</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="yc-form">
+                <div class="hd">经营主体</div>
+                <div class="bd">
+                    <div class="group">
+                        <div class="txt">
+                            <span>经营主体</span>
+                        </div>
+                        <div class="cont">
+                            <span class="bold">亳州永刚中药饮片有限公司</span>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="txt">
+                            <span>员工姓名</span>
+                        </div>
+                        <div class="cont">
+                            <span class="bold">金庸</span>
+                        </div>
+                    </div>
+                    <div class="ft">
+                        <a href="#" class="btn btn-orange submit">立即认证</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="yc-form form-primary">
+                <div class="hd">经营信息<span><i></i>不完整，请完善</span><em>完善经营信息，可精准匹配商机，第一时间推送</em></div>
+                <div class="bd">
+                    <div class="group">
+                        <div class="txt">
+                            <span>经营信息（企业）</span>
+                        </div>
+                        <div class="cont">
+                            <label><input class="cbx" name="companyType" type="radio">饮片厂/饮片生产、加工</label>
+                            <label><input class="cbx" name="companyType" type="radio">药厂/制药企业</label>
+                            <label><input class="cbx" name="companyType" type="radio">药材贸易经营公司</label>
+                            <label><input class="cbx" name="companyType" type="radio">种植合作社/种植基地</label>
+                            <label><input class="cbx" name="companyType" type="radio">个体工商户</label>
+                            <label><input class="cbx" name="companyType" type="radio">其他</label>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="txt">
+                            <span>经营信息（个人）</span>
+                        </div>
+                        <div class="cont">
+                            <label><input class="cbx" name="personalType" type="radio">个人经营</label>
+                            <label><input class="cbx" name="personalType" type="radio">企业采购经理/业务员</label>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="txt">
+                            <span>贸易类型</span>
+                        </div>
+                        <div class="cont">
+                            <label><input class="cbx" name="tradeType" type="radio">采购药材为主</label>
+                            <label><input class="cbx" name="tradeType" type="radio">销售药材为主</label>
+                            <label><input class="cbx" name="tradeType" type="radio">两者都有</label>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="txt mid">
+                            <span>关注品种</span>
+                        </div>
+                        <div class="cont">
+                            <div class="tr">
+                                <input class="ipt" type="text" value="黄连">
+                                <input class="ipt" type="text" value="山">
+                                <input class="ipt" type="text" value="黄连">
+                                <input class="ipt" type="text" value="三七">
+                                <input class="ipt" type="text" value="其他">
+                            </div>
+                            <button class="btn btn-white" type="button" id="jAddTr">增加一行</button>
+                            <span class="tips">药厂、饮片厂等采购企业可不填写</span>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="txt mid">
+                            <span>经营地</span>
+                        </div>
+                        <div class="cont">
+                            <dl class="yc-select" id="jProvince">
+                                <dt data-val="0">省</dt>
+                                <dd>
+                                    <span data-val="0">省</span>
+                                </dd>
+                            </dl>
+                            <dl class="yc-select" id="jCity">
+                                <dt data-val="0">省/县</dt>
+                                <dd>
+                                    <span data-val="0">省/县</span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="ft">
+                        <button type="submit" id="jSave2" class="btn btn-orange submit">保存经营信息</button>
+                        <span class="msg hide"><i class="icons icons-ok"></i>操作成功</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="side">
+        <ul class="yc-ul">
+            <li><a href="#"><i class="icons home"></i>首页</a></li>
+            <li><a href="order.html"><i class="icons menu"></i>我的采购</a><em>4</em></li>
+            <li><a href="#"><i class="icons talk"></i>洽谈</a></li>
+            <li><a href="#"><i class="icons envelope"></i>通知</a></li>
+            <li class="curr"><a href="account.html"><i class="icons setting"></i>账户</a></li>
+        </ul>
+    </div>
+</section>
+
+<!-- 药材品种 -->
+<div class="variety-tags" id="jVarietyTags">
+    <div class="inner">
+        <dl class="search"><dd></dd></dl>
+        <dl>
+            <dt>最近采购品种</dt>
+            <dd>
+                <span>黄连</span>
+                <span>三七</span>
+                <span>当归</span>
+                <span>白芍</span>
+                <span>浙贝母</span>
+                <span>景天红花散</span>
+                <span>最多容纳六字</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>主要经营/采购品种</dt>
+            <dd>
+                <span>黄连</span>
+                <span>三七</span>
+                <span>当归</span>
+                <span>白芍</span>
+            </dd>
+        </dl>
+    </div>
+</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/center.js"></script>
+
+
+<script>
+    var $varietyTags = $('#jVarietyTags');
+    // 防抖处理
+    function debounce(func, wait) {
+        this.timer && clearTimeout(this.timer);
+        this.timer = setTimeout(function() {func()}, wait);
+    }
+    // 关闭所有弹层
+    function hidePop() {
+        $varietyTags.hide();
+    }
+    function move(elem, k) {
+        var $ele = elem.find('.search span'),
+            idx = $ele.parent().find(".on").index(),
+            count = $ele.size();
+        idx += k;   
+        idx = count === idx ? 0 : idx;
+        $ele.eq(idx).addClass("on").siblings().removeClass("on");
+    }
+
+    function toHtml(data, $wrap) {
+        var html = [];
+        $.each(data, function(i, v){
+            html.push('<span' + (i === 0 ? ' class="on"' : '') + '>' + v.name + '</span>');
+        });
+        $wrap.find('.search dd').html(html.join(''));
+        showTags(true, $wrap);
+    }
+
+    function showTags(status, $wrap) {
+        hidePop();
+        $wrap.show();
+        if (status) {
+            $wrap.find('.search').show().siblings().hide();
+        } else {
+            $wrap.find('.search').hide().siblings().show();
+        }
+    }
+
+    // 药材品种
+    function getKeywords() {
+        var keywords = $tags.val();
+        $.ajax({
+            url: 'json/keywords.json',
+            dataType: 'json',
+            data: {key: keywords},
+            success: function(data) {
+                if (data.status === 'success') {
+                    toHtml(data.list, $varietyTags);
+                } else {
+                    $varietyTags.find('.search dd').html(data.msg);
+                }
+            },
+            error: function() {
+                console.log(0)
+            }
+        })
+    }
+
+    $('.form-primary').on({
+        'click': function(e) {
+            var offset = $(this).offset();
+            $varietyTags.css({top: offset.top + $(this).outerHeight(), left: offset.left}).show();
+            $tags = $(this);
+            showTags(false, $varietyTags);
+            return false;
+        },
+        'input': function() {
+            if ($.trim(this.value) == '') {
+                showTags(false, $varietyTags);
+            } else {
+                debounce(getKeywords, 400);
+            }
+        },
+        'keydown': function(event) {
+            var e = event.which;
+            switch(e){
+                case 38: // up
+                    move($varietyTags, -1);
+                    break;
+                case 40: // down
+                    move($varietyTags, 1);
+                    break;
+                case 13: // enter
+                    var val = $varietyTags.find('.search .on').html();
+                    if (val.length > 0) {
+                        this.value = val;
+                        hidePop();
+                    }
+                    break;
+                case 27: //Esc
+                    hidePop();              
+                    break;
+                // no default
+            }
+        }
+    }, '.tr .ipt');
+
+    $varietyTags.on('click', function() {
+        return false;
+    });
+    $varietyTags.on('click', 'span', function() {
+        $tags.val($(this).html());
+        hidePop();
+    });
+
+
+    $('body').on('click', function() {
+        hidePop();
+    })  
+
+    $('#jSave1').on('click', function() {
+        $(this).next().removeClass('hide');
+    });
+    $('#jSave2').on('click', function() {
+        $(this).next().removeClass('hide');
+    });
+</script>
+<script>
+    var ran = (new Date).getTime();
+    $.get('header.html?ran=' + ran, function(data) {
+        $('body').prepend(data);
+    })
+    $.get('footer.html?ran=' + ran, function(data) {
+        $('body').append(data);
+    })
+</script>
+</body>
+
+</html>

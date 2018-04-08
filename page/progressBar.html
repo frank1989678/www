@@ -1,0 +1,34 @@
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>正在进入</title>
+</head>
+<body>
+<form name=loading> 
+	<font color="#0066ff" size="2" face="Arial">正在进入，请稍等...</font>
+	<span id="ProgressBar" style="font-family:Arial; background:#000; color:#000; font-size:12px;"></span><br />
+	<span id="Percent"></span>
+　　<script>　 
+var Percent = 0;
+var ProgressBar = "|";
+var temp = "|";
+count()　 
+function count(){　 
+	Percent += 1;
+	ProgressBar = ProgressBar + temp;　 
+	document.getElementById('ProgressBar').innerHTML = ProgressBar;
+	document.getElementById('Percent').innerHTML = Percent+'%';
+	if (Percent<100)
+		setTimeout("count()",50)
+	//else　 
+		//window.location = "http://www.dreamershop.com";
+
+}
+</script> 
+　</p> 
+</form> 
+<p align="center"> 如果您的浏览器不支持跳转,<a style="text-decoration: none" href="http://www.dreamershop.com"><font color="#FF0000">请点这里</font></a>.</p>
+</body>
+</html>
+

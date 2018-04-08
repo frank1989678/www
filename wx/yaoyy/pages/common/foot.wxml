@@ -1,0 +1,9 @@
+<template name="foot">
+	<view class="foot">
+		<navigator class="li i i1 {{idx == 1 ? 'cur' : ''}}" open-type="redirect" url="/pages/index/index">首页</navigator>
+		<navigator class="li i i2 {{idx == 2 ? 'cur' : ''}}" open-type="redirect" url="/pages/category/category">品种列表</navigator>
+		<navigator class="li i i3 {{idx == 3 ? 'cur' : ''}}" open-type="redirect" url="/pages/cart/cart">购物车<text hidden="{{total == 0}}" class="sup">{{total}}</text></navigator>
+		<navigator class="li i i4 {{idx == 4 ? 'cur' : ''}}" open-type="redirect" url="/pages/quotation/quotation">地道行情</navigator>
+		<navigator class="li i i5 {{idx == 5 ? 'cur' : ''}}" open-type="redirect" url="/pages/center/center">个人中心</navigator>
+	</view>
+</template>

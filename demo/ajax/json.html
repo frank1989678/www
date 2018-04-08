@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>js_ajax</title>
+	<link rel="stylesheet" href="/static/css/layout.css" />
+	<link rel="stylesheet" href="css/form.css" />
+	<script src="/static/js/jquery191.js"></script>
+	<script src="/static/js/city.js"></script>
+	<script src="js/name.js"></script>
+	<script src="js/js_ajax.js"></script>
+</head>
+<body>
+	
+<div class="wrap">
+	<div class="tab">
+		<a class="tab_btn" href="index.php">添加数据</a>
+		<a class="tab_btn curr" href="json.html">同域加载</a>
+		<a class="tab_btn" href="jsonp.html">跨域加载</a>
+		<a class="tab_btn" href="index.php">添加姓氏</a>
+		<a class="tab_btn" href="index.php">添加人名</a>
+	</div>
+	<div class="clearfix pl10 pt10">
+		<div class="l w700">
+			<input type="text" class="filte" /> 
+			<span>-</span>
+			<input type="text" class="filte" />
+			<input type="button" class="w100 btn white bg-blue" value="加载更多..." name="load" id="load"  />
+
+			<table class="mt20 pct100 tc list" id="ajaxJosn">
+				<tbody>
+					<tr class="tit">
+						<td>序号</td>
+						<td>iid</td>
+						<td class="tl">姓名</td>
+						<td>生日</td>
+						<td>电话</td>
+						<td class="tr">地址</td>
+					</tr>	
+				</tbody>
+			</table>
+		</div>
+		<div class="l w500 ml10 console" id="ajaxJosnSource"></div>
+	</div>
+</div>
+</body>
+</html>

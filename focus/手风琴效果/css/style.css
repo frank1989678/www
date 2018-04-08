@@ -1,0 +1,17 @@
+/* index */
+.accordion{position:relative;width:960px;height:210px;overflow:hidden;}
+.accordion div{position:absolute;top:0px;height:210px;width:500px;background:#000;overflow:hidden;border-left:#000 solid 1px;cursor:default;}
+.accordion em{position:absolute;width:100%;height:100%;top:100%;background:#000;filter:alpha(opacity=50);opacity:0.5;}
+.accordion span{position:absolute;top:1%;top:100%;color:#FFF;font-family:verdana,arial,Helvetica,sans-serif;font-size:12px;text-align:justify;width:470px;left:10px;}
+.accordion b{color:#F80;font-weight:bold;font-size:14px;margin-right:1.5em;text-decoration:none;}
+.accordion img{position:absolute;filter:alpha(opacity=100);opacity:1;visibility:hidden;width:500px;height:210px}
+
+
+
+#sliderWrap{background:url(/static/images/original_bg.gif) no-repeat;width:960px;height:445px;position:relative;}
+#slider{position:absolute;width:898px;height:350px;left:28px;top:17px;overflow:hidden;}
+#slider .slide{position:absolute;top:0px;height:350px;width:550px;background:#000;overflow:hidden;border - left:#000 solid 1px;cursor:default;}
+#slider .title{color:#F80;font - weight:bold;font - size:1.2em;margin - right:1.5em;text - decoration:none;}
+#slider .backgroundText{position:absolute;width:100 %;height:100 %;top:100 %;background:#000;filter:alpha(opacity = 40);opacity:0.4;}
+#slider .text{position:absolute;top:1 %;top:100 %;color:#FFF;font - family:verdana,arial,Helvetica,sans - serif;font - size:0.9em;text - align:justify;width:470px;left:10px;}
+#slider .diapo{position:absolute;filter:alpha(opacity = 100);opacity:1;visibility:hidden;}

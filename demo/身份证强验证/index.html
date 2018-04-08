@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>身份证强验证</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/static/js/jquery191.js"></script>
+</head>
+
+<body>
+    
+    <ul class="nav">
+        <li><a class="on" href="index.html" title="">身份证强验证</a></li>
+        <li><a href="demo2.html" title="">身份证弱验证</a></li>
+    </ul>
+    <div class="box">
+        <h1 class="caption">身份证查询</h1>
+        <div class="form">
+            <div class="item">
+                <label class="lab">身份证号码：</label>
+                <input class="ipt" type="text" value="220821197407119272" id="cardNum" />
+                <button class="btn" type="button" id="check">查询</button>
+                <span class="msg" id="error"></span>
+            </div>
+            <div class="item">
+                <label class="lab">发证地：</label>
+                <span class="ipt" id="address"></span>
+            </div>
+            <div class="item">
+                <label class="lab">出生日期：</label>
+                <span class="ipt" id="birthday"></span>
+            </div>
+            <div class="item">
+                <label class="lab">性别：</label>
+                <span class="ipt" id="sex"></span>
+            </div>
+            <div class="item">
+                <label class="lab">18位身份证号：</label>
+                <span class="ipt" id="newNum"></span>
+            </div>
+        </div>
+    </div>
+    <div id="show"></div>
+    <script src="/static/js/cityforid.js"></script>
+    <script src="region.js"></script>
+    <script>
+    function isCardID(code) {
+        var
+            iSum = 0,
+            address = "",
+            birthday = "",
+            sBirthday = "",
+            date = null,
+            info = {
+                pass: !1
+            };
+
+        var convertToEighteen = function() {
+            var
+                Wi = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2],
+                Valide = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'],
+                codeTemp = 0,
+                i = 0;
+            code = code.substr(0, 6) + '19' + code.substr(6, code.length - 6);
+            for (; i < 17; i++) {
+                codeTemp += code.substr(i, 1) * Wi[i];
+            }
+            code += Valide[codeTemp % 11];
+        }
+
+        if (/^\d{15}$/.test(code)) {
+            convertToEighteen();
+        }
+
+        if (!/^\d{17}(\d|X)$/i.test(code)) {
+            info.msg = "你输入的身份证长度或格式错误";
+            return info;
+        }
+
+        code = code.toLowerCase().replace(/x$/, "a");
+
+        for (var i = 17; i >= 0; i--) {
+            iSum += (Math.pow(2, i) % 11) * parseInt(code.charAt(17 - i), 11);
+        }
+        address = REGION[code.substr(0, 6)] || "未知";
+        birthday = code.substr(6, 4) + "年" + code.substr(10, 2) + "月" + code.substr(12, 2) + "日";
+        sBirthday = code.substr(6, 4) + "/" + Number(code.substr(10, 2)) + "/" + Number(code.substr(12, 2));
+        date = new Date(sBirthday);
+
+        if (address == null) {
+            info.msg = "你的身份证地区非法";
+
+        } else if (sBirthday != (date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate())) {
+            info.msg = "身份证上的出生日期非法";
+
+        } else if (iSum % 11 != 1) {
+            info.msg = "身份证号非法";
+
+        } else {
+            info = {
+                pass: true,
+                birthday: birthday,
+                address: address.replace(/省/, "省 ").replace(/市/g, "市 ").replace(/县/g, "县 ").replace(/区/g, "区 "),
+                sex: code.substr(16, 1) % 2 ? "男" : "女",
+                newNum: code.replace(/a$/, "x"),
+                msg: ""
+            }
+        }
+
+        return info;
+    };
+    String.prototype.trim = function() {
+        return this.replace(/(^\s*)|(\s*$)/g, "");
+    };
+
+    var $$ = function(id) {
+        return document.getElementById(id);
+    }
+
+    function check() {
+        var sId = $$("cardNum").value.trim();
+        var result = isCardID(sId);
+        $$("birthday").innerHTML = result.birthday || "";
+        $$("address").innerHTML = result.address || "";
+        $$("sex").innerHTML = result.sex || "";
+        $$("newNum").innerHTML = result.newNum || "";
+        $$("error").innerHTML = result.msg || "";
+    }
+
+    $$("check").onclick = check;
+    $$("cardNum").onfocus = function() {
+        this.select();
+    }
+    $$("cardNum").click = function() {
+        this.select();
+    }
+
+    var datas = [
+        '210304198504260488',
+        '210302198607160938',
+        '210421198403162020',
+        '210303198412082729',
+        '622723198602013412',
+        '210502198412020944',
+        '210124198508162281',
+        '522324197508045617',
+        '510921591208435',
+        '522324197309155216',
+        '522324197309155216',
+        '433026196612172414',
+        '433026196612172414',
+        '522422610421281',
+        '510226196602284031',
+        '522224701013047',
+        '522624630816183',
+        '520201197209083216',
+        '520201750708163',
+        '520202750914123',
+        '520201710121165',
+        '520201661010163',
+        '520201710820161',
+        '522125197912221315',
+        '522121790220561',
+        '522101630705641',
+        '522121196904245616',
+        '522121197603177634',
+        '522121771112601',
+        '522101197403216410',
+        '522121700504563',
+        '522121820410603',
+        '522121640422567',
+        '522132197808265418',
+        '510223661218771',
+        '210304198504290847',
+        '370281781019634',
+        '370212791005457',
+        '211003198407230111',
+        '210905197807210546',
+        '232102196903151919',
+        '370205197405213513',
+        '370284800121002',
+        '370727791118517',
+        '370284197901130819',
+        '370284801127364',
+        '370203800901162',
+        '372922198012224773',
+        '370722197812222517',
+        '370281197811137612',
+        '370281800711635',
+        '370285791121473',
+        '370285791121473',
+        '370285791121473',
+        '370285791121473',
+        '370285791121473',
+        '370285791121473',
+        '370282197806180866',
+        '230803197906010035',
+        '210411198504282942',
+        '120107198507020611',
+        '210303198508131214',
+        '210111198503063012',
+        '152123198510030631',
+        '211322198401012055',
+        '130133831013213',
+        '211322198509260317',
+        '211481198401154411',
+        '210304198503040045',
+        '370283790911703',
+        '150429800509501',
+        '150422198207055113',
+        '152801198703025310',
+        '511428196305026357',
+        '220303198605153610',
+        '411422198412055424',
+        '211224198410315338',
+        '37010219680709292X',
+        '21031119851130004x',
+        '21031119850417003x',
+        '15042919840709121x',
+        '37078119790127719x',
+        '37142819800508053x',
+        '52262619800410121X',
+        '42092219731015461X'
+    ]
+
+    var html = [];
+    for (var i = 0; i < datas.length; i++) {
+        break ;
+        var code = datas[i];
+        var result = isCardID(code);
+        html.push('<li' + (result.pass ? '' : ' class="warn"') + '><span>' + code+ "</span>" + (result.pass ? (result.birthday + "&nbsp;" + result.sex + "&nbsp;" + result.address) : result.msg) + '</li>');
+    }
+    $("#show").html( '<ul class="list">' + html.join("") + '</ul>');
+
+    var kkks = {
+        "110000": "北京市",
+        "120000": "天津市",
+        "130000": "河北省",
+        "140000": "山西省",
+        "150000": "内蒙古自治区",
+        "210000": "辽宁省",
+        "220000": "吉林省",
+        "230000": "黑龙江省",
+        "310000": "上海市",
+        "320000": "江苏省",
+        "330000": "浙江省",
+        "340000": "安徽省",
+        "350000": "福建省",
+        "360000": "江西省",
+        "370000": "山东省",
+        "410000": "河南省",
+        "420000": "湖北省",
+        "430000": "湖南省",
+        "440000": "广东省",
+        "450000": "广西壮族自治区",
+        "460000": "海南省",
+        "500000": "重庆市",
+        "510000": "四川省",
+        "520000": "贵州省",
+        "530000": "云南省",
+        "540000": "西藏自治区",
+        "610000": "陕西省",
+        "620000": "甘肃省",
+        "630000": "青海省",
+        "640000": "宁夏回族自治区",
+        "650000": "新疆维吾尔自治区",
+        "710000": "台湾省",
+        "810000": "香港特别行政区",
+        "820000": "澳门特别行政区"
+    }
+    kkks = {};
+    for (var po in kkks) {
+        $.ajax({
+            url: "/static/json/" + po + ".json",
+            async: !1,
+            success: function(temp) {
+                var push = [];
+                var name = kkks[po]
+                for (var x in temp) {
+                    var city = temp[x].c;
+                    if (typeof city === "object") {
+                        for (var xx in city) {
+                            push.push('"' + city[xx].i + '" : "' + name + temp[x].n + city[xx].n + '",');
+                        }
+                    } else {
+                        push.push('"' + temp[x].i + '" : "' + name + temp[x].n + '",');
+                    }
+                }
+                $("#show").append(push.join("") + "<div style='height:30px'></div>");
+            }
+        })
+    }
+    
+    </script>
+</body>
+
+</html>

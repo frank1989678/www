@@ -1,0 +1,86 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>无标题</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+.modal-browser{position:fixed;width:100%;height:100%;display:none}
+.modal-browser #browserModal-cover{position:fixed;left:0;top:0;height:100%;width:100%;background-color:#111;opacity:.5;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";filter:alpha(opacity=50);z-index:-1}
+.modal-browser .modal-dialog{margin-top:30px;padding-top:20px}
+.modal-browser .modal-content{max-width:700px;width:700px;padding-bottom:80px;padding-top:30px}
+.modal-browser .modal-content .header{text-align:center}
+.modal-browser .modal-content .dji-logo{display:block;background-image:url("//www2.djicdn.com/assets/images/logo-5c446224d9c4d72dab5fd4b764299cc9.png");width:50px;height:29px;margin:45px auto 40px;background-repeat:no-repeat}
+.modal-browser .modal-content .h2-grey{text-transform:uppercase;text-align:center}
+.modal-browser .modal-content p{display:block;margin-top:60px;margin-bottom:60px;text-align:center}
+.modal-browser .modal-content .item-container{width:600px;margin:40px auto;height:130px}
+.modal-browser .modal-content .item-container .item{float:left;width:150px;padding-top:20px;padding-bottom:20px;margin-left:auto;margin-right:auto}
+.modal-browser .modal-content .item-container .item .pic{width:100px;height:100px;margin:0 auto;background-repeat:no-repeat}
+.modal-browser .modal-content .item-container .item .i-c{background-image:url("//www4.djicdn.com/assets/images/share/chrome-d23b7c037c9c8ac731117d93c1e90d6d.jpg")}
+.modal-browser .modal-content .item-container .item .i-f{background-image:url("//www3.djicdn.com/assets/images/share/firefox-3b38aaeb97c9e4305f01838ddaf36639.jpg")}
+.modal-browser .modal-content .item-container .item .i-s{background-image:url("//www2.djicdn.com/assets/images/share/safari-ae900d6c60a68cc580b6948bd4ce46e9.jpg")}
+.modal-browser .modal-content .item-container .item .i-e{background-image:url("//www2.djicdn.com/assets/images/share/edge-64dd3b586d18984d250c93fd994c491b.jpg")}
+.modal-browser .modal-content .item-container .item a{color:#44a8f2;cursor:pointer;display:block}
+.modal-browser .modal-content .item-container .item a img{display:block;margin:0 auto;max-width:100px;width:100px;height:100px}
+.modal-browser .modal-content .item-container .item a h4{text-align:center;margin-top:20px;font-size:18px;font-weight:700}
+	</style>
+</head>
+<body>
+	<div id="browserModal" tabindex="-1" class="modal modal-browser modal-account">
+		<div id="browserModal-cover"></div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<header class="text-center header">
+						<div class="dji-logo"></div>
+						<h3 class="h2-grey">请升级浏览器版本</h3>
+						<p>你正在使用旧版本浏览器。请升级浏览器以获得更好的体验。</p>
+					</header>
+					<div class="item-container">
+						<div class="item">
+							<a href="http://www.google.com/chrome" target="_blank">
+								<div class="pic i-c"></div>
+								<h4>Chrome</h4>
+							</a>
+						</div>
+						<div class="item">
+							<a href="http://www.firefox.com/" target="_blank">
+								<div class="pic i-f"></div>
+								<h4>Firefox</h4>
+							</a>
+						</div>
+						<div class="item">
+							<a href="http://www.apple.com/safari/" target="_blank">
+								<div class="pic i-s"></div>
+								<h4>Safari</h4>
+							</a>
+						</div>
+						<div class="item">
+							<a href="https://www.microsoft.com/en-us/windows/microsoft-edge" target="_blank">
+								<div class="pic i-e"></div>
+								<h4>Edge</h4>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	(function(){
+		var isIE = navigator.userAgent.toLocaleLowerCase().indexOf('msie') !== -1;
+		var isIE10plus = isIE && (function(){
+		　"use strict";
+		　　 return !this;
+		　}());
+		document.getElementById('browserModal-cover').onclick = function(e) {
+			document.getElementById('browserModal').style.display='none';
+		};
+		if(isIE && !isIE10plus){
+			document.getElementById('browserModal').style.display='block';
+		}
+
+			document.getElementById('browserModal').style.display='block';
+	})();
+</script>
+</body>
+</html>

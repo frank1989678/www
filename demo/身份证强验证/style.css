@@ -1,0 +1,67 @@
+.nav{width:570px; margin: 40px auto 10px; padding: 0; border-bottom: 1px solid #ddd; overflow: hidden;}
+.nav li{display: inline-block;}
+.nav li a{display:inline-block; padding: 10px; color: #666; font-size: 14px; text-decoration: none; border-bottom: 5px solid #fff;}
+.nav li a:hover{color: #333;}
+.nav li a.on{color: #c30; border-bottom-color: #c30;}
+.list{list-style:none;margin:0;}
+.list li{margin:0;font:14px/30px arial, "simsun";}
+.list li.warn{color:#c30;}
+.list li:nth-child(odd){background-color:#f0f0f0;}
+.list span{display:inline-block;width:200px;margin-right:10px;text-align:right;margin-right:10px;}
+.box {
+    width: 550px;
+    margin: 0 auto;
+    padding: 40px 10px;
+    background-color: #ffebeb;
+}
+
+.caption {
+    margin: 0;
+    font: 18px tahoma;
+    text-align: center;
+}
+
+.item {
+    margin-top: 20px;
+}
+
+.ipt {
+    display: inline-block;
+    width: 220px;
+    height: 18px;
+    padding: 5px;
+    font: 14px/18px tahoma;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.btn {
+    width: 100px;
+    height: 28px;
+    background-color: #e60012;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.lab {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+    font: 14px/28px tahoma;
+    vertical-align: middle;
+}
+
+.msg {
+    position: absolute;
+    display: block;
+    margin-left: 154px;
+    color: #f00;
+    font-size: 12px;
+}
+
+#show{margin-top:200px;}
