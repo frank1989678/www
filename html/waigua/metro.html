@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>车管所智能管控平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
+	<script src="assets/js/jquery191.js"></script>
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="logo">
+		<a href="index.html"><em>车管所智能管控平台</em>Intelligent management and control platform of vehicle administ</a>
+	</div>
+	<div class="user">
+		<ul>
+			<li><span>yitop</span><i>|</i></li>
+			<li><a href="setting.html">系统设置</a><i>|</i></li>
+			<li><a href="javascript:;" id="mdyPwd">修改密码</a><i>|</i></li>
+			<li><a href="login.html"><i class="ico ico-logout"></i></a></li>
+		</ul>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="metro">
+	<ul>
+		<li class="box">
+			<a href="#">
+				<i class="icon icon-1"></i>
+				<span>制证管理系统</span>
+			</a>
+		</li>
+		<li class="box">
+			<a href="#">
+				<i class="icon icon-2"></i>
+				<span>车驾管业务辅助系统</span>
+			</a>
+		</li>
+		<li class="box">
+			<a href="#">
+				<i class="icon icon-3"></i>
+				<span>交管局收费系统</span>
+			</a>
+		</li>
+		<li class="box">
+			<a href="#">
+				<i class="icon icon-4"></i>
+				<span>居住证查询</span>
+			</a>
+		</li>
+		<li class="box">
+			<a href="#">
+				<i class="icon icon-5"></i>
+				<span>考试监管辅助系统</span>
+			</a>
+		</li>
+		<li class="box">
+			<a href="#">
+				<i class="icon icon-6"></i>
+				<span>网上车管所</span>
+			</a>
+		</li>
+		<li class="box">
+			<a href="#">
+				<i class="icon icon-7"></i>
+				<span>车驾管业务辅助系统</span>
+			</a>
+		</li>
+	</ul>
+</div>
+
+
+<div style="position:fixed;top:30px;left:500px;z-index:8;" id="number">
+	<button type="button" class="ubtn ubtn-cyan" data-num="1">1</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="2">2</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="3">3</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="4">4</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="5">5</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="6">6</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="7">7</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="8">8</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="9">9</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="10">10</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="11">11</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="12">12</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="13">13</button>
+	<button type="button" class="ubtn ubtn-cyan" data-num="14">14</button>
+</div>
+
+<script>
+
+function metro() {
+	var width = [2,3,2];
+	var width = [1,3,3,1,3,1,2];
+	$('.metro').find('li').each(function(i) {
+		$(this).addClass('box-' + width[i] + ' bg-' + (i + 1));
+		if (i > 2) {
+			$(this).addClass('box2');
+		}
+	})
+}
+function metro2(len) {
+	var block = {
+		1: [2],
+		2: [2,3],
+		3: [2,3,4],
+		4: [1,3,1,2],
+		5: [1,3,3, 3,3],
+		6: [1,3,3, 1,3,3],
+		7: [1,3,3, 1,3,1,2],
+		8: [1,3,1,2, 1,3,1,2]
+	}
+	$.ajax({
+		url: 'json/metro.json',
+		cache: false,
+		success: function(res) {
+			var model = [];
+			var data = res.list.slice(0, len);
+			var key = Math.min(len, 7);
+			$.each(data, function(i, item) {
+				var cls = 'box box-' + block[key][i % key] + ' bg-' + (i % 7 + 1);
+				if (len < 5) {
+					cls += ' box2';
+				} else if (len == 5 && i == 0) {
+					cls += ' box3';
+				} else if (len <= 7 && i > 2) {
+					cls += ' box2';
+				}
+				model.push('<li class="' + cls + '">');
+				model.push('<a href="#" style="background-image:url(' + item.icon + ')">');
+				model.push('<span>' + item.title + '</span>');
+				model.push('</a>');
+				model.push('</li>');
+			})
+			$('.metro').html('<ul>' + model.join('') + '</ul>');
+		}
+	})
+}
+$(function() {
+	$('#number').on('click', '.ubtn', function() {
+		var k = $(this).data('num');
+		metro2(k);
+	})
+})
+
+</script>
+</body>
+</html>

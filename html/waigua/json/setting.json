@@ -1,0 +1,37 @@
+{
+    "result": "SUCCESS",
+    "totalSize": 18,
+    "list": [{
+        "id": "1",
+        "logo": "assets/images/logo-thumb.png",
+        "sysName": "外挂系统",
+        "url": "http://192.168.12.22/",
+        "sysType": "系统类型",
+        "target": "_blank",
+        "datetime": "2017-07-02 12:38:32"
+    }, {
+        "id": "2",
+        "logo": "assets/images/logo-thumb.png",
+        "sysName": "外挂系统",
+        "url": "http://192.168.12.22/",
+        "sysType": "系统类型",
+        "target": "_blank",
+        "datetime": "2017-07-02 12:38:32"
+    }, {
+        "id": "3",
+        "logo": "assets/images/logo-thumb.png",
+        "sysName": "外挂系统",
+        "url": "http://192.168.12.22/",
+        "sysType": "系统类型",
+        "target": "_blank",
+        "datetime": "2017-07-02 12:38:32"
+    }, {
+        "id": "4",
+        "logo": "assets/images/logo-thumb.png",
+        "sysName": "外挂系统",
+        "url": "http://192.168.12.22/",
+        "sysType": "系统类型",
+        "target": "_blank",
+        "datetime": "2017-07-02 12:38:32"
+    }]
+}

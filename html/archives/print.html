@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>交通事故快速处理平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<div class="content">
+    <div class="print" id="print">
+        <div class="tit">电子档案自助查询</div>
+        <div class="hd">
+            <span>车辆所有权：个人</span>
+            <span>身份证号：420682198812011001</span>
+            <span>打印时间：2017-11-06 14::22:02</span>
+        </div>
+        <div class="bd">
+            <dl>
+                <dt>车辆信息</dt>
+                <dd>
+                    <label class="for">号牌号码：</label>
+                    <span>鄂A76650</span>
+                </dd>
+                <dd class="row">
+                    <label class="for">机动车所有人：</label>
+                    <span>中华人民共和国国家统计局中华人民共和国国家统计局</span>
+                </dd>
+                <dd>
+                    <label class="for">车辆识别代号：</label>
+                    <span>LFV328R98113</span>
+                </dd>
+                <dd>
+                    <label class="for">发动机号：</label>
+                    <span>09817</span>
+                </dd>
+                <dd>
+                    <label class="for">号牌种类：</label>
+                    <span>号牌种类</span>
+                </dd>
+                <dd>
+                    <label class="for">车辆类型：</label>
+                    <span>小型普通客车</span>
+                </dd>
+                <dd>
+                    <label class="for">中文品牌：</label>
+                    <span>五菱</span>
+                </dd>
+                <dd>
+                    <label class="for">车辆型号：</label>
+                    <span>五菱牌FV98iPY</span>
+                </dd>
+                <dd>
+                    <label class="for">车身颜色：</label>
+                    <span>白色</span>
+                </dd>
+                <dd>
+                    <label class="for">使用性质：</label>
+                    <span>家用</span>
+                </dd>
+                <dd>
+                    <label class="for">机动车状态：</label>
+                    <span>状态</span>
+                </dd>
+                <dd>
+                    <label class="for">初次登记日期：</label>
+                    <span>2010-10-22</span>
+                </dd>
+                <dd>
+                    <label class="for">检验有效期止：</label>
+                    <span>2013-10-22</span>
+                </dd>
+                <dd>
+                    <label class="for">手机号码：</label>
+                    <span>15922110978</span>
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<script>
+// 打印
+function addWaterMarker(str) {
+    var can = document.createElement('canvas');
+    can.width = 260;
+    can.height = 140;
+    can.style.display = 'none';
+    var cans = can.getContext('2d');
+    cans.rotate(-20 * Math.PI / 180);
+    cans.font = "18px tahoma";
+    cans.fillStyle = "rgba(204, 204, 204, 1)";
+    cans.textAlign = 'left';
+    cans.textBaseline = 'Middle';
+    cans.fillText(str, 10, 110);
+    document.getElementById('print').style.backgroundImage = "url(" + can.toDataURL("image/png") + ")";
+}
+addWaterMarker('420682198812011001');
+</script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>事故定责</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">交通事故快速处理平台</a>
+	</div>
+	<div class="user">
+		<div class="online">在线用户数：8人</div>
+		<dl>
+			<dt><i class="ico ico-user"></i>系统管理员</dt>
+			<dd>
+				<a href="javascript:;" id="jmodifyPwd">修改密码</a>
+				<a href="login.html">安全退出</a>
+			</dd>
+		</dl>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="nav cf">
+	<ul>
+		<li><a href="index.html"><i class="ico ico-1"></i>首页</a></li>
+		<li><a href="sgdz.html"><i class="ico ico-2"></i>事故定责</a></li>
+		<li>
+			<dl>
+				<dt><i class="ico ico-3"></i>系统设置</dt>
+				<dd>
+					<a href="user.html">用户管理</a>
+					<a href="role.html">角色管理</a>
+					<a href="area.html">用户区域设置</a>
+					<a href="source.html">资源管理</a>
+				</dd>
+			</dl>
+		</li>
+		<li>
+			<dl>
+				<dt><i class="ico ico-3"></i>报表统计</dt>
+				<dd>
+					<a href="statis.html">报表统计</a>
+					<a href="accident-his.html">历史事故查询</a>
+					<a href="accident.html">事故查询</a>
+				</dd>
+			</dl>
+		</li>
+	</ul>
+</div>
+
+<div class="wrapper">
+	<div>
+		<button type="button" class="ubtn ubtn-primary" onclick="javasript:history.back(-1);">返回</button>
+	</div>
+
+	<div class="box">
+		<div class="table">
+			<div class="cap">一周内案件信息</div>
+			<table class="border">
+				<thead>
+					<tr>
+						<th>事故时间</th>
+						<th>事故地点</th>
+						<th>车牌号</th>
+						<th>手机号</th>
+						<th>报案人</th>
+						<th>报案渠道</th>
+						<th>定责交警姓名</th>
+						<th>事故编号</th>
+						<th>事故方</th>
+						<th width="130">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>2017-06-28 15:29:40</td>
+						<td>湖北省武汉市江岸区后湖大道</td>
+						<td>鄂AKR409</td>
+						<td>13072707333</td>
+						<td>朱哲霖</td>
+						<td>快处</td>
+						<td></td>
+						<td>W70628032673330</td>
+						<td>甲方</td>
+						<td><button type="button" class="ubtn ubtn-primary">重复案件</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="mt30 table">
+			<div class="cap">交通事故详细情况</div>
+			<table class="border">
+				<thead>
+					<tr>
+						<th>事故报警时间</th>
+						<th>事故区域</th>
+						<th>事故编号</th>
+						<th>当事人</th>
+						<th>事故地点</th>
+						<th>事故车辆数</th>
+						<th width="130">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>2017-06-28 15:29:40</td>
+						<td>
+							<select name="area" class="slt select2">
+								<option value="1">江岸区</option>
+							</select>
+						</td>
+						<td>W70628032673330</td>
+						<td>朱哲霖</td>
+						<td>
+			            	<input id="longitude" name="longitude" value="" type="hidden">
+			            	<input id="latitude" name="latitude" value="" type="hidden">
+							<input type="text" class="ipt ipt-map" name="accidentspot" id="accidentspot" value="湖北省武汉市江岸区后湖大道">
+						</td>
+						<td>2</td>
+						<td>
+							<button type="button" class="ubtn ubtn-cyan" id="showMap">地图</button>
+							<button type="button" class="ubtn ubtn-primary">保存</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="mt15 border">
+				<thead>
+					<tr>
+						<th>事故方</th>
+						<th>车辆类型</th>
+						<th>车牌号码</th>
+						<th>司机姓名</th>
+						<th>驾照号码</th>
+						<th>联系电话</th>
+						<th>保险公司</th>
+						<th>保单号</th>
+						<th width="130">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>甲方</td>
+						<td>
+							<select name="carType" class="slt select2">
+								<option value="1">小型客车</option>
+							</select>
+							<button type="button" class="ubtn ubtn-primary">自动识别</button>
+						</td>
+						<td>鄂AKR409</td>
+						<td>朱哲霖</td>
+						<td>420107197202070040</td>
+						<td>13072707333</td>
+						<td>
+							<select name="insurer" class="slt select2">
+								<option value="1">人保财险</option>
+							</select>
+						</td>
+						<td>W70628032673330</td>
+						<td rowspan="2"><button type="button" class="ubtn ubtn-primary">保存</button></td>
+					</tr>
+					<tr>
+						<td>乙方</td>
+						<td>
+							<select name="carType" class="slt select2">
+								<option value="1">小型客车</option>
+							</select>
+							<button type="button" class="ubtn ubtn-primary">自动识别</button>
+						</td>
+						<td>鄂A20SH8</td>
+						<td>周亚金</td>
+						<td>422428197208095118</td>
+						<td>13072707333</td>
+						<td>
+							<select name="insurer" class="slt select2">
+								<option value="1">太平产险</option>
+							</select>
+						</td>
+						<td>W70628032673330</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="mt30">
+			<div class="cap">交通事故处理现场图片</div>
+			<div class="cphoto">
+				<ul>
+					<li>
+						<div class="img vm-img">
+							<img src="/static/uploads/1.jpg">
+						</div>
+						<div class="op">
+							<label><input name="pass1" type="radio" class="radio"><i class="ico ico-ok"></i>通过</label>
+							<label><input name="pass1" type="radio" class="radio"><i class="ico ico-fail"></i>不通过</label>
+						</div>
+					</li>
+					<li>
+						<div class="img vm-img">
+							<img src="/static/uploads/2.jpg">
+						</div>
+						<div class="op">
+							<label><input name="pass1" type="radio" class="radio"><i class="ico ico-ok"></i>通过</label>
+							<label><input name="pass1" type="radio" class="radio"><i class="ico ico-fail"></i>不通过</label>
+						</div>
+					</li>
+					<li>
+						<div class="img vm-img">
+							<img src="/static/uploads/3.jpg">
+						</div>
+						<div class="op">
+							<label><input name="pass1" type="radio" class="radio"><i class="ico ico-ok"></i>通过</label>
+							<label><input name="pass1" type="radio" class="radio"><i class="ico ico-fail"></i>不通过</label>
+						</div>
+					</li>
+					<li>
+						<div class="img vm-img">
+							<img src="/static/uploads/4.jpg">
+						</div>
+						<div class="op">
+							<label><input name="pass1" type="radio" class="radio"><i class="ico ico-ok"></i>通过</label>
+							<label><input name="pass1" type="radio" class="radio"><i class="ico ico-fail"></i>不通过</label>
+						</div>
+					</li>
+				</ul>
+
+				<div class="btm">
+					<button type="button" class="ubtn ubtn-primary">审批通过</button>
+					<button type="button" class="ubtn ubtn-primary">审批不通过</button>
+					<button type="button" class="ubtn ubtn-primary">刷新图片</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="mt30 table">
+			<div class="cap">交通事故处理责任判定</div>
+			<table class="border">
+				<thead>
+					<tr>
+						<th>车辆甲</th>
+						<th></th>
+						<th>事故发生情形</th>
+						<th>车辆乙</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>姓名</td>
+						<td>朱哲霖</td>
+						<td rowspan="4">
+							<select name="situation" class="slt select2">
+								<option value="1">后车撞击前车</option>
+							</select>
+						</td>
+						<td>姓名</td>
+						<td>周亚金</td>
+					</tr>
+					<tr>
+						<td>车牌</td>
+						<td>鄂AKR409</td>
+						<td>车牌</td>
+						<td>鄂A20SH8</td>
+					</tr>
+					<tr>
+						<td>车型</td>
+						<td>
+							<select name="carType1" class="slt select2">
+								<option value="1">小型客车</option>
+							</select>
+						</td>
+						<td>车型</td>
+						<td>
+							<select name="carType2" class="slt select2">
+								<option value="1">小型客车</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>判责</td>
+						<td>
+							<select name="duty1" class="slt select2">
+								<option value="1">全责</option>
+								<option value="2">无责</option>
+							</select>
+						</td>
+						<td>判责</td>
+						<td>
+							<select name="duty2" class="slt select2">
+								<option value="1">全责</option>
+								<option value="2">无责</option>
+							</select>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>事故备注说明</td>
+						<td colspan="4"></td>
+					</tr>
+					<tr>
+						<td colspan="5">
+							<button type="button" class="ubtn ubtn-primary">异常关闭</button>
+							<button type="button" class="ubtn ubtn-primary">处理完成</button>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<!-- 页面专用 -->
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script src="assets/plugins/viewer/viewer.min.js"></script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+	    "totalSize": 18,
+	    "list|10": [{
+		    "id": "@increment",
+	        "number": "W@natural",
+	        "datetime": "@datetime",
+	        "address": "东湖新技术开发区",
+	        "name1": "@cname",
+	        "mobile1": /^1[345678]\d{9}$/,
+	        "name2": "@cname",
+	        "mobile2": /^1[345678]\d{9}$/,
+	        "time": "@datetime"
+		}]
+	});
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+
+<script>
+
+// 地图选点回调
+function mapCallback(pt, address) {
+    var msg = '您的位置是：' + address + '<br/>';
+    msg += '您的坐标是：经度：' + pt.lng + ',纬度：' + pt.lat + '<br/>';
+
+    fx.confirm(msg, function() {
+	    $('#longitude').val(pt.lng);
+	    $('#latitude').val(pt.lat);
+	    $('#accidentspot').val(address);
+        layer.closeAll();
+    });
+}
+
+var _global = {
+	init: function() {
+		this.select2();
+		this.zoomPic();
+		this.map();
+	},
+	select2: function() {
+		$('.select2').select2({
+			minimumResultsForSearch: -1
+		});
+	},
+	zoomPic: function() {
+		$('.cphoto').viewer({zoomRatio: 0.2, transition: false});
+	},
+	map: function() {
+		$('#accidentspot').on('click', function() {
+			var val = this.value;
+			layer.open({
+				type: 2,
+				title: '查看地图',
+				area: ['670px', '555px'],
+				content: ['map.html?region=' + escape(val) + '&s=' + (new Date).getTime(), 'no']
+			})
+		})
+		$('#showMap').on('click', function() {
+			$('#accidentspot').trigger('click');
+		})
+	},
+	filter: function() {
+	}
+}
+</script>
+</body>
+</html>

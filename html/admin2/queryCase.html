@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>交通事故信息管理平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/datetimepicker/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="inner">
+		<div class="user">
+			<dl>
+				<dt>系统管理员<i class="ico ico-arrow-down"></i></dt>
+				<dd>
+					<a href="changePwd.html">修改密码</a>
+					<a href="login.html">安全退出</a>
+				</dd>
+			</dl>
+		</div>
+		<div class="logo">
+			<a href="index.html">武汉市交通事故信息管理平台</a>
+		</div>
+		<div class="nav">
+			<dl>
+				<dt><i class="ico ico-1"></i><span>用户信息</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="userList.html">用户信息</a>
+						<a href="insuranceMessage.html">保险公司信息</a>
+					</div>
+				</dd>
+			</dl>
+			<dl>
+				<dt><i class="ico ico-2"></i><span>警保联动</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="caseList.html">警保案件信息</a>
+						<a href="showCaseSummaryList.html">案件处理登记</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><i class="ico ico-3"></i><span>警保统计</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="caseInfoStatistics.html">案件信息统计</a>
+						<a href="companyStatistics.html">查勘量统计(公司)</a>
+						<a href="surveyMemberStatistics.html">查勘量统计(查勘员)</a>
+						<a href="surveyMemberDayStatistics.html">考勤打卡查询</a>
+						<a href="surveyMemberTimesStatistics.html">考勤打卡统计</a>
+						<a href="jjlMng.html">车损事故报警量</a>
+						<a href="workBriefingInfo.html">工作情况通报</a>
+						<a href="handleCount.html">案件处理统计</a>
+						<a href="accidentsCount.html">快处平台数据统计日报</a>
+						<a href="accidentsMonthCount.html">快处平台数据统计月报</a>
+						<a href="caseKcWarn.html">保险处理超时统计</a>
+						<a href="statisticsView.html">大屏统计</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><i class="ico ico-4"></i><span>系统设置</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="rolesList.html">角色管理</a>
+						<a href="smsContentList.html">警保短信模板</a>
+						<a href="source.html">资源管理</a>
+						<a href="showPage.html">job数据同步</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl class="active">
+				<dt><i class="ico ico-5"></i><span>快赔中心</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="queryCase.html" class="current">快赔案件信息</a>
+						<a href="queryKpPrivies.html">事故当事人信息</a>
+						<a href="showKpDkCaseCount.html">代勘案件统计</a>
+						<a href="showKpComCount.html">公司办理统计</a>
+						<a href="showKpNetCount.html">网点办理统计</a>
+						<a href="showKpCaseCount.html">受案登记统计</a>
+						<a href="excaptionNoticeCount.html">事故频繁异常车辆预警</a>
+						<a href="showPage2.html">快赔案件导出</a>
+					</div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<!-- header end -->
+
+
+
+<!-- wrapper start -->
+<div class="wrapper">
+	<!-- filter start -->
+	<div class="filter filter-res">
+		<form id="filterForm" action="#!">
+            <div class="group">
+                <input class="ipt date" id="queryStartTime" placeholder="事故时间起" type="text">
+            </div>
+            <div class="group">
+                <input class="ipt date" id="queryEndTime" placeholder="事故时间止" type="text">
+            </div>
+
+            <div class="group">
+                <input class="ipt" id="ajbh" placeholder="案件编号" type="text">
+            </div>
+            <div class="group">
+                <input class="ipt" id="sgdd" placeholder="事故地点" type="text">
+            </div>
+            <div class="group">
+                <select id="sgxq" class="slt" name="sgxq">
+                    <option value="">请选择所属辖区</option>
+                    <option value="420102">江岸区</option>
+                </select>
+            </div>
+            <div class="group">
+                <select id="fwwd" class="slt" name="fwwd">
+                       <option value="">请选择服务网点</option>
+                </select>
+            </div>
+
+            <div class="group">
+                <select id="sfdk" class="slt" name="sfdk">
+                    <option value="">是否代勘</option>
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+            </div>
+            <div class="group">
+                <input class="ipt" id="cky" placeholder="查勘员" type="text">
+            </div>
+            <div class="group">
+                <input class="ipt" id="xysbh" placeholder="协议书编号" type="text">
+            </div>
+            <div class="group">
+                <input class="ipt" id="dzsbh" placeholder="定责书编号" type="text">
+            </div>
+            <div class="group">
+                <input class="ipt" id="jjxm" placeholder="交警姓名" type="text">
+            </div>
+            <div class="group">
+                <input class="ipt" id="tjr" placeholder="提交人" type="text">
+            </div>
+                
+			<div class="group">
+				<button type="submit" class="ubtn ubtn-cyan">查询</button>
+				<button type="button" class="ubtn ubtn-cyan" id="jadd">新增</button>
+			</div>
+		</form>
+	</div>
+	<!-- filter end -->
+
+	<div class="table">
+		<div class="caption">
+			<span>案件情况统计</span>
+			<em class="ico ico-arrow-left prev"></em>
+			<em class="ico ico-arrow-right next"></em>
+		</div>
+		<div class="pagesize">
+			<span>显示</span>
+			<select class="slt">
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+			<span>记录</span>
+		</div>
+		<div class="scroll">
+			<script id="tableTemp" type="text/html">
+				{{each list as item i}}
+				<tr>
+					<td><a href="javascript:;" data-id="{{item.id}}">{{item.number}}</a></td>
+					<td>{{item.datetime}}</td>
+					<td>{{item.sgdd}}</td>
+					<td>{{item.sgxq}}</td>
+					<td>{{item.kpwd}}</td>
+					<td>{{item.sfdk}}</td>
+					<td>{{item.kcy}}</td>
+					<td>{{item.quxc}}</td>
+					<td>{{item.xysbh}}</td>
+					<td>{{item.dzsbh}}</td>
+					<td>{{item.jjxm}}</td>
+					<td>{{item.tjr}}</td>
+					<td>{{item.tjsj}}</td>
+					<td>{{item.dkgs}}</td>
+					<td>{{item.bz}}</td>
+					<td data-id="{{item.id}}">
+						<button class="ubtn ubtn-cyan export" type="button">导出图片</button> 
+						<button class="ubtn ubtn-cyan edit" type="button">修改</button>
+						<button class="ubtn ubtn-cyan del" type="button">删除</button>
+					</td>
+				</tr>
+				{{/each}}
+			</script>
+			<table>
+				<thead>
+					<tr>
+                        <th>案件编号</th>
+                        <th>事故发生时间</th>
+                        <th>事故地点</th>
+                        <th>事故辖区</th>
+                        <th>快赔网点</th>
+                        <th>是否代勘</th>
+                        <th>查勘员</th>
+                        <th>是否去过现场</th>
+                        <th>协议书编号</th>
+                        <th>定责书编号</th>
+                        <th>交警姓名</th>
+                        <th>提交人</th>
+                        <th>提交时间</th>
+                        <th>代勘公司</th>
+                        <th>备注</th>
+                        <th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody">
+					<tr>
+						<td><a href="javascript:;" data-id="111307">201706300245</a></td>
+						<td>2017-06-30 15:30:00</td>
+						<td>湖北省武汉市汉阳区</td>
+						<td>汉阳区</td>
+						<td>九鼎理赔点</td>
+						<td>否</td>
+						<td>华钢</td>
+						<td>否</td>
+						<td>20170003419</td>
+						<td></td>
+						<td>张汉元</td>
+						<td>九鼎理赔点</td>
+						<td>2017-06-30 16:22:45</td>
+						<td></td>
+						<td></td>
+						<td> 
+							<button id="exportbtn" class="ubtn ubtn-cyan" type="button" onclick="imgPacket(111307)">导出图片</button> 
+							<button id="modifybtn" class="ubtn ubtn-cyan" type="button" onclick="kpCaseDetail(111307)">修改</button>
+							<button id="delbtn" class="ubtn ubtn-cyan" type="button" onclick="delCase(111307)">删除</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="pagination"></div>
+	</div>
+</div>
+<!-- wrapper end -->
+
+<div class="footer">
+	<p>开发单位：湖北易站通达电子科技有限公司 </p>
+</div>
+
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/datetimepicker/core.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/jquery.pagination.min.js"></script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+		"currentPage": 1,
+	    "nextPage": 2,
+	    "pageSize": 5,
+	    "totalPage": 27,
+	    "totalSize": 131,
+	    "list|10": [{
+	    	"id": "@increment",
+	    	"number": "2017063002@increment",
+	    	"datetime": "@datetime",
+	    	"sgdd|1": ["湖北省武汉市东西湖区", "湖北省武汉市洪山区南李路47号", "湖北省武汉市洪山区工业园路","湖北省武汉市东西湖区新城十一路"],
+	    	"sgxq|1": ["江岸区","江汉区","硚口区","武昌区","洪山区"],
+	    	"kpwd|1": ["龙众理赔点","红光理赔点","南众理赔点","胜东理赔点","优诚理赔点","九鼎理赔点","兴飞跃理赔点","高尔夫理赔点"],
+	    	"sfdk|1": ["是","否"],
+	    	"kcy": "@cname",
+	    	"quxc|1": ["是","否"],
+	    	"xysbh": "0037904",
+	    	"dzsbh": "4201121200393070",
+	    	"jjxm": "@cname",
+	    	"tjr|1": ["龙众理赔点","红光理赔点","南众理赔点","胜东理赔点","优诚理赔点","九鼎理赔点","兴飞跃理赔点","高尔夫理赔点"],
+	    	"tjsj": "@datetime",
+	    	"dkgs|1": ["人保","太保","平安","天安","太平","大地","永安","华安","中华","永诚","安邦","都邦","天平","阳光","渤海","亚太","华泰","英大","长安","中银","国寿","紫金","信达","鼎和","浙商","长江","国泰","国元","富德","交管","协会","测试","大队","其他"],
+	    	"bz": ""
+		}]
+	});
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+<script>
+	!(function($) {
+		var _global = {
+			init: function() {
+				this.select2();
+    			this.filterData = {}; // 搜索条件
+				this.filter();
+				this.request(this.filterData, true); // 加载数据并初始化分页
+				this.bindEvent();
+			},
+			select2: function() {
+				$('.slt').select2();
+			},
+			bindEvent: function() {
+				// 新增
+				$('#jadd').on('click', function() {
+					window.location.href = 'kpCaseDetail.html';
+				})
+			},
+			filter: function() {
+				var that = this;
+				var $form = $('#filterForm');
+				var $start = $('#queryStartTime');
+				var $end = $('#queryEndTime');
+
+				$start.datetimepicker({
+			        format: 'yyyy/mm/dd'
+			    });
+				$end.datetimepicker({
+			        format: 'yyyy/mm/dd'
+			    })
+
+				// 每页显示
+			    $('.pagesize').find('.slt').on('change', function() {
+			    	that.filterData.pageSize = this.value;
+			    	that.request(that.filterData, true);
+			    })
+
+				// 查询
+				$form.on('submit', function() {
+					var start = $start.val(),
+						end = $end.val();
+					if (!start || start == '') {
+						fx.alert("请选择开始时间");
+						return;
+					}
+					if (!end || end == '') {
+						fx.alert("请选择结束时间");
+						return;
+					}
+					if(start > end){
+						fx.alert("开始时间不得大于结束时间");
+						return;
+					}
+
+			        that.filterData.startTime = start;
+			        that.filterData.endTime = end;
+			        that.filterData.ajbh=$("#ajbh").val(); // 案件编号
+			        that.filterData.sgdd=$("#sgdd").val(); // 事故地点
+			        that.filterData.sgxq=$("#sgxq").val(); // 所属辖区
+			        that.filterData.fwwd=$("#fwwd").val(); // 服务网点
+			        that.filterData.sfdk=$("#sfdk").val(); // 是否代勘
+			        that.filterData.cky=$("#cky").val();   // 查勘员
+			        that.filterData.xysbh=$("#xysbh").val(); // 协议书编号
+			        that.filterData.dzsbh=$("#dzsbh").val(); // 定责书编号
+			        that.filterData.jjxm=$("#jjxm").val(); // 交警姓名
+			        that.filterData.tjr=$("#tjr").val();   // 提交人
+					that.request(that.filterData, true);
+					return false;
+				})
+			},
+			/**
+			 * 添加删除classname
+			 * @param  {Object} data ajax参数
+			 * @param  {Boolean} initPage  是否初始化分页
+			 */
+			request: function(data, initPage) {
+				var that = this;
+				fx.request('http://g.cn', data, function(res){
+					var model = template('tableTemp', res);
+					$("#tbody").empty().html(model);
+					$('.tooltip').tooltipsy();
+					window.scrollTo(0, 0);
+					$(window).trigger('resize.scroll');
+					initPage && that.paginate(res.pageSize, res.totalSize);
+				});
+			},
+			paginate: function(pageSize, totalSize) {
+				var that = this;
+				function pageselectCallback(page_index) {
+					that.filterData.page_index = page_index;
+					that.request(that.filterData);
+				}
+				$('.pagination').pagination(totalSize, {
+                    num_edge_entries: 2,
+                    callback: pageselectCallback,
+                    items_per_page: pageSize // 每页显示数量
+                });
+			}
+		}
+
+		_global.init();
+	})(jQuery);
+</script>
+</body>
+</html>

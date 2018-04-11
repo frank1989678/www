@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>历史轨迹</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">武汉119作战指挥中心调度平台</a>
+	</div>
+	<div class="nav">
+		<ul>
+			<li>
+				<dl>
+					<dt><i class="ico ico-1"></i>地图管控</dt>
+					<dd>
+						<a href="track.html">车辆监控</a>
+						<a href="dispatcherManage.html">调度管理</a>
+						<a href="trackHis.html">历史轨迹</a>
+						<a href="railManage.html">电子围栏</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-2"></i>视频监控</dt>
+					<dd>
+						<a href="ocxClient.html">多车视频监控</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-3"></i>信息报表</dt>
+					<dd>
+						<a href="alarmHotSpot.html">警情记录</a>
+						<a href="alarmRecord.html">报警记录</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-4"></i>系统管理</dt>
+					<dd>
+						<a href="carManage.html">车辆管理</a>
+						<a href="orgManage.html">机构管理</a>
+						<a href="userManage.html">用户管理</a>
+						<a href="roleManage.html">角色管理</a>
+						<a href="purviewManage.html">权限管理</a>
+						<a href="contactsManage.html">通讯录管理</a>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+	<div class="user">
+		<span>yitop</span>
+		<i>|</i>
+		<a href="javascript:;" id="mdyPwd">修改密码</a>
+		<i>|</i>
+		<a href="javascript:;" id="mdyTheme">主题</a>
+		<i>|</i>
+		<a href="login.html" class="ico ico-logout"></a>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="map" id="map"></div>
+
+<div id="side">
+	<div class="tit"><button type="button" class="ico ico-refresh"></button>车辆列表</div>
+	<div class="search">
+		<form action="javascript:return false;" name="search" method="GET">
+			<label>车牌号</label>
+			<input type="text" class="ipt" placeholder="请输入车牌号">
+			<button type="submit" class="ico ico-search"></button>
+		</form>
+	</div>
+	<div class="tools">
+		<button type="button" class="tooltip ico ico-1 active" data-tips="全部"></button>
+		<button type="button" class="tooltip ico ico-2" data-tips="在线"></button>
+		<button type="button" class="tooltip ico ico-3" data-tips="离线"></button>
+		<button type="button" class="tooltip ico ico-4" data-tips="报警"></button>
+		<button type="button" class="tooltip ico ico-5" data-tips="刷新"></button>
+	</div>
+	<div class="open"></div>
+	<ul id="carTree" class="ztree"></ul>
+</div>
+
+<div class="side" id="side2">
+	<div class="tit">轨迹筛找（鄂A10001）</div>
+	<div class="form">
+		<div class="item req">
+			<label>开始时间：</label>
+			<input type="text" name="startTime" id="queryStartTime" class="ipt" />
+		</div>
+		<div class="item req">
+			<label>结束时间：</label>
+			<input type="text" name="endTime" id="queryEndTime" class="ipt" />
+		</div>
+		<div class="item">
+			<label class="for"><i class="cbx" data-value="rail"></i>电子围栏</label>
+			<label class="for"><i class="cbx" data-value="sos"></i>sos报警</label>
+			<label class="for"><i class="cbx" data-value="status"></i>车辆处理警情</label>
+		</div>
+		<div class="button tc">
+			<button type="button" class="ubtn ubtn-red" id="jsubmit">查询</button>
+		</div>
+	</div>
+
+	<div class="set">
+		<p>播放倍速</p>
+		<div class="speed">
+			<label><input type="radio" name="speed" value="0.5" />x0.5</label>
+			<label><input type="radio" name="speed" value="1" checked />x1</label>
+			<label><input type="radio" name="speed" value="2" />x2</label>
+			<label><input type="radio" name="speed" value="4" />x4</label>
+			<label><input type="radio" name="speed" value="8" />x8</label>
+		</div>
+		<div class="ctrl">
+			<button class="ico ico-play" id="jplay" onclick="_play(this)"></button>
+			<span class="bar"><i class="time"></i><i class="dot"></i></span>
+			<button class="ico ico-stop" onclick="_stop()"></button>
+		</div>
+	</div>
+
+	<div class="open"></div>
+</div>
+
+<div class="footer-fix">
+    <span>湖北省宏锐慧通信息技术有限公司</span>
+</div>
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<!-- 左侧菜单 -->
+<script src="json/carTree.js"></script>
+<!-- 页面专用 -->
+<link rel="stylesheet" href="assets/plugins/zTreeStyle/jquery.ztree.css" />
+<link rel="stylesheet" href="assets/plugins/jedate/jedate.css" />
+<script src="assets/plugins/jedate/jquery.jedate.min.js"></script>
+<script src="assets/plugins/zTreeStyle/jquery.ztree.min.js"></script>
+<script src="http://webapi.amap.com/maps?v=1.3&key=9d870244cd940650899a73c0566d7652"></script>
+
+<script>
+var CHECK_CAR = 0;
+// 勾选小车
+function checkCar(event, treeId, treeNode) {
+	var id = treeNode.id;
+	if (treeNode.checked) {
+		CHECK_CAR = id;
+	} else {
+		CHECK_CAR = 0;
+	}
+}
+
+var setting = {
+    check: {
+        enable: true,
+        chkboxType: { "Y": "", "N": "" }
+    },
+    data: {
+        simpleData: {
+            enable: true,
+            idKey: "id",
+            pIdKey: "pId",
+            rootPId: null
+        }
+    },
+    view: {
+        showLine: true
+    },
+	callback: {
+		onCheck: checkCar
+	}
+};
+
+var treeObj = $.fn.zTree.init($('#carTree'), setting, treeData);
+treeObj.expandAll(true);
+
+var map = new AMap.Map('map');
+
+var car,
+	markers = [],
+	status = 'stop',
+	speed = 1000,
+	lineArr = [];
+
+function showCar(data) {
+	lineArr = data.lnglat;
+	if (car) {
+		car.stopMove();
+		car.setMap(null);
+		map.remove(markers);
+		markers = [];
+	}
+	status = 'stop';
+	$('#jplay').attr('class', 'ico ico-play');
+	car = new AMap.Marker({
+	    map: map,
+	    position: lineArr[0],
+	    icon: 'assets/images/icon/water/green.png',
+	    offset: new AMap.Pixel(-20, -15),
+	    autoRotation: true
+	});
+
+	// 绘制轨迹
+	var polyline = new AMap.Polyline({
+	    map: map,
+	    path: lineArr,
+	    strokeColor: "#afb8e5",  //线颜色
+	    strokeWeight: 8,      //线宽
+	});
+	markers.push(polyline);
+
+	// SOS点
+	$.each(data.SOS, function(i, item) {
+		var SOS = new AMap.Marker({
+	        map: map,
+	        position: data.SOS[i],
+	        offset: new AMap.Pixel(-22, -30),
+	        content: '<div class="tips-sos">SOS</div>'
+	    });
+	    markers.push(SOS);
+	})
+
+	// 警情点
+	$.each(data.status, function(i, item) {
+		var status = new AMap.Marker({
+	        map: map,
+	        position: data.status[i],
+	        offset: new AMap.Pixel(-15, -15),
+	        content: '<div class="tips-status">' + (i+1) + '</div>'
+	    });
+	    markers.push(status);
+	})
+
+	// 电子围栏
+    var rail = new AMap.Polygon({
+        path: data.rail,//设置多边形边界路径
+        strokeColor: "#8fc31f", //线颜色
+        strokeOpacity: 0.6, //线透明度
+        strokeWeight: 3,    //线宽
+        fillColor: "#8fc31f", //填充色
+        fillOpacity: 0.2//填充透明度
+    });
+    rail.setMap(map);
+    markers.push(rail);
+
+	map.setFitView();
+}
+
+
+function _play(el) {
+	if (!car) {
+		return;
+	}
+	switch (status) {
+		case 'stop':
+			if (lineArr.length > 0) {
+				var k = $('.speed').find('input:checked').val();
+				car.moveAlong(lineArr, speed * k);
+				status = 'play';
+				el.className = 'ico ico-purse';
+			}
+			break;
+		case 'play':
+			car.pauseMove();
+			status = 'purse';
+			el.className = 'ico ico-play';
+			break;
+		case 'purse':
+			car.resumeMove();
+			el.className = 'ico ico-purse';
+			status = 'play';
+			break;
+	}
+}
+function _stop() {
+	if (car) {
+		status = 'stop';
+		car.setPosition(lineArr[0]);
+		car.stopMove();
+	}
+}
+
+
+var _global = {
+	init: function() {
+		this.filter();
+	},
+	filter: function() {
+		var $form = $('.form');
+		$.mydate({
+            start: '#queryStartTime',
+            end: '#queryEndTime',
+            format: 'YYYY/MM/DD hh:mm:ss'
+        })
+
+        $form.on('click', '.for', function() {
+        	$(this).find('.cbx').toggleClass('cbx-on');
+        })
+
+        $('#jsubmit').on('click', function() {
+        	var time1 = $('#queryStartTime').val(),
+        		time2 = $('#queryEndTime').val(),
+        		seconds = (new Date(time2).getTime()) - (new Date(time1).getTime()),
+        		day7 = 7 * 24 * 60 * 60 * 1e3,
+        		minute = 30 * 60 * 1e3,
+        		data = {};
+
+        	if (CHECK_CAR === 0) {
+        		$.notify({
+					'title': '请先勾选小车',
+					'type': 'warning'
+				})	    
+				return false;   
+        	} else if (seconds > day7) {
+        		$.notify({
+					'title': '开始时间与结束时间差≤7天',
+					'type': 'warning'
+				})	    
+				return false;
+        	} else if (seconds < minute) {
+        		$.notify({
+					'title': '开始时间与结束时间差≥30分钟',
+					'type': 'warning'
+				})	 
+				return false;   
+        	}
+        	data = {
+        		id: CHECK_CAR,
+        		start: time1,
+        		end: time2
+        	}
+        	$form.find('.cbx-on').each(function() {
+        		data[$(this).data('value')] = true
+        	})
+        	$.ajax({
+        		url: 'json/lnglat.json',
+        		data: data,
+        		success: function(res) {
+        			showCar(res);
+        		}
+        	})
+        })
+	}
+}
+
+</script>
+
+</body>
+</html>

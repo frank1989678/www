@@ -1,0 +1,84 @@
+<div class="layer-detail2">
+    <ul>
+        <li>警情立案时间：20170901 08:21</li>
+        <li>警情燃烧对象：居民住宅</li>
+        <li>警情案发地点：武汉市光谷大道金融港</li>
+        <li>报警人姓名：张三</li>
+        <li>报警人电话：15500000000</li>
+        <li>报警内容：长江证券光谷大厦着火了</li>
+    </ul>
+    <ul>
+        <li>警情GPS经度：114.23232</li>
+        <li>警情GPS纬度：30.23232</li>
+        <li>警情处置机构：江夏大队</li>
+        <li>警情类别：火警</li>
+        <li>警情级别：二级</li>
+        <li>警情状态：待处理</li>
+    </ul>
+    <div class="btm">
+        <button type="button" class="ubtn ubtn-red fl" onclick="_defer(11)">暂缓处理</button>
+        <button type="button" class="ubtn ubtn-red fr" onclick="_ignore(11)">忽略</button>
+    </div>
+
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>警情调派时间</th>
+                    <th>调派车辆</th>
+                    <th>接警车辆</th>
+                    <th>接警时间</th>
+                    <th>车辆到场时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2017-09-14 17:35</td>
+                    <td>鄂A10001</td>
+                    <td>鄂A10001</td>
+                    <td>2017-09-14 17:35</td>
+                    <td>2017-09-14 17:35</td>
+                </tr>
+                <tr>
+                    <td>2017-09-14 17:35</td>
+                    <td>鄂A10002</td>
+                    <td>鄂A10002</td>
+                    <td>2017-09-14 17:35</td>
+                    <td>2017-09-14 17:35</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form">
+        <form action="javascript:return false;" method="POST" name="anqin">
+            <div class="item">
+                <label>案发地位置修正：</label>
+                <input type="text" class="ipt" style="width:244px;" readonly="" />
+                <div class="map2" id="map2"></div>
+                <button type="button" class="ubtn ubtn-red" onclick="_save(11)">保存</button>
+            </div>
+
+            <div class="item">
+                <label>车辆到场的地点：</label>
+                <input type="text" class="ipt" id="address" placeholder="请输入地址" />
+            </div>
+
+            <div class="item">
+                <label>到场地点的经度：</label>
+                <input type="text" class="ipt" id="lng" onclick="_showMap()" style="width:110px;" />
+                <label style="margin-left:60px;">到场地点的纬度：</label>
+                <input type="text" class="ipt" id="lat" onclick="_showMap()" style="width:110px;" />
+                <button type="button" class="ubtn ubtn-gray">选择</button>
+            </div>
+            <div class="item">
+                <label>选择需要调派的车辆：</label>
+                <select name="" class="slt select2" style="width:372px;">
+                    <option value="">鄂A10001</option>
+                    <option value="">鄂A10002</option>
+                </select>
+                <button type="button" class="ubtn ubtn-red" onclick="_dispatch(11)">调派</button>
+            </div>
+        </form>
+    </div>
+</div>

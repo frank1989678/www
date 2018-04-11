@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>自助取号终端</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+    <span class="logo">自助取号终端</span>
+    <em class="subtitle">（ 排队叫号、资料查缺 ）</em>
+</div>
+<!-- header end -->
+
+<div class="content">
+    <div class="page5">
+        <div class="tit">您选择办理的是：<em>新车上牌 <i class="arrow"></i> 国产新车</em></div>
+        <div class="t2">
+            <p>1.请确认以下资料是否已携带，如果已携带请点击“我有”按钮。</p>
+            <p>2.未带齐资料，窗口不予受理。</p>
+        </div>
+
+        <div class="img">
+            <div class="name">身份证明原件及复印件</div>
+            <div class="num">1/6</div>
+            <div class="thumb">
+                <img src="/static/uploads/1.jpg" alt="身份证">
+                <img src="/static/uploads/2.jpg" alt="身份证">
+                <img src="/static/uploads/3.jpg" alt="身份证">
+                <img src="/static/uploads/4.jpg" alt="身份证">
+                <img src="/static/uploads/5.jpg" alt="身份证">
+                <img src="/static/uploads/6.jpg" alt="身份证">
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="button" class="ubtn ubtn-blue" onclick="zd.page('page8.html')">我没有</button>
+            <button type="button" class="ubtn ubtn-blue" id="have">我有</button>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <button type="button" class="ico ico-home" onclick="zd.pagehome(0)">首页</button>
+    <button type="button" class="ico ico-back" onclick="zd.page('page5.html')">返回</button>
+    <button type="button" class="ico ico-ok" id="jsubmit">确定</button>
+</div>
+
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/js/common.js"></script>
+
+<script>
+
+var _global = {
+    init: function() {
+        this.swiper();
+    },
+    swiper: function() {
+        var $img = $('.thumb').find('img');
+        var $num = $('.num');
+        var k = 0;
+        var c = $img.length;
+        $img.eq(k++).show();
+        $num.html(k + '/' + c);
+
+        $('#have').on('click', function() {
+            if (k >= c) {
+                alert('全部都有')
+            } else {
+                $img.eq(k++).show().siblings().hide();
+                $num.html(k + '/' + c);
+            }
+        })
+    }
+}
+$(function() {
+    _global.init();
+})
+</script>
+</body>
+</html>

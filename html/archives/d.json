@@ -1,0 +1,32 @@
+{
+	"result": "SUCCESS",
+	"data": [{
+		"name": "**军",
+		"vehicleType": "小型普通客车",
+		"plateNo": "鄂A76650",
+		"vin": "LFV328R98113",
+		"brands": "五菱",
+		"registerDate": "2010-10-22"
+	}, {
+		"name": "**军",
+		"vehicleType": "小型普通客车",
+		"plateNo": "鄂A76650",
+		"vin": "LFV328R98113",
+		"brands": "五菱",
+		"registerDate": "2010-10-22"
+	}, {
+		"name": "**军",
+		"vehicleType": "小型普通客车",
+		"plateNo": "鄂A76650",
+		"vin": "LFV328R98113",
+		"brands": "五菱",
+		"registerDate": "2010-10-22"
+	}, {
+		"name": "**军",
+		"vehicleType": "小型普通客车",
+		"plateNo": "鄂A76650",
+		"vin": "LFV328R98113",
+		"brands": "五菱",
+		"registerDate": "2010-10-22"
+	}]
+}

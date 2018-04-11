@@ -1,0 +1,80 @@
+html{font-size:62.5%;font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);}
+body{font-size:1.4rem;background:#fff;color:#333;}
+body,p,dl,dt,dd,ul,ol{margin:0;}
+h1,h2,h3,h4{margin:0;font-size:100%;font-weight:400;}
+ul,ol{padding:0;list-style:none;}
+img{vertical-align:top;}
+input,button,textarea,select{font-size:100%;margin:0;padding:0;outline:none!important;-webkit-appearance:none;}
+textarea{resize:none;}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{-webkit-appearance:none!important;}
+input[type="number"]{-moz-appearance:textfield;}
+em,i{font-style:normal;}
+a{color:#333;text-decoration:none;}
+a:hover{text-decoration:none;}
+
+.ipt,.btn{width:100%;height:40px;padding:5px;border:0;background:#fff;outline:none;-webkit-border-radius:3px;border-radius:3px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.btn{font-size:1.6rem;}
+.btn:active{opacity:.9;box-shadow:inset 0 0 100px rgba(0,0,0,0.2);}
+.btn-warning{background-color:#ffda10;color:#d53635;}
+.btn-primary{background:#cd4d4c;color:#fff;}
+
+.view{max-width:750px;margin:0 auto;}
+.bg1{background-color:#d53635;}
+.bg1 .header{background-color:#e33e3d;}
+.bg2{background-color:#eee;}
+.bg2 .header{background-color:#cd4d4c;}
+
+.header{position:relative;height:44px;line-height:44px;font-size:1.6rem;color:#fff;text-align:center;}
+.header .tit{font-size:1.8rem;font-style:normal;}
+.header .back{position:absolute;top:0;left:0;bottom:0;padding-left:35px;background:url(../images/back.png) no-repeat 20px 50%;background-size:10px auto;color:#fff;}
+.header .desc{position:absolute;top:0;right:25px;color:#fff;}
+
+.sec{height:100%;}
+.h1 img{width:100%;}
+.form1{padding:0 19px 20px;}
+.form1 .tit{font-size:1.8rem;font-weight:400;text-align:center;color:#fff;}
+.form1 .ipt{margin:18px 0;text-align:center;}
+
+.form2{border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;border:0;}
+.form2 .banner{margin-bottom:4px;border-bottom:1px solid #e5e5e5;}
+.form2 .banner img{width:100%;}
+.form2 .group{position:relative;padding-left:60px;padding:0 17px 0 77px;border-bottom:1px solid #e5e5e5;background-color:#fff;}
+.form2 .group label{position:absolute;top:0;left:17px;line-height:40px;font-size:1.5rem;color:#444;}
+.form2 .hr{height:17px;background-color:#fff;}
+.form2 .ipt{font-size:1.2rem;}
+.form2 .ft{padding:50px 17px 20px;}
+.form2 .tips{padding:12px 17px;font-size:1rem;}
+.form2 .tips p{margin:0;line-height:1.5;}
+
+.history{padding:0 17px 18px;background:#fff;}
+.history li{position:relative;padding:7px 0;border-bottom:1px solid #e5e5e5;}
+.history em{display:block;margin-bottom:2px;font-size:1.6rem;color:#333;}
+.history span{font-size:1.2rem;color:#999;}
+.history i{position:absolute;right:0;bottom:8px;color:#cd4d4c;}
+
+/* dialog */
+.dialog{position:absolute;left:0;top:0;right:0;bottom:0;background:#000;background:rgba(0,0,0,.45);display:none;}
+.dialog .cont{position:absolute;top:50%;left:15%;right:15%;margin-top:-140px;padding:125px 0 30px;background:#d53635 url(../images/bg3.png) no-repeat;background-size:100% auto;text-align:center;border-radius:10px;}
+.dialog .h2{color:#fff008;font-size:1.5rem;font-weight:100;margin:0 0 20px;}
+.dialog em{color:#fff008;font:700 3.6rem/1 '';vertical-align:bottom;}
+.dialog sub{color:#fff008;font-size:1.4rem;vertical-align:bottom;}
+.dialog p{margin:0 0 4px;color:#7d1817;}
+.dialog a{display:inline-block;margin-top:50px;padding-right:10px;color:#fff008;font-size:1.5rem;line-height:1;text-decoration:none;background:url(../images/arrow.png) no-repeat 100% 50%;background-size:6px 10px;}
+.dialog .lapse{font-size:1.8rem;color:#fff008;}
+.dialog .close{position:absolute;top:10px;right:10px;width:12px;height:12px;background:url(../images/close.png) no-repeat;background-size:11px auto;}
+
+
+/* pop-msg */
+.pop-msg{position:fixed;bottom:20px;left:19px;right:19px;text-align:center;z-index:2147483641;}
+.pop-msg span{display:inline-block;padding:4px 9px;background:#000;color:#fff;-webkit-border-radius:3px;border-radius:3px;}
+
+/* animate.css */
+@-webkit-keyframes fadeIn{0%{opacity:0}100%{opacity:1}}@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}.fadeIn{-webkit-animation-name:fadeIn;animation-name:fadeIn}
+
+.animated {
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}

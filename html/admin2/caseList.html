@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>交通事故信息管理平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/datetimepicker/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+    <link rel="stylesheet" href="assets/plugins/viewer/viewer.min.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="inner">
+		<div class="user">
+			<dl>
+				<dt>系统管理员<i class="ico ico-arrow-down"></i></dt>
+				<dd>
+					<a href="changePwd.html">修改密码</a>
+					<a href="login.html">安全退出</a>
+				</dd>
+			</dl>
+		</div>
+		<div class="logo">
+			<a href="index.html">武汉市交通事故信息管理平台</a>
+		</div>
+		<div class="nav">
+			<dl>
+				<dt><i class="ico ico-1"></i><span>用户信息</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="userList.html">用户信息</a>
+						<a href="insuranceMessage.html">保险公司信息</a>
+					</div>
+				</dd>
+			</dl>
+			<dl class="active">
+				<dt><i class="ico ico-2"></i><span>警保联动</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="caseList.html" class="current">警保案件信息</a>
+						<a href="showCaseSummaryList.html">案件处理登记</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><i class="ico ico-3"></i><span>警保统计</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="caseInfoStatistics.html">案件信息统计</a>
+						<a href="companyStatistics.html">查勘量统计(公司)</a>
+						<a href="surveyMemberStatistics.html">查勘量统计(查勘员)</a>
+						<a href="surveyMemberDayStatistics.html">考勤打卡查询</a>
+						<a href="surveyMemberTimesStatistics.html">考勤打卡统计</a>
+						<a href="jjlMng.html">车损事故报警量</a>
+						<a href="workBriefingInfo.html">工作情况通报</a>
+						<a href="handleCount.html">案件处理统计</a>
+						<a href="accidentsCount.html">快处平台数据统计日报</a>
+						<a href="accidentsMonthCount.html">快处平台数据统计月报</a>
+						<a href="caseKcWarn.html">保险处理超时统计</a>
+						<a href="statisticsView.html">大屏统计</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><i class="ico ico-4"></i><span>系统设置</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="rolesList.html">角色管理</a>
+						<a href="smsContentList.html">警保短信模板</a>
+						<a href="source.html">资源管理</a>
+						<a href="showPage.html">job数据同步</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><i class="ico ico-5"></i><span>快赔中心</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="queryCase.html">快赔案件信息</a>
+						<a href="queryKpPrivies.html">事故当事人信息</a>
+						<a href="showKpDkCaseCount.html">代勘案件统计</a>
+						<a href="showKpComCount.html">公司办理统计</a>
+						<a href="showKpNetCount.html">网点办理统计</a>
+						<a href="showKpCaseCount.html">受案登记统计</a>
+						<a href="excaptionNoticeCount.html">事故频繁异常车辆预警</a>
+						<a href="showPage2.html">快赔案件导出</a>
+					</div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<!-- header end -->
+
+<!-- wrapper start -->
+<div class="wrapper">
+	<!-- filter start -->
+	<div class="filter filter-res">
+		<form id="filterForm" action="#!">
+			<div class="group">
+				<input type="text" class="ipt" placeholder="车牌号码" id="hphm" />
+			</div>
+			<div class="group">
+				<input type="text" class="ipt" placeholder="案件编号" id="casenumber" />
+			</div>
+			<div class="group">
+				<input type="text" class="ipt date" placeholder="提交开始时间" id="queryStartTime" />
+			</div>
+			<div class="group">
+				<input type="text" class="ipt date" placeholder="提交结束时间" id="queryEndTime" />
+			</div>
+			<div class="group">
+				<select name="" id="queryJqx" class="slt">
+					<option value="">交强险(全部)</option>
+					<option value="100">人保</option>
+					<option value="101">太保</option>
+				</select>
+			</div>
+			<div class="group">
+				<select name="" id="querySyx" class="slt">
+					<option value="">商业险(全部)</option>
+					<option value="100">人保</option>
+				</select>
+			</div>
+			<div class="group">
+				<select name="" id="queryCreateUserId" class="slt">
+					<option value="">案件创建人(全部)</option>
+					<option value="100">胡芬(huf)</option>
+				</select>
+			</div>
+			<div class="group">
+				<select name="" id="vehicleType" class="slt">
+					<option value="">事故类型(全部)</option>
+					<option value="100">单方事故</option>
+					<option value="100">双方事故</option>
+					<option value="100">多方事故</option>
+				</select>
+			</div>
+			<div class="group">
+				<select name="" id="district" class="slt">
+					<option value="">案件区域(全部)</option>
+					<option value="100">江岸区</option>
+					<option value="100">江汉区</option>
+					<option value="100">硚口区</option>
+				</select>
+			</div>
+			<div class="group">
+				<select name="type" id="externaltype" class="slt">
+					<option value="-1">案件来源条件(全部)</option>
+					<option value="1">网上快处</option>
+					<option value="2">警保联动</option>
+				</select>
+			</div>
+			<div class="group">
+				<input type="text" class="ipt" id="username" placeholder="查勘员姓名" />
+			</div>
+			<div class="group">
+				<button type="submit" class="ubtn ubtn-cyan">搜索</button>
+			</div>
+		</form>
+	</div>
+	<!-- filter end -->
+
+	<div class="uinfo">
+		<div class="caption">
+			<span>案件列表</span>
+			<em>当前第 <i id="currentPage">1</i> 页，每页显示 <i id="pageSize">10</i> 条，总计 <i id="totalSize">56805</i> 条</em>
+		</div>
+		<div class="list">
+			<ul id="caseList">
+				<li class="current">
+					<span>201706190023</span>
+					<em>报案人：李秋开</em>
+					<em>2017-06-19 07:46:41</em>
+				</li>
+				<li class="closed">
+					<span>201706190023</span>
+					<i class="ico ico-checked"></i>
+					<em>销案</em>
+					<em>2017-06-19 07:46:41</em>
+					<i class="ico ico-mobile"></i>
+				</li>
+				<li>
+					<span>201706190023</span>
+					<em>报案人：李秋开</em>
+					<em>2017-06-19 07:46:41</em>
+				</li>
+				<li>
+					<span>201706190023</span>
+					<em>报案人：李秋开</em>
+					<em>2017-06-19 07:46:41</em>
+				</li>
+				<li>
+					<span>201706190023</span>
+					<em>报案人：李秋开</em>
+					<em>2017-06-19 07:46:41</em>
+				</li>
+				<li class="closed">
+					<span>201706190023</span>
+					<i class="ico ico-checked"></i>
+					<em>销案</em>
+					<em>2017-06-19 07:46:41</em>
+					<i class="ico ico-mobile"></i>
+				</li>
+				<li>
+					<span>201706190023</span>
+					<em>报案人：李秋开</em>
+					<em>2017-06-19 07:46:41</em>
+				</li>
+				<li>
+					<span>201706190023</span>
+					<em>报案人：李秋开</em>
+					<em>2017-06-19 07:46:41</em>
+				</li>
+				<li class="closed">
+					<span>201706190023</span>
+					<i class="ico ico-checked"></i>
+					<em>销案</em>
+					<em>2017-06-19 07:46:41</em>
+					<i class="ico ico-mobile"></i>
+				</li>
+				<li class="closed">
+					<span>201706190023</span>
+					<i class="ico ico-checked"></i>
+					<em>销案</em>
+					<em>2017-06-19 07:46:41</em>
+					<i class="ico ico-mobile"></i>
+				</li>
+			</ul>
+			<div class="button">
+				<button type="button" class="ubtn ubtn-cyan" id="prevBtn">上一页</button>
+				<button type="button" class="ubtn ubtn-cyan" id="nextBtn">下一页</button>
+			</div>
+		</div>
+		<div class="rcont">
+			<div class="main">
+				<div class="hd">
+					<span>201706180220</span>
+					<em>2016-08-03 11:00:26</em>
+					<div class="tools">
+						<button type="button" class="btn ico export tooltip" data-tips="导出"></button>
+						<button type="button" class="btn ico del tooltip" data-tips="删除"></button>
+						<button type="button" class="btn ico done tooltip" data-tips="受理完成"></button>
+					</div>
+				</div>
+				
+				<!-- 查勘员信息 start -->
+				<div class="bd">
+					<div class="title">查勘员信息</div>
+					<table>
+						<tbody>
+							<tr>
+								<td>查勘员姓名：系统管理员</td>
+								<td>手机号码：root</td>
+								<td>所属机构：大地</td>
+							</tr>
+							<tr>
+								<td>出发时间：2017-06-29 10:31:06</td>
+								<td>到达时间：2017-06-29 10:31:06</td>
+								<td>撤离时间：2017-06-29 10:31:06</td>
+							</tr>
+							<tr>
+								<td>出发地点：无</td>
+								<td>到达地点：无</td>
+								<td>撤离地点：无</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- 查勘员信息 end -->
+				
+				<!-- 文字信息 start -->
+				<div class="bd">
+					<div class="title">文字信息</div>
+					<div class="tab">
+						<span data-item="basic" class="current">事故基本信息</span>|
+						<span data-item="mycarInfo">标的车信息</span>|
+						<span data-item="carInfo">三者车信息</span>|
+						<span data-item="stuffInfo">物损信息</span>|
+						<span data-item="personInfo">人伤信息</span>
+					</div>
+					<div class="tabcont">
+
+						<!-- 事故基本信息 start -->
+						<div class="item" id="basic">
+							<div class="edit">
+								<button type="button" class="ubtn ubtn-cyan jEdit" data-id="1" data-form="basicForm">编辑</button>
+							</div>
+							<table>
+								<tbody>
+									<tr>
+										<td>出险时间：2017-06-29 10:31:06</td>
+										<td>出险地点：湖北省武汉市硚口区武胜路89-附5</td>
+										<td>事故类型：双方事故</td>
+									</tr>
+									<tr>
+										<td>报案时间：2017-06-29 10:31:06</td>
+										<td>报案人姓名：梁肽</td>
+										<td>报案人联系方式：13886078002</td>
+									</tr>
+									<tr>
+										<td>定责时间：2017-06-29 10:35:06</td>
+										<td>受理时间：</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td colspan="3">出险经过：后车撞击前车。</td>
+									</tr>
+									<tr>
+										<td colspan="3">案件区域：硚口区</td>
+									</tr>
+									<tr>
+										<td colspan="3">特殊案件： 否</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- 事故基本信息 end -->
+
+						<!-- 标的车信息 start -->
+						<div class="item" id="mycarInfo">
+							<div class="edit">
+								<button type="button" class="ubtn ubtn-cyan jEdit" data-id="2" data-form="mycarInfoForm">编辑</button>
+							</div>
+							<table>
+								<tbody>
+									<tr>
+										<td>车牌号：鄂A56823</td>
+										<td>驾驶员姓名：梁肽</td>
+										<td>驾驶员联系方式：13886078002</td>
+									</tr>
+									<tr>
+										<td>承保公司（交强险）：太平</td>
+										<td>承保公司（商业险）：太平</td>
+										<td>是否已向保险公司报案：是</td>
+									</tr>
+									<tr>
+										<td>责任类型：全责</td>
+										<td>大致受损部位：无</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- 标的车信息 end -->
+
+						<!-- 三者车信息 start -->
+						<div class="item" id="carInfo">
+							<div class="edit">
+								<button type="button" class="ubtn ubtn-cyan jEdit" data-id="3" data-form="carInfoForm">编辑</button>
+							</div>
+							<table>
+								<tbody>
+									<tr>
+										<td>车牌号：鄂AB8L27</td>
+										<td>驾驶员姓名：李国主</td>
+										<td>驾驶员联系方式：18086054021</td>
+									</tr>
+									<tr>
+										<td>承保公司（交强险）：平安</td>
+										<td>承保公司（商业险）：平安</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>责任类型：无责</td>
+										<td>大致受损部位：无</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- 三者车信息 end -->
+
+						<!-- 物损信息 start -->
+						<div class="item" id="stuffInfo">
+							<div class="edit">
+								<button type="button" class="ubtn ubtn-cyan jEdit" data-id="4" data-form="stuffInfoForm">编辑</button>
+							</div>
+							物损信息
+						</div>
+						<!-- 物损信息 end -->
+
+						<!-- 人伤信息 start -->
+						<div class="item" id="personInfo">
+							<div class="edit">
+								<button type="button" class="ubtn ubtn-cyan jEdit" data-id="5" data-form="personInfoForm">编辑</button>
+							</div>
+							人伤信息
+						</div>
+						<!-- 人伤信息 end -->
+					</div>
+				</div>
+				<!-- 文字信息 end -->
+
+				<!-- 图片信息 start -->
+				<div class="bd">
+					<div class="title">图片信息</div>
+					<div class="tab">
+						<span data-item="pic1" class="current">人车合影（0）</span>|
+						<span data-item="pic2">车驾号钢印照片（0）</span>|
+						<span data-item="pic3">碰撞照片（5）</span>|
+						<span data-item="pic4">人伤/物损照片（0）</span>|
+						<span data-item="pic5">证件照片（0）</span>|
+						<span data-item="pic6">交强险标识（0）</span>|
+						<span data-item="pic7">定责书/协议书（2）</span>
+					</div>
+					<div class="tabcont">
+						<div class="item" id="pic1">
+							<div class="zoompic">
+								<img src="http://pija.hbia.org.cn:5555/hbjb-mng/fileinmix/getimage?time=208153&model=6636db16126e5f78a4a8e62bbe37e755&imageId=1394771&type=0">
+								<img src="http://pija.hbia.org.cn:5555/hbjb-mng/fileinmix/getimage?time=208153&model=5747ca35775f026c100b870d9864b595&imageId=1394772&type=0">
+							</div>
+						</div>
+						<div class="item" id="pic2"></div>
+						<div class="item" id="pic3"></div>
+						<div class="item" id="pic4"></div>
+						<div class="item" id="pic5"></div>
+						<div class="item" id="pic6"></div>
+						<div class="item" id="pic7"></div>
+					</div>
+				</div>
+				<!-- 图片信息 end -->
+			</div>
+			<!-- main end -->
+
+			<div class="form">
+				<div class="title">编辑</div>
+				<!-- 事故基本信息编辑 start -->
+				<form action="#!" id="basicForm">
+					<div class="item">
+			            <div class="txt">出险时间</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="accidentTime" id="accidentTime" autocomplete="off">
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">报案时间</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="respTime" id="respTime" autocomplete="off">
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">报案类型</div>
+			            <div class="cnt">
+			            	<select name="basicCaseType" class="slt select2">
+					          <option value="1" selected="selected">单方事故</option>
+					          <option value="3">双方事故</option>
+					          <option value="2">多方事故</option>
+			            	</select>
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">报案人姓名</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="respUserName" autocomplete="off">
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">报案人联系方式</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="respUserPhone" autocomplete="off">
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">定责时间</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="fixDutyTime" id="fixDutyTime" autocomplete="off">
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">受理时间</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="acceptanceTime" id="acceptanceTime" autocomplete="off">
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">经过</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="accidentDescribe" autocomplete="off">
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">案件区域</div>
+			            <div class="cnt">
+							<select id="basicDistrict" class="slt select2" name="district">
+					          <option value="420102">江岸区</option>
+					          <option value="420103">江汉区</option>
+					        </select>
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">特殊案件</div>
+			            <div class="cnt">
+							<select id="basicDistrict" class="slt select2" name="district">
+								<option value="1" selected="selected">否</option>
+								<option value="2">是</option>
+					        </select>
+			            </div>
+			        </div>
+			        <div class="ft">
+			            <button type="reset" class="ubtn ubtn-primary jreset">取消</button>
+			            <button type="submit" class="ubtn ubtn-cyan jsubmit">保存</button>
+			        </div>
+				</form>
+				<!-- 事故基本信息编辑 end -->
+
+				<!-- 标的车信息编辑/三者车信息编辑 start -->
+				<form action="#!" id="carInfoForm">
+					<input type="hidden" name="cvId">
+					<input type="hidden" value="" name="caseId">
+					<input type="hidden" name="infoType">
+					<input type="hidden" name="sortby">
+			        <div class="item">
+			            <div class="txt">责任类型</div>
+			            <div class="cnt">
+							<select id="vehicleType" class="slt select2">
+					          <option value="1">全责</option>
+					          <option value="2">同责</option>
+					          <option value="3">主责</option>
+					          <option value="4">次责</option>
+					          <option value="5">无责</option>
+					        </select>
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">是否已向保险公司报案</div>
+			            <div class="cnt">
+							<select id="selIsResp" class="slt select2">
+						          <option value="1">是</option>
+						          <option value="2">否</option>
+					        </select>
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">大致受损部位</div>
+			            <div class="cnt">
+			            	<div id="divSelInjureLocationType" class="select">
+								<select id="selInjureLocationType" name="injureLocationType" class="slt select2">
+							          <option value="1">左前</option>
+							          <option value="2">右前</option>
+							          <option value="3">左后</option>
+							          <option value="4">右后</option>
+							          <option value="5">正前</option>
+							          <option value="6">正后</option>
+							          <option value="7">左侧</option>
+							          <option value="8">右侧</option>
+						        </select>
+					        </div>
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">承保公司（交强险）</div>
+			            <div class="cnt">
+							<select id="seldivSelJqxjqx" class="slt select2">
+						        <option value="100" selected="">人保</option>
+					        </select>
+			            </div>
+			        </div>
+			        <div class="item">
+			            <div class="txt">承保公司（商业险）</div>
+			            <div class="cnt">
+							<select id="seldivSelJqxjqx" class="slt select2">
+						        <option value="100" selected="">人保</option>
+					        </select>
+			            </div>
+			        </div>
+					<div class="item">
+			            <div class="txt">车牌号</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="vehicleCarNo" autocomplete="off">
+			            </div>
+			        </div>
+					<div class="item">
+			            <div class="txt">驾驶员姓名</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="vehicleJsyName" autocomplete="off">
+			            </div>
+			        </div>
+					<div class="item">
+			            <div class="txt">驾驶员联系方式</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="vehicleJsyPhone" autocomplete="off">
+			            </div>
+			        </div>
+			        <div class="ft">
+			            <button type="reset" class="ubtn ubtn-primary jreset">取消</button>
+			            <button type="submit" class="ubtn ubtn-cyan jsubmit">保存</button>
+			        </div>
+				</form>
+				<!-- 标的车信息编辑/三者车信息编辑 end -->
+
+				<!-- 物损信息编辑 start -->
+				<form action="#!" id="stuffInfoForm">
+					<input name="caseId" type="hidden">
+					<input name="ciId" type="hidden">
+					<div class="item">
+			            <div class="txt">损坏物品</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="stuffItems" id="stuffItems" autocomplete="off">
+			            </div>
+			        </div>
+			        <div class="ft">
+			            <button type="reset" class="ubtn ubtn-primary jreset">取消</button>
+			            <button type="submit" class="ubtn ubtn-cyan jsubmit">保存</button>
+			        </div>
+				</form>
+				<!-- 物损信息编辑 end -->
+
+				<!-- 人伤信息编辑 start -->
+				<form action="#!" id="personInfoForm">
+					<input type="hidden" name="caseId">
+					<input type="hidden" name="cpId">
+					<input type="hidden" name="sortby">
+					<div class="item">
+			            <div class="txt">姓名</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="name" id="name" autocomplete="off">
+			            </div>
+			        </div>
+					<div class="item">
+			            <div class="txt">身份证号</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="sfzmhm" id="sfzmhm" autocomplete="off">
+			            </div>
+			        </div>
+					<div class="item">
+			            <div class="txt">年龄</div>
+			            <div class="cnt">
+			                <input type="text" class="ipt" value="" name="age" id="age" autocomplete="off">
+			            </div>
+			        </div>
+					<div class="item">
+			            <div class="txt">性别</div>
+			            <div class="cnt">
+			            	<select id="sex" class="slt" name="sex">
+					          <option value="1">男</option>
+					          <option value="2">女</option>
+					        </select>
+			            </div>
+			        </div>
+					<div class="item">
+			            <div class="txt">户籍类型</div>
+			            <div class="cnt">
+			            	<select id="hj" class="slt" name="hj">
+					          <option value="1">城镇</option>
+					          <option value="2">农村</option>
+					          <option value="3">非农</option>
+					        </select>
+			            </div>
+			        </div>
+			        <div class="ft">
+			            <button type="reset" class="ubtn ubtn-primary jreset">取消</button>
+			            <button type="submit" class="ubtn ubtn-cyan jsubmit">保存</button>
+			        </div>
+				</form>
+				<!-- 人伤信息编辑 end -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- wrapper end -->
+
+<div class="footer">
+	<p>开发单位：湖北易站通达电子科技有限公司 </p>
+</div>
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/viewer/viewer.min.js"></script>
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/plugins/datetimepicker/core.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/page.js"></script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.setup({
+	    timeout: '300-1000' // 表示响应时间介于 200 和 600 毫秒之间，默认值是'10-100'。
+	})
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+		"currentPage": 1,
+		"nextPage": 2,
+		"pageSize": 10,
+		"totalPage": 3,
+		"totalSize": 29,
+	    "list|10": [{
+	    	"acceptanceTimeStr|1": ["", "@datetime"],
+	    	"accidentTimeStr": "@datetime",
+	    	"caseId": "@increment",
+	    	"respUserName": "@cname",
+	    	"caseNo": "W70629121535010",
+	    	"caseType": "双方事故",
+	    	"createTimeStr": "@datetime",
+	    	"externaltype|1-2": 1,
+	    	"isSpecial|0-1": 1,
+	    	"isSpecial|0-1": 1,
+	    	"hphm|1": ["苏C7H072", "鄂AX8G21", "鄂A68GV2"]
+		}]
+	});
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+<script>
+	!(function($){
+		var _global = {
+			init: function() {
+				this.select2();
+				this.filter();
+				this.bindEvent();
+				this.page();
+				this.tab();
+			},
+			select2: function() {
+				$('.slt').select2();
+			},
+			filter: function() {
+				var $start = $('#queryStartTime');
+				var $end = $('#queryEndTime');
+				$start.datetimepicker({
+			        format: 'yyyy/mm/dd'
+			    });
+				$end.datetimepicker({
+			        format: 'yyyy/mm/dd'
+			    })
+			},
+			bindEvent: function() {
+				var that = this;
+				// 编辑
+				$('.main').on('click', '.jEdit', function() {
+					var id = $(this).data('id'),
+						form = $(this).data('form');
+
+					$('#' + $(this).data('form')).show().siblings('form').hide();
+					$('.form').show();
+					$('.main').hide();
+					window.scroll(0,0);
+
+					// 初始化表单
+					switch (form) {
+						case 'basicForm':
+							that.basicInit(id);
+							break;
+						case 'mycarInfoForm':
+							$('#carInfoForm').show().siblings('form').hide();
+							that.carInfoInit(id, 1);
+							break;
+						case 'carInfoForm':
+							$('#carInfoForm').show().siblings('form').hide();
+							that.carInfoInit(id, 2);
+							break;
+						case 'stuffInfoForm':
+							that.stuffInfoInit(id);
+							break;
+						case 'personInfoForm':
+							that.personInfoInit(id);
+							break;
+					}
+				})
+
+				// 取消
+				$('.form').on('click', '.jreset', function() {
+					$('.form').hide();
+					$('.main').show();
+				})
+
+				// 提交表单
+				this.basicForm();
+				this.carInfoForm();
+				this.stuffInfoForm();
+				this.personInfoForm();
+			},
+			// 事故基本信息表单信息回填
+			basicInit: function(caseId) {
+				var $form = $('#basicForm');
+				fx.request("hbjb/webAction/loadCase", {caseId: caseId},function(datas){
+					$form.find("input[name='accidentTime']").val(datas.data.accidentTimeStr);
+					$form.find("input[name='respTime']").val(datas.data.respTimeStr);
+					$form.find("input[name='respUserName']").val(datas.data.respUserName);
+					$form.find("input[name='respUserPhone']").val(datas.data.respUserPhone);
+					$form.find("input[name='accidentDescribe']").val(datas.data.accidentDescribe);
+					// fx.jsSelectItemByValue("basicCaseType", datas.data.caseType);
+				});
+			},
+			// 	标的车信息/三者车信息 表单信息回填
+			carInfoInit: function(cvId, infoType) {
+				var $form = $('#carInfoForm');
+				$form.find("input[name='infoType']").val(infoType);
+				fx.request("hbjb/webAction/loadCaseVehicle", {cvId: cvId},function(datas){
+					$form.find("input[name='cvId']").val(datas.data.csVehicleId);
+					$form.find("input[name='carNo']").val(datas.data.hphm);
+					$form.find("input[name='vehicleJsyName']").val(datas.data.driverName);
+					$form.find("input[name='vehicleJsyPhone']").val(datas.data.phone);
+					$form.find("input[name='sortby']").val(datas.data.sortby);
+					fx.jsSelectItemByValue("vehicleType", datas.data.type);
+					fx.jsSelectItemByValue("selIsResp", datas.data.isResp);
+					fx.jsSelectItemByValue4Select2("divSelInjureLocationType", true, "injureLocationType", 
+						[{value: 1, name: "左前"},
+						 {value: 2, name: "右前"},
+						 {value: 3, name: "左后"},
+						 {value: 4, name: "右后"},
+						 {value: 5, name: "正前"},
+						 {value: 6, name: "正后"},
+						 {value: 7, name: "左侧"},
+						 {value: 8, name: "右侧"}],
+						eval("[" + datas.data.injureLocation + "]"),
+						{
+					          maximumSelectionLength: 8,
+					          placeholder: "最多选择8处",
+					          allowClear: true
+					    }
+					);
+					fx.jsSelectItemByValue4Select2("divSelJqx", false, "jqx", 
+						bxData,
+						eval("[" + datas.data.jqx + "]"),
+						{
+					          placeholder: "请选择",
+					          allowClear: true
+					        }
+					);
+					fx.jsSelectItemByValue4Select2("divSelSyx", false, "syx", 
+						bxData,
+						eval("[" + datas.data.syx + "]"),
+						{
+					          placeholder: "请选择",
+					          allowClear: true
+					        }
+					);
+				});
+			},
+			stuffInfoInit: function(ciId) {
+				var $form = $('#stuffInfoForm');
+				fx.request("hbjb/webAction/loadCaseStuff", {ciId: ciId},function(datas){
+					$form.find("input[name='caseId']").val(datas.data.caseId);
+					$form.find("input[name='ciId']").val(datas.data.ciId);
+					$("#stuffItems").val(datas.data.stuffInfo);
+				});
+			},
+			personInfoInit: function(cpId) {
+				var $form = $('#personInfoForm');
+				fx.request("hbjb/webAction/loadCasePerson", {cpId: cpId},function(datas){
+					$form.find("input[name='cpId']").val(datas.data.cpId);
+					$form.find("input[name='name']").val(datas.data.name);
+					$form.find("input[name='sfzmhm']").val(datas.data.sfzmhm);
+					$form.find("input[name='age']").val(datas.data.age);
+					$form.find("input[name='sortby']").val(datas.data.sortby);
+					$form.find("select[name='sex']").val(datas.data.sex);
+					$form.find("select[name='hj']").val(datas.data.hj);
+				});
+			},
+			// 事故基本信息
+			basicForm: function() {
+				$('#basicForm').validator({
+                    fields: {
+                        accidentTime: '出险时间: required',
+                        respTime: '报案时间: required',
+                        respUserName: '报案人姓名: required',
+                        respUserPhone: '报案人联系方式: required; phone',
+                        fixDutyTime: '定责时间: required',
+                        acceptanceTime: '受理时间: required',
+                        accidentDescribe: '经过: required'
+                    },
+                    valid: function(form) {
+                    	that.post($(form).serialize());
+                    }
+                });
+
+                $('#accidentTime').datetimepicker({
+			        format: 'yyyy-mm-dd hh:ii',
+		            startView: 2,
+		            minView: 0
+			    });
+                $('#respTime').datetimepicker({
+			        format: 'yyyy-mm-dd hh:ii',
+		            startView: 2,
+		            minView: 0
+			    });
+                $('#fixDutyTime').datetimepicker({
+			        format: 'yyyy-mm-dd hh:ii',
+		            startView: 2,
+		            minView: 0
+			    });
+                $('#acceptanceTime').datetimepicker({
+			        format: 'yyyy-mm-dd hh:ii',
+		            startView: 2,
+		            minView: 0
+			    });
+			},
+			// 标的车信息|三者车信息
+			carInfoForm: function() {
+				$('#carInfoForm').validator({
+                    fields: {
+                        vehicleCarNo: '车牌号: required',
+                        vehicleJsyName: '驾驶员姓名: required',
+                        vehicleJsyPhone: '驾驶员联系方式: required'
+                    },
+                    valid: function(form) {
+                    	that.post($(form).serialize());
+                    }
+                });
+			},
+			// 标的车信息|三者车信息
+			stuffInfoForm: function() {
+				$('#stuffInfoForm').validator({
+                    fields: {
+                        stuffItems: '损坏物品: required'
+                    },
+                    valid: function(form) {
+                    	that.post($(form).serialize());
+                    }
+                });
+			},
+			// 标的车信息|三者车信息
+			personInfoForm: function() {
+				$('#personInfoForm').validator({
+                    fields: {
+                        name: '姓名: required',
+                        sfzmhm: '身份证号: required; IDcard',
+                        age: '年龄: required; age'
+                    },
+                    valid: function(form) {
+                    	that.post($(form).serialize());
+                    }
+                });
+			},
+			page: function() {
+				var that = this,
+					$caseList = $('#caseList'),
+					page = new Page({url: 'http://g.cn', success: function(data) {
+						var model = that.processData(data);
+						$caseList.html(model.join(''));
+						$caseList.find('li:first').trigger('click');
+						$('.ico-mobile').tooltipsy(); // 快处图标提示
+					}});
+
+				// 加载案件详情
+				$caseList.on('click', 'li', function() {
+					$(this).addClass('current').siblings().removeClass('current');
+					$('.main').load("hbjb/webAction/caseDetail?caseId=" + $(this).data('id'), function() {
+						$('.zoompic').viewer();
+					});
+				})
+
+				// 搜索
+				$('#filterForm').on('submit', function() {
+					var data = {};
+					var start = $("#queryStartTime").val();
+					var end = $("#queryEndTime").val();
+					data.hphm = $("#hphm").val();
+					data.casenumber = $("#casenumber").val();
+					data.queryJqx = $("#queryJqx").val();
+					data.querySyx = $("#querySyx").val();					
+					data.queryCreateUserId = $("#queryCreateUserId").val();
+					data.vehicleType = $("#vehicleType").val();
+					data.district = $("#district").val();
+					data.externaltype = $("#externaltype").val();
+					data.username = $("#username").val();
+					if (start && start != "") {
+						data.startAccidentTime = start;
+					}
+					if (end && end != "") {
+						data.endAccidentTime = end;
+					}
+					$('.main').empty();
+					page.initQueryData(data);
+					page.load();
+				})
+			},
+			processData: function(data) {
+				var model = [];
+				$.each(data, function(i, item) {
+					var isClosed = item.acceptanceTimeStr != null && item.acceptanceTimeStr != '';
+					var className = isClosed ? 'closed' : '';
+					if (item.isSpecial == 0) {
+						className += ' special';
+					}
+					model.push('<li class="', className,'" data-id="' + item.caseId + '">');
+					model.push('<span>', item.caseNo, '</span>');
+					if (isClosed) {
+						model.push('<i class="ico ico-checked"></i>');
+					}
+					if (item.status == 3) {
+						model.push('<em>销案</em>');
+					} else {
+						model.push('<em>报案人：', item.respUserName, '</em>');
+					}
+					model.push('<em>', item.accidentTimeStr, '</em>');
+					if (item.externaltype == 1) {
+						model.push('<i class="ico ico-mobile" data-tips="网上快处"></i>');
+					}
+					model.push('</li>');
+				})
+				return model;
+			},
+			tab: function() {
+				$('.main').on('click', '.tab span', function() {
+					$(this).addClass('current').siblings().removeClass('current');
+					$('#' + $(this).data('item')).show().siblings().hide();
+				})
+			}
+		}
+		_global.init();
+	})(jQuery);
+
+</script>
+
+</body>
+</html>

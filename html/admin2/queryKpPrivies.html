@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>交通事故信息管理平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/datetimepicker/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="inner">
+		<div class="user">
+			<dl>
+				<dt>系统管理员<i class="ico ico-arrow-down"></i></dt>
+				<dd>
+					<a href="changePwd.html">修改密码</a>
+					<a href="login.html">安全退出</a>
+				</dd>
+			</dl>
+		</div>
+		<div class="logo">
+			<a href="index.html">武汉市交通事故信息管理平台</a>
+		</div>
+		<div class="nav">
+			<dl>
+				<dt><i class="ico ico-1"></i><span>用户信息</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="userList.html">用户信息</a>
+						<a href="insuranceMessage.html">保险公司信息</a>
+					</div>
+				</dd>
+			</dl>
+			<dl>
+				<dt><i class="ico ico-2"></i><span>警保联动</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="caseList.html">警保案件信息</a>
+						<a href="showCaseSummaryList.html">案件处理登记</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><i class="ico ico-3"></i><span>警保统计</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="caseInfoStatistics.html">案件信息统计</a>
+						<a href="companyStatistics.html">查勘量统计(公司)</a>
+						<a href="surveyMemberStatistics.html">查勘量统计(查勘员)</a>
+						<a href="surveyMemberDayStatistics.html">考勤打卡查询</a>
+						<a href="surveyMemberTimesStatistics.html">考勤打卡统计</a>
+						<a href="jjlMng.html">车损事故报警量</a>
+						<a href="workBriefingInfo.html">工作情况通报</a>
+						<a href="handleCount.html">案件处理统计</a>
+						<a href="accidentsCount.html">快处平台数据统计日报</a>
+						<a href="accidentsMonthCount.html">快处平台数据统计月报</a>
+						<a href="caseKcWarn.html">保险处理超时统计</a>
+						<a href="statisticsView.html">大屏统计</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><i class="ico ico-4"></i><span>系统设置</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="rolesList.html">角色管理</a>
+						<a href="smsContentList.html">警保短信模板</a>
+						<a href="source.html">资源管理</a>
+						<a href="showPage.html">job数据同步</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl class="active">
+				<dt><i class="ico ico-5"></i><span>快赔中心</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="queryCase.html">快赔案件信息</a>
+						<a href="queryKpPrivies.html" class="current">事故当事人信息</a>
+						<a href="showKpDkCaseCount.html">代勘案件统计</a>
+						<a href="showKpComCount.html">公司办理统计</a>
+						<a href="showKpNetCount.html">网点办理统计</a>
+						<a href="showKpCaseCount.html">受案登记统计</a>
+						<a href="excaptionNoticeCount.html">事故频繁异常车辆预警</a>
+						<a href="showPage2.html">快赔案件导出</a>
+					</div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<!-- header end -->
+
+
+
+<!-- wrapper start -->
+<div class="wrapper">
+	<!-- filter start -->
+	<div class="filter filter-res">
+		<form id="filterForm" action="#!">
+			<div class="group">
+				<input class="ipt" id="sgdsr" placeholder="事故当事人" type="text">
+			</div>
+			<div class="group">
+				<input class="ipt" id="sfzh" placeholder="驾驶证号" type="text">
+			</div>
+			<div class="group">
+				<input class="ipt" id="lxfs" placeholder="联系方式" type="text">
+			</div>
+			<div class="group">
+				<input class="ipt" id="cphm" placeholder="车牌号码" type="text">
+			</div>
+			<div class="group">
+				<select id="ssbxgs" class="slt" name="usernameSelect">
+					<option value="">所属保险公司</option>
+					<option value="100">人保</option>
+				</select>
+			</div>
+			<div class="group">
+				<input class="ipt" id="gsje" placeholder="估损金额" type="text">
+			</div>
+			<div class="group">
+				<select id="sflx" class="slt" name="usernameSelect">
+					<option value="">是否留修</option>
+					<option value="1">是</option>
+					<option value="2">否</option>
+				</select>
+			</div>
+			<div class="group">
+				<select id="sgzr" class="slt" name="usernameSelect">
+					<option value="">事故责任</option>
+					<option value="1">全责</option>
+					<option value="2">同责</option>
+					<option value="3">主责</option>
+					<option value="4">次责</option>
+					<option value="5">无责</option>
+				</select>
+			</div>
+			<div class="group">
+				<input class="ipt date" id="queryStartTime" placeholder="事故时间起" type="text">
+			</div>
+			<div class="group">
+				<input class="ipt date" id="queryEndTime" placeholder="事故时间止" type="text">
+			</div>
+			<div class="group">
+				<select id="ssxq" class="slt" name="usernameSelect">
+					<option value="">事故辖区</option>
+					<option value="420102">江岸区</option>
+				</select>
+			</div>
+			<div class="group">
+				<select id="sswd" class="slt" name="usernameSelect">
+					<option value="">请选择服务网点</option>
+					<option value="1">龙众理赔点</option>
+					<option value="2">红光理赔点</option>
+					<option value="3">南众理赔点</option>
+				</select>
+			</div>
+			<div class="group">
+				<input class="ipt" id="bah" placeholder="报案号" type="text">
+			</div>
+			<div class="group">
+				<button type="submit" class="ubtn ubtn-cyan">查询</button>
+			</div>
+		</form>
+	</div>
+	<!-- filter end -->
+	
+
+	<div class="table">
+		<div class="caption">
+			<span>当事人情况</span>
+			<em class="ico ico-arrow-left prev"></em>
+			<em class="ico ico-arrow-right next"></em>
+		</div>
+		<div class="pagesize">
+			<span>显示</span>
+			<select class="slt">
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+			<span>记录</span>
+		</div>
+		<div class="scroll">
+			<script id="tableTemp" type="text/html">
+				{{each list as item i}}
+				<tr>
+					<td>{{item.col1}}</td>
+					<td>{{item.col2}}</td>
+					<td>{{item.col3}}</td>
+					<td>{{item.col4}}</td>
+					<td>{{item.col5}}</td>
+					<td>{{item.col6}}</td>
+					<td>{{item.col7}}</td>
+					<td>{{item.col8}}</td>
+					<td>{{item.col9}}</td>
+					<td>{{item.col10}}</td>
+					<td>{{item.col11}}</td>
+					<td>{{item.col12}}</td>
+					<td>{{item.col13}}</td>
+					<td>{{item.col14}}</td>
+					<td>{{item.col15}}</td>
+					<td>{{item.col16}}</td>
+					<td>{{item.col17}}</td>
+				</tr>
+				{{/each}}
+			</script>
+			<table>
+				<thead>
+					<tr>
+						<th>案件编号</th>
+						<th>报案号</th>
+						<th>事故当事人</th>
+						<th>驾驶证号</th>
+						<th>联系方式</th>
+						<th>车牌号码</th>
+						<th>所属保险公司</th>
+						<th>估损金额</th>
+						<th>是否留修</th>
+						<th>保险期限起</th>
+						<th>保险期限止</th>
+						<th>事故责任</th>
+						<th>事故时间</th>
+						<th>事故地点</th>
+						<th>事件辖区</th>
+						<th>所属网点</th>
+						<th>提交时间</th>
+					</tr>
+				</thead>
+				<tbody id="tbody">
+					<tr>
+						<td>201706300222</td>
+						<td></td>
+						<td>黄众芳</td>
+						<td>500242198604173623</td>
+						<td>13720250237</td>
+						<td>鄂A65LS3</td>
+						<td>人保</td>
+						<td>670</td>
+						<td>否</td>
+						<td>2017-03-16 00:00:00</td>
+						<td>2018-03-16 00:00:00</td>
+						<td>全责</td>
+						<td>2017-06-30 14:38:12</td>
+						<td>湖北省武汉市洪山区雄楚大道493号</td>
+						<td>洪山区</td>
+						<td>南众理赔点</td>
+						<td>2017-06-30 15:59:01</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+			
+		<div class="pagination"></div>
+	</div>
+</div>
+<!-- wrapper end -->
+
+<div class="footer">
+	<p>开发单位：湖北易站通达电子科技有限公司 </p>
+</div>
+
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/datetimepicker/core.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/jquery.pagination.min.js"></script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.setup({
+	    timeout: '100-1000' // 表示响应时间介于 200 和 600 毫秒之间，默认值是'10-100'。
+	})
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+		"currentPage": 1,
+	    "nextPage": 2,
+	    "pageSize": 5,
+	    "totalPage": 27,
+	    "totalSize": 131,
+	    "list|10": [{
+		    "col1": "201706030308",
+	        "col2": "0037904",
+	        "col3": "@cname",
+	        "col4": "@natural",
+	        "col5": /^1[345678]\d{9}$/,
+	        "col6": "鄂A65LS3",
+	        "col7|100-1000": 1,
+	        "col8|1": ["是","否"],
+	        "col9": "@datetime",
+	        "col10": "@datetime",
+	        "col11": "全职",
+	        "col12": "@datetime",
+	    	"col13|1": ["湖北省武汉市东西湖区", "湖北省武汉市洪山区南李路47号", "湖北省武汉市洪山区工业园路","湖北省武汉市东西湖区新城十一路"],
+	    	"col14|1": ["江岸区","江汉区","硚口区","武昌区","洪山区"],
+	    	"col15|1": ["龙众理赔点","红光理赔点","南众理赔点","胜东理赔点","优诚理赔点","九鼎理赔点","兴飞跃理赔点","高尔夫理赔点"],
+	    	"col16": "@datetime"
+		}]
+	});
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+<script>
+	!(function($) {
+		var _global = {
+			init: function() {
+				this.select2();
+				this.filterData = {}; // 搜索条件
+				this.filter();
+				this.request(this.filterData, true); // 加载数据并初始化分页
+			},
+			select2: function() {
+				$('.slt').select2();
+			},
+			filter: function() {
+				var $form = $('#filterForm');
+				var $start = $('#queryStartTime');
+				var $end = $('#queryEndTime');
+
+				$start.datetimepicker({
+			        format: 'yyyy/mm/dd'
+			    });
+				$end.datetimepicker({
+			        format: 'yyyy/mm/dd'
+			    })
+
+				// 每页显示
+			    $('.pagesize').find('.slt').on('change', function() {
+			    	that.filterData.pageSize = this.value;
+			    	that.request(that.filterData, true);
+			    })
+
+				// 查询
+				$form.on('submit', function() {
+					var start = $start.val(),
+						end = $end.val(),
+						gsje = $("#gsje").val();
+
+					if (!start || start == '') {
+						fx.alert("请选择开始时间");
+						return;
+					}
+					if (!end || end == '') {
+						fx.alert("请选择结束时间");
+						return;
+					}
+					if(start > end){
+						fx.alert("开始时间不得大于结束时间");
+						return;
+					}
+					if (isNaN(gsje)) {
+						fx.alert("估损金额只能为数字");
+						return;
+					}
+
+					that.filterData.startTime = start;
+					that.filterData.endTime   = end;
+					that.filterData.gsje      = gsje;
+					that.filterData.sgdsr     = $("#sgdsr").val();
+					that.filterData.sfzh      = $("#sfzh").val();
+					that.filterData.lxfs      = $("#lxfs").val();
+					that.filterData.cphm      = $("#cphm").val();
+					that.filterData.ssbxgs    = $("#ssbxgs").val();
+					that.filterData.sflx      = $("#sflx").val();
+					that.filterData.sgzr      = $("#sgzr").val();
+					that.filterData.ssxq      = $("#ssxq").val();
+					that.filterData.sswd      = $("#sswd").val();
+					that.filterData.bah       = $("#bah").val();
+					that.request(that.filterData, true);
+					return false;
+				})
+			},
+			/**
+			 * 添加删除classname
+			 * @param  {Object} data ajax参数
+			 * @param  {Boolean} initPage  是否初始化分页
+			 */
+			request: function(data, initPage) {
+				var that = this;
+				fx.request('http://g.cn', data, function(res){
+					var model = template('tableTemp', res);
+					$("#tbody").empty().html(model);
+					$('.tooltip').tooltipsy();
+					window.scrollTo(0, 0);
+					$(window).trigger('resize.scroll');
+					initPage && that.paginate(res.pageSize, res.totalSize);
+				});
+			},
+			paginate: function(pageSize, totalSize) {
+				var that = this;
+				function pageselectCallback(page_index) {
+					that.filterData.page_index = page_index;
+					that.request(that.filterData);
+				}
+				$('.pagination').pagination(totalSize, {
+                    num_edge_entries: 2,
+                    callback: pageselectCallback,
+                    items_per_page: pageSize // 每页显示数量
+                });
+			}
+		}
+
+		_global.init();
+	})(jQuery);
+</script>
+</body>
+</html>

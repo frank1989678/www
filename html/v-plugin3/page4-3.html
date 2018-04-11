@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>车管所智能管控平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">车管所智能管控平台</a>
+	</div>
+	<div class="user">
+        <span>当前在线人数：<em>15</em></span>
+        <i>|</i>
+        <span>历史登录人数：<em>430</em></span>
+        <i>|</i>
+        <span>admin</span>
+        <i>|</i>
+        <a href="login.html" class="logout"></a>
+    </div>
+</div>
+<!-- header end -->
+
+<div class="side-menu">
+    <!-- menu.html -->
+</div>
+
+<div class="content">
+    <div class="box">
+        <div class="box-tit">
+            <span class="t1">工作窗口管理</span>
+        </div>
+
+        <div class="filter tr">
+            <button type="button" class="ubtn ubtn-primary" onclick="add()">添加</button>
+        </div>
+
+        <div class="table">
+            <table class="border tc">
+                <thead>
+                    <tr>
+                        <th>窗口id</th>
+                        <th>窗口名称</th>
+                        <th>所属机构</th>
+                        <th>窗口状态</th>
+                        <th>是否午间窗口</th>
+                        <th>窗口ip地址</th>
+                        <th>号牌抬头</th>
+                        <th>普通业务列表</th>
+                        <th>午间业务列表</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>午间业务列表</td>
+                        <td>驾管科</td>
+                        <td>启用</td>
+                        <td>是</td>
+                        <td>192.168.1.1</td>
+                        <td>A</td>
+                        <td>A,B,C</td>
+                        <td>C</td>
+                        <td>
+                            <span class="ubtn ubtn-primary" onclick="accredit(1, 1)">修改普通业务授权</span>
+                            <span class="ubtn ubtn-primary" onclick="accredit(1, 2)">修改午间业务授权</span>
+                            <span class="ubtn ubtn-primary">修改午间吧标志</span>
+                            <span class="ubtn ubtn-primary">修改窗口状态</span>
+                            <span class="ubtn ubtn-primary" onclick="edit(1)">修改</span>
+                            <span class="ubtn ubtn-primary" onclick="del(1)">删除</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pages">
+            <input value="100" id="totalSize"  type="hidden">
+            <input value="5" id="currentSize" type="hidden">
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+	<span>湖北省宏锐慧通信息技术有限公司</span>
+</div>
+
+
+<!-- 新增&编辑 -->
+<div class="form layer-form" id="tempForm">
+    <div class="ftit">添加</div>
+    <form name="form1" id="form1" onsubmit="return false;">
+        <div class="row">
+            <label class="for">窗口名称：</label>
+            <input type="text" name="name" class="ipt" autocomplete="off"  />
+        </div>
+        <div class="row">
+            <label class="for">所属机构：</label>
+            <select name="org" class="slt">
+                <option value="">请选择</option>
+            </select>
+        </div>
+        <div class="row">
+            <label class="for">IP地址：</label>
+            <input type="text" name="ip" class="ipt" autocomplete="off"  />
+        </div>
+        <div class="row">
+            <label class="for">号牌抬头：</label>
+            <input type="text" name="title" class="ipt" autocomplete="off"  />
+        </div>
+        <div class="row">
+            <label class="for">午间窗口：</label>
+            <label class="cbx"><input type="radio" value="1" name="wujian">是</label>
+            <label class="cbx" style="margin-left:30px;;"><input type="radio" value="1" name="wujian">否</label>
+        </div>
+        <div class="buttons">
+            <button type="submit" class="ubtn ubtn-primary submit">确定</button>
+            <button type="button" class="ubtn ubtn-gray layer-close">取消</button>
+        </div>
+    </form>
+</div>
+<!-- end 新增&编辑 -->
+
+<!-- 业务授权 -->
+<div class="form layer-form" id="tempForm1">
+    <div class="ftit">设置工作窗口授权</div>
+    <div class="table">
+        <table class="border tc">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th><input type="checkbox" class="cbx"></th>
+                    <th>向导名称</th>
+                    <th>类型名称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><input type="checkbox" class="cbx" name="name1"></td>
+                    <td>机动车注销</td>
+                    <td>机动车注销</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><input type="checkbox" class="cbx" name="name2"></td>
+                    <td>补登记证书</td>
+                    <td>补登记证书</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><input type="checkbox" class="cbx" name="name3"></td>
+                    <td>补登记证书</td>
+                    <td>补登记证书</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="buttons">
+        <input type="hidden" name="uid" class="ipt" value="0">
+        <input type="hidden" name="type" class="ipt" value="0">
+        <button type="submit" class="ubtn ubtn-primary submit">确定</button>
+        <button type="button" class="ubtn ubtn-gray layer-close">取消</button>
+    </div>
+</div>
+<!-- end 业务授权 -->
+
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/jquery.pagination.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/listpage.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+
+<script>
+    $.ajax({
+        url: 'menu.html',
+        cache: false,
+        async: false,
+        success: function(res) {
+            $('.side-menu').html(res)
+        }
+    })
+</script>
+
+<script>
+var pageSetting = {
+    name     : '工作窗口',                // 页面名称，用于提示信息
+    getURL   : '',      // 编辑信息时回填表单
+    resetURL : '',                  // 重置密码
+    limit    : 'json/limit.json',   // 接口
+    delURL   : ''                   // 删除一条数据
+}
+/**
+ * 业务授权
+ * @param  {Number} id 业务id
+ * @param  {Number} type 1：普通业务，2：午间业务
+ */
+function accredit(id, type) {
+    if (id) {
+        $.ajax({
+            url: '',
+            data: {id: id},
+            // dataType: 'json',
+            cache: false,
+            success: function(res) {
+                res = {
+                    data: {
+                        'name1': '',
+                        'name2': true,
+                        'name3': true
+                    }
+                }
+                var $temp = $('#tempForm1');
+                $temp.find('.cbx').each(function(i, item) {
+                    this.checked = res.data[this.name];
+                })
+                $temp.find('.ipt[name="uid"]').val(id);
+                $temp.find('.ipt[name="type"]').val(type);
+                layer.open({
+                    area: '560px',
+                    type: 1,
+                    title: false,
+                    content: $temp
+                })
+            }
+        })
+    }
+}
+
+$(function() {
+    var lock = false;
+    var $model = $('#tempForm1');
+
+    // 全选、反选
+    fx.cbx($model);
+
+    // 保存业务授权
+    $model.on('click', '.submit', function() {
+        var id = $model.find('.ipt[name="uid"]').val();
+            type = $model.find('.ipt[name="type"]').val(),
+            ids = [];
+        if (lock) {
+            return;
+        }
+        $model.find('.cbx:checked').each(function() {
+            ids.push(this.name);
+        })
+        $.ajax({
+            url: '',
+            data: {id: id, type: type, ids: ids.join(',')},
+            beforeSend: function() {
+                lock = true;
+            },
+            complete: function() {
+                lock = false;
+            },
+            success: function(res) {
+                layer.closeAll();
+            }
+        })
+    })
+
+    // 分页
+    $('.pages').initPage();
+})
+</script>
+</body>
+</html>

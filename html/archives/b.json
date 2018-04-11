@@ -1,0 +1,29 @@
+{
+	"plateNo": "鄂A76650",
+	"number": "201648277278",
+	"name": "补牌换证",
+	"time": "2017-03-20",
+	"pic": [{
+		"src": "/static/uploads/1.jpg",
+		"src2": "/static/uploads/1.jpg",
+		"name": "资料目录"
+	},{
+		"src": "/static/uploads/14.jpg",
+		"src2": "/static/uploads/14.jpg",
+		"name": "申请表"
+	},{
+		"src": "/static/uploads/mobile.jpg",
+		"src2": "/static/uploads/mobile.jpg",
+		"name": "所有人身份证明复印件"
+	},{
+		"src": "/static/uploads/test.jpg",
+		"src2": "/static/uploads/test.jpg",
+		"name": "查验表"
+	},{
+		"src": "http://p3.pstatp.com/large/1c5e0004200e487d3225",
+		"name": "查验表"
+	},{
+		"src": "/static/uploads/19.jpg",
+		"name": "查验表"
+	}]
+}

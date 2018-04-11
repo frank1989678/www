@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>交通事故快速处理平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">武汉市车管所制证管理系统</a>
+	</div>
+	<div class="user"></div>
+</div>
+<!-- header end -->
+
+<div class="side-menu">
+	<dl class="active">
+		<dt>
+			<a href="javascript:;">
+				<i class="icon icon-1"></i>
+				<span>取号信息</span>
+				<i class="icon arrow"></i>
+			</a>
+		</dt>
+		<dd>
+			<a href="index.html" class="current">取号信息</a>
+		</dd>
+	</dl>
+</div>
+
+<div class="content">
+    <div class="box">
+        <div class="tit">取号信息</div>
+
+        <div class="filter filter-res">
+            <form name="filterForm" id="filter">
+                <div class="group">
+                    <label class="for">业务类型：</label>
+                    <select name="businessType" class="slt">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+
+                <div class="group">
+                    <label class="for">业务名称：</label>
+                    <select name="businessName" class="slt">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+
+                <div class="group group2">
+                    <label class="for">取号时间：</label>
+                    <input type="text" name="startTime" id="queryStartTime" class="ipt date" />
+                    <em>至</em>
+                    <input type="text" name="endTime" id="queryEndTime" class="ipt date" />
+                </div>
+
+                <div class="group">
+                    <label class="for">姓名：</label>
+                    <input type="text" name="username" class="ipt" />
+                </div>
+
+                <div class="group">
+                    <label class="for">身份证号：</label>
+                    <input type="text" name="cardId" class="ipt" />
+                </div>
+
+                <div class="group">
+                    <label class="for">状态：</label>
+                    <select name="businessType" class="slt">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+
+                <div class="group">
+                    <button type="submit" class="ubtn ubtn-cyan">查询</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="mt15 table">
+            <script id="tableTemp" type="text/html">
+                {{each list as item i}}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.businessType}}</td>
+                    <td>{{item.businessName}}</td>
+                    <td>{{item.username}}</td>
+                    <td>{{item.cardId}}</td>
+                    <td>{{item.datetime}}</td>
+                    <td>{{item.info}}</td>
+                    <td>{{if item.status == 1}}成功{{else}}失败{{/if}}</td>
+                    <td><button type="button" class="ubtn ubtn-primary" onclick="_showDetail({{item.id}})">查看身份证</button></td>
+                </tr>
+                {{/each}}
+            </script>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>业务类型</th>
+                        <th>业务名称</th>
+                        <th>姓名</th>
+                        <th>身份证号</th>
+                        <th>取号时间</th>
+                        <th>发号信息</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+        
+        <div class="operate">
+            <div class="action">
+                <select name="" class="slt select2">
+                    <option value="10">每页10行</option>
+                    <option value="20">每页20行</option>
+                    <option value="50">每页50行</option>
+                    <option value="100">每页100行</option>
+                </select>
+            </div>
+            <div class="pagination"></div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+	<span>湖北省宏锐慧通信息技术有限公司</span>
+</div>
+
+
+
+<script id="detailTemp" type="text/html">
+<div class="layer-info" id="tempForm">
+    <div class="tit">身份证信息</div>
+    <div class="col">
+        <div class="item">
+            <label class="for">姓&#12288;&#12288;名：</label>
+            <span>{{username}}</span>
+        </div>
+        <div class="item">
+            <label class="for">性&#12288;&#12288;别：</label>
+            <span>{{if sex == 1}}男{{else}}女{{/if}}</span>
+        </div>
+        <div class="item">
+            <label class="for">出生日期：</label>
+            <span>{{born}}</span>
+        </div>
+        <div class="item">
+            <label class="for">住&#12288;&#12288;址：</label>
+            <span>{{address}}</span>
+        </div>
+        <div class="item">
+            <label class="for">签发机关：</label>
+            <span>{{org}}</span>
+        </div>
+        <div class="item">
+            <label class="for">有&nbsp;效&nbsp;期&nbsp;：</label>
+            <span>{{period}}</span>
+        </div>
+    </div>
+    <div class="col">
+        <div class="item">
+            <label class="for">身份证号：</label>
+            <span>{{cardId}}</span>
+        </div>
+        <div class="item">
+            <label class="for">民&#12288;&#12288;族：</label>
+            <span>{{nation}}</span>
+        </div>
+        <div class="item">
+            <label class="for">身份证照片：</label>
+        </div>
+        <div class="avatar">
+            <img src="{{avatar}}" />
+        </div>
+    </div>
+</div>
+</script>
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/ajaxPage.js"></script>
+<link rel="stylesheet" href="assets/plugins/jedate/jedate.css" />
+<script src="assets/plugins/jedate/jquery.jedate.min.js"></script>
+<script src="assets/plugins/viewer/viewer.min.js"></script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+    Mock.mock('http://g.cn', {
+        "result": "SUCCESS",
+        "totalSize": 22,
+        "list|10": [{
+            'id': '@increment',
+            'businessType': '驾驶证业务',
+            'businessName': '六年免检',
+            'username': '@cname',
+            'cardId': /^\d{6}(19|2\d)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)?$/,
+            'datetime': '@datetime',
+            'info': '13号，M110号',
+            'status|1-0': 1
+        }]
+    });
+    Mock.mock('http://aaa.com', {
+        "result": "SUCCESS",
+        "totalSize": 22,
+        "data": {
+            'id': '@increment',
+            'username': '@cname',
+            'cardId': /^\d{6}(19|2\d)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)?$/,
+            'sex|0-1': 1,
+            'nation': '汉',
+            'born': '@date',
+            'avatar': '/static/uploads/mm1.jpg',
+            'address': '湖北省武汉市一区二街三室湖北省武汉市一区二街三室',
+            'org': '公安局',
+            'period': '2012.07.30—2022.07.30'
+        }
+    });
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+<script>
+// 查看身份证
+function _showDetail(id) {
+    if (id) {
+        $.ajax({
+            url: 'http://aaa.com',
+            data: {id: id},
+            type: 'POST',
+            dataType: 'json',
+            success: function(res) {
+                layer.open({
+                    shift: -1,
+                    type: 1,
+                    title: false,
+                    area: '620px',
+                    content: template('detailTemp', res.data),
+                    btn: false
+                })
+                $('.avatar').viewer({zoomRatio: 0.2});
+            }
+        })
+    }
+}
+
+var _global = {
+    init: function() {
+        this.filter();
+    },
+    filter: function() {
+        var that = this;
+        var $form = $('#filter');
+        var page =  new Page({
+            pageIndex: 1, // 当前页
+            pageSize: 10, // 每页显示10条
+            url: 'http://g.cn',
+            callback: function(res) {
+                $('#tbody').empty().html(template('tableTemp', res));
+            }
+        })
+        
+        // 查询
+        $form.on('submit', function() {
+            var filterData = $form.serializeArray();
+            page.request(true, filterData);
+            return false;
+        })
+
+        $.mydate({
+            start: '#queryStartTime',
+            end: '#queryEndTime'
+        })
+    }
+}
+</script>
+</body>
+</html>

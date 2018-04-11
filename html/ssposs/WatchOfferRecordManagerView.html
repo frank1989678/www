@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>武汉车辆管理平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/datetimepicker/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="logo">
+		<a href="index.html">随手拍管理系统</a>
+	</div>
+	<div class="user">
+		<span>yitop</span>
+		<i>|</i>
+		<a href="modify_password.html">修改密码</a>
+		<i>|</i>
+		<a href="about.html">关于</a>
+		<i>|</i>
+		<a href="contact.html">联系</a>
+		<i>|</i>
+		<a href="login.html" class="ico ico-logout"></a>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="nav box">
+	<dl>
+		<dt>
+			<i class="ico ico-1"></i>
+			<span>举报审核</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="wfsh.html">违法审核</a>
+			<a href="wtsh.html">违停审核</a>
+			<a href="shqr.html">审核确认</a>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			<i class="ico ico-2"></i>
+			<span>审核统计</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="ExamineCountAndExportManagerView.html">按地区统计</a>
+			<a href="StatisticsByUserView.html">按审核人员统计</a>
+			<a href="JiangjinfafangAndExportManagerView.html">奖金发放统计</a>
+			<a href="WatchOfferRecordManagerView.html">举报信息查询</a>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			<i class="ico ico-3"></i>
+			<span>系统管理</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="UserManageView.html">账号管理</a>
+			<a href="RoleManagerView.html">角色管理</a>
+			<a href="ModifyValidateView.html">安全管理</a>
+			<a href="DictionaryMangerView.html">字典管理</a>
+			<a href="LawTypeManagerView.html">违法类型管理</a>
+			<a href="PurviewManageView.html">资源管理</a>
+			<a href="DLLDManageView.html">道路路段管理</a>
+		</dd>
+	</dl>
+</div>
+
+<div class="wrapper box">
+	<div class="breadcrumb"><i class="ico ico-site"></i>举报信息查询</div>
+
+	<div class="filter filter-res">
+		<form id="filterForm" action="#!">
+			<div class="group">
+				<label class="for">区域</label>
+				<select name="region" id="region" class="slt select2">
+					<option value="">请选择</option>
+					<option value="15">江岸区</option>
+					<option value="16">江汉区</option>
+					<option value="17">硚口区</option>
+					<option value="18">汉阳区</option>
+					<option value="19">武昌区</option>
+					<option value="20">青山区</option>
+					<option value="21">洪山区</option>
+					<option value="22">东西湖区</option>
+					<option value="23">汉南区</option>
+					<option value="24">蔡甸区</option>
+					<option value="25">江夏区</option>
+					<option value="26">黄陂区</option>
+					<option value="27">新洲区</option>
+					<option value="28">经济技术开发区</option>
+					<option value="29">东湖新技术开发区</option>
+					<option value="30">化学工业区</option>
+					<option value="31">东湖生态旅游风景区</option>
+				</select>
+			</div>
+
+			<div class="group">
+				<label class="for">举报类型</label>
+					<select name="type" id="type" class="slt select2">
+					<option value="">请选择</option>
+					<option value="1">图片</option>
+					<option value="2">视频</option>
+					<option value="3">图片和视频</option>
+					<option value="5">电话</option>
+				</select>
+			</div>
+
+			<div class="group">
+				<label class="for">用户类型</label>
+				<select name="userType" id="userType" class="slt select2">
+					<option value="">请选择</option>
+					<option value="0">普通用户</option>
+					<option value="1">vip用户</option>
+					<option value="2">城管</option>
+					<option value="3">警员</option>
+				</select>
+			</div>
+
+			<div class="group">
+				<label class="for">路段类型</label>
+				<select name="roadType" id="roadType" class="slt select2">
+					<option value="">请选择</option>
+					<option value="(1,2,0)">非严管路段</option>
+					<option value="3">严管路段</option>
+				</select>
+			</div>
+			<div class="group">
+				<label class="for">审核状态</label>
+				<select name="status" id="status" class="slt select2"><option value="">请选择</option><option value="0">待审核</option><option value="1">待检测</option><option value="2">预审不通过</option><option value="6">检测通过</option><option value="7">检测不通过</option><option value="8">交警已采纳</option><option value="9">交警未采纳</option><option value="4">失效</option><option value="19">正在审核中</option><option value="20">正在检测中</option>
+				</select>
+			</div>
+
+			<div class="group">
+				<label class="for">举报编号</label>
+				<input type="text" class="ipt" name="id" id="id" placeholder="举报编号" />
+			</div>
+
+			<div class="group">
+				<label class="for">渠道来源</label>
+				<select name="source" id="source" class="slt select2">
+					<option value="">请选择</option>
+					<option value="2">交警APP</option>
+					<option value="3">微信</option>
+					<option value="4">支付宝</option>
+					<option value="5">行车记录仪</option>
+					<option value="6">交警官网</option>
+					<option value="7">高德</option>
+					<option value="8">行车记录仪二代</option>
+					<option value="20">其他2</option>
+				</select>
+			</div>
+
+			<div class="group">
+				<label class="for">时间类型</label>
+				<select name="dateType" id="dateType" class="slt select2">
+					<option value="1">采集时间</option>
+					<option value="2">审核时间</option>
+				</select>
+			</div>
+			<div class="group">
+				<label class="for">导出状态</label>
+				<select name="export" id="export" class="slt select2">
+					<option value="1">已导出</option>
+					<option value="2">未导出</option>
+				</select>
+			</div>
+
+			<div class="group">
+				<label class="for">车牌号码</label>
+				<input type="text" class="ipt" name="carNumber" id="carNumber" placeholder="车牌号码" />
+			</div>
+
+			<div class="group">
+				<label class="for">车机编号</label>
+				<input type="text" class="ipt" name="carCode" id="carCode" placeholder="车机编号" />
+			</div>
+
+			<div class="group">
+				<label class="for">使用单位</label>
+				<select name="user" id="user" class="slt select2">
+					<option value="">请选择</option>
+				</select>
+			</div>
+
+			<div class="group group2">
+				<label class="for">采集时间</label>
+				<input type="text" class="ipt date" id="queryStartTime" placeholder="" />
+				<i>-</i>
+				<input type="text" class="ipt date" id="queryEndTime" placeholder="" />
+			</div>
+
+			<div class="group group9">
+				<button type="submit" class="ubtn ubtn-primary">查询</button>
+				<button type="button" class="ubtn ubtn-primary">导出图片</button>
+				<button type="button" class="ubtn ubtn-primary">导出列表</button>
+			</div>
+		</form>
+	</div>
+	
+	<div class="table">
+		<script id="tableTemp" type="text/html">
+			{{each list as item i}}
+			<tr>
+				<td><a href="javascript:;" class="link" data-id="{{item.id}}">{{item.id}}</a></td>
+				<td>{{item.region}}</td>
+				<td>{{item.carNumber}}</td>
+				<td>{{item.source}}</td>
+				<td>{{item.datetime}}</td>
+				<td>{{item.type}}</td>
+				<td>{{item.userType}}</td>
+				<td>{{item.roadType}}</td>
+				<td>{{item.admin}}</td>
+				<td>{{item.check}}</td>
+				<td>{{item.status}}</td>
+				<td>{{item.export}}</td>
+				<td>{{item.updatetime}}</td>
+				<td>
+					<a href="WatchOfferRecordManagerView_detail.html?id={{item.id}}" class="ubtn ubtn-ghost">查看</a>
+				</td>
+			</tr>
+			{{/each}}
+		</script>
+
+		<table class="tc">
+			<thead>
+				<tr>
+					<th>编号</th>
+					<th>区域</th>
+					<th>车牌号码</th>
+					<th>渠道来源</th>
+					<th>采集时间段</th>
+					<th>举报类型</th>
+					<th>用户类型</th>
+					<th>路段类型</th>
+					<th>审核人</th>
+					<th>检测人</th>
+					<th>状态</th>
+					<th>是否已导出</th>
+					<th>更新时间</th>
+					<th width="60">操作</th>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+				<tr>
+					<td><a href="javascript:;" class="link" data-id="111">111</a></td>
+					<td>洪山区</td>
+					<td>鄂A17AM9</td>
+					<td>行车记录仪二代</td>
+					<td>2000-06-29 02:05:12</td>
+					<td>图片和视频</td>
+					<td>普通用户</td>
+					<td>非严管路段</td>
+					<td>admin</td>
+					<td>admin</td>
+					<td>待审核</td>
+					<td>未导出</td>
+					<td>-</td>
+					<td>
+						<a href="WatchOfferRecordManagerView_detail.html?id=2" class="ubtn ubtn-ghost">查看</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="operate">
+		<div class="action">
+			<select name="" class="slt select2">
+				<option value="10">每页10行</option>
+				<option value="20">每页20行</option>
+				<option value="50">每页50行</option>
+				<option value="100">每页100行</option>
+			</select>
+		</div>
+		<div class="pagination"></div>
+	</div>
+</div>
+
+
+
+<div class="form layer-form" id="tempForm">
+	<div class="title">举报人信息</div>
+	<form action="">
+		<div class="item">
+            <div class="txt">用户号码</div>
+            <div class="cnt" id="userNo"></div>
+        </div>
+		<div class="item">
+            <div class="txt">姓名</div>
+            <div class="cnt" id="userName"></div>
+        </div>
+		<div class="item">
+            <div class="txt">手机号</div>
+            <div class="cnt" id="userMobile"></div>
+        </div>
+		<div class="item">
+            <div class="txt">身份证号码</div>
+            <div class="cnt" id="idNumber"></div>
+        </div>
+    </form>
+</div>
+
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/datetimepicker/core.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/jquery.pagination.min.js"></script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.setup({
+	    timeout: '300-1000' // 表示响应时间介于 200 和 600 毫秒之间，默认值是'10-100'。
+	})
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+		"currentPage": 1,
+	    "nextPage": 2,
+	    "pageSize": 5,
+	    "totalPage": 27,
+	    "totalSize": 131,
+	    "list|10": [{
+		    "id|40000-50000": 1,
+		    "region|1": ["江岸区","青山区","硚口区","东西湖区","经济技术开发区","东湖生态旅游风景区","洪山区"],
+		    "type|1": ["图片","图片","图片和视频","电话"],
+		    "source|1": ["交警APP","微信","支付宝","行车记录仪","高德","行车记录仪二代","交警官网"],
+	        "datetime": "@datetime",
+	        "checktime": "@datetime",
+	        "updatetime": "@datetime",
+	        "carNumber": "鄂AT2A50",
+	        "admin": "admin",
+	        "check": "-",
+		    "userType|1": ["普通用户","vip用户","城管","警员"],
+		    "roadType|1": ["非严管路段","严管路段"],
+		    "status|1": ["待审核","已审核"],
+		    "export|1": ["未导出","已导出"]
+		}]
+	});
+	
+
+	Mock.mock('http://h.cn', {
+		"result": "SUCCESS",
+	    "data": {
+	        "userNo": /^[0-9]{15}$/,
+	        "userName": "@cname",
+	        "idNumber": /^[0-9]{18}$/,
+	        "userMobile": /^1[345678]\d{9}$/
+		}
+	});
+	Mock.mock('http://del.cn', {
+		"result": "SUCCESS",
+	    "data": {
+	    	"result|0-1": 1
+		}
+	});
+
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+
+<script>
+	!(function($) {
+		var _global = {
+			init: function() {
+				this.select2();
+				this.filterData = {}; // 搜索条件
+				this.filter();
+				this.request(this.filterData, true); // 加载数据并初始化分页
+				this.bindEvent();
+			},
+			select2: function() {
+				$('.slt').select2();
+			},
+			filter: function() {
+				var that = this;
+				var $form = $('#filterForm');
+				var $start = $('#queryStartTime');
+				var $end = $('#queryEndTime');
+				var $start1 = $('#checkStartTime');
+				var $end2 = $('#checkEndTime');
+
+				$form.find('.date').datetimepicker({
+			        format: 'yyyy/mm/dd'
+			    });
+
+				// 每页显示
+			    $('.action').find('.slt').on('change', function() {
+			    	that.filterData.pageSize = this.value;
+			    	that.request(that.filterData, true);
+			    })
+
+				// 查询
+				$form.on('submit', function() {
+					var start = $start.val(),
+						end = $end.val();
+
+					if(start && end && start > end){
+						fx.alert("开始时间不得大于结束时间");
+						return;
+					}
+
+					that.filterData.startTime = start;
+					that.filterData.endTime   = end;
+					that.request(that.filterData, true);
+					return false;
+				})
+			},
+			/**
+			 * 添加删除classname
+			 * @param  {Object} data ajax参数
+			 * @param  {Boolean} initPage  是否初始化分页
+			 */
+			request: function(data, initPage) {
+				var that = this;
+				fx.request('http://g.cn', data, function(res){
+					var model = template('tableTemp', res);
+					$("#tbody").empty().html(model);
+					window.scrollTo(0, 0);
+					initPage && that.paginate(res.pageSize, res.totalSize);
+				});
+			},
+			paginate: function(pageSize, totalSize) {
+				var that = this;
+				function pageselectCallback(page_index) {
+					that.filterData.page_index = page_index;
+					that.request(that.filterData);
+					showDetail(page_index);
+				}
+				// 分页统计
+				function showDetail(page_index) {
+					$('.pagination').prepend('<div class="p-size">第' + (page_index + 1) + '页/共' + Math.ceil(totalSize/pageSize) + '页（共' + totalSize + '行）</div>');
+				}
+				$('.pagination').pagination(totalSize, {
+                    num_edge_entries: 2,
+                    callback: pageselectCallback,
+                    items_per_page: pageSize // 每页显示数量
+                });
+                showDetail(0);
+			},
+			bindEvent: function() {
+				var that = this,
+					$temp = $('#tempForm'),
+					$form = $temp.find('form'),
+					$tbody = $('#tbody');
+
+				// 举报人信息
+				$('#tbody').on('click', '.link', function() {
+					var id = $(this).data('id');
+					var defaultText = '缺失';
+					if (id) {
+						fx.request('http://h.cn', {id: id}, function(res){
+							$('#userNo').html(res.data.userNo || defaultText);
+							$('#userName').html(res.data.userName || defaultText);
+							$('#idNumber').html(res.data.idNumber || defaultText);
+							$('#userMobile').html(res.data.userMobile || defaultText);
+
+							layer.open({
+								area: '340px',
+								type: 1,
+								title: false,
+								content: $temp
+							})
+						});
+					}
+				})
+			}
+		}
+
+		_global.init();
+	})(jQuery);
+</script>
+</body>
+</html>

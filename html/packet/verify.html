@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="随手拍举报有奖红包，输入你的红包口令">
+    <meta name="author" content="">
+    <title>身份验证</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="bg2">
+
+<div class="view">
+    <header class="header">
+        <a href="index.html" class="back"></a>
+        <!-- <a href="javascript:window.history.back();" class="back"></a> -->
+        <em class="tit">身份验证</em>
+    </header>
+
+    <section class="sec">
+        <form action="" class="form2">
+            <div class="banner">
+                <img src="images/idcard.png" alt="身份验证">
+            </div>
+            <div class="group">
+                <label>手机号：</label>
+                <input type="number" class="ipt" value="" id="mobile" placeholder="请输入您的手机号码">
+            </div>
+            <div class="group">
+                <label>身份证：</label>
+                <input type="text" class="ipt" value="" id="idCard" placeholder="请输入您的身份证号码">
+            </div>
+            <div class="hr"></div>
+
+            <div class="tips">
+                <p>温馨提示：</p>
+                <p>为确保红包被举报人本人领取，我们需对您的身份进行验证，身份证验证通过后，下次领取红包无需验证。</p>
+            </div>
+
+            <div class="ft">
+                <button type="submit" class="btn btn-primary" id="submit">确认</button>
+            </div>
+        </form>
+    </section>
+</div>
+
+<script src="js/zepto.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+
+function checkMobile() {
+    var mobile = $('#mobile').val(),
+        msg = '';
+    if (!mobile) {
+        msg = '请输入手机号';
+    } else if (!/^1[3-9]\d{9}$/.test(mobile)) {
+        msg = '手机号码错误';
+    } else {
+        // $('#mobile').next().hide();
+        return true;
+    }
+    // $('#mobile').next().html(msg).show();
+    fx.msg(msg);
+    return false;
+}
+
+function checkIdCard() {
+    var idCard = $('#idCard').val(),
+        msg = '';
+    if (!idCard) {
+        msg = '请输入身份证';
+    } else if (!/^\d{6}(19|2\d)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X|x)?$/.test(idCard)) {
+        msg = '身份证号码无效';
+    } else {
+        // $('#idCard').next().hide();
+        return true;
+    }
+    // $('#idCard').next().html(msg).show();
+    fx.msg(msg);
+    return false;
+}
+
+
+$('#submit').on('click', function() {
+    if (checkMobile() && checkIdCard()) {
+    }
+    return false;
+})
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>车管所智能管控平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">车管所智能管控平台</a>
+	</div>
+	<div class="user">
+        <span>当前在线人数：<em>15</em></span>
+        <i>|</i>
+        <span>历史登录人数：<em>430</em></span>
+        <i>|</i>
+        <span>admin</span>
+        <i>|</i>
+        <a href="login.html" class="logout"></a>
+    </div>
+</div>
+<!-- header end -->
+
+<div class="side-menu">
+    <!-- menu.html -->
+</div>
+
+<div class="content">
+    <div class="box">
+        <div class="box-tit">
+            <span class="t1">打印</span>
+            <span class="t2">
+                <a href="javascript:;" onclick="history.go(-1)" class="ubtn ubtn-cyan">返回</a>
+            </span>
+        </div>
+        
+        <div class="box-check">
+
+            <div class="dl">
+                <div class="dd d5">
+                    <ul>
+                        <li>
+                            身份证正面
+                            <span class="thumb img-vm"><img src="/static/uploads/1.jpg" /></span>
+                            <span class="ubtn ubtn-primary jprint">打印</span>
+                            <span class="ubtn ubtn-cyan big">查看大图</span>
+                        </li>
+                        <li>
+                            身份证反面
+                            <span class="thumb img-vm"><img src="/static/uploads/2.jpg" /></span>
+                            <span class="ubtn ubtn-primary jprint">打印</span>
+                            <span class="ubtn ubtn-cyan big">查看大图</span>
+                        </li>
+                        <li>
+                            手持身份证正面
+                            <span class="thumb img-vm"><img src="/static/uploads/3.jpg" /></span>
+                            <span class="ubtn ubtn-primary jprint">打印</span>
+                            <span class="ubtn ubtn-cyan big">查看大图</span>
+                        </li>
+                        <li>
+                            驾驶证正本
+                            <span class="thumb img-vm"><img src="/static/uploads/4.jpg" /></span>
+                            <span class="ubtn ubtn-primary jprint">打印</span>
+                            <span class="ubtn ubtn-cyan big">查看大图</span>
+                        </li>
+                        <li>
+                            驾驶证副本
+                            <span class="thumb img-vm"><img src="/static/uploads/5.jpg" /></span>
+                            <span class="ubtn ubtn-primary jprint">打印</span>
+                            <span class="ubtn ubtn-cyan big">查看大图</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+	<span>湖北省宏锐慧通信息技术有限公司</span>
+</div>
+
+<div class="print"></div>
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/plugins/viewer/viewer.min.js"></script>
+
+<script>
+    $.ajax({
+        url: 'menu.html',
+        cache: false,
+        async: false,
+        success: function(res) {
+            $('.side-menu').html(res)
+        }
+    })
+</script>
+
+<script>
+$(function() {
+    $('.d5').viewer({zoomRatio:0.2, transition:false});
+
+    $('.d5').on('click', '.big', function() {
+        $(this).parent().find('.thumb img').trigger('click');
+    })
+
+    $('.d5').on('click', '.jprint', function() {
+        $('.print').html($(this).parent().find('img').clone());
+        $('body').addClass('printing');
+        window.print();
+        $('body').removeClass('printing');
+    })
+})
+</script>
+</body>
+</html>

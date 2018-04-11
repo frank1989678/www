@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>资源列表</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">交通事故快速处理平台</a>
+	</div>
+	<div class="user">
+		<div class="online">在线用户数：8人</div>
+		<dl>
+			<dt><i class="ico ico-user"></i>系统管理员</dt>
+			<dd>
+				<a href="javascript:;" id="jmodifyPwd">修改密码</a>
+				<a href="login.html">安全退出</a>
+			</dd>
+		</dl>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="nav cf">
+	<ul>
+		<li><a href="index.html"><i class="ico ico-1"></i>首页</a></li>
+		<li><a href="sgdz.html"><i class="ico ico-2"></i>事故定责</a></li>
+		<li>
+			<dl>
+				<dt><i class="ico ico-3"></i>系统设置</dt>
+				<dd>
+					<a href="user.html">用户管理</a>
+					<a href="role.html">角色管理</a>
+					<a href="area.html">用户区域设置</a>
+					<a href="source.html">资源管理</a>
+				</dd>
+			</dl>
+		</li>
+		<li>
+			<dl>
+				<dt><i class="ico ico-3"></i>报表统计</dt>
+				<dd>
+					<a href="statis.html">报表统计</a>
+					<a href="accident-his.html">历史事故查询</a>
+					<a href="accident.html">事故查询</a>
+				</dd>
+			</dl>
+		</li>
+	</ul>
+</div>
+
+
+<div class="wrapper">
+	<div class="box">
+		<div class="tit">资源管理</div>
+
+		<div class="operate">
+			<button type="button" class="ubtn ubtn-cyan" id="jadd">添加</button>
+			<button type="button" class="ubtn ubtn-orange" id="jedit">修改</button>
+			<button type="button" class="ubtn ubtn-primary" id="expandAll">展开</button>
+			<button type="button" class="ubtn ubtn-primary" id="collapseAll">合起</button>
+		</div>
+
+		<ul id="roleTree" class="ztree"></ul>
+
+	</div>
+</div>
+
+
+<div class="form layer-form" id="tempForm">
+	<div class="title">新增</div>
+	<form action="#!" id="add" name="add" onsubmit="return false;">
+		<div class="item">
+            <div class="txt"><i>*</i>资源名称</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="resourceName" />
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt"><i>*</i>请求地址</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="resourceString" />
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt"><i>*</i>排序</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="priority" />
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt"><i>*</i>资源类型</div>
+            <div class="cnt">
+            	<select name="resourceType" class="slt select2">
+					<option value="url">菜单</option>
+					<option value="button">按钮</option>
+    			</select>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt"><i>*</i>是否启用</div>
+            <div class="cnt">
+            	<select name="resourceEnable" id="" class="slt select2">
+                    <option value="0">启用</option>
+                    <option value="1">禁用</option>
+    			</select>
+            </div>
+        </div>
+	    <div class="buttons" style="padding:20px 0;">
+	        <input name="supResourceId" type="hidden" />
+	        <input name="resourceId" id="resourceId" type="hidden" />
+	        <button type="button" class="ubtn ubtn-cyan layer-close">关闭</button>
+	        <button type="submit" class="ubtn ubtn-blue submit">确定</button>
+	    </div>
+    </form>
+</div>
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<!-- 页面专用 -->
+<link rel="stylesheet" href="assets/plugins/zTreeStyle/jquery.ztree.css" />
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script src="assets/plugins/zTreeStyle/jquery.ztree.min.js"></script>
+
+<script>
+var _global = {
+	init: function() {
+		this.select2();
+    	this.role();
+	},
+	select2: function() {
+		$('.select2').select2({
+			minimumResultsForSearch: -1
+		});
+	},
+    role: function() {
+        var lastValue = '',
+            that = this,
+			opType = 'add';
+			$temp = $('#tempForm'),
+			$form = $temp.find('form');
+
+        var setting = {
+            check: {
+                enable: false
+            },
+            data: {
+	            simpleData: {
+	                enable: true,
+	                idKey: "id",
+	                pIdKey: "pId",
+	                rootPId: null
+	            }
+            },
+            view: {
+                showLine: false
+            }
+        };
+
+        var treeObj = $.fn.zTree.init($('#roleTree'), setting, []);   
+
+        var getTreeNode = function() {
+	        $.ajax({
+	            type: 'GET',
+	            dataType: 'json',
+	            url: '/getTree',
+	            url: 'json/tree.json',
+	            success: function (data) {
+	            	var data = [{"id":1,"pId":0,"sid":null,"spid":null,"url":null,"name":"事故定责","checked":null,"nodes":null},{"id":2,"pId":0,"sid":null,"spid":null,"url":null,"name":"系统设置","checked":null,"nodes":null},{"id":3,"pId":0,"sid":null,"spid":null,"url":null,"name":"报表统计","checked":null,"nodes":null},{"id":4,"pId":1,"sid":null,"spid":null,"url":null,"name":"待处理","checked":null,"nodes":null},{"id":5,"pId":1,"sid":null,"spid":null,"url":null,"name":"处理中","checked":null,"nodes":null},{"id":6,"pId":1,"sid":null,"spid":null,"url":null,"name":"定责完成","checked":null,"nodes":null},{"id":7,"pId":2,"sid":null,"spid":null,"url":null,"name":"用户管理","checked":null,"nodes":null},{"id":8,"pId":2,"sid":null,"spid":null,"url":null,"name":"用户区域设置","checked":null,"nodes":null},{"id":9,"pId":3,"sid":null,"spid":null,"url":null,"name":"事故查询","checked":null,"nodes":null},{"id":10,"pId":3,"sid":null,"spid":null,"url":null,"name":"历史事故查询","checked":null,"nodes":null},{"id":11,"pId":3,"sid":null,"spid":null,"url":null,"name":"报表统计","checked":null,"nodes":null},{"id":12,"pId":2,"sid":null,"spid":null,"url":null,"name":"角色管理","checked":null,"nodes":null},{"id":13,"pId":2,"sid":null,"spid":null,"url":null,"name":"资源管理","checked":null,"nodes":null},{"id":15,"pId":0,"sid":null,"spid":null,"url":null,"name":"首页","checked":null,"nodes":null}]
+	                treeObj = $.fn.zTree.init($('#roleTree'), setting, data);
+	            }, 
+	            error: function () {
+	            	$.notify({
+	            		type: 'danger',
+	            		title: '数据加载失败'
+	            	})
+	            }
+	        })
+	    }
+	    getTreeNode();
+
+        // 全部展开
+        $('#expandAll').on('click', function() {
+            treeObj.expandAll(true);
+        })
+        // 全部折叠
+        $('#collapseAll').on('click', function() {
+            treeObj.expandAll(false);
+        })
+
+		// 新增
+		$('#jadd').on('click', function() {
+			var selectedNodes = treeObj.getSelectedNodes();
+			opType = 'add';
+			$form[0].reset();
+			$form.find('.select2').trigger('change.select2');
+			$form.prev('.title').html('新增');
+	        if (selectedNodes.length > 0) {
+	            $('#resourceId').val(selectedNodes[0].id);
+	        }
+			layer.open({
+				area: '540px',
+				type: 1,
+				title: false,
+				content: $temp
+			})
+		})
+
+        // 修改
+        $('#jedit').on('click', function() {
+	        var selectedNodes = treeObj.getSelectedNodes();
+	        if (selectedNodes.length > 0) {
+	        	var id = selectedNodes[0].id;
+				opType = 'edit';
+	            $form[0].reset();
+				$form.prev('.title').html('编辑');
+	            $('#resourceId').val(id);
+	            $.ajax({
+	            	url: '',
+	            	data: {id: id},
+	            	success: function(res) {
+	            		res = {"resourceId":1,"resourceName":"事故定责","resourceType":"url","resourceString":"/alarm/waitalarmlist/10/1.htm","supResourceId":0,"priority":1,"enabled":0}
+						$form.find('.ipt[name="resourceName"]').val(res.resourceName);
+						$form.find('.ipt[name="resourceString"]').val(res.resourceString);
+						$form.find('.ipt[name="priority"]').val(res.priority);
+						$form.find('.slt[name="resourceType"]').val(res.resourceType);
+						$form.find('.slt[name="resourceEnable"]').val(res.enabled);
+						$form.find('.select2').trigger('change.select2');
+	            	}
+	            })
+	            layer.open({
+					area: '540px',
+					type: 1,
+					title: false,
+					content: $temp
+				})
+	        } else {
+	        	$.notify({'content': '请选择一个节点!', type: 'danger'});
+	        }
+        })
+
+
+		// 验证
+		$form.validator({
+            fields: {
+                resourceName: '名称: required',
+                resourceString: '请求地址: required'
+            },
+            valid: function(form) {
+            	that[opType]($(form).serialize());
+            }
+        });
+    },
+    add: function(data) {
+    	console.log(data)
+    	$.ajax({
+    		url: '',
+    		data: data,
+    		success: function(res) {
+    			if (res.result === 'success') {
+    				fx.alert('添加成功', function() {
+    					window.location.reload();
+    				});
+    			} else {
+    				$.notify({
+    					type: 'danger',
+    					title: '添加失败，请稍候再试'
+    				})
+    			}
+    			layer.closeAll();
+    		}
+    	})
+    },
+    edit: function(data) {
+    	$.ajax({
+    		url: '',
+    		data: data,
+    		success: function(res) {
+    			if (res.result === 'success') {
+    				fx.alert('修改成功', function() {
+    					window.location.reload();
+    				});
+    			} else {
+    				$.notify({
+    					type: 'danger',
+    					title: '修改失败，请稍候再试'
+    				})
+    			}
+    			layer.closeAll();
+    		}
+    	})
+    }
+}
+</script>
+</body>
+</html>

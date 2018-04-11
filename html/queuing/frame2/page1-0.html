@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>自助取号终端</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<!-- header begin -->
+<div class="header">
+    <span class="logo">自助取号终端</span>
+    <em class="subtitle">（排队叫号、资料查缺）</em>
+</div>
+<!-- header end -->
+
+<div class="page page9">
+    <div class="t3">身份证读取成功，请取走您的身份证</div>
+    <!-- <div class="time2" id="time"></div> -->
+    <div class="circle">
+        <svg class="svg">
+            <circle cx="117" cy="117" r="105" fill="#FFF" stroke="#43AEFA" stroke-width="20"></circle>
+            <circle cx="117" cy="117" r="105" fill="transparent" stroke="#F4F1F1" stroke-width="22" transform="rotate(-90 117 117)" id="pie" class="pie" ></circle>
+        </svg>
+        <div class="time" id="time"></div>
+    </div>
+</div>
+
+<div class="footer">
+    <button type="button" class="ico ico-home" onclick="zd.pagehome(0)">首页</button>
+    <button type="button" class="ico ico-back" onclick="zd.page('page1.html')">返回</button>
+    <button type="button" class="ico ico-ok"  onclick="zd.page('page2.html')">确定</button>
+</div>
+
+<iframe id="iframe" class="iframe" src="" frameborder="0"></iframe>
+
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/js/common.js"></script>
+
+<script>
+var _global = {
+    init: function() {
+        this.clock(5);
+    },
+    clock: function(second) {
+        var n = second,
+            t = document.getElementById('time'),
+            c = document.getElementById('pie');
+
+        t.innerHTML = second;
+
+        var timer = setInterval(function() {
+            if (0 == second) {
+                // 时间已走完
+                clearInterval(timer);
+            }else {
+                t.innerHTML = --second;
+                c.style.strokeDashoffset = Math.round(second / n * 660) - 660;
+            }
+        }, 1e3);
+    }
+}
+$(function() {
+    _global.init();
+})
+</script>
+</body>
+</html>

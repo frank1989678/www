@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>车管所智能管控平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">车管所智能管控平台</a>
+	</div>
+	<div class="user">
+        <span>当前在线人数：<em>15</em></span>
+        <i>|</i>
+        <span>历史登录人数：<em>430</em></span>
+        <i>|</i>
+        <span>admin</span>
+        <i>|</i>
+        <a href="login.html" class="logout"></a>
+    </div>
+</div>
+<!-- header end -->
+
+<div class="side-menu">
+    <!-- menu.html -->
+</div>
+
+<div class="content">
+    <div class="box">
+        <div class="box-tit">
+            <span class="t1">六合一登录查询</span>
+        </div>
+
+        <div class="filter">
+            <form name="filterForm" method="GET" action="">
+
+                <label class="for">请输入验证码：</label>
+                <input type="text" name="code" class="ipt" autocomplete="off" />
+                <img src="assets/images/xxx.gif" class="verify" alt="验证码" />
+                <button type="submit" class="ubtn ubtn-primary">保存</button>
+                <span class="t2">
+                    <em>已登录：xxxx</em>
+                    <em class="c-blue">有效：xxxx</em>
+                    <em class="c-red">失效：xxxx</em>
+                </span>
+            </form>
+        </div>
+
+        <div class="table">
+            <table class="border tc">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>账号</th>
+                        <th>登录状态</th>
+                        <th>登录时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>admin</td>
+                        <td>已登录</td>
+                        <td>2018-01-11 15:35:11</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pages">
+            <div class="nums">
+                <span class="total">第1页/共2页（共18行）</span>
+                <span class="current">1</span>
+                <a href="javascript:void(0);">2</a>
+                <a href="javascript:void(0);" class="next" rel="next">下一页</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+	<span>湖北省宏锐慧通信息技术有限公司</span>
+</div>
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/plugins/datepicker/WdatePicker.js"></script>
+
+<script>
+    $.ajax({
+        url: 'menu.html',
+        cache: false,
+        async: false,
+        success: function(res) {
+            $('.side-menu').html(res)
+        }
+    })
+</script>
+
+<script>
+// 已解决
+function solved(id) {
+    fx.confirm('是否确认已解决？', function() {
+        $.ajax({
+            url: '',
+            data: {id: id},
+            success: function(res) {
+                layer.closeAll();
+            }
+        })
+    })
+}
+</script>
+</body>
+</html>

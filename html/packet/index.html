@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="随手拍举报有奖红包，输入你的红包口令">
+    <meta name="author" content="">
+    <title>随手拍举报有奖红包</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="bg1">
+
+<div class="view">
+    <header class="header">
+        <a href="javascript:;" class="back">退出</a>
+        <em class="tit">身份验证</em>
+        <a href="javscript:;" class="desc">说明</a>
+    </header>
+
+    <section class="sec">
+        <h1 class="h1">
+            <img src="images/banner.png" alt="随手拍举报有奖红包">
+        </h1>
+        <div class="form1">
+            <h2 class="tit">输入你的红包口令</h2>
+            <form action="">
+                <input type="text" class="ipt" value="" id="code" placeholder="" autocomplete="off">
+                <button type="submit" class="btn btn-warning" id="submit">领取</button>
+            </form>
+        </div>
+    </section>
+
+</div>
+
+<section class="dialog" id="dialog">
+    <div class="cont">
+        <h2 class="h2">举报有奖红包</h2>
+        <!-- <p class="lapse">口令已失效<br>该红包已被领取！</p> -->
+
+        <p><em id="money">0.10</em><sub>元</sub></p>
+        <p>已存入余额</p>
+
+        <a href="history.html">查看领取详情</a>
+
+        <div class="close" onclick="closeDialog()"></div>
+    </div>
+</section>
+
+<script src="js/zepto.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+$('#submit').on('click', function() {
+    var code = $('#code').val();
+    if (code) {
+        fx.hideMsg();
+        $('#code').val('');
+        $('#dialog').fadeIn();
+    } else {
+        fx.msg('请输入红包口令！');
+    }
+    return false;
+})
+
+function closeDialog() {
+    $('#dialog').fadeOut();
+}
+</script>
+</body>
+</html>

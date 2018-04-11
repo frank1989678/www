@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>交通事故快速处理平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="logo">
+		公安交通档案综合管理系统
+	</div>
+</div>
+<!-- header end -->
+
+<div class="content">
+    <div class="filter">
+        <form name="filterForm" id="filterForm">
+            <label class="for">车辆所有权：</label>
+            <select name="type" class="slt">
+                <option value="1">个人</option>
+                <option value="2">单位</option>
+            </select>
+            <label class="for">身份证号：</label>
+            <input type="text" name="cardid" class="ipt" autocomplete="off" placeholder="请输入车主身份证号码" />
+            <button type="submit" class="ubtn ubtn-primary">查询</button>
+        </form>
+    </div>
+    <div class="tabcont"></div>
+</div>
+
+
+
+<script id="tableTemp" type="text/html">
+<div class="item">
+    <div class="tit">车辆信息
+        <div class="form">
+            <label for="">被授权人：</label>
+            <input type="text" class="ipt" id="cardId2" placeholder="请输入身份证号码">
+            <button type="button" class="ubtn ubtn-primary" onclick="accredit()">授权</button>
+        </div>
+    </div>
+    <div class="table">
+        <table class="border">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" class="cbx"></th>
+                    <th>序号</th>
+                    <th>号牌种类</th>
+                    <th>号牌号码</th>
+                    <th>车辆识别代号</th>
+                    <th>中文品牌</th>
+                    <th>机动车所有人</th>
+                    <th>初次登记日期</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{each data as list idx}}
+                <tr>
+                    <td><input type="checkbox" value="{{list.plateNo}}" class="cbx"></td>
+                    <td>{{idx + 1}}</td>
+                    <td>{{list.vehicleType}}</td>
+                    <td>{{list.plateNo}}</td>
+                    <td>{{list.vin}}</td>
+                    <td>{{list.brands}}</td>
+                    <td>{{list.name}}</td>
+                    <td>{{list.registerDate}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+</script>
+
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/art.template.js"></script>
+
+<script>
+// 授权
+function accredit() {
+    var reg = /^\d{6}(19|2\d)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)?$/;
+    var cardId = $('#cardId2').val();
+    var cbx = [];
+    var msg = '';
+    $('td .cbx:checked').each(function() {
+        cbx.push(this.value);
+    })
+    if (cardId == '') {
+        msg = '请输入被授权人身份证号码';
+    } else if (!reg.test(cardId)) {
+        msg = '请输入正确的身份证号码';
+    } else if (cbx.length === 0) {
+        msg = '请先选择授权查看的车辆';
+    }
+
+    if (msg) {
+        _global.alert(msg);
+    } else {
+        layer.open({
+            skin: 'layui-custom',
+            title: false,
+            content: '<div class="tit"><i class="i"></i>授权确认</div><div class="text">请确认是否将车辆 ' + cbx.join('、') + ' 授权  '+cardId+' 可查询？</div>',
+            btn: ['确定', '取消'],
+            area: '540px',
+            yes: function() {
+                $.ajax({
+                    url: "",
+                    data: {},
+                    success: function(res) {
+                        alert(4)
+                    }
+                })
+            }
+        })
+    }
+}
+var _global = {
+	init: function() {
+        this.bindEvent();
+        this.filter();
+        this.fix();
+	},
+    bindEvent: function() {
+        var that = this;
+        // 关闭弹层
+        $('body').on('click', '.close', function() {
+            $('.model, .model-mask').remove();
+        })
+        $('body').on('click', 'th .cbx', function() {
+            var icheck = this.checked;
+            $('.cbx').each(function() {
+                this.checked = icheck;
+            })
+        })
+        $('body').on('click', 'td .cbx', function() {
+            var icheck = this.checked;
+            if (icheck) {
+                $('td .cbx').each(function() {
+                    if (this.checked == false) {
+                        icheck = false;
+                        return false; // break;
+                    }
+                })
+            } else {
+                icheck = false;
+            }
+            $('th .cbx')[0].checked = icheck;
+        })
+    },
+    alert: function(msg) {
+        layer.open({
+            title: false,
+            btn: false,
+            area: '540px',
+            content: '<div class="layui-warning">' + msg + '</div>'
+        })
+    },
+    fix: function() {
+        var height = $(window).height(),    
+            F = $('.footer').outerHeight();
+        $('.content').css('min-height', height - F - 70 - 40);
+    },
+	filter: function() {
+		var that = this;
+		var $form = $('#filterForm');
+        var reg = /^\d{6}(19|2\d)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)?$/;
+		
+        // 查询
+        $form.on('submit', function() {
+            var type = $form.find('.slt').val();
+            var cardId = $form.find('.ipt').val();
+            var msg = '';
+            if (type == 1) {
+                if (cardId == '') {
+                    msg = '请输入身份证号码';
+                } else if (!reg.test(cardId)) {
+                    msg = '请输入正确的身份证号码';
+                }
+            } else if (type == 2) {
+                if (cardId == '') {
+                    msg = '请输入单位名称';
+                }
+            }
+            if (msg) {
+                that.alert(msg);
+            } else {
+                $.ajax({
+                    url: 'd.json',
+                    data: {cardId: cardId},
+                    cache: false,
+                    beforeSend: function() {
+                        $('<div class="spinner">加载中...</div>').appendTo($('body'));
+                    },
+                    complete: function() {
+                        $('.spinner').remove();
+                    },
+                    success: function(res) {
+                        if (res.result == 'fail') {
+                            that.alert('没有查询到车辆');
+                        } else {
+                            $('.tabcont').empty().html(template('tableTemp', res)).show();
+                        }
+                    }
+                })
+            }
+            return false;
+        })
+	}
+}
+$(function() {
+    _global.init();
+})
+</script>
+</body>
+</html>

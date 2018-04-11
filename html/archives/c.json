@@ -1,0 +1,18 @@
+{
+	"data": {
+		"name": "变更登记",
+		"number": "ASDAD",
+		"pic": [{
+			"imageCode": "",
+			"name": "受理凭证",
+			"src": "http://localhost:8680/file/filedownload?fileId=002201711037710ee8e"
+		}, {
+			"imageCode": "",
+			"name": "",
+			"src": ""
+		}],
+		"plateNo": "ASD1111",
+		"time": "2017-06-02"
+	},
+	"result": "SUCCESS"
+}

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>通讯录管理</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">武汉119作战指挥中心调度平台</a>
+	</div>
+	<div class="nav">
+		<ul>
+			<li>
+				<dl>
+					<dt><i class="ico ico-1"></i>地图管控</dt>
+					<dd>
+						<a href="track.html">车辆监控</a>
+						<a href="dispatcherManage.html">调度管理</a>
+						<a href="trackHis.html">历史轨迹</a>
+						<a href="railManage.html">电子围栏</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-2"></i>视频监控</dt>
+					<dd>
+						<a href="ocxClient.html">多车视频监控</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-3"></i>信息报表</dt>
+					<dd>
+						<a href="alarmHotSpot.html">警情记录</a>
+						<a href="alarmRecord.html">报警记录</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-4"></i>系统管理</dt>
+					<dd>
+						<a href="carManage.html">车辆管理</a>
+						<a href="orgManage.html">机构管理</a>
+						<a href="userManage.html">用户管理</a>
+						<a href="roleManage.html">角色管理</a>
+						<a href="purviewManage.html">权限管理</a>
+						<a href="contactsManage.html">通讯录管理</a>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+	<div class="user">
+		<span>yitop</span>
+		<i>|</i>
+		<a href="javascript:;" id="mdyPwd">修改密码</a>
+		<i>|</i>
+		<a href="javascript:;" id="mdyTheme">主题</a>
+		<i>|</i>
+		<a href="login.html" class="ico ico-logout"></a>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="wrapper">
+
+	<div class="box">
+		<div class="tit">通讯录管理</div>
+
+		<div class="filter">
+			<form name="filterForm" id="filter" action="javascript:return false;" method="GET">
+				<label class="for">机构：</label>
+				<input type="text" name="org" class="ipt" />
+				<button type="submit" class="ubtn ubtn-red">查询</button>
+				<button type="button" class="ubtn ubtn-red" onclick="_add()">新增</button>
+			</form>
+		</div>
+
+		<div class="table">
+			<table>
+				<thead>
+					<tr>
+						<th>机构名称</th>
+						<th>父机构</th>
+						<th>通讯录名称</th>
+						<th>电话号码</th>
+						<th width="130">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody"></tbody>
+			</table>
+		</div>
+		
+		<div class="operate">
+			<div class="pagination"></div>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+    <span>湖北省宏锐慧通信息技术有限公司</span>
+</div>
+
+<!-- 新增&编辑 -->
+<div class="form layer-form" id="tempForm">
+	<div class="ftit">添加</div>
+	<form name="form1" onsubmit="return false;">
+		<div class="item req">
+            <div class="txt">机构名称：</div>
+            <div class="cnt">
+            	<select name="org" class="slt select2">
+            		<option value="">武汉市公安消防支队</option>
+            	</select>
+            </div>
+        </div>
+		<div class="item req">
+            <div class="txt">通讯录名称：</div>
+            <div class="cnt">
+            	<input type="text" name="name" class="ipt" />
+            </div>
+        </div>
+		<div class="item req">
+            <div class="txt">电话号码：</div>
+            <div class="cnt">
+            	<input type="text" name="phone" class="ipt" />
+            </div>
+        </div>
+	    <div class="buttons">
+	        <button type="button" class="ubtn ubtn-gray layer-close">取消</button>
+	        <button type="submit" class="ubtn ubtn-red submit" onclick="_submitForm()">确定</button>
+	    </div>
+	</form>
+</div>
+<!-- end 新增&编辑 -->
+
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<!-- 页面专用 -->
+<script>
+// 页面配置信息，必须放在listPage.js前面配合使用
+var pageSetting = {
+	name      : "通讯录", 	// 页面名称，用于提示信息
+	iid       : 0, 		// 等于0时为新增，其他为编辑
+	submitURL : '', 	// 提交表单（新增&编辑url地址）
+	getURL    : 'http://h.cn', 	// 编辑信息时回填表单
+	delURL    : '' 		// 删除一条数据
+}
+</script>
+<script src="assets/js/listPage.js"></script>
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/ajaxPage.js"></script>
+<script id="tableTemp" type="text/html">
+	{{each list as item i}}
+	<tr>
+		<td>{{item.org}}</td>
+		<td>{{item.porg}}</td>
+		<td>{{item.name}}</td>
+		<td>{{item.phone}}</td>
+		<td>
+			<button type="button" class="ubtn ubtn-primary jedit" onclick="_edit({{item.id}})">编辑</button>
+			<button type="button" class="ubtn ubtn-red jdel" onclick="_del({{item.id}})">删除</button>
+		</td>
+	</tr>
+	{{/each}}
+</script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+	    "totalSize": 18,
+	    "list|10": [{
+		    "id": "@increment",
+	        "org": "江岸中队",
+	        "porg": "江岸大队",
+	        "name": "中队指挥中心",
+	        "phone": "15022222222"
+		}]
+	});
+
+
+	Mock.mock('http://h.cn', {
+		"result": "SUCCESS",
+	    "data": {
+	        "org": "江岸中队",
+	        "name": "中队指挥中心",
+	        "phone": "15022222222"
+		}
+	});
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+
+<script>
+var _global = {
+	init: function() {
+		this.filter();
+		this.select2();
+	},
+	select2: function() {
+		$('.select2').select2({
+			minimumResultsForSearch: -1
+		})
+	},
+	filter: function() {
+		var that = this;
+		var $form = $('#filter');
+		var page =  new Page({
+			request: false,
+			pageIndex: 1, // 当前页
+			pageSize: 10, // 每页显示10条
+			url: 'http://g.cn',
+			callback: function(res) {
+				$('#tbody').empty().html(template('tableTemp', res));
+			}
+		})
+		
+		// 查询
+		$form.on('submit', function() {
+			var filterData = $form.serializeArray();
+			page.request(true, filterData);
+			return false;
+		})
+	}
+}
+</script>
+</body>
+</html>

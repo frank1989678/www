@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>自助取号终端</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+    <span class="logo">自助取号终端</span>
+    <em class="subtitle">（ 排队叫号、资料查缺 ）</em>
+</div>
+<!-- header end -->
+
+<div class="content">
+    <div class="page6">
+        <div class="tit">您选择办理的是：六年免检，<em>请确认以下资料已携带齐全</em></div>
+        <dl>
+            <dd>
+                <span>机动车所有人身份原件及复印件</span> 
+                <button type="button" class="ubtn ubtn-blue" onclick="showPic(this,'assets/images/thumb.png')">查看资料样本</button>
+            </dd>
+            <dd>
+                <span>行驶证原件</span>
+                <button type="button" class="ubtn ubtn-blue" onclick="showPic(this,'assets/images/thumb.png')">查看资料样本</button>
+            </dd>
+            <dd>
+                <span>交强险副本原件（已生效的交强险）</span>
+                <button type="button" class="ubtn ubtn-blue" onclick="showPic(this,'assets/images/thumb.png')">查看资料样本</button>
+            </dd>
+        </dl>
+        <dl>
+            <dt>* 机动车所有人为单位的身份证件为：</dt>
+            <dd>
+                <span>委托书加盖公章</span>
+                <button type="button" class="ubtn ubtn-blue" onclick="showPic(this,'assets/images/thumb.png')">查看资料样本</button>
+            </dd>
+            <dd>
+                <span>营业执照原件及复印件</span>
+                <button type="button" class="ubtn ubtn-blue" onclick="showPic(this,'assets/images/thumb.png')">查看资料样本</button>
+            </dd>
+            <dd>
+                <span>代办人身份证原件及复印件</span>
+                <button type="button" class="ubtn ubtn-blue" onclick="showPic(this,'assets/images/thumb.png')">查看资料样本</button>
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="footer">
+    <button type="button" class="ico ico-home" onclick="zd.pagehome(0)">首页</button>
+    <button type="button" class="ico ico-back" onclick="zd.page('page5.html')">返回</button>
+    <button type="button" class="ico ico-ok" id="jsubmit">确定</button>
+</div>
+
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/js/common.js"></script>
+
+<script>
+
+function showPic(el, src) {
+    var title = $(el).prev().html();
+    var $model = $('<div class="model"><div class="title">' + title + '</div><div class="pic"><img id="imgRotate" src="' + src + '" /></div><div class="close"></div><div class="lb-op"><div class="lb-turn-left"></div><div class="lb-turn-right"></div></div></div>').appendTo($('body'));
+
+    var 
+        winHeight = $(window).height();
+        winWidth  = $(window).width(),
+        height    = $model.outerHeight(),
+        _top       = (winHeight - height)/2;
+
+    $model.before('<div class="model-mask"></div>');
+    $model.css({
+        width: '82%',
+        height: '66%',
+        left: '9%',
+        top: '17%'
+    }).fadeIn(300);
+}
+
+var _global = {
+    init: function() {
+        this.bindEvent();
+    },
+    bindEvent: function() {
+        var that = this;
+        // 关闭弹层
+        $('body').on('click', '.close', function() {
+            $('.model, .model-mask').remove();
+        })
+        // 确定
+        $('#jsubmit').on('click', function() {
+            parent.zd.loading();
+            var success = Math.random() < 0.5;
+            
+            setTimeout(function() {
+
+            if (success) {
+                parent.zd.closeLoading();
+                zd.page('page7.html');
+            } else {
+                parent.zd.closeLoading();
+                zd.page('page8.html');
+            }
+
+            }, 2e3)
+
+        })
+    }
+}
+$(function() {
+    _global.init();
+})
+</script>
+</body>
+</html>

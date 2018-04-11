@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <title>武汉110作战指挥中心调度平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/lib/select2/select2.css" />
+    <script src="assets/js/jquery191.js"></script>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">
+        <a href="/" target="_parent">武汉110作战指挥中心调度平台</a>
+    </div>
+    <div class="nav">
+        <ul>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-1"></i>应急指挥</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-2"></i>视频监控</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-3"></i>勤务管理</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-4"></i>信息报表</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-5"></i>系统管理</dt>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <div class="user">
+        <ul>
+            <li>欢迎！Apples</li>
+            <li><a href="javascript:;" id="j_mdyPwd">修改密码</a></li>
+            <li><a href="login.html">注销</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="crumbs">通讯录管理</div>
+
+    <div class="filter">
+        <form name="filterForm" id="filterForm" onsubmit="return false;">
+            <span class="for">机构：</span>
+            <input type="text" name="org" class="ipt ipt-tree" readonly onclick="showOrg(this)">
+            <input type="hidden" class="orgid" name="orgId">
+
+            <div class="abs">
+                <button type="submit" class="ubtn ubtn-filter">查询</button>
+                <button type="button" class="ubtn ubtn-filter" onclick="_add()">新增</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th><label><input class="cbx" type="checkbox">机构名称</label></th>
+                    <th>父机构</th>
+                    <th>通讯录名称</th>
+                    <th>电话号码</th>
+                    <th width="260" class="tc">操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+        <!-- 引擎模板 -->
+        <script id="tableTemp" type="text/html">
+            {{each list as item i}}
+            <tr>
+                <td><label><input class="cbx" type="checkbox" value="{{item.id}}">{{item.orgName}}</label></td>
+                <td>{{item.pname}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.phone}}</td>
+                <td class="tc">
+                    <button type="button" class="ubtn ubtn-td j_edit" data-id="{{item.id}}">编辑</button>
+                    <button type="button" class="ubtn ubtn-td j_del" data-id="{{item.id}}">删除</button>
+                </td>
+            </tr>
+            {{/each}}
+        </script>
+    </div>
+
+    <div class="operate">
+        <div class="action">
+            <button type="button" class="ubtn ubtn-small del-all">批量删除</button>
+        </div>
+        <div class="pagination"></div>
+    </div>
+</div>
+
+
+<!-- 新增&编辑 -->
+<div class="form layer-form" id="tempForm">
+    <form name="form1" id="form1" onsubmit="return false;">
+        <!-- id的值为空时是新增数据，有值时修改数据 -->
+        <input type="hidden" name="id">
+        <div class="row req">
+            <span class="for">机构名称</span>
+            <input type="text" class="ipt ipt-tree" name="orgName" readonly onclick="showOrg(this)" />
+            <input type="hidden" class="orgid" name="orgId"/>
+        </div>
+        <div class="row req">
+            <span class="for">通讯录名称</span>
+            <input type="text" class="ipt" name="name"  />
+        </div>
+        <div class="row req">
+            <span class="for">电话号码</span>
+            <input type="text" class="ipt" name="phone"  />
+        </div>
+    </form>
+</div>
+<!-- end 新增&编辑 -->
+
+
+<!-- 快速选择机构 -->
+<div class="layer-tree">
+    <input type="text" class="ipt" placeholder="快速搜索" autocomplete="off" onkeyup="searchTree(this)" />
+    <div class="ops">
+        <button type="button" class="ubtn" onclick="expandAll('orgList')">展开</button>
+        <button type="button" class="ubtn" onclick="collapseAll('orgList')">收起</button>
+        <button type="button" class="ubtn">全选</button>
+        <button type="button" class="ubtn" onclick="clearInput(this)">清空</button>
+    </div>
+    <div class="choose"></div>
+    <ul id="orgList" class="ztree"></ul>
+</div>
+
+<script src="assets/js/common.js"></script>
+<script src="assets/js/page.js"></script>
+<script src="assets/js/layerTree.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/lib/layer/layer.js"></script>
+<script src="assets/lib/validator/validator.js"></script>
+<script src="assets/lib/select2/select2.js"></script>
+<script src="assets/lib/ztree/jquery.ztree.min.js"></script>
+
+
+<!-- 模拟接口(只做演示使用，后端同学在开发时请删除此代码块) -->
+<script src="assets/js/mock.js"></script>
+<script>
+
+    Mock.mock('http://g.cn', {
+        "code|0-1": 1, // 必须，作为判断ajax请求成功的判断提交
+        "code": "1",
+        "msg": "暂无车辆",
+        "totalSize": 15,
+        "list|10": [{
+            "id": "@increment",
+            "orgName": "江岸中队",
+            "pname": "江岸大队",
+            "name": "中队指挥中心",
+            "phone": /^1\d{10}/
+        }]
+    });
+    Mock.mock('http://api.com', {
+        "code|0-1": 1, // 必须，作为判断ajax请求成功的判断提交
+        "code": "1",
+        "msg": "操作失败"
+    });
+    Mock.mock('http://edit.com', {
+        "code": "1",
+        "msg": "操作失败",
+        "data": {
+            id: "1",
+            username: "frank",
+            org: "2",
+            "mobile": /^1[345678]\d{9}$/,
+            status: "未激活",
+            role: "系统管理员"
+        }
+    });
+</script>
+<!-- 模拟接口(只做演示使用，后端同学在开发时请删除此代码块) end -->
+
+<script>
+// 页面配置
+var _API = {
+    name: '通讯录',           // 页面标题
+    url: 'http://g.cn',    // 查询接口
+    del: 'http://api.com', // 删除操作接口
+    add: 'http://api.com', // 新增操作接口
+    edit: 'http://edit.com' // 编辑操作接口
+}
+var _page = {
+    init: function() {
+        this.select2();
+        this.validator();
+        this.table();
+    },
+    select2: function() {
+        $('.select2').select2({
+            minimumResultsForSearch: -1
+        });
+    },
+    validator: function() {
+        var that = this;
+        $('#form1').validator({
+            fields: {
+                orgName: {
+                    rule: 'required',
+                    msg: '请输入机构名称'
+                },
+                name: {
+                    rule: 'required',
+                    msg: '请输入通讯录名称'
+                },
+                phone: {
+                    rule: 'required, tel|mobile',
+                    msg: {
+                        'required': '请输入电话号码',
+                        'mobile': '手机号码格式错误',
+                        'tel': '固话号码格式错误'
+                    }
+                }
+            },
+            valid: function(form) {
+                var params = {};
+                fx.ajax('http://api.com', 'POST', params, function() {
+                    $.notify({
+                        title: '添加成功'
+                    })
+                    layer.closeAll();
+                    that.page.reload();
+                }, null, true)
+            }
+        })
+    },
+    // 前端分页
+    table: function() {
+        var that = this;
+        var $form = $('#filterForm');
+        that.page =  new Page({
+            pageIndex: 1,   // 当前页
+            pageSize: 10,   // 每页显示10条
+            request: true,  // 页面加载后立即请求数据
+            url: _API.url,
+            api: _API
+        })
+
+        // 查询
+        $form.on('submit', function() {
+            var filterData = $form.serializeArray();
+            that.page.request(filterData);
+            return false;
+        })
+        // 查询
+        $form.on('reset', function() {
+            that.page.reload();
+            return false;
+        })
+    }
+}
+
+
+var set = {
+    $el: null,
+    check: {
+        enable: true,
+        chkStyle: 'radio',
+        radioType: 'all'
+    },
+    view: {
+        dblClickExpand: false,
+        showIcon: false
+    },
+    data: {
+        simpleData: {
+            enable: true,
+            idKey: 'id',
+            pIdKey: 'pid',
+            rootPId: null
+        }
+    },
+    callback: {
+        onClick: onClickAgency2,
+        onCheck: checkAgency2
+    }
+};
+
+function onClickAgency2(e, treeId, treeNode) {
+    var zTree = $.fn.zTree.getZTreeObj("orgList");
+    zTree.checkNode(treeNode, !treeNode.checked, null, true);
+    return false;
+}
+function checkAgency2(e, treeId, treeNode) {
+    var agencyzTree = $.fn.zTree.getZTreeObj("orgList"),
+        nodes = agencyzTree.getCheckedNodes(true),
+        text = [],
+        val = []; 
+
+    $.each(nodes, function(i, item) {
+        text.push(item.name);
+        val.push(item.id);
+    })
+    set.$el.val(text.join(',')).nextAll('.orgid').val(val.join(','));
+}
+
+// 机构
+function showOrg(el) {
+    var $el = $(el);
+    var offset = $el.offset();
+    set.$el = $el; // 缓存触发的输入框
+    $('.orgid').val('');
+    $.ajax({
+        url: 'json/carTree.json',
+        dataType: 'json',
+        success: function(res) {
+            var treeobj = $.fn.zTree.init($("#orgList"), set, res);
+            $('#orgList').parent().show().css({
+                left: offset.left,
+                top: offset.top + 30,
+                position: 'fixed'
+            })
+        }
+    })
+}
+</script>
+</body>
+</html>

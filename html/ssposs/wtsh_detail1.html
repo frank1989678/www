@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>武汉车辆管理平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/datetimepicker/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+    <link rel="stylesheet" href="assets/plugins/video/video.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="logo">
+		<a href="index.html">随手拍管理系统</a>
+	</div>
+	<div class="user">
+		<span>yitop</span>
+		<i>|</i>
+		<a href="modify_password.html">修改密码</a>
+		<i>|</i>
+		<a href="about.html">关于</a>
+		<i>|</i>
+		<a href="contact.html">联系</a>
+		<i>|</i>
+		<a href="login.html" class="ico ico-logout"></a>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="nav box">
+	<dl class="active">
+		<dt>
+			<i class="ico ico-1"></i>
+			<span>举报审核</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="wfsh.html">违法审核</a>
+			<a href="wtsh.html">违停审核</a>
+			<a href="shqr.html">审核确认</a>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			<i class="ico ico-2"></i>
+			<span>审核统计</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="ExamineCountAndExportManagerView.html">按地区统计</a>
+			<a href="StatisticsByUserView.html">按审核人员统计</a>
+			<a href="JiangjinfafangAndExportManagerView.html">奖金发放统计</a>
+			<a href="WatchOfferRecordManagerView.html">举报信息查询</a>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			<i class="ico ico-3"></i>
+			<span>系统管理</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="UserManageView.html">账号管理</a>
+			<a href="RoleManagerView.html">角色管理</a>
+			<a href="ModifyValidateView.html">安全管理</a>
+			<a href="DictionaryMangerView.html">字典管理</a>
+			<a href="LawTypeManagerView.html">违法类型管理</a>
+			<a href="PurviewManageView.html">资源管理</a>
+			<a href="DLLDManageView.html">道路路段管理</a>
+		</dd>
+	</dl>
+</div>
+
+<div class="wrapper box">
+	<div class="breadcrumb"><i class="ico ico-site"></i>违法审核</div>
+	<div class="operate">
+		<a href="javascript:history.back(-1);" class="ubtn ubtn-primary">返回</a>
+	</div>
+	
+	<div class="floor">
+		<h2>基本信息</h2>
+		<ul class="list">
+			<li>
+				<span>采集时间：</span>
+				<em>2017-07-26 07:57:11</em>
+			</li>
+			<li>
+				<span>渠道来源：</span>
+				<em>行车记录仪二代</em>
+			</li>
+			<li>
+				<span>违法地点：</span>
+				<em>湖北省武汉市洪山区徐东大街58号</em>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="floor">
+		<h2>交通违法视频</h2>
+		<div class="video">
+			<div class="inner">
+				<video class="video-js" id="video1" controls preload="auto" poster="">
+				    <source src="uploads/video1.mp4" type='video/mp4'>
+				</video>
+			</div>
+			<div class="img">
+				<ul>
+					<li><img src="uploads/a.jpg" alt=""><i class="ico ico-del"></i></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="buttons">
+			<button type="button" class="ubtn ubtn-blue" id="catVideoBtn">截图</button>
+			<button type="button" class="ubtn ubtn-ghost" id="trunLeft">左转</button>
+			<button type="button" class="ubtn ubtn-ghost" id="trunRight">右转</button>
+			<button type="button" class="ubtn ubtn-ghost" id="trun180">180度旋转</button>
+		</div>
+
+		<div class="pic">
+			<ul>
+				<li><img src="uploads/prt1.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt2.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt3.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt4.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt5.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt6.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt13.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt14.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt15.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt16.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt17.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt18.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt19.jpg" alt=""><i class="ico ico-cbx"></i></li>
+				<li><img src="uploads/prt20.jpg" alt=""><i class="ico ico-cbx"></i></li>
+			</ul>
+			<div class="buttons">
+				<button type="button" class="ubtn ubtn-blue">确认</button>
+				<button type="button" class="ubtn ubtn-ghost">取消</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="floor">
+		<h2>交通违法地点</h2>
+		<div class="map">
+			<div id="map"></div>
+		</div>
+	</div>
+
+	<div class="floor">
+		<div class="operate">
+			<button type="button" class="ubtn ubtn-primary" id="jsubmit">完善信息</button>
+			<button type="button" class="ubtn ubtn-red" id="jnopass">不通过</button>
+			<button type="button" class="ubtn ubtn-ghost" id="jprev">上一页</button>
+			<button type="button" class="ubtn ubtn-ghost" id="jnext">下一页</button>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="form layer-form" id="tempForm">
+	<div class="title">完善信息</div>
+	<div class="cnt1">
+        <div class="group" style="height:170px;">
+			<h3>举报内容</h3>
+			<p>时间：2017-07-27 08:39:46</p>
+			<p>路口路段:<span entercode="address">湖北省武汉市洪山区武珞路682号</span></p>
+			<p>GPS坐标:<span entercode="gpsLongItude">114.352623</span> <span entercode="gpsLatItude">30.534798</span></p>
+        </div>
+
+        <div class="group">
+			<h3>车辆信息</h3>
+			<div class="thumb">
+				<img src="uploads/a.jpg" id="thumb" />
+			</div>
+			<div class="ctrl">
+				<button type="button" class="ubtn ubtn-ghost fr" id="jn">下一张</button>
+				<button type="button" class="ubtn ubtn-ghost" id="jp">上一张</button>
+			</div>
+		</div>
+	</div>
+	<div class="cnt2">
+		<div class="group">
+			<h3>违法信息</h3>
+			<div class="item">
+	            <div class="txt">违法地点：</div>
+	            <div class="cnt">
+	            	湖北省武汉市武昌区武珞路568号
+	            </div>
+	        </div>
+			<div class="item">
+	            <div class="txt">区域：</div>
+	            <div class="cnt">
+	            	<select class="slt select2" name="xzqh" id="xzqh"><option parentid="9" code="420102" tid="15">江岸区</option><option parentid="9" code="420103" tid="16">江汉区</option><option parentid="9" code="420104" tid="17">硚口区</option><option parentid="9" code="420105" tid="18">汉阳区</option><option parentid="9" code="420107" tid="20">青山区</option><option parentid="9" code="420111" tid="21">洪山区</option><option parentid="9" code="420112" tid="22">东西湖区</option><option parentid="9" code="420113" tid="23">汉南区</option><option parentid="9" code="420114" tid="24">蔡甸区</option><option parentid="9" code="420115" tid="25">江夏区</option><option parentid="9" code="420117" tid="27">新洲区</option><option parentid="9" code="4201A1" tid="28">经济技术开发区</option><option parentid="9" code="4201A2" tid="29">东湖新技术开发区</option><option parentid="9" code="4201A3" tid="30">化学工业区</option><option parentid="9" code="420106" tid="19" selected="selected">武昌区</option><option parentid="9" code="420116" tid="26">黄陂区</option><option parentid="9" code="4201A5" tid="31">东湖生态旅游风景区</option></select>
+	            </div>
+	        </div>
+			<div class="item">
+	            <div class="txt">地点核实：</div>
+	            <div class="cnt">
+	            	<input type="text" class="ipt" value="" style="margin-bottom:9px;" name="carNumber" autocomplete="off">
+	            	<select name="" id="" class="slt select2">
+	            		<option value="">请选择</option>
+	            	</select>
+	            </div>
+	        </div>
+        </div>
+
+        <div class="group">
+			<h3>号牌信息</h3>
+			<div class="item">
+	            <div class="txt">号牌种类：</div>
+	            <div class="cnt">
+	            	<select class="slt select2" name="carType" id="carType">
+	                    <option value="02">小型汽车</option>
+	                    <option value="01">大型汽车</option>
+	                    <option value="08">轻便摩托车</option>
+	                    <option value="07">两、三轮摩托车</option>
+	                    <option value="13">农用运输车</option>
+	                    <option value="06">外籍汽车</option>
+	                    <option value="04">领馆汽车</option>
+	                    <option value="03">使馆汽车</option>
+	                    <option value="09">使馆摩托车</option>
+	                    <option value="10">领馆摩托车</option>
+	                    <option value="11">境外摩托车</option>
+	                    <option value="12">外籍摩托车</option>
+	                    <option value="05">港澳入出境车</option>
+	                    <option value="14">拖拉机</option>
+	                    <option value="15">挂车</option>
+	                    <option value="16">教练汽车</option>
+	                    <option value="23">警用汽车</option>
+	                </select>
+	            </div>
+	        </div>
+			<div class="item">
+	            <div class="txt">号牌号码：</div>
+	            <div class="cnt">
+	            <select class="slt select2" style="width:80px;" name="carNamber_1" id="carNamber_1">
+	                    <option value="鄂">鄂</option>
+	                    <option value="沪">沪</option>
+	                    <option value="苏">苏</option>
+	                    <option value="浙">浙</option>
+	                    <option value="皖">皖</option>
+	                    <option value="鲁">鲁</option>
+	                    <option value="粤">粤</option>
+	                    <option value="赣">赣</option>
+	                    <option value="京">京</option>
+	                    <option value="藏">藏</option>
+	                    <option value="川">川</option>
+	                    <option value="甘">甘</option>
+	                    <option value="桂">桂</option>
+	                    <option value="贵">贵</option>
+	                    <option value="黑">黑</option>
+	                    <option value="吉">吉</option>
+	                    <option value="冀">冀</option>
+	                    <option value="津">津</option>
+	                    <option value="晋">晋</option>
+	                    <option value="辽">辽</option>
+	                    <option value="蒙">蒙</option>
+	                    <option value="闽">闽</option>
+	                    <option value="宁">宁</option>
+	                    <option value="青">青</option>
+	                    <option value="琼">琼</option>
+	                    <option value="陕">陕</option>
+	                    <option value="湘">湘</option>
+	                    <option value="新">新</option>
+	                    <option value="渝">渝</option>
+	                    <option value="豫">豫</option>
+	                    <option value="云">云</option>
+	                    <option value="使">使</option>
+	                </select>
+	                <select class="slt select2" style="width:80px;" name="carNamber_3" id="carNamber_3">
+	                    <option value="A">A</option>
+	                    <option value="B">B</option>
+	                    <option value="C">C</option>
+	                    <option value="D">D</option>
+	                    <option value="E">E</option>
+	                    <option value="F">F</option>
+	                    <option value="G">G</option>
+	                    <option value="H">H</option>
+	                    <option value="I">I</option>
+	                    <option value="J">J</option>
+	                    <option value="K">K</option>
+	                    <option value="L">L</option>
+	                    <option value="M">M</option>
+	                    <option value="N">N</option>
+	                    <option value="O">O</option>
+	                    <option value="P">P</option>
+	                    <option value="Q">Q</option>
+	                    <option value="R">R</option>
+	                    <option value="S">S</option>
+	                    <option value="T">T</option>
+	                    <option value="U">U</option>
+	                    <option value="V">V</option>
+	                    <option value="W">W</option>
+	                    <option value="X">X</option>
+	                    <option value="Y">Y</option>
+	                    <option value="Z">Z</option>
+	                </select>
+	                <input class="ipt" name="carNamber_2" id="carNamber_2" maxlength="5" style="width:172px;text-transform: uppercase">
+	            </div>
+	        </div>
+		</div>
+
+		<div class="group">
+	        <h3>违法行为</h3>
+			<div class="item">
+	            <div class="txt">违法类型：</div>
+	            <div class="cnt"><select class="slt select2" name="lawType" id="lawType"><option value="6">机动车逆向行驶           </option><option value="8">违反禁止标线指示         </option><option value="2">伪造、变造机动车号牌           </option><option value="188">机动车违反规定使用公交专用车道</option><option value="166">违停</option><option value="186">客车严重超员</option><option value="5">报废机动车上路行驶             </option><option value="3">伪造、变造行驶证               </option><option value="4">驾驶拼装机动车                 </option><option value="7">机动车闯红灯           </option><option value="9">进入导向车道，不按指示方向行驶 </option><option value="1">交通事故肇事逃逸</option></select>
+	            </div>
+	        </div>
+			<div class="item">
+	            <div class="txt">违法代码：</div>
+	            <div class="cnt">
+	            	<select class="slt select2" name="lawCode" id="lawCode">
+	            		<option parentid="6" value="13010">13010</option>
+	            	</select>
+	            </div>
+	        </div>
+		</div>
+	</div>
+
+    <div class="buttons">
+        <button type="button" class="ubtn ubtn-blue layer-close">关闭</button>
+        <button type="button" class="ubtn ubtn-blue submit" style="width:120px;">保存信息</button>
+    </div>
+</div>
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/datetimepicker/core.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/plugins/video/video.js"></script>
+<script src="assets/plugins/viewer/viewer.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script src="assets/js/art.template.js"></script>
+
+
+<script src="http://api.map.baidu.com/api?v=2.0&ak=yf0xLlteaVZiaOgqMILN9ZgN"></script>
+
+
+
+<script>
+	!(function($) {
+		var _global = {
+			init: function() {
+				this.select2();
+				this.bindEvent();
+				this.video();
+				this.map();
+			},
+			select2: function() {
+				$('.slt').select2();
+			},
+			video: function() {
+				var that = this,
+					videoId = 'video1',
+					$pic = $('.pic'),
+					$img = $('.img');
+
+
+				videojs(videoId, {
+		  			language: 'zh-CN'
+				}).ready(function() {
+					$('#video1').find('video').wrap('<div style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;"></div>')
+			    });
+
+				// 截图
+				$('#catVideoBtn').on('click', function() {
+					var result = false;
+					$img.find('li').each(function() {
+			        	if ($(this).is(':empty')) {
+			        		that.screenshot($(this));
+			        		result = true;
+			        		return false;
+			        	}
+			        })
+			        if (!result) {
+			        	$.notify({
+			        		type: 'danger',
+			        		title: '截图失败',
+			        		content: '请先删除一张截图'
+			        	})
+			        }
+				})
+				// 删除截图
+				$img.on('click', '.ico-del', function() {
+					$(this).parent().empty();
+				})
+
+				// 左转
+				$('#trunLeft').on('click', function() {
+					fx.rotateVideo(videoId, -1);
+				})
+
+				// 右转
+				$('#trunRight').on('click', function() {
+	                fx.rotateVideo(videoId, 1);
+	            })
+				// 180度旋转
+				$('#trun180').on('click', function() {
+	                fx.rotateVideo(videoId, 2);
+	            })
+
+				// 选取截图
+				$pic.on('click', '.ico-cbx', function() {
+					if ($pic.find('.ico-cbx-on').length === 4 && !$(this).hasClass('ico-cbx-on')) {
+						$.notify({
+			        		type: 'warning',
+			        		content: '最多只能选中4张'
+			        	})
+					} else {
+						$(this).toggleClass('ico-cbx-on');
+					}
+				})
+				// 确认截图
+				$pic.on('click', '.ubtn-blue', function() {
+					var $cbx = $pic.find('.ico-cbx-on');
+
+					if ($cbx.length === 4) {
+						$cbx.each(function(i) {
+							var $el = $(this),
+								imgSrc = $el.siblings('img').attr('src'),
+								currentTime = $el.parent().index();
+
+							fx.imgToBase64(imgSrc, function (base64Img) {
+								$img.find('li').eq(i).html('<img shotTime="' + currentTime + '" src="' + base64Img + '" /><i class="ico ico-del"></i>');
+	                        }, 'image/jpeg');
+						})
+						$pic.find('.ubtn-ghost').trigger('click');
+					} else {
+						$.notify({
+			        		type: 'warning',
+			        		content: '必须选中4张截图'
+			        	})
+					}
+				})
+				// 取消截图
+				$pic.on('click', '.ubtn-ghost', function() {
+					$pic.find('.ico-cbx-on').each(function() {
+						$(this).removeClass('ico-cbx-on');
+					})
+				})
+
+				$pic.viewer({zoomRatio: 0.2});
+
+			},
+			screenshot: function($el) {
+				var _video = $('#video1').find('video').get(0);
+		        var currentTime = _video.currentTime;
+		        // 创建canvas
+		        var canvas = document.createElement("canvas");
+		        var width = Math.min(_video.videoWidth, 1280);
+		        var height = Math.min(_video.videoHeight, 720);
+		        canvas.width = width;
+		        canvas.height = height;
+		        canvas.crossOrigin = 'Anonymous';
+		        canvas.getContext('2d').drawImage(_video, 0, 0, width, height);
+		        $el.html('<img shotTime="' + currentTime + '" src="' + canvas.toDataURL('image/jpeg') + '" /><i class="ico ico-del"></i>');
+			},
+			map: function() {
+			    // 百度地图API功能
+			    var map = new BMap.Map("map");
+			    var point = new BMap.Point(114.410600, 30.503223);
+			    var myIcon = new BMap.Icon('assets/images/ico.png', new BMap.Size(23, 28), {imageOffset: new BMap.Size(-269, 0)});
+
+			    // 创建标注   
+			    var marker = new BMap.Marker(point, {icon:myIcon});	
+				// 将标注添加到地图中  
+				map.addOverlay(marker);	
+			    map.centerAndZoom(point, 18); // 定位到中心点
+			    // 启用滚轮放大缩小
+			    // map.enableScrollWheelZoom(); 
+			},
+			bindEvent: function() {
+				var that = this,
+					$thumb = $('#thumb'),
+					$temp = $('#tempForm');
+
+				// 关闭弹层
+				$temp.on('click', '.layer-close', function() {
+					layer.closeAll();
+				})
+
+				// 保存信息
+				$temp.on('click', '.submit', function() {
+					alert('保存信息')
+					layer.closeAll();
+				})
+
+				// 完善信息
+				$('#jsubmit').on('click', function() {
+					layer.open({
+						area: '1000px',
+						type: 1,
+						title: false,
+						content: $temp
+					})
+				})
+
+				// 不通过
+				$('#jnopass').on('click', function() {
+
+				})
+				// 上一页
+				$('#jprev').on('click', function() {
+
+				})
+				// 下一页
+				$('#jnext').on('click', function() {
+
+				})
+			}
+		}
+
+		_global.init();
+	})(jQuery);
+</script>
+</body>
+</html>

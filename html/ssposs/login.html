@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>登录</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
+</head>
+
+<body>
+<div class="login-box">
+    <div class="myform">
+
+        <div class="h1">
+            <span>随手拍管理系统</span>
+            <em>Pats conveniently management system</em>
+        </div>
+
+        <div class="msg" id="msg"></div>
+        <form id="loginForm" action="" method="post">
+            <div class="group">
+                <input type="text" placeholder="用户名" id="username" name="username" autocomplete="off" value="" class="input user">
+            </div>
+
+            <div class="group">
+                <input type="password" placeholder="密码" id="password" name="password" autocomplete="off" value="" class="input lock">
+            </div>
+
+            <div class="button">
+                <button type="submit" class="ubtn ubtn-primary" id="submit">登录</button>
+            </div>
+
+            <div class="active"></div>
+
+        </form>
+    </div>
+    <div class="mask"></div>
+    <div class="border"></div>
+    <div class="camera"></div>
+</div>
+
+<div class="bg"></div>
+
+
+
+    <script src="assets/js/jquery191.js"></script>
+    <script>
+    !(function($) {
+        var 
+            $username = $('#username'),
+            $password = $('#password'),
+            $submit   = $('#submit'),
+            $msg      = $('#msg'),
+            $active   = $('.active'),
+            status    = false,
+            isSubmit    = false; // 锁定登录按钮
+
+        var showMsg = function(message) {
+            $msg.html(message || '');
+        }
+        var checkUsername = function() {
+            var msg = $username.val() ? '' : '请输入用户名';
+            showMsg(msg);
+            return msg;
+        }
+        var checkPassword = function() {
+            var msg = $password.val() ? '' : '请输入密码';
+            showMsg(msg);
+            return msg;
+        }
+        var checkForm = function() {
+            return !checkUsername() && !checkPassword();
+        }
+
+        $('.input').on('focus', function() {
+            var idx = $(this).parent().index();
+            if (status) {
+                $active.stop().show().animate({top: idx * 72}, 150);
+            } else {
+                $active.css({top: idx * 72}).show();
+            }
+            status = true;
+        }).on('blur', function() {
+            $active.fadeOut(50, function() {
+                status = false;
+            });
+        })
+
+        // 提交
+        $submit.on('click', function() {
+            if (!isSubmit && checkForm()) {
+                $.ajax({
+                    url: '',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: $('#loginForm').serialize(),
+                    success: function(res) {
+                        if(res.status == '200') {
+                            // 登录成功
+                            window.location.href = 'index.html';
+                        }else{
+                            // 错误提示信息
+                            showMsg(res.msg);
+                        }
+                    },
+                    complete: function() {
+                        isSubmit = false;
+                    },
+                    beforeSend: function() {
+                        isSubmit = true;
+                    }
+                })
+            }
+            return false;
+        });
+    })(jQuery);
+    </script>
+</body>
+</html>

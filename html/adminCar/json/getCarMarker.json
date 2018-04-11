@@ -1,0 +1,43 @@
+{
+    "org": [{
+            "name": "江岸大队",
+            "lng": "114.293085",
+            "lat": "30.597529",
+            "icon": "assets/images/icon/ico-level2.png"
+        }, {
+            "name": "青年路中队",
+            "lng": "114.326387",
+            "lat": "30.585744",
+            "icon": "assets/images/icon/ico-level3.png"
+        }, {
+            "name": "天地小型站",
+            "lng": "114.311968",
+            "lat": "30.556554",
+            "icon": "assets/images/icon/ico-level4.png"
+        }
+    ],
+    "xfs": [{
+            "name": "青年路中队",
+            "lng":"114.278917",
+            "lat":"30.569502",
+            "icon": "assets/images/icon/ico-xfx.png"
+        }, {
+            "name": "天地小型站",
+            "lng":"114.378137",
+            "lat":"30.607923",
+            "icon": "assets/images/icon/ico-water.png"
+        }
+    ],
+    "avc": [{
+            "name": "青年路中队",
+            "lng":"114.309816",
+            "lat":"30.620924",
+            "icon": "assets/images/icon/ico-alarm.png"
+        }, {
+            "name": "天地小型站",
+            "lng":"114.377107",
+            "lat":"30.592113",
+            "icon": "assets/images/icon/ico-alarm.png"
+        }
+    ]
+}

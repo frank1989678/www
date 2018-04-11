@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>自助取号终端</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<!-- header begin -->
+<div class="header">
+    <span class="logo">自助取号终端</span>
+    <em class="subtitle">（排队叫号、资料查缺）</em>
+</div>
+<!-- header end -->
+
+<div class="page page1">
+    <div class="t1"><span class="time" id="jclock"></span>欢迎光临车管所</div>
+    <div class="t2">自助取号，请刷二代身份证</div>
+    <div class="card">
+        <span class="gif"><img src="assets/images/card.gif" width="344" height="308" /></span>
+        <span class="tips">身份证阅读器在终端机下方右侧</span>
+    </div>
+</div>
+
+<div class="footer">
+    <button type="button" class="ico ico-home" onclick="zd.pagehome(0)">首页</button>
+    <button type="button" class="ico ico-back" onclick="zd.page('page1.html')">返回</button>
+    <button type="button" class="ico ico-ok"  onclick="zd.page('page2.html')">确定</button>
+</div>
+
+<iframe id="iframe" class="iframe" src="" frameborder="0"></iframe>
+
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/js/common.js"></script>
+
+<script>
+
+var _global = {
+    init: function() {
+        this.time();
+    },
+    time: function() {
+        var $jclock = $('#jclock');
+        var showTime = function() {
+            var formatNumber = function(n) {
+                return n < 10 ? '0' + n : n;
+            }
+            var time = new Date(),
+                yyyy = time.getFullYear(),
+                MM = formatNumber(time.getMonth() + 1),
+                DD = formatNumber(time.getDate()),
+                hh = formatNumber(time.getHours()),
+                mm = formatNumber(time.getMinutes());
+
+            var s = yyyy + '年' + MM + '月' + DD + '日 ' + hh + ':' + mm;
+            $jclock.html(s);
+        }
+        setInterval(function() {
+            showTime();
+        }, 1e3);
+        showTime();
+    }
+}
+$(function() {
+    _global.init();
+})
+</script>
+</body>
+</html>

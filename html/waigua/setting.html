@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>车管所智能管控平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+	<script src="assets/js/jquery191.js"></script>
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="logo">
+		<a href="index.html"><em>车管所智能管控平台</em>Intelligent management and control platform of vehicle administ</a>
+	</div>
+
+	<div class="nav">
+		<ul>
+			<li><a href="user.html"><i class="ico ico-1"></i>用户管理</a></li>
+			<li><a href="usertype.html"><i class="ico ico-2"></i>用户类型管理</a></li>
+			<li><a href="systype.html"><i class="ico ico-3"></i>系统类型管理</a></li>
+			<li><a href="setting.html"><i class="ico ico-4"></i>外挂系统配置</a></li>
+		</ul>
+	</div>
+
+	<div class="user">
+		<ul>
+			<li><span>yitop</span><i>|</i></li>
+			<li><a href="login.html"><i class="ico ico-logout"></i></a></li>
+		</ul>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="wrapper">
+	<div class="tit">外挂系统配置</div>
+	<div class="filter">
+		<form name="filterForm" id="filterForm" onsubmit="javascript:return false;" method="GET">
+			<button type="button" class="ubtn ubtn-cyan fr" onclick="_add()">新增</button>
+			<button type="submit" class="ubtn ubtn-primary fr">查询</button>
+
+			<label class="for">身份证号：</label>
+			<input type="text" name="idCard" class="ipt" autocomplete="off" />
+			<label class="for">归属部门：</label>
+			<select name="dept" class="slt">
+				<option value="">请选择</option>
+			</select>
+		</form>
+	</div>
+
+	<div class="table">
+		<table class="border tc">
+			<thead>
+				<tr>
+                    <th>序号</th>
+					<th>系统LOGO</th>
+                    <th>系统名称</th>
+                    <th>访问地址</th>
+                    <th>系统类型</th>
+                    <th>打开方式</th>
+                    <th>创建时间</th>
+					<th width="200">操作</th>
+				</tr>
+			</thead>
+			<tbody id="tbody"></tbody>
+		</table>
+		<script id="tableTemp" type="text/html">
+			{{each list as item i}}
+			<tr>
+				<td>{{i+1}}</td>
+		        <td><img src="{{item.logo}}" alt="系统logo"></td>
+		        <td>{{item.sysName}}</td>
+		        <td>{{item.url}}</td>
+		        <td>{{item.sysType}}</td>
+		        <td>{{item.target}}</td>
+		        <td>{{item.datetime}}</td>
+				<td>
+					<button type="button" class="ubtn ubtn-link" onclick="_edit({{item.id}})">编辑</button>
+					<button type="button" class="ubtn ubtn-link" onclick="_del({{item.id}}, this)">删除</button>
+				</td>
+			</tr>
+			{{/each}}
+		</script>
+	</div>
+	
+	<div class="operate">
+		<div class="pagination"></div>
+	</div>
+</div>
+
+
+<!-- 新增&编辑 -->
+<div class="form layer-form" id="tempForm">
+	<div class="ftit">添加</div>
+	<form name="form1" onsubmit="return false;">
+		<div class="item">
+            <div class="txt">系统名称：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="sysName" autocomplete="off" />
+            	<i class="req">*</i>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">系统Logo：</div>
+            <div class="cnt">
+            	<span class="preview">
+            		<img src="assets/images/default.png" />
+            	</span>
+            	<span class="btn-file">
+            		<button type="button" class="ubtn ubtn-primary">上传图片</button>
+            		<input type="file" class="ipt-file" name="thumb" />
+            	</span>
+            	<input type="text" class="ipt hide" name="logo" />
+            	<i class="req">*</i>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">访问地址：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="url" autocomplete="off" />
+            	<i class="req">*</i>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">系统类型：</div>
+            <div class="cnt">
+				<select name="sysType" class="slt">
+					<option value="">系统类型</option>
+				</select>
+            	<i class="req">*</i>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">打开方式：</div>
+            <div class="cnt">
+				<select name="target" class="slt">
+					<option value="_blank">新增页面</option>
+					<option value="_self">原窗口</option>
+				</select>
+            	<i class="req">*</i>
+            </div>
+        </div>
+		<div class="item hide">
+            <div class="txt">创建时间：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="datetime" value="" disabled readonly />
+            </div>
+        </div>
+	    <div class="buttons">
+	    	<input type="text" class="ipt hide" name="uid" value="0" />
+	        <button type="button" class="ubtn ubtn-primary layer-close">取消</button>
+	        <button type="submit" class="ubtn ubtn-primary submit" onclick="_submitForm()">确定</button>
+	    </div>
+	</form>
+</div>
+<!-- end 新增&编辑 -->
+
+<script src="assets/js/common.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/ajaxPage.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script>
+
+function _resetFile() {
+	$('.btn-file').html('<button type="button" class="ubtn ubtn-primary">上传图片</button><input type="file" class="ipt-file" name="thumb" />');
+	$('.preview').html('<img src="assets/images/default.png" />');
+}
+// 新增
+function _add() {
+	var $temp = $('#tempForm');
+	var $form = $temp.find('form');
+	$form[0].reset();
+	$form.prev('.ftit').html('新增系统');
+	$form.find('.item.hide').hide();
+	_resetFile();
+	layer.open({
+		area: '570px',
+		type: 1,
+		title: false,
+		closeBtn: 0,
+		content: $temp
+	})
+}
+
+// 编辑
+function _edit(id) {
+	var $temp = $('#tempForm');
+	var $form = $temp.find('form');
+	$form[0].reset();
+	$form.prev('.ftit').html('编辑系统');
+	$form.find('.item.hide').show();
+	if (id) {
+		$.ajax({
+			url: '',
+			data: {id: id},
+			success: function(res) {
+				res = {
+					data: {
+						"uid": id,
+						"sysName": "系统名称",
+						"logo": "assets/images/logo.png",
+						"url": "192.168.1.1",
+						"sysType": "",
+						"target": "_self",
+						"datetime": "2010-11-10 15:35"
+					}
+				};
+				$form.find('.ipt, .slt').each(function(i, item) {
+					var k = res.data[this.name];
+					if (typeof k === 'undefined' || k == 'undefined') {
+						k = '';
+					}
+					this.value = k;
+				})
+				$('.preview').find('img').attr('src', res.data.logo);
+				layer.open({
+					area: '570px',
+					type: 1,
+					title: false,
+					closeBtn: 0,
+					content: $temp
+				})
+			}
+		})
+	}
+}
+
+// 提交
+function _submitForm() {
+
+}
+// 删除一行
+function _del(id, el) {
+	fx.confirm('确定删除么？', function(k) {
+		$.ajax({
+			url: '',
+			data: {id: id},
+			success: function(res) {
+				if (res.result === "SUCCESS") {
+					fx.alert('删除成功！');
+					$(el).closest('tr').remove();
+				}
+			}
+		})
+		layer.closeAll();
+	})
+}
+
+var _global = {
+	init: function() {
+		this.logo();
+		this.filter();
+		this.bindEvent();
+	},
+	logo: function() {
+		// 上传logo
+		var $prvDiv = $('.preview');
+		$('.btn-file').on('change', '.ipt-file', function() {
+			if (this.files && this.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(evt) {
+					$prvDiv.html('<img src="' + evt.target.result + '" alt="" />');
+				}
+				reader.readAsDataURL(this.files[0]);
+			} else {
+				$prvDiv.html('<span class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + this.value + '\'"></span>');
+			}
+			$('.btn-file').next().val('1').trigger('validate');
+		})
+	},
+	filter: function() {
+		var that = this;
+		var $form = $('#filterForm');
+		var page =  new Page({
+			url: 'json/setting.json'
+		})
+		
+		// 查询
+		$form.on('submit', function() {
+			var filterData = $form.serializeArray();
+			page.request(true, filterData);
+			return false;
+		})
+
+		that.page = page;
+	},
+	bindEvent: function() {
+		var that = this,
+            $tbody = $('#tbody'),
+			$temp = $('#tempForm'),
+			$form = $temp.find('form'),
+            $uid = $form.find('.ipt[name="uid"]');
+
+		// 验证
+		$form.validator({
+            fields: {
+            	sysName: {
+            		rule: 'required;length(~20)',
+            		msg: {
+            			required: '系统名称字段不能为空',
+            			length: '最大20个字符',
+            		}
+            	},
+            	url: {
+            		rule: 'required;length(~50)',
+            		msg: {
+            			required: '访问地址字段不能为空',
+            			length: '最大50个字符',
+            		}
+            	},
+            	logo: {
+            		rule: 'required',
+            		msg: {
+            			required: '系统Logo未上传'
+            		}
+            	}
+            },
+            valid: function(form) {
+            	var url = 'json/user.json',
+            		data = $(form).serialize(),
+                    type = $uid.val(),
+                    msg = '新增成功！';
+
+            	fx.request(url, data, function(res) {
+                    res = {
+                        "id": type,
+                        "logo": $form.find('.ipt[name="logo"]').val(),
+                        "sysName": $form.find('.ipt[name="sysName"]').val(),
+                        "url": $form.find('.ipt[name="url"]').val(),
+                        "sysType": $form.find('.slt[name="sysType"]').find('option:selected').text(),
+                        "target": $form.find('.slt[name="target"]').find('option:selected').text(),
+                        "datetime": $form.find('.ipt[name="datetime"]').val()
+                    }
+                    that.page.refresh(res, type);
+                    if (type != '0') {
+                        msg = '保存成功！'
+                    }
+                    $.notify({
+                        title: msg,
+                        type: 'success'
+                    })
+                    layer.closeAll();
+            	})
+                // window.location.reload(true);
+            }
+        });
+	
+		// 显示密码
+		var setTypeModel = function(password) {
+			try {
+				$('.ico-eye').siblings('.ipt').attr('type', password ? 'password' : 'text');
+			} catch (err) {}
+		}
+		$(document).on('mouseup', function() {
+			setTypeModel(true);
+		}).on('mousedown', '.ico-eye', function() {
+			setTypeModel(false);
+		})
+	}
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+[{
+    "id": 85,
+    "pid": 123461,
+    "name": "鄂A11185",
+    "iconSkin": "car",
+    "icon": null,
+    "nocheck": false,
+    "carStatus": 2,
+    "actionStatus": 2,
+    "efStatus": 2,
+    "statusReturn": 4,
+    "longitude":"114.303722",
+    "latitude":"30.526556",
+    "chkDisabled": false,
+    "carType": 1,
+    "carState": 3
+}, {
+    "id": 86,
+    "pid": 123461,
+    "name": "鄂A11186",
+    "iconSkin": "car",
+    "icon": null,
+    "nocheck": false,
+    "carStatus": 2,
+    "actionStatus": 2,
+    "efStatus": 2,
+    "statusReturn": 4,
+    "longitude":"114.333591",
+    "latitude":"30.516944",
+    "chkDisabled": false,
+    "carType": 1,
+    "carState": 3
+}]

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>地图选点</title>
+    <meta name="renderer" content="webkit" />
+    <style>
+        html,body{width:100%;height:100%;margin:0;padding:0;}
+        .showMap{width:100%;height:100%;position:relative;}
+        .hd{font-size:14px;line-height:32px;padding:5px;position:absolute;top:5px;left:5px;background:#fff;z-index:4;border:1px solid #aaa;}
+        .ipt{display:block;width:200px;}
+        .ubtn{display:inline-block;width:80px;line-height:30px;padding:0 8px;text-align:center;cursor:pointer;border:0;color:#fff;background:#dd4635;vertical-align:top;}
+        .ubtn:hover{background-color:#c63f30;}
+        #map{width:100%;height:100%;}
+    </style>
+</head>
+
+<body>
+
+<div class="showMap">
+    <div class="hd">
+        请输入关键字：
+        <input type="text" id="tipinput" value="" class="ipt" />
+    </div>
+    <div class="bd" id="map"></div>
+</div>
+
+
+
+<script src="http://webapi.amap.com/maps?v=1.3&key=9d870244cd940650899a73c0566d7652&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder"></script>
+<script src="assets/js/jquery191.js"></script>
+<script>
+function getQueryString(name) { 
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null; 
+} 
+var searchPot = getQueryString('region');
+var map = new AMap.Map('map');
+
+ var autoOptions = {
+    input: "tipinput"
+};
+var auto = new AMap.Autocomplete(autoOptions);
+var placeSearch = new AMap.PlaceSearch({
+    map: map
+});  //构造地点查询类
+AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+function select(e) {
+    if (e.poi && e.poi.location) {
+        map.setZoom(15);
+        map.setCenter(e.poi.location);
+    }
+    placeSearch.setCity(e.poi.adcode);
+    placeSearch.search(e.poi.name);  //关键字查询查询
+}
+
+map.on('click', function(e) {
+    var address = '';
+    var pt = {
+        lng: e.lnglat.getLng(),
+        lat: e.lnglat.getLat()
+    }
+    var geocoder = new AMap.Geocoder({
+        radius: 1000,
+        extensions: "all"
+    });
+    var lnglatXY = new AMap.LngLat(pt.lng, pt.lat); 
+    geocoder.getAddress(lnglatXY, function(status, result) {
+        if (status === 'complete' && result.info === 'OK') {
+            address = result.regeocode.formattedAddress;
+        }
+        try{
+            window.parent.mapCallback(pt, address);
+        }catch(err){}
+    });
+});
+
+$("#tipinput").on('keyup', function(e) {
+    if (e.keyCode == 13) {
+        placeSearch.search(this.value);  //关键字查询查询
+    }
+})
+searchPot && $("#tipinput").val(searchPot) && placeSearch.search(searchPot);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>报表统计</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">交通事故快速处理平台</a>
+	</div>
+	<div class="user">
+		<div class="online">在线用户数：8人</div>
+		<dl>
+			<dt><i class="ico ico-user"></i>系统管理员</dt>
+			<dd>
+				<a href="javascript:;" id="jmodifyPwd">修改密码</a>
+				<a href="login.html">安全退出</a>
+			</dd>
+		</dl>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="nav cf">
+	<ul>
+		<li><a href="index.html"><i class="ico ico-1"></i>首页</a></li>
+		<li><a href="sgdz.html"><i class="ico ico-2"></i>事故定责</a></li>
+		<li>
+			<dl>
+				<dt><i class="ico ico-3"></i>系统设置</dt>
+				<dd>
+					<a href="user.html">用户管理</a>
+					<a href="role.html">角色管理</a>
+					<a href="area.html">用户区域设置</a>
+					<a href="source.html">资源管理</a>
+				</dd>
+			</dl>
+		</li>
+		<li>
+			<dl>
+				<dt><i class="ico ico-3"></i>报表统计</dt>
+				<dd>
+					<a href="statis.html">报表统计</a>
+					<a href="accident-his.html">历史事故查询</a>
+					<a href="accident.html">事故查询</a>
+				</dd>
+			</dl>
+		</li>
+	</ul>
+</div>
+
+<div class="wrapper">
+	<div class="filter">
+		<form onsubmit="return false" name="filter" id="filter">
+			<label class="for">统计时间</label>
+			<input type="text" class="ipt date" name="start1" id="queryStartTime"  />
+			<i>-</i>
+			<input type="text" class="ipt date" name="end1" id="queryEndTime"  />
+
+			<label class="for">统计维度</label>
+			<span class="radio-group">
+				<input type="hidden" name="type" value="1">
+				<em data-value="1" class="on">按时间事故统计</em>
+				<em data-value="2">按区域事故统计</em>
+				<em data-value="3">按公司事故统计</em>
+			</span>
+		</form>
+	</div>
+
+	<div class="box">
+		<div class="tab">
+			<span class="on">表格模式</span>
+			<span>图标模式</span>
+		</div>
+		
+		<div class="mt15 tab-cont">
+			<div class="table hide">
+				<script id="tableTemp" type="text/html">
+					{{each list as item i}}
+					<tr>
+						<td>{{item.date}}</td>
+						<td>{{item.sum}}</td>
+						<td>{{item.wait}}</td>
+						<td>{{item.processor}}</td>
+						<td>{{item.done}}</td>
+						<td>{{item.closed}}</td>
+					</tr>
+					{{/each}}
+				</script>
+
+				<table>
+					<thead>
+						<tr>
+							<th>日期</th>
+							<th>事故总数</th>
+							<th>待处理</th>
+							<th>处理中</th>
+							<th>定责完成</th>
+							<th>异常关闭</th>
+						</tr>
+					</thead>
+					<tbody id="tbody"></tbody>
+					<tfoot id="tfoot"></tfoot>
+				</table>
+			</div>
+			
+			<div class="table" id="chart1" style="height:300px;"></div>
+		</div>
+
+		
+		<div class="operate">
+			<div class="pagination"></div>
+		</div>
+	</div>
+
+</div>
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<!-- 页面专用 -->
+<link rel="stylesheet" href="assets/plugins/jedate/jedate.css" />
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/ajaxPage.js"></script>
+<script src="assets/plugins/jedate/jquery.jedate.min.js"></script>
+<script src="assets/js/echarts.min.js"></script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+	    "totalSize": 18,
+	    "list|10": [{
+		    "date": "@date",
+	        "sum|40-60": 1,
+	        "wait|10-15": 1,
+	        "processor|10-15": 1,
+	        "done|10-15": 1,
+	        "closed|10-15": 1
+		}]
+	});
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+
+<script>
+var _global = {
+	init: function() {
+		this.bindEvent();
+		this.jeDate();
+		this.chart();
+		// this.filter();
+	},
+	filter: function() {
+		var that = this;
+		var $form = $('#filter');
+		var page =  new Page({
+			pageIndex: 1, // 当前页
+			pageSize: 10, // 每页显示10条
+			url: 'http://g.cn',
+			callback: function(res) {
+				var html = ['<td>总合计</td>'];
+				var model = {
+					sum: 0,
+					wait: 0,
+					processor: 0,
+					done: 0,
+					closed: 0
+				};
+				var flag = false;
+				$.each(res.list, function(i, item) {
+					model.sum += item.sum;
+					model.wait += item.wait;
+					model.processor += item.processor;
+					model.done += item.done;
+					model.closed += item.closed;
+					flag = true;
+				})
+				$.each(model, function(j, td) {
+					html.push('<td>', td,'</td>');
+				})
+				flag && $('#tfoot').html('<tr>' + html.join('') + '</tr>');
+			}
+		})
+		
+		// 查询
+		$form.on('submit', function() {
+			var filterData = $form.serializeArray();
+			page.request(true, filterData);
+			return false;
+		}).trigger('submit');
+
+		$form.on('click', '.radio-group em', function() {
+			$(this).siblings('input').val($(this).data('value'));
+			$(this).addClass('on').siblings().removeClass('on');
+			$form.trigger('submit');
+		})
+	},
+	jeDate: function() {
+		$.mydate({
+            start: '#queryStartTime',
+            end: '#queryEndTime',
+            format: 'YYYY-MM-DD hh:mm',
+            isinitVal: true
+        })
+	},
+	bindEvent: function() {
+		$('.tab').on('click', 'span', function() {
+			$(this).addClass('on').siblings().removeClass('on');
+			$('.tab-cont').children().eq($(this).index()).show().siblings().hide();
+		})
+	},
+	chart: function() {
+		var that = this;
+		var timer = 0;
+
+		chart1 = echarts.init(document.getElementById('chart1'));
+
+        var chartReset = function() {
+        	clearTimeout(timer);
+        	timer = setTimeout(function() {
+        		chart1.resize();
+        	}, 50)
+        }
+        // that.chart1(chart1);
+        // that.chart2(chart1);
+        that.chart3(chart1);
+        $(window).on('resize', chartReset);
+	},
+	chart2: function(chart1) {
+		var options = {
+			 title: {
+		        text: '区域事故统计'
+		    },
+		    color: ['#de4242', '#4778c7', '#4e8ff7', '#26b99a', '#eb9335', '#263238'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    barMaxWidth: 6,
+		    yAxis: {},
+		    xAxis: [
+                {
+                    type : 'category',
+                    axisLabel: {show:true,clickable: true, rotate:0, margin: 8, interval: 0},
+                    data: []
+                }
+		    ],
+		    series: []
+		}
+		chart1.setOption(options);
+
+		var data = [{"allCount":420,"waitCount":44,"underCount":44,"dutyCount":399,"bugCount":21,"groupValue":"江岸区"},{"allCount":443,"waitCount":0,"underCount":0,"dutyCount":423,"bugCount":20,"groupValue":"江汉区",},{"allCount":326,"waitCount":0,"underCount":0,"dutyCount":313,"bugCount":13,"groupValue":"硚口区",},{"allCount":291,"waitCount":0,"underCount":0,"dutyCount":251,"bugCount":40,"groupValue":"汉阳区",},{"allCount":869,"waitCount":0,"underCount":0,"dutyCount":835,"bugCount":34,"groupValue":"武昌区",},{"allCount":666,"waitCount":0,"underCount":1,"dutyCount":582,"bugCount":83,"groupValue":"洪山",},{"allCount":186,"waitCount":0,"underCount":0,"dutyCount":154,"bugCount":32,"groupValue":"青山区",},{"allCount":473,"waitCount":0,"underCount":1,"dutyCount":392,"bugCount":80,"groupValue":"东湖新技术开发区",},{"allCount":184,"waitCount":0,"underCount":0,"dutyCount":141,"bugCount":43,"groupValue":"武汉经济技术开发区",},{"allCount":52,"waitCount":1,"underCount":0,"dutyCount":47,"bugCount":4,"groupValue":"东湖生态旅游风景区",}]
+
+		var xAxisData = [],
+			y_allCount = [],
+			y_waitCount = [],
+			y_underCount = [],
+			y_dutyCount = [],
+			y_bugCount = [];
+
+		$.each(data, function(i, item) {
+			xAxisData.push(item.groupValue)
+			y_allCount.push(item.allCount);
+			y_waitCount.push(item.waitCount);
+			y_underCount.push(item.underCount);
+			y_dutyCount.push(item.dutyCount);
+			y_bugCount.push(item.bugCount);
+		})
+		chart1.setOption({
+			xAxis: {
+				data: xAxisData
+			},
+	    	series: [{
+                name: '事故总数',
+                type: 'bar',
+                data: y_allCount
+            }, {
+                name: '待处理',
+                type: 'bar',
+                data: y_waitCount
+            }, {
+                name: '处理中',
+                type: 'bar',
+                data: y_underCount
+            }, {
+                name: '定责完成',
+                type: 'bar',
+                data: y_dutyCount
+            }, {
+                name: '异常关闭',
+                type: 'bar',
+                data: y_bugCount
+            }]
+		});
+	},
+	chart3: function(chart1) {
+		var options = {
+			 title: {
+		        text: '公司事故统计'
+		    },
+		    color: ['#de4242', '#4778c7', '#4e8ff7', '#26b99a', '#eb9335', '#263238'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    barMaxWidth: 6,
+		    yAxis: {},
+		    xAxis: [
+                {
+                    type : 'category',
+                    axisLabel: {show:true,clickable: true, rotate:0, margin: 8, interval: 0},
+                    data: []
+                }
+		    ],
+		    series: []
+		}
+		chart1.setOption(options);
+
+		var data = [{"tzCount":15,"qzCount":108,"groupValue":"中华联合","zzCount":5,"czCount":13},{"tzCount":0,"qzCount":9,"groupValue":"中银保险","zzCount":0,"czCount":0},{"tzCount":2,"qzCount":44,"groupValue":"亚太产险","zzCount":3,"czCount":0},{"tzCount":110,"qzCount":1238,"groupValue":"人保财险","zzCount":41,"czCount":39},{"tzCount":0,"qzCount":7,"groupValue":"信达产险","zzCount":0,"czCount":0},{"tzCount":1,"qzCount":23,"groupValue":"华安产险","zzCount":0,"czCount":0},{"tzCount":0,"qzCount":17,"groupValue":"华泰产险","zzCount":0,"czCount":1},{"tzCount":2,"qzCount":21,"groupValue":"国元","zzCount":1,"czCount":2},{"tzCount":3,"qzCount":75,"groupValue":"国寿财险","zzCount":2,"czCount":4}]
+
+		var xAxisData = [],
+			y_allCount = [],
+			y_qzCount = [],
+			y_zzCount = [],
+			y_tzCount = [],
+			y_czCount = [];
+
+		$.each(data, function(i, item) {
+			xAxisData.push(item.groupValue)
+			y_allCount.push(item.qzCount+item.zzCount+item.tzCount+item.czCount);
+			y_qzCount.push(item.qzCount);
+			y_zzCount.push(item.zzCount);
+			y_tzCount.push(item.tzCount);
+			y_czCount.push(item.czCount);
+		})
+		chart1.setOption({
+			xAxis: {
+				data: xAxisData
+			},
+	    	series: [{
+                name: '事故总数',
+                type: 'bar',
+                data: y_allCount
+            }, {
+                name: '全责',
+                type: 'bar',
+                data: y_qzCount
+            }, {
+                name: '主责',
+                type: 'bar',
+                data: y_zzCount
+            }, {
+                name: '同责',
+                type: 'bar',
+                data: y_tzCount
+            }, {
+                name: '次责',
+                type: 'bar',
+                data: y_czCount
+            }]
+		});
+	},
+	chart1: function(chart1) {
+		var options = {
+		    tooltip: {
+		        trigger: 'axis'
+		    },
+            backgroundColor: '#fff',
+		    legend: {
+		        top: 30,
+		        right: 40,
+		        selectedMode: false,
+		        orient: 'vertical',
+		        borderRadius: 0,
+		        itemWidth: 22,
+		        itemHeight: 22,
+		        padding:0 ,
+		        backgroundColor: '#f00',
+		        data:['处理事件数', 'aaa']
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true,
+		        borderWidth: 0
+		    },
+		    xAxis: {
+                axisLine: {
+                    lineStyle: {
+                    	color: '#a9c7ff',
+                    	width: 2
+                    }
+                },
+                axisLabel: {
+                	textStyle: {
+					    color: function (value, index) {
+					        return index%2 === 0 ? '#5a738e' : '#eb9335';
+					    }
+					}
+                },
+                data: []
+		    },
+		    yAxis: {
+                axisLine: {
+                    lineStyle: {
+                    	color: '#a9c7ff',
+                    	width: 2
+                    }
+                },
+                axisLabel: {
+                	textStyle: {
+                		color: '#5a738e'
+                	}
+                },
+		    	scale : true,
+		    	splitLine: {
+		    		lineStyle: {
+		    			color: '#e6ecf9'
+		    		}
+		    	}
+		    },
+            series: {
+                name: '处理事件数',
+                type: 'line',
+                itemStyle: {
+                	normal: {
+                		borderWidth: 5,
+                		color: '#ffa511'
+                	}
+                },
+                lineStyle: {
+                	normal: {
+                		color: '#ffa511',
+                		opacity: 0.53,
+                		width: 3
+                	}
+                },
+                areaStyle: {
+                	normal: {
+                		color: '#ffa511',
+                		opacity: 0.09
+                	}
+                },
+                data: []
+            }
+        }
+        chart1.setOption(options);
+
+		var res = {
+			item: ['2017-06-01', '2017-06-02', '2017-06-03', '2017-06-04', '2017-06-05', '2017-06-06', '2017-06-07', '2017-06-08', '2017-06-09', '2017-06-10'],
+			value: [90, 160, 130, 110, 148, 120, 150, 155, 180, 170]
+		}
+        chart1.setOption({
+        	xAxis: {
+				data: res.item
+			},
+			series: {
+				data: res.value
+			}
+        });
+	}
+}
+</script>
+</body>
+</html>

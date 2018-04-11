@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>武汉车辆管理平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/datetimepicker/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+    <link rel="stylesheet" href="assets/plugins/video/video.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="logo">
+		<a href="index.html">随手拍管理系统</a>
+	</div>
+	<div class="user">
+		<span>yitop</span>
+		<i>|</i>
+		<a href="modify_password.html">修改密码</a>
+		<i>|</i>
+		<a href="about.html">关于</a>
+		<i>|</i>
+		<a href="contact.html">联系</a>
+		<i>|</i>
+		<a href="login.html" class="ico ico-logout"></a>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="nav box">
+	<dl class="active">
+		<dt>
+			<i class="ico ico-1"></i>
+			<span>举报审核</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="wfsh.html">违法审核</a>
+			<a href="wtsh.html">违停审核</a>
+			<a href="shqr.html">审核确认</a>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			<i class="ico ico-2"></i>
+			<span>审核统计</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="ExamineCountAndExportManagerView.html">按地区统计</a>
+			<a href="StatisticsByUserView.html">按审核人员统计</a>
+			<a href="JiangjinfafangAndExportManagerView.html">奖金发放统计</a>
+			<a href="WatchOfferRecordManagerView.html">举报信息查询</a>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			<i class="ico ico-3"></i>
+			<span>系统管理</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="UserManageView.html">账号管理</a>
+			<a href="RoleManagerView.html">角色管理</a>
+			<a href="ModifyValidateView.html">安全管理</a>
+			<a href="DictionaryMangerView.html">字典管理</a>
+			<a href="LawTypeManagerView.html">违法类型管理</a>
+			<a href="PurviewManageView.html">资源管理</a>
+			<a href="DLLDManageView.html">道路路段管理</a>
+		</dd>
+	</dl>
+</div>
+
+<div class="wrapper box">
+	<div class="breadcrumb"><i class="ico ico-site"></i>审核确认</div>
+	<div class="operate">
+		<a href="javascript:history.back(-1);" class="ubtn ubtn-primary">返回</a>
+	</div>
+	
+	<div class="floor">
+		<h2>交通违法照片</h2>
+		<ul class="illegal">
+			<li><img src="uploads/prt1.jpg" alt=""></li>
+			<li><img src="uploads/prt2.jpg" alt=""></li>
+			<li><img src="uploads/prt3.jpg" alt=""></li>
+			<li><img src="uploads/prt4.jpg" alt=""></li>
+		</ul>
+	</div>
+
+	<div class="floor">
+		<h2>交通违法视频</h2>
+		<div class="video">
+			<div class="inner">
+				<video class="video-js" id="video1" controls preload="auto" poster="">
+				    <source src="uploads/video1.mp4" type='video/mp4'>
+				</video>
+			</div>
+		</div>
+
+		<div class="buttons">
+			<button type="button" class="ubtn ubtn-ghost" id="trunLeft">左转</button>
+			<button type="button" class="ubtn ubtn-ghost" id="trunRight">右转</button>
+			<button type="button" class="ubtn ubtn-ghost" id="trun180">180度旋转</button>
+		</div>
+
+	</div>
+	
+	<div class="floor">
+		<h2>基本信息</h2>
+		<div class="table">
+			<table>
+				<tbody>
+					<tr>
+						<td>采集时间：</td>
+						<td>2017-07-02 09:22:22</td>
+						<td>渠道来源：</td>
+						<td>行车记录仪二代</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>违法地点：</td>
+						<td><a href="#!" class="ico ico-map fr"></a>解放大道(古田二路路口)C/新佳丽北路</td>
+						<td>违法类型：</td>
+						<td>机动车逆向行驶</td>
+						<td>违法代码：</td>
+						<td>13013</td>
+					</tr>
+					<tr>
+						<td>号牌号码：</td>
+						<td>鄂AC91H2</td>
+						<td>道路名称：</td>
+						<td>雄楚大道(62009)</td>
+						<td>路段名称：</td>
+						<td>雄楚大街(小何村路口至杨家湾路口路段)F(1027)</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="floor">
+		<div class="operate">
+			<button type="button" class="ubtn ubtn-ghost" id="jprev">上一页</button>
+			<button type="button" class="ubtn ubtn-ghost" id="jnext">下一页</button>
+		</div>
+	</div>
+</div>
+
+<div id="bdMap" style="width:1000px;height:400px;display:none;"></div>
+
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/datetimepicker/core.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/plugins/video/video.js"></script>
+<script src="assets/plugins/viewer/viewer.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script src="assets/js/art.template.js"></script>
+
+<script src="http://api.map.baidu.com/api?v=2.0&ak=yf0xLlteaVZiaOgqMILN9ZgN"></script>
+
+
+
+<script>
+	!(function($) {
+		var _global = {
+			init: function() {
+				this.select2();
+				this.bindEvent();
+				this.video();
+				this.map();
+			},
+			select2: function() {
+				$('.slt').select2();
+			},
+			video: function() {
+				var that = this,
+					videoId = 'video1',
+					$pic = $('.pic'),
+					$img = $('.img');
+
+				videojs(videoId, {
+		  			language: 'zh-CN'
+				}).ready(function() {
+					$('#video1').find('video').wrap('<div style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;"></div>')
+			    });
+
+				// 左转
+				$('#trunLeft').on('click', function() {
+					fx.rotateVideo(videoId, -1);
+				})
+
+				// 右转
+				$('#trunRight').on('click', function() {
+	                fx.rotateVideo(videoId, 1);
+	            })
+				// 180度旋转
+				$('#trun180').on('click', function() {
+	                fx.rotateVideo(videoId, 2);
+	            })
+			},
+			map: function() {
+			    // 百度地图API功能
+			    var map = new BMap.Map("bdMap");
+			    var point = new BMap.Point(114.410600, 30.503223);
+			    var myIcon = new BMap.Icon('assets/images/ico.png', new BMap.Size(23, 28), {imageOffset: new BMap.Size(-269, 0)});
+
+			    // 创建标注   
+			    var marker = new BMap.Marker(point, {icon:myIcon});	
+				// 将标注添加到地图中  
+				map.addOverlay(marker);	
+			    map.centerAndZoom(point, 18); // 定位到中心点
+			    // 启用滚轮放大缩小
+			    // map.enableScrollWheelZoom(); 
+
+			    $('.ico-map').on('click', function() {
+			    	layer.open({
+			    		area: '[1000px,400px]',
+						type: 1,
+						title: false,
+						content: $('#bdMap')
+			    	})
+			    	map.centerAndZoom(point, 18); // 定位到中心点
+			    })
+			},
+			bindEvent: function() {
+				var that = this,
+					$temp = $('#tempForm'),
+					$form = $temp.find('form');
+
+				// 上一页
+				$('#jprev').on('click', function() {
+
+				})
+				// 下一页
+				$('#jnext').on('click', function() {
+
+				})
+			}
+		}
+
+		_global.init();
+	})(jQuery);
+</script>
+</body>
+</html>

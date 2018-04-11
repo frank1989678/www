@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <title>武汉110作战指挥中心调度平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/lib/select2/select2.css" />
+    <script src="assets/js/jquery191.js"></script>
+</head>
+<body>
+
+<!-- <iframe src="nav.html" width="100%" height="75" frameborder="0" scrolling="no"></iframe> -->
+
+<div class="header">
+    <div class="logo">
+        <a href="/" target="_parent">武汉110作战指挥中心调度平台</a>
+    </div>
+    <div class="nav">
+        <ul>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-1"></i>应急指挥</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-2"></i>视频监控</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-3"></i>勤务管理</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-4"></i>信息报表</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-5"></i>系统管理</dt>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <div class="user">
+        <ul>
+            <li>欢迎！Apples</li>
+            <li><a href="javascript:;" id="j_mdyPwd">修改密码</a></li>
+            <li><a href="login.html">注销</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="wrapper">
+    <div class="crumbs">资源管理</div>
+
+    <div class="filter">
+        <form name="filterForm" id="filterForm" onsubmit="return false;">
+            <button type="button" class="ubtn ubtn-filter" onclick="_add()">新增</button>
+            <button type="button" class="ubtn ubtn-filter ml30" id="jedit">编辑</button>
+            <button type="button" class="ubtn ubtn-filter ml30" id="expandAll">全部展开</button>
+            <button type="button" class="ubtn ubtn-filter ml30" id="collapseAll">全部合起</button>
+        </form>
+    </div>
+
+    <ul id="treeId" class="ztree"></ul>
+</div>
+
+
+<!-- 新增&编辑 -->
+<div class="form layer-form" id="tempForm" style="max-height:100%;">
+    <form name="form1" id="form1" onsubmit="return false;">
+        <!-- id的值为空时是新增数据，有值时修改数据 -->
+        <input type="hidden" name="id">
+        <div class="row">
+            <span class="for">资源名称</span>
+            <input type="text" class="ipt" name="name"  />
+        </div>
+        <div class="row">
+            <span class="for">请求地址</span>
+            <input type="text" class="ipt" name="url"  />
+        </div>
+        <div class="row">
+            <span class="for">排序</span>
+            <input type="text" class="ipt" name="sort"  />
+        </div>
+        <div class="row req">
+            <span class="for">资源类型</span>
+            <select name="category" class="slt select2">
+                <option value="1">菜单</option>
+                <option value="2">按钮</option>
+            </select>
+        </div>
+        <div class="row req">
+            <span class="for">是否启用</span>
+            <select name="enabled" class="slt select2">
+                <option value="1">启用</option>
+                <option value="2">禁用</option>
+            </select>
+        </div>
+        <div class="row req">
+            <span class="for">是否显示</span>
+            <select name="visible" class="slt select2">
+                <option value="1">显示</option>
+                <option value="2">隐藏</option>
+            </select>
+        </div>
+    </form>
+</div>
+<!-- end 新增&编辑 -->
+
+<script src="assets/js/common.js"></script>
+<script src="assets/lib/layer/layer.js"></script>
+<script src="assets/lib/validator/validator.js"></script>
+<script src="assets/lib/select2/select2.js"></script>
+<script src="assets/lib/ztree/jquery.ztree.min.js"></script>
+
+
+<!-- 模拟接口(只做演示使用，后端同学在开发时请删除此代码块) -->
+<script src="assets/js/mock.js"></script>
+<script>
+    Mock.mock('http://api.com', {
+        "code|0-1": 1, // 必须，作为判断ajax请求成功的判断提交
+        "code": "1",
+        "msg": "操作失败"
+    });
+    Mock.mock('http://edit.com', {
+        "code": "1",
+        "msg": "操作失败",
+        "data": {
+            "id": "1",
+            "name": "用户管理",
+            "url": "http://xiaofang.com/userManage/",
+            "sort|0-99": 1,
+            "mobile": /^1[345678]\d{9}$/,
+            "category|1-2": 1,
+            "enabled|1-2": 1,
+            "visible|1-2": 1
+        }
+    });
+</script>
+<!-- 模拟接口(只做演示使用，后端同学在开发时请删除此代码块) end -->
+
+<script>
+// 页面配置
+var _API = {
+    name: '资源',           // 页面标题
+    url: 'http://g.cn',    // 查询接口
+    del: 'http://api.com', // 删除操作接口
+    add: 'http://api.com', // 新增操作接口
+    edit: 'http://edit.com' // 编辑操作接口
+}
+
+// 新增
+function _add() {
+    var $temp = $('#tempForm');
+    var $form = $temp.find('form');
+    $form[0].reset();
+    $form.find('.slt').trigger('change.select2');
+    $('body').addClass('noscroll');
+    layer.open({
+        type: 1,
+        area: ['600px'],
+        content: $temp,
+        btn: ['取消', '确定'],
+        btn2: function() {
+            $form.submit();
+            return false;
+        },
+        end: function() {
+            $('body').removeClass('noscroll');
+        }
+    })
+    return $form;
+}
+
+var _page = {
+    init: function() {
+        this.select2();
+        this.validator();
+        this.tree();
+    },
+    select2: function() {
+        $('.select2').select2({
+            minimumResultsForSearch: -1
+        });
+    },
+    validator: function() {
+        var that = this;
+        $('#form1').validator({
+            fields: {
+                name: {
+                    rule: 'required',
+                    msg: '请输入资源名称'
+                },
+                url: {
+                    rule: 'required',
+                    msg: '请输入请求地址'
+                },
+                sort: {
+                    rule: 'range(0~9999999)',
+                    msg: {
+                        rule: '请填写 0 到 9999999 的数'
+                    }
+                }
+            },
+            valid: function(form) {
+                var params = $(form).serialize();
+                fx.ajax('http://api.com', 'POST', params, function() {
+                    $.notify({
+                        title: '添加成功'
+                    })
+                    that.getTreeData();
+                    layer.closeAll();
+                }, null, true)
+            }
+        })
+    },
+    getTreeData: function() {
+        var that = this;
+
+        var setting = {
+            check: {
+                enable: false
+            },
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: 'id',
+                    pIdKey: 'pId'
+                }
+            },
+            view: {
+                showLine: false
+            }
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: 'json/tree.json',
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                that.treeObj = $.fn.zTree.init($('#treeId'), setting, data);
+            }, 
+            error: function () {
+                fx.alert('数据加载失败');
+            }
+        })
+    },
+    tree: function() {
+        var that = this;
+
+        this.getTreeData();
+
+        // 全部展开
+        $('#expandAll').on('click', function() {
+            if (that.treeObj) {
+                that.treeObj.expandAll(true);
+            }
+        })
+        // 全部折叠
+        $('#collapseAll').on('click', function() {
+            if (that.treeObj) {
+                that.treeObj.expandAll(false);
+            }
+        })
+
+        // 取消节点的选中状态
+        $('#treeId').on('click', function() {
+            if (that.treeObj) {
+                that.treeObj.cancelSelectedNode();
+            }
+        })
+
+        // 修改
+        $('#jedit').on('click', function() {
+            if (that.treeObj) {
+                var selectedNodes = that.treeObj.getSelectedNodes();
+                if (selectedNodes.length > 0) {
+                    var keyId = selectedNodes[0].id;
+                    var $form = _add(); // 打开弹出框
+                    fx.ajax(_API.edit, 'GET', {key: keyId}, function(res) {
+                        $form.find('.ipt, .slt').each(function(i, item) {
+                            this.value = res.data[this.name] || '';
+                            $(this).hasClass('slt') && $(this).trigger('change.select2');
+                        })
+                    })
+                } else {
+                    $.notify({'title': '请选择一个节点!'});
+                }
+            }
+        })
+    }
+}
+
+</script>
+</body>
+</html>

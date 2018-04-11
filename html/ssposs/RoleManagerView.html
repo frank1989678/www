@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>武汉车辆管理平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/datetimepicker/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+    <link rel="stylesheet" href="assets/plugins/zTreeStyle/jquery.ztree.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="logo">
+		<a href="index.html">随手拍管理系统</a>
+	</div>
+	<div class="user">
+		<span>yitop</span>
+		<i>|</i>
+		<a href="modify_password.html">修改密码</a>
+		<i>|</i>
+		<a href="about.html">关于</a>
+		<i>|</i>
+		<a href="contact.html">联系</a>
+		<i>|</i>
+		<a href="login.html" class="ico ico-logout"></a>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="nav box">
+	<dl>
+		<dt>
+			<i class="ico ico-1"></i>
+			<span>举报审核</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="wfsh.html">违法审核</a>
+			<a href="wtsh.html">违停审核</a>
+			<a href="shqr.html">审核确认</a>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			<i class="ico ico-2"></i>
+			<span>审核统计</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="ExamineCountAndExportManagerView.html">按地区统计</a>
+			<a href="StatisticsByUserView.html">按审核人员统计</a>
+			<a href="JiangjinfafangAndExportManagerView.html">奖金发放统计</a>
+			<a href="WatchOfferRecordManagerView.html">举报信息查询</a>
+		</dd>
+	</dl>
+	<dl>
+		<dt>
+			<i class="ico ico-3"></i>
+			<span>系统管理</span>
+			<i class="arrow"></i>
+		</dt>
+		<dd>
+			<a href="UserManageView.html">账号管理</a>
+			<a href="RoleManagerView.html">角色管理</a>
+			<a href="ModifyValidateView.html">安全管理</a>
+			<a href="DictionaryMangerView.html">字典管理</a>
+			<a href="LawTypeManagerView.html">违法类型管理</a>
+			<a href="PurviewManageView.html">资源管理</a>
+			<a href="DLLDManageView.html">道路路段管理</a>
+		</dd>
+	</dl>
+</div>
+
+<div class="wrapper box">
+	<div class="breadcrumb"><i class="ico ico-site"></i>角色管理</div>
+
+	<div class="filter">
+		<form id="filterForm" action="#!">
+				<label class="for">区域</label>
+				<select name="region" id="region" class="slt select2">
+					<option value="">请选择</option>
+					<option value="15">江岸区</option>
+					<option value="16">江汉区</option>
+					<option value="17">硚口区</option>
+					<option value="18">汉阳区</option>
+					<option value="19">武昌区</option>
+					<option value="20">青山区</option>
+					<option value="21">洪山区</option>
+					<option value="22">东西湖区</option>
+					<option value="23">汉南区</option>
+					<option value="24">蔡甸区</option>
+					<option value="25">江夏区</option>
+					<option value="26">黄陂区</option>
+					<option value="27">新洲区</option>
+					<option value="28">经济技术开发区</option>
+					<option value="29">东湖新技术开发区</option>
+					<option value="30">化学工业区</option>
+					<option value="31">东湖生态旅游风景区</option>
+				</select>
+
+				<label class="for">角色名称</label>
+				<input type="text" class="ipt" name="roleName" id="roleName" placeholder="角色名称" />
+
+				<button type="submit" class="ubtn ubtn-primary">查询</button>
+				<button type="button" class="ubtn ubtn-primary" id="jadd">新增角色</button>
+		</form>
+	</div>
+	
+	<div class="table">
+		<script id="tableTemp" type="text/html">
+			{{each list as item i}}
+			<tr>
+				<td><label class="cbx"><input type="checkbox" value="{{item.id}}" /></label></td>
+				<td>{{item.roleName}}</td>
+				<td>{{item.desc}}</td>
+				<td>{{item.createTime}}</td>
+				<td>{{item.updateTime}}</td>
+				<td>
+					<button type="button" class="ubtn ubtn-ghost jedit" data-id="{{item.id}}">编辑</button>
+					<button type="button" class="ubtn ubtn-ghost jpower" data-id="{{item.id}}">权限编辑</button>
+				</td>
+			</tr>
+			{{/each}}
+		</script>
+
+		<table class="tc">
+			<thead>
+				<tr>
+					<th width="50"><label class="cbx"><input type="checkbox" /></label></th>
+					<th>角色名称</th>
+					<th>角色描述</th>
+					<th>创建时间</th>
+					<th>最近修改时间</th>
+					<th width="180">操作</th>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+				<tr>
+					<td><label class="cbx"><input value="1" type="checkbox"></label></td>
+					<td>业务管理员</td>
+					<td>-</td>
+					<td>2014-07-18 18:24:09</td>
+					<td>2014-07-18 18:24:09</td>
+					<td>
+						<button type="button" class="ubtn ubtn-ghost jedit" data-id="1">编辑</button>
+						<button type="button" class="ubtn ubtn-ghost jpower" data-id="1">权限编辑</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="operate">
+		<div class="action">
+			<button type="button" class="ubtn ubtn-red jdel">批量删除</button>
+			<select name="" class="slt select2">
+				<option value="10">每页10行</option>
+				<option value="20">每页20行</option>
+				<option value="50">每页50行</option>
+				<option value="100">每页100行</option>
+			</select>
+		</div>
+		<div class="pagination"></div>
+	</div>
+</div>
+
+
+<div class="form layer-form" id="tempForm">
+	<div class="title">修改会员信息</div>
+	<form action="">
+		<div class="item">
+            <div class="txt">区域：</div>
+            <div class="cnt">
+				<select name="region" class="slt select2">
+					<option value="">请选择</option>
+					<option value="15">江岸区</option>
+					<option value="16">江汉区</option>
+					<option value="17">硚口区</option>
+					<option value="18">汉阳区</option>
+					<option value="19">武昌区</option>
+					<option value="20">青山区</option>
+					<option value="21">洪山区</option>
+					<option value="22">东西湖区</option>
+					<option value="23">汉南区</option>
+					<option value="24">蔡甸区</option>
+					<option value="25">江夏区</option>
+					<option value="26">黄陂区</option>
+					<option value="27">新洲区</option>
+					<option value="28">经济技术开发区</option>
+					<option value="29">东湖新技术开发区</option>
+					<option value="30">化学工业区</option>
+					<option value="31">东湖生态旅游风景区</option>
+				</select>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">角色名称：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="roleName" placeholder="角色名称" />
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">角色描述：</div>
+            <div class="cnt">
+            	<textarea name="desc" class="ipt ipt-mul"></textarea>
+            </div>
+        </div>
+	    <div class="buttons" style="padding:20px 0;">
+	        <button type="button" class="ubtn ubtn-blue layer-close">关闭</button>
+	        <button type="submit" class="ubtn ubtn-blue submit" style="width:120px;">保存信息</button>
+	    </div>
+	</form>
+</div>
+
+<div class="form layer-form" id="treeForm">
+	<div class="title">赋予权限给</div>
+	<ul id="ztree" class="ztree"></ul>
+    <div class="buttons" style="padding-top:20px;">
+        <button type="button" class="ubtn ubtn-blue layer-close">关闭</button>
+        <button type="submit" class="ubtn ubtn-blue submit" style="width:120px;">保存信息</button>
+    </div>
+</div>
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/datetimepicker/core.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/plugins/zTreeStyle/jquery.ztree.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/jquery.pagination.min.js"></script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.setup({
+	    timeout: '300-1000' // 表示响应时间介于 200 和 600 毫秒之间，默认值是'10-100'。
+	})
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+		"currentPage": 1,
+	    "nextPage": 2,
+	    "pageSize": 5,
+	    "totalPage": 27,
+	    "totalSize": 131,
+	    "list|10": [{
+		    "id": "@increment",
+		    "roleName|1": ["业务管理员","临时用户"],
+	        "desc": "-",
+	        "createTime": "@datetime",
+	        "updateTime": "@datetime"
+		}]
+	});
+	
+	Mock.mock('http://h.cn', {
+		"result": "SUCCESS",
+	    "data": {
+	        "roleName": "@cname",
+	        "desc": "角色描述",
+	        "region|15-31": 1
+		}
+	});
+
+	Mock.mock('http://del.cn', {
+		"result": "SUCCESS",
+	    "data": {
+	    	"result|0-1": 1
+		}
+	});
+
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+
+<script>
+	!(function($) {
+		var _global = {
+			init: function() {
+				this.select2();
+				this.filterData = {}; // 搜索条件
+				this.filter();
+				this.request(this.filterData, true); // 加载数据并初始化分页
+				this.bindEvent();
+            	this.role();
+			},
+			select2: function() {
+				$('.slt').select2();
+			},
+			filter: function() {
+				var that = this;
+				var $form = $('#filterForm');
+
+				// 每页显示
+			    $('.action').find('.slt').on('change', function() {
+			    	that.filterData.pageSize = this.value;
+			    	that.request(that.filterData, true);
+			    })
+
+				// 查询
+				$form.on('submit', function() {
+					that.filterData.region = $('#region').val();
+					that.filterData.roleName   = $('#roleName').val();
+					that.request(that.filterData, true);
+					return false;
+				})
+			},
+			/**
+			 * 添加删除classname
+			 * @param  {Object} data ajax参数
+			 * @param  {Boolean} initPage  是否初始化分页
+			 */
+			request: function(data, initPage) {
+				var that = this;
+				fx.request('http://g.cn', data, function(res){
+					var model = template('tableTemp', res);
+					$("#tbody").empty().html(model);
+					window.scrollTo(0, 0);
+					initPage && that.paginate(res.pageSize, res.totalSize);
+				});
+			},
+			paginate: function(pageSize, totalSize) {
+				var that = this;
+				function pageselectCallback(page_index) {
+					that.filterData.page_index = page_index;
+					that.request(that.filterData);
+					showDetail(page_index);
+				}
+				// 分页统计
+				function showDetail(page_index) {
+					$('.pagination').prepend('<div class="p-size">第' + (page_index + 1) + '页/共' + Math.ceil(totalSize/pageSize) + '页（共' + totalSize + '行）</div>');
+				}
+				$('.pagination').pagination(totalSize, {
+                    num_edge_entries: 2,
+                    callback: pageselectCallback,
+                    items_per_page: pageSize // 每页显示数量
+                });
+                showDetail(0);
+			},
+			bindEvent: function() {
+				var that = this,
+					$temp = $('#tempForm'),
+					$treeForm = $('#treeForm'),
+					$form = $temp.find('form'),
+					$tbody = $('#tbody');
+
+				// 重置密码
+				$tbody.on('click', '.jpwd', function() {
+					layer.confirm('是否确认重置密码？', {
+			            title: '提示'
+			        }, function(layerId) {
+			        	layer.close(layerId);
+			        })
+				})
+
+				// 新增
+				$('#jadd').on('click', function() {
+					$form[0].reset();
+					$form.find('.select2').trigger('change.select2');
+					layer.open({
+						area: '540px',
+						type: 1,
+						title: false,
+						content: $temp
+					})
+				})
+
+				// 编辑
+				$tbody.on('click', '.jedit', function() {
+					var id = $(this).data('id');
+					$form[0].reset();
+					if (id) {
+						fx.request('http://h.cn', {id: id}, function(res){
+							$form.find('.slt[name="region"]').val(res.data.region);
+							$form.find('.ipt[name="roleName"]').val(res.data.roleName);
+							$form.find('.ipt[name="desc"]').val(res.data.desc);
+							$form.find('.select2').trigger('change.select2');
+							layer.open({
+								area: '540px',
+								type: 1,
+								title: false,
+								content: $temp
+							})
+						});
+					}
+				})
+				// 权限
+				$tbody.on('click', '.jpower', function() {
+					var id = $(this).data('id');
+					if (id) {
+						layer.open({
+							area: ['540px', '500px'],
+							type: 1,
+							title: false,
+							content: $treeForm
+						})
+					}
+				})
+
+				// 验证
+				$form.validator({
+                    fields: {
+                        roleName: '角色名称: required'
+                    },
+                    valid: function(form) {
+                    	// that.post($(form).serialize());
+                    	layer.closeAll();
+						return false;
+                    }
+                });
+
+				// 关闭弹层
+				$('body').on('click', '.layer-close', function() {
+					layer.closeAll();
+				})
+
+			},
+			del: function(data) {
+				fx.loading();
+        		$.ajax({
+        			url: 'http://del.cn',
+        			dataType: 'json',
+        			type: 'GET',
+        			type: 'POST',
+        			data: data,
+        			success: function(res) {
+        				fx.closeLoading();
+        				if (res.data.result == 0) {
+        					$.notify({
+        						type: 'danger',
+        						title: '操作失败'
+        					})
+            			} else {
+        					$.notify({
+        						type: 'success',
+        						title: '操作成功'
+        					})
+            			}
+        			}
+        		})
+			},
+			role: function() {
+
+	            var setting = {
+	                check: {
+	                    enable: true,
+                    	chkboxType: { 'Y': 'p', 'N': 's' }
+	                },
+	                data: {
+			            simpleData: {
+			                enable: true,
+			                idKey: "id",
+			                pIdKey: "pId",
+			                rootPId: null
+			            }
+	                },
+	                view: {
+	                    showLine: false
+	                }
+	            };
+
+	            var data = [{
+					"id": 0,
+					"pId": 0,
+					"name": "全部",
+					"checked": null,
+					"open": true
+				}, {
+					"id": 1,
+					"pId": 0,
+					"name": "违法举报审核",
+					"checked": null,
+					"open": true
+				}, {
+					"id": 2,
+					"pId": 0,
+					"name": "用户管理",
+					"checked": null,
+					"open": true
+				}, {
+					"id": 3,
+					"pId": 0,
+					"name": "系统管理",
+					"checked": null,
+					"open": true
+				}, {
+					"id": 4,
+					"pId": 0,
+					"name": "营运车辆管理",
+					"checked": null,
+					"open": true
+				}, {
+					"id": 11,
+					"pId": 1,
+					"name": "举报审核",
+					"checked": null,
+					"open": true
+				}, {
+					"id": 12,
+					"pId": 1,
+					"name": "违停审核",
+					"checked": null,
+					"open": true
+				}, {
+					"id": 13,
+					"pId": 1,
+					"name": "举报检测",
+					"checked": null,
+					"open": true
+				}, {
+					"id": 14,
+					"pId": 1,
+					"name": "通知模板",
+					"checked": null,
+					"open": true
+				}, {
+					"id": 21,
+					"pId": 2,
+					"name": "vip用户管理",
+					"checked": null,
+					"open": true
+				}, {
+					"id": 211,
+					"pId": 21,
+					"name": "vip用户管理-删除",
+					"checked": null,
+					"open": true
+				}, {
+					"id": 212,
+					"pId": 21,
+					"name": "vip用户管理-新增",
+					"checked": null,
+					"open": true
+				}]
+
+	            var treeObj = $.fn.zTree.init($('#ztree'), setting, data);
+			}
+		}
+
+		_global.init();
+	})(jQuery);
+</script>
+</body>
+</html>

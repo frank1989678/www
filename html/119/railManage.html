@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>电子围栏</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">武汉119作战指挥中心调度平台</a>
+	</div>
+	<div class="nav">
+		<ul>
+			<li>
+				<dl>
+					<dt><i class="ico ico-1"></i>地图管控</dt>
+					<dd>
+						<a href="track.html">车辆监控</a>
+						<a href="dispatcherManage.html">调度管理</a>
+						<a href="trackHis.html">历史轨迹</a>
+						<a href="railManage.html">电子围栏</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-2"></i>视频监控</dt>
+					<dd>
+						<a href="ocxClient.html">多车视频监控</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-3"></i>信息报表</dt>
+					<dd>
+						<a href="alarmHotSpot.html">警情记录</a>
+						<a href="alarmRecord.html">报警记录</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-4"></i>系统管理</dt>
+					<dd>
+						<a href="carManage.html">车辆管理</a>
+						<a href="orgManage.html">机构管理</a>
+						<a href="userManage.html">用户管理</a>
+						<a href="roleManage.html">角色管理</a>
+						<a href="purviewManage.html">权限管理</a>
+						<a href="contactsManage.html">通讯录管理</a>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+	<div class="user">
+		<span>yitop</span>
+		<i>|</i>
+		<a href="javascript:;" id="mdyPwd">修改密码</a>
+		<i>|</i>
+		<a href="javascript:;" id="mdyTheme">主题</a>
+		<i>|</i>
+		<a href="login.html" class="ico ico-logout"></a>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="map" id="map"></div>
+
+<div id="side">
+	<div class="tit"><button type="button" class="ico ico-refresh"></button>车辆列表</div>
+	<div class="search">
+		<form action="javascript:return false;" name="search" method="GET">
+			<label>车牌号</label>
+			<input type="text" class="ipt" placeholder="请输入车牌号">
+			<button type="submit" class="ico ico-search"></button>
+		</form>
+	</div>
+	<div class="tools">
+		<button type="button" class="tooltip ico ico-1 active" data-tips="全部"></button>
+		<button type="button" class="tooltip ico ico-2" data-tips="在线"></button>
+		<button type="button" class="tooltip ico ico-3" data-tips="离线"></button>
+		<button type="button" class="tooltip ico ico-4" data-tips="报警"></button>
+		<button type="button" class="tooltip ico ico-5" data-tips="刷新"></button>
+	</div>
+	<div class="open"></div>
+	<ul id="carTree" class="ztree"></ul>
+</div>
+
+<div id="side3">
+	<div class="tit">围栏列表</div>
+	<div class="nice-table">
+		<div class="thead">
+			<em class="col2">围栏名称</em>
+			<em class="col3">状态</em>
+			<em class="col3">车辆数</em>
+		</div>
+		<div class="tbody">
+			<div class="tr">
+				<em class="col2" data-id="1"><i class="cbx"></i>泛海中队辖区</em>
+				<em class="col3">生效</em>
+				<em class="col3">3</em>
+			</div>
+			<div class="tr">
+				<em class="col2" data-id="1"><i class="cbx"></i>洪山中队辖区</em>
+				<em class="col3">生效</em>
+				<em class="col3">3</em>
+			</div>
+			<div class="tr">
+				<em class="col2" data-id="1"><i class="cbx"></i>硚口中队辖区</em>
+				<em class="col3">生效</em>
+				<em class="col3">3</em>
+			</div>
+			<div class="tr">
+				<em class="col2" data-id="1"><i class="cbx"></i>洪山中队辖区</em>
+				<em class="col3">生效</em>
+				<em class="col3">3</em>
+			</div>
+			<div class="tr">
+				<em class="col2" data-id="1"><i class="cbx"></i>硚口中队辖区</em>
+				<em class="col3">生效</em>
+				<em class="col3">3</em>
+			</div>
+		</div>
+	</div>
+	<div class="buttons">
+		<button type="button" class="ubtn ubtn-primary" id="jcreate">创建</button>
+		<button type="button" class="ubtn ubtn-red" id="jdel">删除</button>
+		<button type="button" class="ubtn ubtn-red" id="jrefresh">刷新</button>
+	</div>
+
+	<div class="form">
+		<form action="javascript:return false;" name="createRail" method="get">
+			<div class="item req">
+				<label>围栏名称：</label>
+				<input name="name" class="ipt" type="text">
+			</div>
+			<div class="item req">
+				<label>围栏报警类型：</label>
+				<select name="type" class="slt select2">
+					<option value="1">平台报警</option>
+					<option value="2">车机报警</option>
+					<option value="3">平台+车机报警</option>
+				</select>
+			</div>
+			<div class="item req" style="margin-bottom:4px;">
+				<label>围栏状态：</label>
+				<span class="tn">
+					<label style="margin-right:16px;"><input class="_cbx" type="radio" name="enabled" value="1" checked="" />生效</label>
+					<label><input class="_cbx" type="radio" name="enabled" value="0" />未生效</label>
+				</span>
+			</div>
+			<div class="item">
+				<label class="for"><input class="_cbx" type="checkbox" name="enter">进围栏报警</label>
+				<label class="for"><input class="_cbx" type="checkbox" name="leave">出围栏报警</label>
+				<label class="for"><input class="_cbx" type="checkbox" name="time">开启有效时间</label>
+			</div>
+			<div class="item">
+				<label>开始时间：</label>
+				<input name="startTime" id="queryStartTime" class="ipt" type="text">
+			</div>
+			<div class="item">
+				<label>结束时间：</label>
+				<input name="endTime" id="queryEndTime" class="ipt" type="text">
+			</div>
+
+			<div class="btm">
+				<button type="button" class="ubtn ubtn-red fr" id="jsubmit" onclick="saveRail()">保存</button>
+				<button type="button" class="ubtn ubtn-primary" id="jreset" onclick="_removeMarker()">重新画图</button>
+			</div>
+
+			<div class="car">
+				<p>绑定车辆列表：</p>
+			</div>
+
+		</form>
+	</div>
+</div>
+
+<div class="footer-fix">
+    <span>湖北省宏锐慧通信息技术有限公司</span>
+</div>
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<!-- 左侧菜单 -->
+<script src="json/carTree.js"></script>
+<!-- 页面专用 -->
+<link rel="stylesheet" href="assets/plugins/zTreeStyle/jquery.ztree.css" />
+<link rel="stylesheet" href="assets/css/drawingManager.css" />
+<link rel="stylesheet" href="assets/plugins/jedate/jedate.css" />
+<script src="assets/plugins/jedate/jquery.jedate.min.js"></script>
+<script src="assets/plugins/zTreeStyle/jquery.ztree.min.js"></script>
+<script src="http://webapi.amap.com/maps?v=1.3&key=9d870244cd940650899a73c0566d7652&plugin=AMap.MouseTool,AMap.PolyEditor,AMap.CircleEditor"></script>
+<script src="assets/js/drawingManager.js"></script>
+
+<script>
+// 勾选小车
+function checkCar(event, treeId, treeNode) {
+	var id = treeNode.id;
+	if (treeNode.checked) {
+		$('.car').append('<label id="car' + id + '">' + treeNode.name + '</label>');
+	} else {
+		$('#car' + id).remove();
+	}
+}
+
+var setting = {
+    check: {
+        enable: true,
+        chkboxType: { "Y": "", "N": "" }
+    },
+    data: {
+        simpleData: {
+            enable: true,
+            idKey: "id",
+            pIdKey: "pId",
+            rootPId: null
+        }
+    },
+    view: {
+        showLine: true
+    },
+	callback: {
+		onCheck: checkCar
+	}
+};
+
+var treeObj = $.fn.zTree.init($('#carTree'), setting, treeData);
+treeObj.expandAll(true);
+
+var map = new AMap.Map('map',{zoom:14});
+
+// 鼠标工具，绘制圆形、矩形、多边形
+var drawingManager = new DrawingManager(map, {
+    drawingModes: [
+        'circle',
+        // 'rectangle',
+        'polygon',
+        'polyline'
+    ]
+});
+
+var _global = {
+	init: function() {
+		this.bindEvent();
+		this.form();
+	},
+	bindEvent: function() {
+		$('.nice-table').on('click', '.cbx', function() {
+			$(this).toggleClass('cbx-on');
+		})
+		$('.nice-table').on('click', '.col2', function() {
+			var id = $(this).data('id');
+			$.ajax({
+				url: '',
+				data: {id: id},
+				success: function(res) {
+					var $form = $('.form');
+					res = {
+						name: '泛海中队辖区',
+						enabled: 1,
+		        		type: 1,
+		        		start: '17:33:04',
+		        		end: '17:33:04',
+						cars: ['鄂A10020'],
+						enter: 1,
+						leave: 1,
+						time: 1
+					}
+					$form.find('.ipt[name="name"]').val(res.name);
+					$form.find('.slt[name="type"]').val(res.type);
+					$form.find('._cbx').each(function() {
+						if (this.name == 'enabled') {
+							this.checked = res[this.name] == this.value;
+						} else {
+							this.checked = res[this.name] == 1;
+						}
+					})
+					$('#queryStartTime').val(res.start)
+        			$('#queryEndTime').val(res.end)
+				}
+			})
+		})
+	
+		// 删除
+		$('#jdel').on('click', function() {
+			var ids = [];
+			$('.nice-table').find('.cbx-on').each(function(i) {
+				ids.push($(this).parent().data('id'));
+			})
+			if (ids.length === 0) {
+				$.notify({
+					'title': '请先勾选要删除的围栏',
+					'type': 'warning'
+				})
+			} else {
+				layer.confirm('确认删除吗？', function() {
+					
+				})
+			}
+		})
+	},
+	form: function() {
+		var $form = $('.form');
+		$.mydate({
+            start: '#queryStartTime',
+            end: '#queryEndTime',
+            format: 'hh:mm:ss'
+        })
+	}
+}
+
+</script>
+
+</body>
+</html>

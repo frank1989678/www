@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>调度管理</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/zTreeStyle/jquery.ztree.css" />
+    <link rel="stylesheet" href="assets/plugins/date/daterangepicker.min.css" />
+    <script src="assets/js/jquery191.js"></script>
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">武汉119作战指挥中心调度平台</a>
+	</div>
+	<div class="nav">
+		<ul>
+			<li>
+				<dl>
+					<dt><i class="ico ico-1"></i>地图管控</dt>
+					<dd>
+						<a href="track.html">车辆监控</a>
+						<a href="dispatcherManage.html">调度管理</a>
+						<a href="trackHis.html">历史轨迹</a>
+						<a href="railManage.html">电子围栏</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-2"></i>视频监控</dt>
+					<dd>
+						<a href="ocxClient.html">多车视频监控</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-3"></i>信息报表</dt>
+					<dd>
+						<a href="alarmHotSpot.html">警情记录</a>
+						<a href="alarmRecord.html">报警记录</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-4"></i>系统管理</dt>
+					<dd>
+						<a href="carManage.html">车辆管理</a>
+						<a href="orgManage.html">机构管理</a>
+						<a href="userManage.html">用户管理</a>
+						<a href="roleManage.html">角色管理</a>
+						<a href="purviewManage.html">权限管理</a>
+						<a href="contactsManage.html">通讯录管理</a>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+	<div class="user">
+		<span>yitop</span>
+		<i>|</i>
+		<a href="javascript:;" id="mdyPwd">修改密码</a>
+		<i>|</i>
+		<a href="javascript:;" id="mdyTheme">主题</a>
+		<i>|</i>
+		<a href="login.html" class="ico ico-logout"></a>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="wrapper fold">
+	<div class="box">
+		<div class="tit">信息编辑</div>
+		<div class="form g-form">
+            <form class="myform" action="" name="filter" id="filter" method="POST" enctype="multipart/form-data">
+				<div class="item req">
+					<div class="txt">调度车辆：</div>
+					<div class="cnt">
+                        <input type="text" class="ipt" name="car" id="jcar" value="" readonly="" style="text-overflow:ellipsis;">
+                        <input type="hidden" id="jcarId" />
+                    </div>
+				</div>
+				<div class="item req">
+					<div class="txt">调度内容：</div>
+					<div class="cnt"><input type="text" class="ipt" name="content" /></div>
+				</div>
+				<div class="item">
+					<div class="txt">调度地址：</div>
+					<div class="cnt">
+						<input type="text" class="ipt" name="address" id="tipinput" autocomplete="off" />
+						<input type="hidden" name="lng" id="lng">
+						<input type="hidden" name="lat" id="lat">
+					</div>
+				</div>
+				<div class="item">
+					<div class="txt">调度电话：</div>
+					<div class="cnt"><input type="text" class="ipt" name="phone" /></div>
+				</div>
+				<div class="item">
+					<div class="txt">调度图片：</div>
+					<div class="cnt">
+						<input type="file" class="ipt" name="photo" id="jphoto" />
+                        <input type="text" class="ipt hide" id="jthumb" />
+                    </div>
+				</div>
+				<div class="item">
+					<div class="txt">定时发送：</div>
+					<div class="cnt">
+						<i class="cbx" id="isClock"></i>
+						<input type="text" class="ipt date hide" style="width:270px;" name="clockTime" />
+						<span class="tips">(定时小于30min无法修改)</span>
+					</div>
+				</div>
+				<div class="item">
+					<button type="button" class="ubtn ubtn-primary" id="jsubmit">发送</button>
+					<button type="button" class="ubtn ubtn-primary hide" id="jcancel">取消</button>
+					<button type="submit" class="ubtn ubtn-primary">查询</button>
+					<button type="reset" class="ubtn ubtn-primary">清空</button>
+				</div>
+			</form>
+			<div class="gps">
+				<label class="lbl">地图选点：</label>
+				<div class="map" id="map"></div>
+				<div class="tc">经度：<i id="slng" style="margin-right:30px;"></i>纬度：<i id="slat"></i></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="box mt60">
+		<div class="tit">历史记录</div>
+		<div class="table mt15">
+			<table>
+				<thead>
+				<tr>
+					<th>调度发送时间</th>
+					<th>调度文本</th>
+					<th width="120">调度地址</th>
+					<th>调度电话</th>
+					<th>调度图片</th>
+					<th>调度发送车辆</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody id="tbody"></tbody>
+			</table>
+		</div>
+		<div class="operate">
+			<div class="pagination"></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="side" id="side">
+    <div class="tit">
+        <button type="button" onclick="getCarTree(0,0,0,0)" class="ico ico-refresh"></button>
+        车辆列表
+    </div>
+    <div class="search">
+        <form name="search">
+            <label>车牌号</label>
+            <input type="text" class="ipt" placeholder="请输入车牌号" onkeyup="searchCar(this)">
+            <button type="button" class="ico ico-search"></button>
+        </form>
+        <div class="choose" id="autoSearch"></div>
+    </div>
+    <div class="tools">
+        <button type="button" class="tooltip ico ico-1 active" onclick="getCarTree(0,0,0, 0)" data-tips="全部"></button>
+        <button type="button" class="tooltip ico ico-2" onclick="getCarTree(2,0,0, 1)" data-tips="在线"></button>
+        <button type="button" class="tooltip ico ico-3" onclick="getCarTree(1,0,0, 2)" data-tips="离线"></button>
+    </div>
+    <div class="open"></div>
+    <ul id="carTree" class="ztree"></ul>
+</div>
+
+<script>
+var cars = {};
+var treeTimer;
+
+
+
+// 获取小车树形菜单
+function getTree(data) {
+    if (typeof window.setting === 'undefined') {
+        return;
+    }
+    $.ajax({
+        url: '/carMonitor/getTree',
+        url: 'json/carTree2.json',
+        dataType: 'json',
+        data: data,
+        success: function(res) {
+            $.fn.zTree.destroy('carTree');
+            $.each(res || {}, function(i, item) {
+                if (cars[item.id]) {
+                    // item.checked = true;
+                }
+                // item.open = true; // 展开节点
+            })
+            var data = processData(res);
+            // console.log(res)
+            // var treeObj = $.fn.zTree.init($('#carTree'), setting, res);
+            // treeObj.transformTozTreeNodes(res);
+            // removeNoCarNode(treeObj);
+
+            var carUrl = location.search;//获取url中“？”符后的字串
+            if(carUrl.indexOf("?") != -1){
+                var node = treeObj.getNodeByParam("id","${param.id}");
+                treeObj.checkNode(node,true,false);
+                var pageName = "${param.pageName}";
+                if(pageName=='carPositionRecord'){
+                    $("#carCode1").html('轨迹筛找（'+node.name+'）');
+                }else if(pageName=='dispatchRecord'){
+                    $("#jcar").val(node.name);
+                    $("#jcarId").val(node.id);
+                }else if(pageName=='ocxMonitor'){
+                    treeObj.selectNode(node);
+                    _getVideoInfo(node.id,"flag");
+                }
+            }
+        },
+        error: function() {
+            $.notify({
+                type: 'danger',
+                title: '数据加载失败!'
+            })
+        }
+    })
+}
+
+// 获取小车树形菜单
+function getCarTree(carStatus, efStatus,actionStatus,idx) {
+    // 导航高亮
+    $('#side').find('.tools .ico').eq(idx).addClass('active').siblings().removeClass('active');
+    getTree({
+        carStatus: carStatus,
+        efStatus: efStatus,
+        actionStatus:actionStatus
+    });
+    // autoRefreshCarTree(true);
+}
+
+/**
+ * 自动刷新车辆类表
+ * @param {Boolean} refresh 是否自动刷新
+ */
+function autoRefreshCarTree(refresh) {
+    treeTimer && clearTimeout(treeTimer);
+    if (refresh) {
+        treeTimer = setTimeout(function(){
+            $('#side').find('.tools .active').trigger('click');
+        }, 30 * 1000);
+    }
+}
+
+$(function() {
+    getCarTree(0,0,0,0);
+
+    // 鼠标在车辆列表上时关闭自动刷新
+    $('#side').on('mouseenter', function() {
+        autoRefreshCarTree();
+    }).on('mouseleave', function() {
+        autoRefreshCarTree(true);
+    })
+})
+
+// 搜索车牌号
+function searchCar(el) {
+    var carNumber = el.value,
+        zTree, treeNode, model = [];
+
+    if (carNumber != '') {
+        zTree = $.fn.zTree.getZTreeObj('carTree');
+        treeNode = zTree.getNodesByParamFuzzy('name', carNumber);
+        $.each(treeNode, function(i, item) {
+            model.push('<span onclick="selectCar(' + item.id + ')">' + item.name + '</span>');
+        })
+    }
+    $('#autoSearch').html(model.join('')).show();
+}
+
+// 搜索定位
+function selectCar(carId) {
+    var zTree = $.fn.zTree.getZTreeObj('carTree');
+    var node = zTree.getNodeByParam('id', carId);
+    zTree.cancelSelectedNode(false);
+    zTree.selectNode(node, true);
+}
+</script>
+
+
+<div class="footer">
+    <span>湖北省宏锐慧通信息技术有限公司</span>
+</div>
+
+<script id="tableTemp" type="text/html">
+    {{each list as item i}}
+    <tr>
+        <td>{{item.datetime}}</td>
+        <td>{{item.content}}</td>
+        <td>{{item.address}}</td>
+        <td>{{item.mobile}}</td>
+        <td><img  height="60" width="80" src="{{item.pic}}" /></td>
+        <td>
+            {{if (item.car.length > 3) }}
+            {{item.car.slice(0, 3).join('、') + '...'}}
+            {{else}}
+            {{item.car.join('、')}}
+            {{/if}}
+        </td>
+        <td>
+            <button type="button" class="ubtn ubtn-primary" onclick="_show({{item.id}})">详情</button>
+            <button type="button" class="ubtn ubtn-primary" onclick="_edit({{item.id}})">编辑</button>
+            <button type="button" class="ubtn ubtn-red" onclick="_delRow({{item.id}}, this)">删除</button>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+
+<script id="detailTemp" type="text/html">
+    <div>
+        <p>创建时间：{{createTime}}</p>
+        <p>是否定时：{{time}}</p>
+        <p>定时发送时间：{{clockTime}}</p>
+        <p>调度内容：{{content}}</p>
+        <p>调度地址：{{address}}</p>
+    </div>
+    {{if carList.length > 0}}
+    <div style="margin:15px 0;border-top:1px solid #ccc;"></div>
+    <div class="nice-table">
+        <div class="thead">
+            <em class="col1">调度发送车辆</em>
+            <em class="col2">调度状态</em>
+        </div>
+        <div class="tbody">
+            {{each carList as item i}}
+            <div class="tr">
+                <em class="col1">{{item.car}}</em>
+                <em class="col2">{{item.status}}</em>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+</script>
+
+<!-- 公用 -->
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/date/daterangepicker.min.js"></script>
+<script src="assets/plugins/zTreeStyle/jquery.ztree.all.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/plugins/viewer/viewer.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/ajaxPage.js"></script>
+<script src="http://webapi.amap.com/maps?v=1.3&key=9d870244cd940650899a73c0566d7652&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder"></script>
+<script src="assets/app/dispatch.js"></script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+		"totalSize": 18,
+		"list|10": [{
+			"id": "@increment",
+			"datetime": "20170901 08:21",
+			"content": "武汉市公安消防支队",
+			"pic": "/static/uploads/1.jpg",
+			"address": "武汉市公安消防支队",
+			"mobile": /^1[345678]\d{9}$/,
+			"car": ['鄂A10001', '鄂A10002', '鄂A10003', '鄂A10004']
+		}]
+	});
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+</body>
+</html>

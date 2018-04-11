@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <title>武汉110作战指挥中心调度平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/lib/select2/select2.css" />
+    <script src="assets/js/jquery191.js"></script>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">
+        <a href="/" target="_parent">武汉110作战指挥中心调度平台</a>
+    </div>
+    <div class="nav">
+        <ul>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-1"></i>应急指挥</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-2"></i>视频监控</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-3"></i>勤务管理</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-4"></i>信息报表</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-5"></i>系统管理</dt>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <div class="user">
+        <ul>
+            <li>欢迎！Apples</li>
+            <li><a href="javascript:;" id="j_mdyPwd">修改密码</a></li>
+            <li><a href="login.html">注销</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="crumbs">用户管理</div>
+
+    <div class="filter">
+        <form name="filterForm" id="filterForm" onsubmit="return false;">
+            <span class="for">车辆：</span>
+            <input name="carNumber" class="ipt" type="text" style="width:400px;">
+
+            <div class="abs">
+                <button type="submit" class="ubtn ubtn-filter">查询</button>
+                <button type="button" class="ubtn ubtn-filter" onclick="_add()">新增</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th><input class="cbx" type="checkbox"></th>
+                    <th>用户注册时间</th>
+                    <th>用户名</th>
+                    <th>用户关联机构</th>
+                    <th>用户电话</th>
+                    <th>用户激活状态</th>
+                    <th>用户角色</th>
+                    <th width="390" class="tc">操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+        <!-- 引擎模板 -->
+        <script id="tableTemp" type="text/html">
+            {{each list as item i}}
+            <tr>
+                <td><input class="cbx" type="checkbox" value="{{item.id}}"></td>
+                <td>{{item.registertime}}</td>
+                <td>{{item.username}}</td>
+                <td>{{item.org}}</td>
+                <td>{{item.mobile}}</td>
+                <td>{{item.status}}</td>
+                <td>{{item.role}}</td>
+                <td class="tc">
+                    <button type="button" class="ubtn ubtn-td j_reset" onclick="_del({{item.id}})">重置密码</button>
+                    <button type="button" class="ubtn ubtn-td j_edit" data-id="{{item.id}}">编辑</button>
+                    <button type="button" class="ubtn ubtn-td j_del" data-id="{{item.id}}">删除</button>
+                </td>
+            </tr>
+            {{/each}}
+        </script>
+    </div>
+
+    <div class="operate">
+        <div class="action">
+            <button type="button" class="ubtn ubtn-small del-all">批量删除</button>
+        </div>
+        <div class="pagination"></div>
+    </div>
+</div>
+
+
+<!-- 新增&编辑 -->
+<div class="form layer-form" id="tempForm">
+    <form name="form1" id="form1" onsubmit="return false;">
+        <!-- id的值为空时是新增数据，有值时修改数据 -->
+        <input type="hidden" name="id">
+        <div class="row">
+            <span class="for">用户名</span>
+            <input type="text" class="ipt" name="username"  />
+        </div>
+        <div class="row req">
+            <span class="for">机构</span>
+            <select name="org" class="slt select2">
+                <option value="">请选择</option>
+                <option value="1">特勤一中队</option>
+                <option value="2">硚口中队</option>
+            </select>
+        </div>
+        <div class="row">
+            <span class="for">联系电话</span>
+            <input type="text" class="ipt" name="mobile"  />
+        </div>
+        <div class="row req">
+            <span class="for">用户状态</span>
+            <select name="status" class="slt select2">
+                <option value="已激活">已激活</option>
+                <option value="未激活">未激活</option>
+            </select>
+        </div>
+        <div class="row">
+            <span class="for">角色</span>
+            <select name="role" class="slt select2">
+                <option value="值班员">值班员</option>
+                <option value="指挥员">指挥员</option>
+                <option value="系统管理员">系统管理员</option>
+            </select>
+        </div>
+    </form>
+</div>
+<!-- end 新增&编辑 -->
+
+
+
+<script src="assets/js/common.js"></script>
+<script src="assets/js/page.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/lib/layer/layer.js"></script>
+<script src="assets/lib/validator/validator.js"></script>
+<script src="assets/lib/select2/select2.js"></script>
+
+
+<!-- 模拟接口(只做演示使用，后端同学在开发时请删除此代码块) -->
+<script src="assets/js/mock.js"></script>
+<script>
+
+    Mock.mock('http://g.cn', {
+        "code|0-1": 1, // 必须，作为判断ajax请求成功的判断提交
+        "code": "1",
+        "msg": "暂无车辆",
+        "totalSize": 15,
+        "list|10": [{
+            "id": "@increment",
+            "registertime": "20170901 08:21",
+            "username": "admin",
+            "org": "特勤一中队",
+            "mobile": /^1[345678]\d{9}$/,
+            "status": "已激活",
+            "role": "指挥员"
+        }]
+    });
+    Mock.mock('http://api.com', {
+        "code|0-1": 1, // 必须，作为判断ajax请求成功的判断提交
+        "code": "1",
+        "msg": "操作失败"
+    });
+    Mock.mock('http://edit.com', {
+        "code": "1",
+        "msg": "操作失败",
+        "data": {
+            id: "1",
+            username: "frank",
+            org: "2",
+            "mobile": /^1[345678]\d{9}$/,
+            status: "未激活",
+            role: "系统管理员"
+        }
+    });
+</script>
+<!-- 模拟接口(只做演示使用，后端同学在开发时请删除此代码块) end -->
+
+<script>
+// 页面配置
+var _API = {
+    name: '用户',           // 页面标题
+    url: 'http://g.cn',    // 查询接口
+    del: 'http://api.com', // 删除操作接口
+    add: 'http://api.com', // 新增操作接口
+    edit: 'http://edit.com' // 编辑操作接口
+}
+var _page = {
+    init: function() {
+        this.select2();
+        this.validator();
+        this.table();
+    },
+    select2: function() {
+        $('.select2').select2({
+            minimumResultsForSearch: -1
+        });
+    },
+    validator: function() {
+        var that = this;
+        $('#form1').validator({
+            fields: {
+                username: {
+                    rule: 'required',
+                    msg: '请输入用户名'
+                },
+                org: {
+                    rule: 'required',
+                    msg: '请选择机构'
+                },
+                mobile: {
+                    rule: 'mobile'
+                }
+            },
+            valid: function(form) {
+                var params = {};
+                fx.ajax('http://api.com', 'POST', params, function() {
+                    $.notify({
+                        title: '添加成功'
+                    })
+                    layer.closeAll();
+                    that.page.reload();
+                }, null, true)
+            }
+        })
+    },
+    // 前端分页
+    table: function() {
+        var that = this;
+        var $form = $('#filterForm');
+        that.page =  new Page({
+            pageIndex: 1,   // 当前页
+            pageSize: 10,   // 每页显示10条
+            request: true,  // 页面加载后立即请求数据
+            url: _API.url,
+            api: _API
+        })
+
+        // 查询
+        $form.on('submit', function() {
+            var filterData = $form.serializeArray();
+            that.page.request(filterData);
+            return false;
+        })
+        // 查询
+        $form.on('reset', function() {
+            that.page.reload();
+            return false;
+        })
+    }
+}
+
+</script>
+</body>
+</html>

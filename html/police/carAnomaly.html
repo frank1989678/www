@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <title>武汉110作战指挥中心调度平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/lib/select2/select2.css" />
+    <script src="assets/js/jquery191.js"></script>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">
+        <a href="/" target="_parent">武汉110作战指挥中心调度平台</a>
+    </div>
+    <div class="nav">
+        <ul>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-1"></i>应急指挥</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-2"></i>视频监控</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-3"></i>勤务管理</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-4"></i>信息报表</dt>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-5"></i>系统管理</dt>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <div class="user">
+        <ul>
+            <li>欢迎！Apples</li>
+            <li><a href="javascript:;" id="j_mdyPwd">修改密码</a></li>
+            <li><a href="login.html">注销</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="crumbs">车辆异常统计</div>
+
+    <div class="filter">
+        <form name="filterForm" id="filterForm" onsubmit="return false;">
+            <div style="float:left;position:relative;">
+                <span class="for">&#12288;&#12288;车辆：</span>
+                <input type="text" name="car" id="j_car" class="ipt ipt-tree" readonly onclick="showCars()">
+                <input type="hidden" name="carId" id="j_carId">
+                <div class="layer-tree" style="left:85px;">
+                    <input type="text" class="ipt" placeholder="快速搜索" autocomplete="off" onkeyup="searchTree(this)" />
+                    <div class="ops">
+                        <button type="button" class="ubtn">展开</button>
+                        <button type="button" class="ubtn">收起</button>
+                        <button type="button" class="ubtn">全选</button>
+                        <button type="button" class="ubtn">清空</button>
+                    </div>
+                    <div class="choose"></div>
+                    <ul id="carList" class="ztree"></ul>
+                </div>
+            </div>
+            <div style="margin-left:350px;">
+                <span class="for">查询日期：</span>
+                <input name="queryStartTime" id="time1" class="ipt" type="text">
+                <em>至</em>
+                <input name="queryEndTime" id="time2" class="ipt" type="text">
+            </div>
+            <div class="abs">
+                <button type="submit" class="ubtn ubtn-filter">查询</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>报警时间</th>
+                    <th>报警车辆</th>
+                    <th>围栏名称</th>
+                    <th>动作信息</th>
+                    <th>报警类型</th>
+                    <th>报警内容</th>
+                    <th width="130" class="tc">操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+        <!-- 引擎模板 -->
+        <script id="tableTemp" type="text/html">
+            {{each list as item i}}
+            <tr>
+                <td>{{item.datetime}}</td>
+                <td>{{item.carNumber}}</td>
+                <td>{{item.railName}}</td>
+                <td>{{item.action}}</td>
+                <td>{{item.type}}</td>
+                <td>{{item.content}}</td>
+                <td class="tc"><span class="ubtn ubtn-td j_see" data-id="{{item.id}}">查看</span></td>
+            </tr>
+            {{/each}}
+        </script>
+    </div>
+
+    <div class="operate">
+        <div class="pagination"></div>
+    </div>
+</div>
+
+
+<!-- 导入 -->
+<div class="form layer-form" id="importForm" style="padding:50px">
+    <form name="form2" id="form2" onsubmit="return false;">
+        <div class="row">
+            <span class="for">选择文件</span>
+            <span class="upload ipt" style="display:inline-block;width:240px;"></span>
+            <a href="#" class="ubtn ubtn-small" target="_blank" style="margin-top:-11px;">下载模板</a>
+        </div>
+    </form>
+</div>
+<!-- end 导入 -->
+
+
+<script src="assets/js/common.js"></script>
+<script src="assets/js/page.js"></script>
+<script src="assets/js/layerTree.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/lib/layer/layer.js"></script>
+<script src="assets/lib/select2/select2.js"></script>
+<script src="assets/lib/datepicker/WdatePicker.js"></script>
+<script src="assets/lib/ztree/jquery.ztree.min.js"></script>
+
+
+<!-- 模拟接口(只做演示使用，后端同学在开发时请删除此代码块) -->
+<script src="assets/js/mock.js"></script>
+<script>
+
+    Mock.mock('http://g.cn', {
+        "code|0-1": 1, // 必须，作为判断ajax请求成功的判断提交
+        "code": "1",
+        "msg": "暂无车辆",
+        "totalSize": 15,
+        "list|10": [{
+            id: "@increment",
+            datetime: "@datetime",
+            carNumber: /鄂A\d{5}/,
+            railName: "知音站巡控线路",
+            action: "在围栏外",
+            type: "后视镜",
+            content: "请注意国亲期间车辆巡控范围",
+            "km": /\d{1,2}\.\d{1,3}/
+        }]
+    });
+    Mock.mock('http://api.com', {
+        "code|0-1": 1, // 必须，作为判断ajax请求成功的判断提交
+        "code": "1",
+        "msg": "操作失败"
+    });
+    Mock.mock('http://edit.com', {
+        "code": "1",
+        "msg": "操作失败",
+        "data": {
+            id: "1",
+            "carType|1-7": 1,
+            carNumber: /鄂A\d{5}/,
+            carOrg: 1,
+            carIcon: 1,
+            carUser: "@cname",
+            imie: "正常",
+            sim: "正常",
+            cameraType: "正常",
+            cameraSim: "正常",
+            carStatus: "正常"
+        }
+    });
+</script>
+<!-- 模拟接口(只做演示使用，后端同学在开发时请删除此代码块) end -->
+
+<script>
+// 页面配置
+var _API = {
+    name: '车辆里程',           // 页面标题
+    url: 'http://g.cn',    // 查询接口
+    del: 'http://api.com', // 删除操作接口
+    add: 'http://api.com', // 新增操作接口
+    edit: 'http://edit.com' // 编辑操作接口
+}
+var _page = {
+    init: function() {
+        // this.select2();
+        this.datepicker();
+        this.table();
+    },
+    datepicker: function() {
+         $('#time1').on('click', function() {
+            var val = $('#time2').val() || '%y-%M-%d';
+            WdatePicker({
+                autoPickDate: true,
+                maxDate: val,
+                dateFmt: 'yyyy/MM/dd HH:mm:ss'
+            })
+        })
+        $('#time2').on('click', function() {
+            WdatePicker({
+                autoPickDate: true,
+                minDate: '#F{$dp.$D(\'time1\')}',
+                maxDate: '%y-%M-%d',
+                dateFmt: 'yyyy/MM/dd HH:mm:ss'
+            })
+        })
+         $('#time3').on('click', function() {
+            var val = $('#time4').val() || '%y-%M-%d';
+            WdatePicker({
+                autoPickDate: true,
+                maxDate: val,
+                dateFmt: 'yyyy/MM/dd HH:mm:ss'
+            })
+        })
+        $('#time4').on('click', function() {
+            WdatePicker({
+                autoPickDate: true,
+                minDate: '#F{$dp.$D(\'time3\')}',
+                maxDate: '%y-%M-%d',
+                dateFmt: 'yyyy/MM/dd HH:mm:ss'
+            })
+        })
+    },
+    select2: function() {
+        $('.select2').select2({
+            minimumResultsForSearch: -1
+        });
+    },
+    // 前端分页
+    table: function() {
+        var that = this;
+        var $form = $('#filterForm');
+        that.page =  new Page({
+            pageIndex: 1,   // 当前页
+            pageSize: 10,   // 每页显示10条
+            request: true,  // 页面加载后立即请求数据
+            url: _API.url,
+            api: _API
+        })
+
+        // 查询
+        $form.on('submit', function() {
+            var filterData = $form.serializeArray();
+            that.page.request(filterData);
+            return false;
+        })
+        // 查询
+        $form.on('reset', function() {
+            that.page.reload();
+            return false;
+        })
+    }
+}
+
+// 导入
+function _import() {
+    var $importForm = $('#importForm');
+    $importForm.find('.upload').html('<input type="file" name="filename" data-rule="required" data-msg="请选择上传文件"  />');
+    layer.open({
+        area: '600px',
+        type: 1,
+        title: '导入',
+        content: $importForm,
+        btn: ['取消', '确定'],
+        btn2: function() {
+            $('#form2').submit();
+            return false;
+        }
+    })
+}
+
+// 导出
+function _export() {
+    alert('导出')
+}
+
+
+var set = {
+    check: {
+        enable: true
+    },
+    view: {
+        dblClickExpand: false,
+        showIcon: false
+    },
+    data: {
+        simpleData: {
+            enable: true,
+            idKey: 'id',
+            pIdKey: 'pid',
+            rootPId: null
+        }
+    },
+    callback: {
+        onClick: onClickAgency2,
+        onCheck: checkAgency2
+    }
+};
+
+function onClickAgency2(e, treeId, treeNode) {
+    var zTree = $.fn.zTree.getZTreeObj("carList");
+    zTree.checkNode(treeNode, !treeNode.checked, null, true);
+    return false;
+}
+function checkAgency2(e, treeId, treeNode) {
+    var agencyzTree = $.fn.zTree.getZTreeObj("carList"),
+        nodes = agencyzTree.getCheckedNodes(true),
+        v = "",
+        aid="";
+    for (var i=0, l=nodes.length; i<l; i++) {
+        v += nodes[i].name + ",";
+        aid += nodes[i].id + ",";
+    }
+    if (v.length > 0 ) v = v.substring(0, v.length-1);
+    if (v.length > 0 ) aid = aid.substring(0, aid.length-1);
+    $('#j_car').val(v);
+    $('#j_carId').val(aid);
+}
+</script>
+</body>
+</html>

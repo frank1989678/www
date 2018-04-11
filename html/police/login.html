@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <title>武汉110作战指挥中心调度平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg1">
+
+<div class="header">
+    <div class="logo">
+        <a href="/index.html">武汉110作战指挥中心调度平台</a>
+    </div>
+    <div class="user"></div>
+</div>
+
+<div class="login-box">
+    <form name="form1" id="form1" onsubmit="return false;">
+        <div class="hd">登录</div>
+        <div  class="form form-ico">
+            <div class="row">
+                <i class="ico user"></i>
+                <input type="text" placeholder="请输入用户名" name="mobile" autocomplete="off" class="ipt">
+            </div>
+
+            <div class="row">
+                <i class="ico lock"></i>
+                <input type="password" placeholder="请输入密码" name="password" autocomplete="off" class="ipt">
+            </div>
+        </div>
+        <div class="button">
+            <button type="submit" class="ubtn ubtn-primary">登录</button>
+        </div>
+    </form>
+</div>
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/lib/layer/layer.js"></script>
+<script src="assets/lib/validator/validator.js"></script>
+
+<script>
+$('#form1').validator({
+    fields: {
+        'mobile': {
+            'rule': 'required, mobile',
+            'msg': {
+                'required': '请输入手机号'
+            }
+        },
+        'password': {
+            'rule': 'required',
+            'msg': {
+                'required': '请输入密码'
+            }
+        }
+    },
+    valid: function(form) {
+        var data = fx.getFormJson(form);
+        $.ajax({
+            url: '',
+            data: data,
+            success: function(res) {
+                if (res.result == 0) {
+                    layer.confirm('密码错误', {area: '600px', skin: 'layer-tips'});
+                }
+            }            
+        })
+    }
+})
+
+</script>
+</body>
+</html>

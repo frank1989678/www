@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>交通事故信息管理平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/datetimepicker/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="inner">
+		<div class="user">
+			<dl>
+				<dt>系统管理员<i class="ico ico-arrow-down"></i></dt>
+				<dd>
+					<a href="changePwd.html">修改密码</a>
+					<a href="login.html">安全退出</a>
+				</dd>
+			</dl>
+		</div>
+		<div class="logo">
+			<a href="index.html">武汉市交通事故信息管理平台</a>
+		</div>
+		<div class="nav">
+			<dl>
+				<dt><i class="ico ico-1"></i><span>用户信息</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="userList.html">用户信息</a>
+						<a href="insuranceMessage.html">保险公司信息</a>
+					</div>
+				</dd>
+			</dl>
+			<dl>
+				<dt><i class="ico ico-2"></i><span>警保联动</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="caseList.html">警保案件信息</a>
+						<a href="showCaseSummaryList.html">案件处理登记</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><i class="ico ico-3"></i><span>警保统计</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="caseInfoStatistics.html">案件信息统计</a>
+						<a href="companyStatistics.html">查勘量统计(公司)</a>
+						<a href="surveyMemberStatistics.html">查勘量统计(查勘员)</a>
+						<a href="surveyMemberDayStatistics.html">考勤打卡查询</a>
+						<a href="surveyMemberTimesStatistics.html">考勤打卡统计</a>
+						<a href="jjlMng.html">车损事故报警量</a>
+						<a href="workBriefingInfo.html">工作情况通报</a>
+						<a href="handleCount.html">案件处理统计</a>
+						<a href="accidentsCount.html">快处平台数据统计日报</a>
+						<a href="accidentsMonthCount.html">快处平台数据统计月报</a>
+						<a href="caseKcWarn.html">保险处理超时统计</a>
+						<a href="statisticsView.html">大屏统计</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl class="active">
+				<dt><i class="ico ico-4"></i><span>系统设置</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="rolesList.html" class="current">角色管理</a>
+						<a href="smsContentList.html">警保短信模板</a>
+						<a href="source.html">资源管理</a>
+						<a href="showPage.html">job数据同步</a>
+					</div>
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><i class="ico ico-5"></i><span>快赔中心</span></dt>
+				<dd>
+					<div class="scroll">
+						<a href="queryCase.html">快赔案件信息</a>
+						<a href="queryKpPrivies.html">事故当事人信息</a>
+						<a href="showKpDkCaseCount.html">代勘案件统计</a>
+						<a href="showKpComCount.html">公司办理统计</a>
+						<a href="showKpNetCount.html">网点办理统计</a>
+						<a href="showKpCaseCount.html">受案登记统计</a>
+						<a href="excaptionNoticeCount.html">事故频繁异常车辆预警</a>
+						<a href="showPage2.html">快赔案件导出</a>
+					</div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<!-- header end -->
+
+
+
+<!-- wrapper start -->
+<div class="wrapper">
+	<!-- filter start -->
+	<div class="filter">
+		<form id="filterForm" action="#!">
+			<button type="button" class="ubtn ubtn-cyan" id="jadd">新增</button>
+		</form>
+	</div>
+	<!-- filter end -->
+	
+
+	<div class="table">
+		<div class="caption"><span>角色管理</span></div>
+		<table>
+            <thead>
+	            <tr>
+	                <td>角色编码</td>
+	                <td>角色名</td>
+	                <td>操作</td>
+	            </tr>
+            </thead>
+            <tbody id="tbody">
+                <tr>
+                    <td>000001</td>
+                    <td>案件统计员</td>
+                    <td><button class="ubtn ubtn-cyan" type="button">授权</button></td>
+                </tr>
+            
+                <tr>
+                    <td>000014</td>
+                    <td>快赔中心理赔员</td>
+                    <td><button class="ubtn ubtn-cyan" type="button">授权</button></td>
+                </tr>
+            
+                <tr>
+                    <td>000009</td>
+                    <td>查勘员</td>
+                    <td><button class="ubtn ubtn-cyan" type="button">授权</button></td>
+                </tr>
+            
+                <tr>
+                    <td>000016</td>
+                    <td>大屏展示</td>
+                    <td><button class="ubtn ubtn-cyan" type="button">授权</button></td>
+                </tr>
+            
+                <tr>
+                    <td>000008</td>
+                    <td>保险理赔员</td>
+                    <td><button class="ubtn ubtn-cyan" type="button">授权</button></td>
+                </tr>
+            
+                <tr>
+                    <td>000004</td>
+                    <td>质量管理员</td>
+                    <td><button class="ubtn ubtn-cyan" type="button">授权</button></td>
+                </tr>
+            
+                <tr>
+                    <td>0000010</td>
+                    <td>协会查勘管理员</td>
+                    <td><button class="ubtn ubtn-cyan" type="button">授权</button></td>
+                </tr>
+            
+                <tr>
+                    <td>000007</td>
+                    <td>游客</td>
+                    <td><button class="ubtn ubtn-cyan" type="button">授权</button></td>
+                </tr>
+            
+                <tr>
+                    <td>000006</td>
+                    <td>协会管理员</td>
+                    <td><button class="ubtn ubtn-cyan" type="button">授权</button></td>
+                </tr>
+            </tbody>
+        </table>
+	</div>
+
+</div>
+<!-- wrapper end -->
+
+<div class="footer">
+	<p>开发单位：湖北易站通达电子科技有限公司 </p>
+</div>
+
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/datetimepicker/core.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+	!(function($) {
+		var _global = {
+			init: function() {
+				this.bindEvent();
+			},
+			bindEvent: function() {
+	            // 添加
+	            $('#jadd').on('click', function() {
+	            	window.location.href = 'roleadd.html';
+	            })
+			}
+		}
+		_global.init();
+	})(jQuery);
+</script>
+</body>
+</html>

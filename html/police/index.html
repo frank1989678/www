@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <title>武汉110作战指挥中心调度平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="assets/js/jquery191.js"></script>
+</head>
+<body>
+
+<!-- <iframe src="nav.html" width="100%" height="75" frameborder="0" scrolling="no"></iframe> -->
+
+<div class="header">
+    <div class="logo">
+        <a href="index.html" target="_parent">武汉110作战指挥中心调度平台</a>
+    </div>
+    <div class="nav">
+        <ul>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-1"></i>应急指挥</dt>
+                    <dd>
+                        <a href="#">车辆监控</a>
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-2"></i>视频监控</dt>
+                    <dd>
+                        <a href="ocxClient.html">车辆监控</a>
+                        <a href="videoConference.html">视频会议</a>
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-3"></i>勤务管理</dt>
+                    <dd>
+                        <a href="alarmHotSpot.html">警情记录</a>
+                        <a href="alarmRecord.html">报警记录</a>
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-4"></i>信息报表</dt>
+                    <dd>
+                        <a href="track.html">地图监控</a>
+                        <a href="dispatcherManage.html">调度管理</a>
+                        <a href="trackHis.html">历史轨迹</a>
+                        <a href="railManage.html">电子围栏</a>
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-5"></i>系统管理</dt>
+                    <dd>
+                        <a href="carManage.html">车辆管理</a>
+                        <a href="carKM.html">车辆里程统计</a>
+                        <a href="carAnomaly.html">车辆异常统计</a>
+                        <a href="sourceManage.html">资源管理</a>
+                        <a href="orgManage.html">机构管理</a>
+                        <a href="userManage.html">用户管理</a>
+                        <a href="roleManage.html">角色管理</a>
+                        <a href="purviewManage.html">权限管理</a>
+                        <a href="addressList.html">通讯录管理</a>
+                        <a href="groupManage.html">群组管理</a>
+                        <a href="channelManage.html">频道管理</a>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <div class="user">
+        <ul>
+            <li>欢迎！Apples</li>
+            <li><a href="javascript:;" id="j_mdyPwd">修改密码</a></li>
+            <li><a href="login.html">注销</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="content">
+    
+<button type="button" class="ubtn ubtn-primary" onclick="API.login()">登录</button>
+<button type="button" class="ubtn ubtn-primary" onclick="API.confirm()">确定or取消</button>
+<button type="button" class="ubtn ubtn-primary" onclick="API.tips()">网路异常</button>
+<button type="button" class="ubtn ubtn-primary">登录</button>
+</div>
+
+<div class="form layer-form login-form" id="j_model1">
+    <form name="form1" id="form1">
+        <div class="row">
+            <i class="ico user"></i>
+            <input type="text" placeholder="请输入用户名" name="mobile" autocomplete="off" class="ipt">
+        </div>
+
+        <div class="row">
+            <i class="ico lock"></i>
+            <button type="button" class="ubtn ubtn-small fr">获取验证码</button>
+            <input type="text" placeholder="请输入验证码" name="code" autocomplete="off" class="ipt" style="width:260px;">
+        </div>
+    </form>
+</div>
+
+<script src="assets/js/common.js"></script>
+<script src="assets/lib/layer/layer.js"></script>
+<script src="assets/lib/validator/validator.js"></script>
+
+<script>
+
+$('#form1').validator({
+    fields: {
+        'mobile': {
+            'rule': 'required, mobile',
+            'msg': {
+                'required': '请输入手机号'
+            }
+        },
+        'code': {
+            'rule': 'required',
+            'msg': {
+                'required': '请输入验证码'
+            }
+        }
+    },
+    valid: function(form) {
+        var data = fx.getFormJson(form);
+        $.ajax({
+            url: '',
+            data: data,
+            success: function(res) {
+                layer.closeAll();
+            }            
+        })
+    }
+})
+
+var API = {
+    login: function() {
+        layer.open({
+            type: 1,
+            title: '检验验证码',
+            area: '600px',
+            content: $('#j_model1'),
+            btn: ['登录'],
+            yes: function() {
+                $('#form1').submit();
+            }
+        })
+    },
+    confirm: function() {
+        layer.confirm('是否删除此频道信息？', {area: '600px', skin: 'layer-confirm', title: '&nbsp;'}, function() {
+
+        })
+    },
+    tips: function() {
+        layer.confirm('网络异常请稍后再试', {area: '600px', skin: 'layer-tips', title: '查询'});
+    }
+}
+
+</script>
+</body>
+</html>

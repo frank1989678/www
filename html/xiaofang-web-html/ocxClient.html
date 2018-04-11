@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>视频监控</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+    <div class="logo">
+        <a href="index.html">武汉119作战指挥中心调度平台<em>Intelligent command platform for fire fighting</em></a>
+    </div>
+    <div class="nav">
+        <ul>
+            <li>
+                <dl>
+                <dt><i class="ico ico-1"></i>每日警情</dt>
+                    <dd>
+                        <a href="track.html">车辆监控</a>
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-2"></i>历史统计</dt>
+                    <dd>
+                        <a href="alarmHotSpot.html">警情记录</a>
+                        <a href="alarmRecord.html">报警记录</a>
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-3"></i>车辆监控</dt>
+                    <dd>
+                        <a href="ocxClient.html">视频监控</a>
+                        <a href="videoConference.html">视频会议</a>
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-5"></i>地图管控</dt>
+                    <dd>
+                        <a href="track.html">车辆监控</a>
+                        <a href="dispatcherManage.html">调度管理</a>
+                        <a href="trackHis.html">历史轨迹</a>
+                        <a href="railManage.html">电子围栏</a>
+                    </dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt><i class="ico ico-6"></i>系统管理</dt>
+                    <dd>
+                        <a href="carManage.html">车辆管理</a>
+                        <a href="orgManage.html">机构管理</a>
+                        <a href="userManage.html">用户管理</a>
+                        <a href="roleManage.html">角色管理</a>
+                        <a href="purviewManage.html">权限管理</a>
+                        <a href="contactsManage.html">通讯录管理</a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="admin">
+                指挥长 <em>欢迎登录</em>
+            </li>
+            <li class="dropdown">
+                <dl class="menu">
+                    <dt>设置</dt>
+                    <dd>
+                        <a href="javascript:;" id="mdyH1">配置标题</a>
+                        <a href="javascript:;" id="mdyPwd">修改密码</a>
+                        <a href="login.html">退出</a>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- header end -->
+
+
+<div class="side" id="side">
+    <div class="search">
+        <form name="search">
+            <label>车辆列表</label>
+            <input type="text" class="ipt" placeholder="请输车牌号" onkeyup="searchCar(this)">
+            <button type="button" class="ico ico-search"></button>
+            <button type="button" onclick="getCarTree(0,0,0,0)" class="ico ico-refresh"></button>
+        </form>
+        <div class="choose" id="autoSearch"></div>
+    </div>
+    <div class="tools">
+        <span class="li active" onclick="getCarTree(0,0,0, 0)"><i class="ico ico-1"></i>全部车辆</span>
+        <span class="li" onclick="getCarTree(2,0,0, 1)"><i class="ico ico-2"></i>在线车辆</span>
+        <span class="li" onclick="getCarTree(1,0,0, 2)"><i class="ico ico-3"></i>离线车辆</span>
+        <span class="li" onclick="getCarTree(0,0,1, 3)"><i class="ico ico-4"></i>出警车辆</span>
+    </div>
+    <div class="yuntai">
+		<div class="hd">云台控制</div>
+		<div class="bd">
+			<div class="item">
+				<label class="for">步长</label>
+				<select name="" class="slt">
+					<option value="">1</option>
+					<option value="">2</option>
+					<option value="">3</option>
+				</select>
+				<div class="arrow">
+					<button type="button" class="b btl"></button>
+					<button type="button" class="b btm"></button>
+					<button type="button" class="b btr"></button>
+					<button type="button" class="b bml"></button>
+					<button type="button" class="b bmr"></button>
+					<button type="button" class="b bbl"></button>
+					<button type="button" class="b bbm"></button>
+					<button type="button" class="b bbr"></button>						
+				</div>
+				<div class="lit">
+					<button type="button" class="b minus"></button>
+					<span>变倍</span>
+					<button type="button" class="b plus"></button>
+				</div>
+				<div class="lit">
+					<button type="button" class="b minus"></button>
+					<span>焦距</span>
+					<button type="button" class="b plus"></button>
+				</div>
+				<div class="lit">
+					<button type="button" class="b minus"></button>
+					<span>光圈</span>
+					<button type="button" class="b plus"></button>
+				</div>
+			</div>
+			<div class="item">
+				<label class="for">预置点</label>
+				<select name="" class="slt">
+					<option value="">1</option>
+					<option value="">2</option>
+					<option value="">3</option>
+					<option value="">3</option>
+					<option value="">3</option>
+					<option value="">3</option>
+					<option value="">3</option>
+					<option value="">3</option>
+				</select>
+			</div>
+			<div class="item">
+				<button type="button" class="ubtn ubtn-red">定位</button>
+				<button type="button" class="ubtn ubtn-red">设置</button>
+			</div>
+		</div>
+	</div>
+    <div class="open"></div>
+    <ul id="carTree" class="ztree"></ul>
+</div>
+
+<div class="screen" id="screen">
+	<object classid="clsid:92A85542-C1C4-4B79-A242-B3B3BA5AED72" class="video" style="width:100%;height:100%;" name="video" codebase="MMVideoOcx3GWin.ocx" id="video">
+	<embed></embed>
+	<param name="wmode" value="transparent">  
+	</object>
+
+	<div class="tools">
+		<button type="button" class="tooltip t1" onclick="setWinNum(1)" data-tips="窗口个数1"></button>
+		<button type="button" class="tooltip t2" onclick="setWinNum(4)" data-tips="窗口个数4"></button>
+		<button type="button" class="tooltip t3" onclick="setWinNum(6)" data-tips="窗口个数6"></button>
+		<button type="button" class="tooltip t4" onclick="setWinNum(8)" data-tips="窗口个数8"></button>
+		<button type="button" class="tooltip t5" onclick="setWinNum(9)" data-tips="窗口个数9"></button>
+		<button type="button" class="tooltip t6" onclick="setWinNum(13)" data-tips="窗口个数13"></button>
+		<button type="button" class="tooltip t7" onclick="setWinNum(16)" data-tips="窗口个数16"></button>
+		<button type="button" class="tooltip t8" onclick="setWinNum(25)" data-tips="窗口个数25"></button>
+		<button type="button" class="tooltip t9" onclick="setWinNum(36)" data-tips="窗口个数36"></button>
+		<button type="button" class="tooltip t10" onclick="setWinNum(49)" data-tips="窗口个数49"></button>
+		<button type="button" class="tooltip t11" onclick="setWinNum(64)" data-tips="窗口个数64"></button>
+		<button type="button" class="tooltip t12" onclick="localSet()" data-tips="设置"></button>
+		<button type="button" class="tooltip t13" onclick="setCtrlOff()" data-tips="隐藏功能"></button>
+	</div>
+</div>
+
+
+<div class="footer-fix">
+    <span>湖北省宏锐慧通信息技术有限公司</span>
+</div>
+
+
+<!-- 右键菜单 -->
+<ul class="dropdown-menu" id="rMenu">
+	<li><a href="javascript:;" onclick="openAllView()">视频全开</a></li>
+	<li><a href="javascript:;" onclick="closeAllVideo()">视频全关</a></li>
+	<li><a href="javascript:;" onclick="opentel()">开始语音</a></li>
+	<li><a href="javascript:;" onclick="closetel()">结束语音</a></li>
+	<li class="divider"></li>
+	<li><a href="javascript:;" onclick="onplayer()">录像回放</a></li>
+	<li><a href="javascript:;" onclick="onGetReclist()">录像记录</a></li>
+	<!-- <li class="dropdown-submenu">
+		<a href="javascript:;">录像记录</a>
+		<ul class="dropdown-menu">
+			<li><a href="javascript:;" onclick="onGetReclist()">摄像头1</a></li>
+			<li><a href="javascript:;" onclick="onGetReclist()">摄像头2</a></li>
+			<li><a href="javascript:;" onclick="onGetReclist()">摄像头3</a></li>
+			<li><a href="javascript:;" onclick="onGetReclist()">摄像头4</a></li>
+		</ul>
+	</li> -->
+</ul>
+<!-- end 右键菜单 -->
+
+<!-- 右键菜单 -->
+<ul class="dropdown-menu dropdown-context" id="rMenu2">
+	<li><a href="javascript:;" onclick="openView()">开启视频</a></li>
+	<li><a href="javascript:;" onclick="closeVideo()">关闭视频</a></li>
+	<li class="divider"></li>
+	<li><a href="javascript:;" onclick="onplayer()">录像回放</a></li>
+	<li><a href="javascript:;" onclick="onGetReclist()">录像记录</a></li>
+</ul>
+<!-- end 右键菜单 -->
+
+<input type="hidden" id="Server" value="220.202.15.34" data-tips="服务器">
+<input type="hidden" id="CServerPort" value="5071" data-tips="端口">
+
+<input type="hidden" id='vehip' value="18674059457" data-tips="通信号" />
+<input type="hidden" id='Chn1' value="1" data-tips="通道" />
+
+<input type="hidden" id='vehname' value="油田" data-tips="车牌号" />
+<input type="hidden" id='vehid' value="18674059457" data-tips="通信号" />
+<input type="hidden" id='vehtype' value="0" data-tips="类型" />
+<input type="hidden" id='vgroupid' value="11050" data-tips="车队编号" />
+<input type="hidden" id='videonum' value="4" data-tips="摄像头个数（1-4）" />
+
+
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<!-- 页面专用 -->
+<script src="assets/plugins/zTreeStyle/jquery.ztree.min.js"></script>
+<script src="assets/js/ocxClient.js"></script>
+
+
+</body>
+</html>

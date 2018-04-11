@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>车管所智能管控平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+	<link rel="stylesheet" href="assets/plugins/date/daterangepicker.min.css" />
+	<script src="assets/js/jquery191.js"></script>
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header">
+	<div class="logo">
+		<a href="index.html"><em>车管所智能管控平台</em>Intelligent management and control platform of vehicle administ</a>
+	</div>
+
+	<div class="nav">
+		<ul>
+			<li><a href="user.html"><i class="ico ico-1"></i>用户管理</a></li>
+			<li><a href="usertype.html"><i class="ico ico-2"></i>用户类型管理</a></li>
+			<li><a href="systype.html"><i class="ico ico-3"></i>系统类型管理</a></li>
+			<li><a href="setting.html"><i class="ico ico-4"></i>外挂系统配置</a></li>
+		</ul>
+	</div>
+
+	<div class="user">
+		<ul>
+			<li><span>yitop</span><i>|</i></li>
+			<li><a href="login.html"><i class="ico ico-logout"></i></a></li>
+		</ul>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="wrapper">
+	<div class="tit">用户管理</div>
+	<div class="filter">
+		<form name="filterForm" id="filterForm" onsubmit="javascript:return false;" method="GET">
+			<div class="cf">
+				<label class="for">姓名：</label>
+				<input type="text" name="userName" class="ipt" autocomplete="off" />
+
+				<label class="for">身份证号：</label>
+				<input type="text" name="idCard" class="ipt" autocomplete="off" />
+
+				<label class="for">归属部门：</label>
+				<select name="dept" class="slt">
+					<option value="">请选择</option>
+				</select>
+				
+				<span class="queryTime">
+					<label class="for">创建时间：</label>
+					<input type="text" name="queryStartTime" id="queryStartTime" class="ipt date" autocomplete="off" />
+					<em>-</em>
+					<input type="text" name="queryEndTime" id="queryEndTime" class="ipt date" autocomplete="off" />
+				</span>
+			</div>
+
+			<div class="cf">
+				<button type="button" class="ubtn ubtn-cyan fr" onclick="_add()">新增用户</button>
+				<button type="submit" class="ubtn ubtn-primary fr">查询</button>
+				<label class="for">角色：</label>
+				<label class="cbx"><input type="checkbox" name="role_1">制证管理系统</label>
+				<label class="cbx"><input type="checkbox" name="role_2">驾驶证业务辅助系统</label>
+				<label class="cbx"><input type="checkbox" name="role_3">交管局收费系统</label>
+				<label class="cbx"><input type="checkbox" name="role_4">居住证查询</label>
+				<label class="cbx"><input type="checkbox" name="role_5">考试监管辅助系统</label>
+				<label class="cbx"><input type="checkbox" name="role_6">车驾管业务辅助系统</label>
+			</div>
+			
+		</form>
+	</div>
+
+	<div class="table">
+		<table class="border tc">
+			<thead>
+				<tr>
+                    <th>序号</th>
+					<th>姓名</th>
+                    <th>身份证</th>
+                    <th>IP地址</th>
+                    <th>用户编号</th>
+                    <th>归属部门</th>
+                    <th class="tl">用户角色</th>
+                    <th>创建时间</th>
+					<th width="200">操作</th>
+				</tr>
+			</thead>
+			<tbody id="tbody"></tbody>
+		</table>
+		<script id="tableTemp" type="text/html">
+			{{each list as item i}}
+			<tr>
+				<td>{{i+1}}</td>
+		        <td>{{item.name}}</td>
+		        <td>{{item.idCard}}</td>
+		        <td>{{item.IP}}</td>
+		        <td>{{item.number}}</td>
+		        <td>{{item.dept}}</td>
+		        <td class="tl">{{item.role}}</td>
+		        <td>{{item.datetime}}</td>
+				<td>
+					<button type="button" class="ubtn ubtn-link" onclick="_edit({{item.id}})">编辑</button>
+					<button type="button" class="ubtn ubtn-link" onclick="_del({{item.id}})">删除</button>
+				</td>
+			</tr>
+			{{/each}}
+		</script>
+	</div>
+	
+	<div class="operate">
+		<div class="pagination"></div>
+	</div>
+</div>
+
+
+<!-- 新增&编辑 -->
+<div class="form layer-form" id="tempForm">
+	<div class="ftit">添加</div>
+	<form name="form1" onsubmit="return false;">
+		<div class="item">
+            <div class="txt">姓&#12288;&#12288;名：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="name" autocomplete="off" />
+            	<i class="req">*</i>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">用&nbsp;&nbsp;户&nbsp;&nbsp;名：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="userName" autocomplete="off" />
+            	<i class="req">*</i>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">密&#12288;&#12288;码：</div>
+            <div class="cnt">
+            	<input type="password" class="ipt" name="pwd" autocomplete="off" value="123456" />
+            	<i class="ico ico-eye"></i>
+            	<i class="req">*</i>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">身份证号：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="idCard" autocomplete="off" />
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">IP&nbsp;&nbsp;地&nbsp;&nbsp;址：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" style="width:48%" name="IP1" autocomplete="off" placeholder="192.168.1.1" />
+            	<i>-</i>
+            	<input type="text" class="ipt" style="width:48%" name="IP2" autocomplete="off" placeholder="192.168.1.9" />
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">用户类型：</div>
+            <div class="cnt">
+				<select name="type" class="slt">
+					<option value="0">请选择</option>
+					<option value="1">管理员</option>
+				</select>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">用户编号：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="number" autocomplete="off" />
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">归属部门：</div>
+            <div class="cnt">
+				<select name="dept" class="slt">
+					<option value="caiwubu">财务部</option>
+				</select>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">角&#12288;&#12288;色：</div>
+            <div class="cnt">
+            	<div class="ipt cbxs">
+					<label class="cbx"><input type="checkbox" name="role_1">制证管理系统</label>
+					<label class="cbx"><input type="checkbox" name="role_2">驾驶证业务辅助系统</label>
+					<label class="cbx"><input type="checkbox" name="role_3">交管局收费系统</label>
+					<label class="cbx"><input type="checkbox" name="role_4">居住证查询</label>
+					<label class="cbx"><input type="checkbox" name="role_5">考试监管辅助系统</label>
+					<label class="cbx"><input type="checkbox" name="role_6">车驾管业务辅助系统</label>
+            	</div>
+            </div>
+        </div>
+		<div class="item hide">
+            <div class="txt">创建时间：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="datetime" value="" disabled readonly />
+            </div>
+        </div>
+	    <div class="buttons">
+	    	<input type="text" class="ipt hide" name="uid" value="0" />
+	        <button type="button" class="ubtn ubtn-primary layer-close">取消</button>
+	        <button type="submit" class="ubtn ubtn-primary submit" onclick="_submitForm()">确定</button>
+	    </div>
+	</form>
+</div>
+<!-- end 新增&编辑 -->
+
+<script src="assets/js/common.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/ajaxPage.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script src="assets/plugins/date/daterangepicker.min.js"></script>
+<script>
+// 新增
+function _add() {
+	var $temp = $('#tempForm');
+	var $form = $temp.find('form');
+	$form[0].reset();
+	$form.prev('.ftit').html('新增用户');
+	$form.find('.item.hide').hide();
+	layer.open({
+		area: '570px',
+		type: 1,
+		title: false,
+		closeBtn: 0,
+		content: $temp
+	})
+}
+
+// 编辑
+function _edit(id) {
+	var $temp = $('#tempForm');
+	var $form = $temp.find('form');
+	$form[0].reset();
+	$form.prev('.ftit').html('编辑用户');
+	$form.find('.item.hide').show();
+	if (id) {
+		$.ajax({
+			url: '',
+			data: {id: id},
+			success: function(res) {
+				res = {
+					data: {
+						"uid": id,
+						"userName": "张三",
+						"name": "admin",
+						"pwd": "******",
+						"idCard": "420984198806022514",
+						"IP1": "192.168.1.1",
+						"IP2": "192.168.1.24",
+						"type": "1",
+						"number": "952712",
+						"dept": "caiwubu",
+						"role": ["role_1", "role_2", "role_3"],
+						"datetime": "2010-11-10 15:35"
+					}
+				};
+				$form.find('.ipt, .slt').each(function(i, item) {
+					var k = res.data[this.name];
+					if (typeof k === 'undefined' || k == 'undefined') {
+						k = '';
+					}
+					this.value = k;
+				})
+				// 角色回选
+				$.each(res.data.role, function(key, name) {
+					$form.find('.cbxs input[name="' + name + '"]').prop('checked', true);
+				})
+				layer.open({
+					area: '570px',
+					type: 1,
+					title: false,
+					closeBtn: 0,
+					content: $temp
+				})
+			}
+		})
+	}
+}
+
+// 提交
+function _submitForm() {
+
+}
+// 删除一行
+function _del(id, el) {
+	fx.confirm('确定删除么？', function(k) {
+		$.ajax({
+			url: '',
+			data: {id: id},
+			success: function(res) {
+				if (res.result === "SUCCESS") {
+					fx.alert('删除成功！');
+					$(el).closest('tr').remove();
+				}
+			}
+		})
+		layer.closeAll();
+	})
+}
+
+var _global = {
+	init: function() {
+		this.jeDate();
+		this.filter();
+		this.bindEvent();
+	},
+	jeDate: function() {
+        $('.queryTime').date({
+            time1: '#queryStartTime',
+            time2: '#queryEndTime',
+            format: 'YYYY/MM/DD HH:mm'
+        })
+	},
+	filter: function() {
+		var that = this;
+		var $form = $('#filterForm');
+		var page =  new Page({
+			url: 'json/user.json'
+		})
+		
+		// 查询
+		$form.on('submit', function() {
+			var filterData = $form.serializeArray();
+			page.request(true, filterData);
+			return false;
+		})
+
+		that.page = page;
+	},
+	bindEvent: function() {
+		var that = this,
+            $tbody = $('#tbody'),
+			$temp = $('#tempForm'),
+			$form = $temp.find('form'),
+            $uid = $form.find('.ipt[name="uid"]');
+
+		// 验证
+		$form.validator({
+			rules: {
+				pwd: function(el) {
+					var uid = $uid.val();
+					if (uid !== 0 && el.value === '******') {
+						return true;
+					} else if (/^[a-zA-Z0-9]{1,20}$/.test(el.value)) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			},
+            fields: {
+            	name: {
+            		rule: 'required;length(~10)',
+            		msg: {
+            			required: '姓名字段不能为空',
+            			length: '最大10个字符',
+            		}
+            	},
+            	userName: {
+            		rule: 'required;length(~20)',
+            		msg: {
+            			required: '用户名字段不能为空',
+            			length: '最大20个字符',
+            		}
+            	},
+            	pwd: {
+            		rule: 'required;length(~20);pwd',
+            		msg: {
+            			required: '密码字段不能为空',
+            			length: '最大20个字符',
+            			pwd: '字母、数字或字母和数字的组合'
+            		}
+            	},
+                idCard: 'IDcard',
+                IP1: 'ip',
+                IP2: 'ip',
+                number: 'length(~20): 最大20个字符'
+            },
+            valid: function(form) {
+            	var url = 'json/user.json',
+            		data = $(form).serialize(),
+                    type = $uid.val(),
+                    msg = '新增成功！';
+
+            	fx.request(url, data, function(res) {
+            		var roles = [];
+            		$form.find('.cbxs input:checked').each(function() {
+            			roles.push($(this).parent().html());
+            		})
+                    res = {
+                        "id": type,
+                        "name": $form.find('.ipt[name="name"]').val(),
+                        "idCard": $form.find('.ipt[name="idCard"]').val(),
+                        "IP1": $form.find('.ipt[name="IP1"]').val(),
+                        "number": $form.find('.ipt[name="number"]').val(),
+                        "dept": $form.find('.ipt[name="dept"]').val(),
+                        "role": roles.join('、'),
+                        "datetime": $form.find('.ipt[name="datetime"]').val()
+                    }
+                    that.page.refresh(res, type);
+                    if (type != '0') {
+                        msg = '保存成功！'
+                    }
+                    $.notify({
+                        title: msg,
+                        type: 'success'
+                    })
+                    layer.closeAll();
+            	})
+                // window.location.reload(true);
+            }
+        });
+	
+		// 显示密码
+		var setTypeModel = function(password) {
+			try {
+				$('.ico-eye').siblings('.ipt').attr('type', password ? 'password' : 'text');
+			} catch (err) {}
+		}
+		$(document).on('mouseup', function() {
+			setTypeModel(true);
+		}).on('mousedown', '.ico-eye', function() {
+			setTypeModel(false);
+		})
+	}
+}
+
+</script>
+</body>
+</html>

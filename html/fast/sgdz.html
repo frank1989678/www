@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>事故定责</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">交通事故快速处理平台</a>
+	</div>
+	<div class="user">
+		<div class="online">在线用户数：8人</div>
+		<dl>
+			<dt><i class="ico ico-user"></i>系统管理员</dt>
+			<dd>
+				<a href="javascript:;" id="jmodifyPwd">修改密码</a>
+				<a href="login.html">安全退出</a>
+			</dd>
+		</dl>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="nav cf">
+	<ul>
+		<li><a href="index.html"><i class="ico ico-1"></i>首页</a></li>
+		<li><a href="sgdz.html"><i class="ico ico-2"></i>事故定责</a></li>
+		<li>
+			<dl>
+				<dt><i class="ico ico-3"></i>系统设置</dt>
+				<dd>
+					<a href="user.html">用户管理</a>
+					<a href="role.html">角色管理</a>
+					<a href="area.html">用户区域设置</a>
+					<a href="source.html">资源管理</a>
+				</dd>
+			</dl>
+		</li>
+		<li>
+			<dl>
+				<dt><i class="ico ico-3"></i>报表统计</dt>
+				<dd>
+					<a href="statis.html">报表统计</a>
+					<a href="accident-his.html">历史事故查询</a>
+					<a href="accident.html">事故查询</a>
+				</dd>
+			</dl>
+		</li>
+	</ul>
+</div>
+
+<div class="wrapper">
+	<div class="crumbs">
+		<em>定责中事故共有 4 条</em>
+	</div>
+
+	<div class="box">
+		<div class="tit">定责中事故一览 (全部区域)</div>
+
+		<div class="operate">
+			<button type="button" class="ubtn ubtn-primary">刷新</button>
+		</div>
+
+		<div class="mt15 table">
+			<script id="tableTemp" type="text/html">
+				{{each list as item i}}
+				<tr>
+					<td>{{item.id}}</td>
+					<td>{{item.number}}</td>
+					<td>{{item.datetime}}</td>
+					<td>{{item.address}}</td>
+					<td>{{item.name1}}</td>
+					<td>{{item.mobile1}}</td>
+					<td>{{item.name2}}</td>
+					<td>{{item.mobile2}}</td>
+					<td>{{item.time}}</td>
+					<td>
+						<a href="sgdz-detail.html?id={{item.id}}" class="ubtn ubtn-orange">处理</a>
+					</td>
+				</tr>
+				{{/each}}
+			</script>
+
+			<table>
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>事故编号</th>
+						<th>事故报警时间</th>
+						<th>事故发生地点</th>
+						<th>甲姓名</th>
+						<th>甲电话</th>
+						<th>乙姓名</th>
+						<th>乙电话</th>
+						<th>处理完成时间</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody"></tbody>
+			</table>
+		</div>
+		
+		<div class="operate">
+			<div class="pagination"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<!-- 页面专用 -->
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/ajaxPage.js"></script>
+
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+	    "totalSize": 18,
+	    "list|10": [{
+		    "id": "@increment",
+	        "number": "W@natural",
+	        "datetime": "@datetime",
+	        "address": "东湖新技术开发区",
+	        "name1": "@cname",
+	        "mobile1": /^1[345678]\d{9}$/,
+	        "name2": "@cname",
+	        "mobile2": /^1[345678]\d{9}$/,
+	        "time": "@datetime"
+		}]
+	});
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+
+<script>
+var _global = {
+	init: function() {
+		this.filter();
+	},
+	filter: function() {
+		var that = this;
+		var $form = $('#filter');
+		var page =  new Page({
+			pageIndex: 1, // 当前页
+			pageSize: 10, // 每页显示10条
+			url: 'http://g.cn',
+			callback: function(res) {
+				$('#tbody').empty().html(template('tableTemp', res));
+			}
+		})
+		
+		// 查询
+		$form.on('submit', function() {
+			var filterData = $form.serializeArray();
+			page.request(true, filterData);
+			return false;
+		})
+	}
+}
+</script>
+</body>
+</html>

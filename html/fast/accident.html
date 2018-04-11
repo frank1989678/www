@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>事故查询</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">交通事故快速处理平台</a>
+	</div>
+	<div class="user">
+		<div class="online">在线用户数：8人</div>
+		<dl>
+			<dt><i class="ico ico-user"></i>系统管理员</dt>
+			<dd>
+				<a href="javascript:;" id="jmodifyPwd">修改密码</a>
+				<a href="login.html">安全退出</a>
+			</dd>
+		</dl>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="nav cf">
+	<ul>
+		<li><a href="index.html"><i class="ico ico-1"></i>首页</a></li>
+		<li><a href="sgdz.html"><i class="ico ico-2"></i>事故定责</a></li>
+		<li>
+			<dl>
+				<dt><i class="ico ico-3"></i>系统设置</dt>
+				<dd>
+					<a href="user.html">用户管理</a>
+					<a href="role.html">角色管理</a>
+					<a href="area.html">用户区域设置</a>
+					<a href="source.html">资源管理</a>
+				</dd>
+			</dl>
+		</li>
+		<li>
+			<dl>
+				<dt><i class="ico ico-3"></i>报表统计</dt>
+				<dd>
+					<a href="statis.html">报表统计</a>
+					<a href="accident-his.html">历史事故查询</a>
+					<a href="accident.html">事故查询</a>
+				</dd>
+			</dl>
+		</li>
+	</ul>
+</div>
+
+<div class="wrapper">
+	<div class="filter filter-res">
+		<form onsubmit="return false" name="filter" id="filter">
+			<button type="submit" class="ubtn ubtn-primary fr">查询</button>
+
+			<div class="group">
+				<label class="for">事故编号</label>
+				<input class="ipt" name="idNum" type="text">
+			</div>
+			<div class="group">
+				<label class="for">车牌号码</label>
+				<input class="ipt" name="carNumber" type="text">
+			</div>
+			<div class="group">
+				<label class="for">认定书编号</label>
+				<input class="ipt" name="rds" type="text">
+			</div>
+			<div class="group">
+				<label class="for">姓名</label>
+				<input class="ipt" name="name" type="text">
+			</div>
+			<div class="group">
+				<label class="for">所属区域</label>
+				<select name="area" class="slt select2">
+					<option value="">全部</option>
+					<option value="1">洪山区</option>
+				</select>
+			</div>
+			<div class="group">
+				<label class="for">保险公司</label>
+				<select name="area" class="slt select2">
+					<option value="">全部</option>
+					<option value="1">平安</option>
+				</select>
+			</div>
+			<div class="group group2">
+				<label class="for">事故时间</label>
+				<input type="text" class="ipt date" name="start1" id="queryStartTime"  />
+				<i>-</i>
+				<input type="text" class="ipt date" name="end1" id="queryEndTime"  />
+			</div>
+		</form>
+	</div>
+
+	<div class="box">
+		<div class="tit">事故信息一览</div>
+
+		<div class="mt15 table">
+			<script id="tableTemp" type="text/html">
+				{{each list as item i}}
+				<tr>
+					<td>{{item.id}}</td>
+					<td>{{item.number}}</td>
+					<td>{{item.datetime}}</td>
+					<td>{{item.area}}</td>
+					<td>{{item.insure}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.carNumber}}</td>
+					<td>{{item.mobile}}</td>
+					<td>{{item.operator}}</td>
+					<td>{{item.status}}</td>
+					<td>{{item.time}}</td>
+					<td>
+						<a href="accident-see.html?id={{item.id}}" class="ubtn ubtn-orange">查看</a>
+					</td>
+				</tr>
+				{{/each}}
+			</script>
+
+			<table>
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>事故编号</th>
+						<th>事故时间</th>
+						<th>事故区域</th>
+						<th>保险公司</th>
+						<th>当事人姓名</th>
+						<th>车牌号码</th>
+						<th>联系方式</th>
+						<th>远程处警专席</th>
+						<th>处理状态</th>
+						<th>处理时间</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody"></tbody>
+			</table>
+		</div>
+		
+		<div class="operate">
+			<div class="pagination"></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="form layer-form" id="tempForm">
+	<div class="title">添加</div>
+	<form name="form1" onsubmit="return false;">
+		<div class="item">
+            <div class="txt">用户名称：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="account"  />
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">用户姓名：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="name"  />
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">用户密码：</div>
+            <div class="cnt">
+            	<input type="text" class="ipt" name="pwd"  />
+            </div>
+        </div>
+
+		<div class="item">
+            <div class="txt">用户类型：</div>
+            <div class="cnt">
+				<select name="type" class="slt select2">
+					<option value="">请选择</option>
+					<option value="15">远程处警专席</option>
+				</select>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">用户角色：</div>
+            <div class="cnt">
+				<select name="role" class="slt select2">
+					<option value="1">临时用户</option>
+					<option value="0">业务管理员</option>
+				</select>
+            </div>
+        </div>
+	    <div class="buttons" style="padding:20px 0;">
+	        <button type="submit" class="ubtn ubtn-blue submit">确定</button>
+	        <button type="button" class="ubtn ubtn-cyan layer-close">取消</button>
+	    </div>
+	</form>
+</div>
+
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<!-- 页面专用 -->
+<link rel="stylesheet" href="assets/plugins/jedate/jedate.css" />
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/ajaxPage.js"></script>
+<script src="assets/plugins/jedate/jquery.jedate.min.js"></script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+	    "totalSize": 218,
+	    "list|10": [{
+		    "id": "@increment",
+		    "number": "W70626015682030",
+		    "datetime": "@datetime",
+		    "area": "东湖新技术开发区",
+		    "insure": "保险公司",
+		    "name": "@cname",
+		    "carNumber": "鄂A76ZZ0",
+		    "mobile": /^1[3-9]\d{9}$/,
+		    "operator": "@cname",
+		    "status": "定责完成",
+		    "time": "@datetime",
+		}]
+	});
+
+	Mock.mock('http://h.cn', {
+		"result": "SUCCESS",
+	    "data": {
+	        "account": "yitop",
+	        "name": "@cname",
+	        "pwd": "***",
+	        "type": "15",
+	        "role|0-1": 1,
+		}
+	});
+
+	Mock.mock('http://del.cn', {
+		"result": "SUCCESS",
+	    "data": {
+	    	"result|0-1": 1
+		}
+	});
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+
+<script>
+var _global = {
+	init: function() {
+		this.jeDate();
+		this.select2();
+		this.filter();
+		this.bindEvent();
+	},
+	jeDate: function() {
+		$.mydate({
+            start: '#queryStartTime',
+            end: '#queryEndTime',
+            format: 'YYYY-MM-DD',
+            isinitVal: true
+        })
+	},
+	select2: function() {
+		$('.select2').select2({
+			minimumResultsForSearch: -1
+		});
+	},
+	filter: function() {
+		var that = this;
+		var $form = $('#filter');
+		var page =  new Page({
+			pageIndex: 1, // 当前页
+			pageSize: 10, // 每页显示10条
+			url: 'http://g.cn',
+			data: $form.serializeArray(),
+			callback: function(res) {
+				$('#tbody').empty().html(template('tableTemp', res));
+			}
+		})
+		
+		// 查询
+		$form.on('submit', function() {
+			var filterData = $form.serializeArray();
+			page.request(true, filterData);
+			return false;
+		})
+	},
+	bindEvent: function() {
+		var that = this,
+			$temp = $('#tempForm'),
+			$form = $temp.find('form'),
+			$tbody = $('#tbody'),
+			opType = 'add';
+
+		// 编辑
+		$tbody.on('click', '.jedit', function() {
+			var id = $(this).data('id');
+			opType = 'edit';
+			$form[0].reset();
+			$form.prev('.title').html('修改');
+			if (id) {
+				fx.request('http://h.cn', {id: id}, function(res){
+					$form.find('.ipt[name="account"]').val(res.data.account);
+					$form.find('.ipt[name="name"]').val(res.data.name);
+					$form.find('.ipt[name="pwd"]').val(res.data.pwd);
+					$form.find('.slt[name="type"]').val(res.data.type);
+					$form.find('.slt[name="role"]').val(res.data.role);
+					$form.find('.select2').trigger('change.select2');
+					layer.open({
+						area: '540px',
+						type: 1,
+						title: false,
+						content: $temp
+					})
+				});
+			}
+		})
+
+		// 新增
+		$('#jadd').on('click', function() {
+			opType = 'add';
+			$form[0].reset();
+			$form.find('.select2').trigger('change.select2');
+			$form.prev('.title').html('新增');
+			layer.open({
+				area: '540px',
+				type: 1,
+				title: false,
+				content: $temp
+			})
+		})
+
+		// 验证
+		$form.validator({
+            fields: {
+                account : '用户名称: required',
+                name    : '真实姓名: required',
+                pwd     : '用户密码: required',
+                type    : '用户类型: required',
+                role    : '用户角色: required'
+            },
+            valid: function(form) {
+            	// that.post($(form).serialize());
+            	layer.closeAll();
+				return false;
+            }
+        });
+
+        // 删除
+        $tbody.on('click', '.jdel', function() {
+        	var id = $(this).data('id');
+        	layer.confirm('确认删除吗？', function(key) {
+        		layer.close(key);
+        		that.del({id: id});
+        	})
+        })
+	},
+	del: function(data) {
+		fx.loading();
+		$.ajax({
+			url: 'http://del.cn',
+			dataType: 'json',
+			type: 'GET',
+			type: 'POST',
+			data: data,
+			success: function(res) {
+				fx.closeLoading();
+				if (res.data.result == 0) {
+					$.notify({
+						type: 'danger',
+						title: '删除失败'
+					})
+    			} else {
+					$.notify({
+						type: 'success',
+						title: '删除成功'
+					})
+    			}
+			}
+		})
+	}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>登录</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/login.css" />
+</head>
+
+<body>
+<div class="login-box">
+    <div class="banner">
+        <img src="assets/images/login/banner.jpg" width="430" height="730" />
+        <i class="mask"></i>
+    </div>
+    <div class="form">
+        <div class="logo"></div>
+        <div class="title">
+            湖北省消防总队消防作战智能指挥平台
+            <em>Dispatching platform of Wuhan 119 operational command center</em>
+        </div>
+        <div class="enter">
+            <form id="loginForm" action="" method="post">
+                <div class="group">
+                    <i class="ico user"></i>
+                    <input type="text" placeholder="用户名" id="username" name="username" autocomplete="off" value="" class="input">
+                    <span class="ico clear-btn"></span>
+                </div>
+
+                <div class="group">
+                    <i class="ico lock"></i>
+                    <input type="password" placeholder="密码" id="password" name="password" autocomplete="off" value="" class="input">
+                    <span class="ico clear-btn"></span>
+                </div>
+
+                <div class="button">
+                    <button type="button" class="ubtn ubtn-blue" id="submit">登录</button>
+                </div>
+            </form>
+            <div class="msg" id="msg"></div>
+        </div>
+    </div>
+    <div class="copy">
+        <span>湖北省宏锐慧通信息技术有限公司</span><br>
+        <a target="_blank" class="police" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=42010602000754">鄂公网安备 42010602000754号</a>
+    </div>
+</div>
+
+    <script src="assets/js/jquery191.js"></script>
+    <script>
+    !(function($) {
+        var 
+            $username = $('#username'),
+            $password = $('#password'),
+            $submit   = $('#submit'),
+            $msg      = $('#msg'),
+            isSubmit    = false; // 锁定登录按钮
+
+        var showMsg = function(message) {
+            $msg.html(message || '');
+        }
+        var checkUsername = function() {
+            var msg = $username.val() ? '' : '请输入用户名';
+            showMsg(msg);
+            return msg;
+        }
+        var checkPassword = function() {
+            var msg = $password.val() ? '' : '请输入密码';
+            showMsg(msg);
+            return msg;
+        }
+        var checkForm = function() {
+            return !checkUsername() && !checkPassword();
+        }
+
+        var showClearBtn = function(el) {
+            el.value ? $(el).next().show() : $(el).next().hide();
+        }
+
+        $('.input').on('keyup', function() {
+            showClearBtn(this);
+        }).on('blur', function() {
+            showClearBtn(this);
+        }).each(function() {
+            showClearBtn(this);
+        })
+
+        $('.clear-btn').on('click', function() {
+            $(this).hide().prev().val('').focus();
+        })
+
+        $(document).on('keyup', function(e) {
+            if (e.keyCode == 13) {
+                $submit.trigger('click');
+            }
+        })
+
+        // 提交
+        $submit.on('click', function() {
+            if (!isSubmit && checkForm()) {
+                $.ajax({
+                    url: '',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: $('#loginForm').serialize(),
+                    success: function(res) {
+                        if(res.status == '200') {
+                            // 登录成功
+                            window.location.href = 'index.html';
+                        }else{
+                            // 错误提示信息
+                            showMsg(res.msg);
+                        }
+                    },
+                    complete: function() {
+                        isSubmit = false;
+                    },
+                    beforeSend: function() {
+                        isSubmit = true;
+                    }
+                })
+            }
+            return false;
+        });
+    })(jQuery);
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>车管所智能管控平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
+</head>
+
+<body>
+<div class="login-box">
+    <div class="myform">
+        <div class="tit">用户登录</div>
+        <form id="loginForm" name="loginForm" method="post" onsubmit="return false;">
+            <div class="group">
+                <i class="ico user"></i>
+                <input type="text" placeholder="用户名" id="username" name="username" autocomplete="off" value="" class="input" tabindex="1">
+                <span class="ico clear-btn"></span>
+            </div>
+
+            <div class="group">
+                <i class="ico lock"></i>
+                <input type="password" placeholder="密码" id="password" name="password" autocomplete="off" value="" class="input" tabindex="2">
+                <span class="ico clear-btn"></span>
+            </div>
+
+            <div class="button">
+                <button type="button" class="ubtn ubtn-primary" id="submit" tabindex="3">登录</button>
+            </div>
+
+            <div class="error"></div>
+        </form>
+    </div>
+    <div class="cap"><img src="assets/images/cap.png" /></div>
+    <div class="copy">
+        <p>湖北易站通达电子科技有限公司</p>
+        <p>建议使用IE9以上版本，或者火狐，谷歌浏览器</p>
+    </div>
+</div>
+
+
+
+    <script src="assets/js/jquery191.js"></script>
+    <script>
+    !(function($) {
+        var 
+            $username = $('#username'),
+            $password = $('#password'),
+            $submit   = $('#submit'),
+            $msg      = $('.error'),
+            status    = false,
+            isSubmit    = false; // 锁定登录按钮
+
+        var showMsg = function(message) {
+            $msg.html(message || '');
+        }
+        var checkUsername = function() {
+            var msg = $username.val() ? '' : '请输入用户名';
+            showMsg(msg);
+            msg && $username.focus();
+            return msg;
+        }
+        var checkPassword = function() {
+            var msg = $password.val() ? '' : '请输入密码';
+            showMsg(msg);
+            msg && $password.focus();
+            return msg;
+        }
+        var checkForm = function() {
+            return !checkUsername() && !checkPassword();
+        }
+
+        var showClearBtn = function(el) {
+            el.value ? $(el).next().show() : $(el).next().hide();
+        }
+
+        $('.input').on('keyup', function() {
+            showClearBtn(this);
+        }).on('focus', function() {
+            $(this).parent().addClass('active').siblings().removeClass('active');
+        }).on('blur', function() {
+            $(this).parent().removeClass('active')
+            showClearBtn(this);
+        }).each(function() {
+            showClearBtn(this);
+        })
+
+        $('.clear-btn').on('click', function() {
+            $(this).hide().prev().val('').focus();
+        })
+
+        $(document).on('keyup', function(e) {
+            if (e.keyCode == 13) {
+                $submit.trigger('click');
+            }
+        })
+
+        // 提交
+        $submit.on('click', function() {
+            if (!isSubmit && checkForm()) {
+                $.ajax({
+                    url: '/ajaxSbmi',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: $('#loginForm').serialize(),
+                    success: function(res) {
+                        if(res.status == '200') {
+                            // 登录成功
+                            window.location.href = 'index';
+                        }else{
+                            // 错误提示信息
+                            showMsg(res.msg);
+                        }
+                    },
+                    complete: function() {
+                        isSubmit = false;
+                    },
+                    beforeSend: function() {
+                        isSubmit = true;
+                    }
+                })
+            }
+            return false;
+        });
+    })(jQuery);
+    </script>
+</body>
+</html>

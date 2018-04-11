@@ -1,0 +1,39 @@
+html,body{height:100%;color:#0288d1;}
+body{background:url(../images/bg.jpg) no-repeat 50% 50%;}
+*{
+	-moz-box-sizing: border-box;  
+ -webkit-box-sizing: border-box; 
+	  -o-box-sizing: border-box; 
+	 -ms-box-sizing: border-box; 
+	     box-sizing: border-box;
+}
+
+.login-box{position:absolute;z-index:1;top:50%;left:50%;width:420px;height:340px;margin:-170px 0 0 -210px;background:#fff;}
+.login-box .mask,
+.login-box .border{position:absolute;top:-15px;left:-15px;right:-15px;bottom:-15px;border:1px solid #fff;opacity:0.14;filter:alpha(opacity=14);}
+.login-box .mask{background:#fff;}
+.login-box .h1{position:absolute;top:-110px;left:-50px;right:-50px;text-align:center;}
+.login-box .h1 span{display:inline-block;padding-left:50px;line-height:50px;font-size:30px;background:url(../images/logo.png) no-repeat 0 50%;}
+.login-box .myform{position:relative;z-index:2;padding:30px 50px;}
+.login-box .title{padding-bottom:20px;font-size:24px;}
+.login-box .title em{font-size:18px;}
+.login-box .group{padding:18px 0;position:relative;z-index:1;}
+.login-box .input{width:100%;height:36px;line-height:20px;padding:7px 7px 7px 34px;border:1px solid #ddd;border-radius:3px;background:#fff url(../images/ico-login.png) no-repeat -30px 0;transition:border .1s;}
+.login-box .user{background-position:0 0;}
+.login-box .lock{background-position:0 -36px;}
+.login-box .msg{position:absolute;top:300px;left:0;right:0;color:#f00;text-align:center;}
+.login-box .button{margin-top:20px;}
+.login-box .ubtn{width:100%;height:44px;font-size:16px;}
+.login-box .ubtn:hover{box-shadow:0 1px 3px rgba(0, 0, 0, .4);}
+
+#loginForm{position:relative;}
+#loginForm .active{position:absolute;top:0;left:-50px;right:-50px;height:72px;background:#f0f4f7;border-left:5px solid #4e8ff7;display:none;}
+
+.footer{text-align:center;margin-top:32px;color:#fff;}
+@media(min-height:660px) {
+	.login-box .h1{top:-130px;}
+}
+@media(max-height:659px) {
+	body{background-position:50% 60%;}
+	.login-box{margin-top:-160px;}
+}

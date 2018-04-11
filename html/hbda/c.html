@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>档案审核</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/jedate/jedate.css" />
+</head>
+<body>
+
+<div class="wrapper">
+
+	<!-- header begin -->
+	<div class="header">
+		<div class="logo">
+			<a href="index.html">公安交通档案综合管理系统</a>
+		</div>
+		<div class="user">
+			<ul>
+				<li><i class="ico ico-user"></i><span>您好，赵雷</span></li>
+				<li><a href="index.html"><i class="ico ico-home"></i>首页</a><i>|</i></li>
+				<li><a href="notice.html"><i class="ico ico-notice"></i>通知公告</a><i>|</i></li>
+				<li><a href="index.html"><i class="ico ico-edit"></i>修改资料</a><i>|</i></li>
+				<li><a href="index.html"><i class="ico ico-lock"></i>修改密码</a><i>|</i></li>
+				<li><a href="index.html"><i class="ico ico-logout"></i>退出</a></li>
+			</ul>
+		</div>
+		<div class="menu">
+			<div class="item" id="menu1">
+				<div class="hd"><a href="#">机动车纸质档案</a></div>
+				<div class="bd">
+					<dl>
+						<dt>
+							<a href="javascript:;">
+								<span>A库转B库交接</span>
+								<i class="ico ico-right"></i>
+							</a>
+						</dt>
+						<dd>
+							<a href="ab1.html" id="menu1_1_1"><i class="ico ico1"></i>A库转B库登记</a>
+							<a href="ab2.html" id="menu1_1_2"><i class="ico ico2"></i>A库转B库签收</a>
+							<a href="ab3.html" id="menu1_1_3"><i class="ico ico3"></i>修改/补打印</a>
+						</dd>
+					</dl>
+					<dl>
+						<dt>
+							<a href="javascript:;">
+								<span>B库转A库交接</span>
+								<i class="ico ico-right"></i>
+							</a>
+						</dt>
+						<dd>
+							<a href="ba1.html" id="menu1_2_1"><i class="ico ico1"></i>B库转A库登记</a>
+							<a href="ba2.html" id="menu1_2_2"><i class="ico ico2"></i>B库转A库签收</a>
+						</dd>
+					</dl>
+					<dl>
+						<dt>
+							<a href="javascript:;">
+								<span>档案审核</span>
+								<i class="ico ico-right"></i>
+							</a>
+						</dt>
+						<dd>
+							<a href="c.html" id="menu1_3_1"><i class="ico ico8"></i>档案审核</a>
+						</dd>
+					</dl>
+					<dl>
+						<dt>
+							<a href="javascript:;">
+								<span>查询统计</span>
+								<i class="ico ico-right"></i>
+							</a>
+						</dt>
+						<dd>
+							<a href="d1.html" id="menu1_4_1"><i class="ico ico5"></i>档案查询</a>
+							<a href="d2.html" id="menu1_4_2"><i class="ico ico6"></i>交接统计</a>
+							<a href="d3.html" id="menu1_4_3"><i class="ico ico7"></i>问题档案查询</a>
+						</dd>
+					</dl>
+				</div>
+			</div>
+
+			<div class="item" id="menu2">
+				<div class="hd"><a href="#">机动车影像</a></div>
+				<div class="bd">
+					<dl>
+						<dt>
+							<a href="javascript:;">
+								<span>档案影像</span>
+								<i class="ico ico-right"></i>
+							</a>
+						</dt>
+						<dd>
+							<a href="e1.html" id="menu2_1_1"><i class="ico ico4"></i>历史档案影像</a>
+						</dd>
+					</dl>
+					<dl>
+						<dt>
+							<a href="javascript:;">
+								<span>查询统计</span>
+								<i class="ico ico-right"></i>
+							</a>
+						</dt>
+						<dd>
+							<a href="f1.html" id="menu2_2_1"><i class="ico ico5"></i>影像查询</a>
+							<a href="f2.html" id="menu2_2_2"><i class="ico ico6"></i>历史档案扫描流水统计</a>
+							<a href="f3.html" id="menu2_2_3"><i class="ico ico7"></i>按扫描人员统计</a>
+						</dd>
+					</dl>
+				</div>
+			</div>
+
+			<div class="item" id="menu3">
+				<div class="hd"><a href="#">档案抽检</a></div>
+			</div>
+			<div class="item" id="menu4">
+				<div class="hd"><a href="#">库房管理</a></div>
+			</div>
+			<div class="item" id="menu5">
+				<div class="hd"><a href="#">综合查询</a></div>
+			</div>
+			<div class="item" id="menu6">
+				<div class="hd"><a href="#">统计分析</a></div>
+			</div>
+			<div class="item" id="menu7">
+				<div class="hd"><a href="#">系统管理</a></div>
+				<div class="bd">
+					<dl>
+						<dt>
+							<a href="javascript:;">
+								<span>系统管理</span>
+								<i class="ico ico-right"></i>
+							</a>
+						</dt>
+						<dd>
+							<a href="department.html" id="menu7_1_1"><i class="ico ico9"></i>部门管理</a>
+							<a href="role.html" id="menu7_1_2"><i class="ico ico10"></i>角色管理</a>
+							<a href="user.html" id="menu7_1_3"><i class="ico ico11"></i>用户管理</a>
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div></div>
+	<!-- header end -->
+
+	<div class="content">
+		<div class="crumbs">
+			<a href="#">机动车纸质档案</a>
+			<i>&gt;</i>
+			<a href="#">档案审核</a>
+			<i>&gt;</i>
+			<span>档案审核</span>
+		</div>
+
+		<div class="box">
+			<div class="filter">
+				<form name="filterForm" id="filterForm" action="#" onsubmit="return false;" novalidate>
+					<label class="for">档案编号</label>
+					<input class="ipt" name="code" type="text" placeholder="请输入流水号信息，或用扫描枪扫描">
+					<button type="submit" class="ubtn ubtn-primary">确定</button>
+				</form>
+			</div>
+
+			<div class="table hide">
+				<div class="caption">
+					<span>车辆信息</span>
+				</div>
+				<script id="table1" type="text/html">
+					{{each carInfo as item i}}
+					<tr>
+						<td>{{item.id}}</td>
+						<td>{{item.code}}</td>
+						<td>{{item.carType}}</td>
+						<td>{{item.carNumber}}</td>
+						<td>{{item.discern}}</td>
+						<td>{{item.status}}</td>
+					</tr>
+					{{/each}}
+				</script>
+				<table class="tc">
+					<thead>
+						<tr>    
+							<th>序号</th>
+							<th>档案编号</th>
+							<th>号牌种类</th>
+							<th>号牌号码</th>
+							<th>车辆识别代号</th>
+							<th>档案状态</th>
+						</tr>
+					</thead>
+					<tbody id="tbody2"></tbody>
+				</table>
+			</div>
+
+			<div class="table hide" style="margin-top:40px;">
+				<div class="caption">
+					<span>车辆信息</span>
+				</div>
+				<script id="tableTemp" type="text/html">
+					{{each list as item i}}
+					<tr>
+						<td>{{item.id}}</td>
+						<td>{{item.code}}</td>
+						<td>{{item.type}}</td>
+						<td>{{item.date}}</td>
+						<td>{{item.status}}</td>
+						<td>{{item.status2}}</td>
+						<td data-id="{{item.id}}">
+							{{if item.status2 === '正常'}}
+								<a href="javascript:;" class="ubtn ubtn-link record1">记录为缺失流水</a>
+								<a href="javascript:;" class="ubtn ubtn-link record2">记录缺失资料</a>
+							{{else if item.status2 === '资料缺失'}}
+								<a href="javascript:;" class="ubtn ubtn-link record2">记录缺失资料</a>
+							{{else if item.status2 === '流水缺失'}}
+								<a href="javascript:;" class="ubtn ubtn-link record3">修改为正常流水</a>
+							{{/if}}
+						</td>
+					</tr>
+					{{/each}}
+				</script>
+				<table class="tc">
+					<thead>
+						<tr>    
+							<th>序号</th>
+							<th>流水号</th>
+							<th>业务类型</th>
+							<th>申请时间</th>
+							<th>流水状态</th>
+							<th>流水缺失状态</th>
+							<th>问题档案管理</th>
+						</tr>
+					</thead>
+					<tbody id="tbody"></tbody>
+				</table>
+			</div>
+
+			<div class="operate">
+				<div class="pagination"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="form layer-form" id="tempForm">
+	<div class="title">请选择缺失资料种类</div>
+	<form action="" name="form1" onsubmit="return false;">
+		<input type="hidden" name="id" value="">
+		<div class="item" style="padding-top:15px;overflow:hidden;">
+			<label class="cbx">资料目录</label>
+			<label class="cbx">受理凭证</label>
+			<label class="cbx">申请表</label>
+			<label class="cbx">车辆购置税</label>
+			<label class="cbx">交强险凭证</label>
+			<label class="cbx">合格证1</label>
+			<label class="cbx">合格证2</label>
+			<label class="cbx">查验表</label>
+			<label class="cbx">车辆识别代码拓印件</label>
+			<label class="cbx" style="width:100%;margin:0;clear:both;">所有人身份证明复印件</label>
+        </div>
+	    <div class="ft">
+	        <button type="button" class="ubtn ubtn-gray layer-close">取消</button>
+	        <button type="button" class="ubtn ubtn-primary" id="material" style="width:120px;">确定</button>
+	    </div>
+	</form>
+</div>
+
+
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/jedate/jquery.jedate.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/jquery.pagination.min.js"></script>
+<script src="assets/js/common.js"></script>
+
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+	    "totalSize": 131,
+	    "list|10": [{
+		    "id": "@increment",
+		    "code": "201648277278",
+		    "type|1": ["补牌换证","抵押登记","注册登记",],
+		    "date": "@date",
+		    "status": "完成",
+		    "status2|1": ["正常","资料缺失","流水缺失"]
+		}],
+		"carInfo": [{
+		    "id": "@increment",
+		    "code": "201648277278",
+		    "carType": "小型汽车",
+		    "carNumber": "A76656",
+		    "discern": "LSGJB84BFY0620096",
+		    "status": "问题档案"
+		}]
+	});
+
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+
+<script>
+
+var _pageInit = {
+	init: function() {
+		menu('menu1_3_1');
+		this.filter();
+		this.bindEvent();
+		this.cbx();
+	},
+	filter: function() {
+		var that = this;
+		var $form = $('#filterForm');
+		var page =  new Page({
+			pageIndex: 1, // 当前页
+			pageSize: 10, // 每页显示10条
+			url: 'http://g.cn',
+			callback: function(res) {
+				if (res.result === 'SUCCESS') {
+					var model = template('table1', res);
+	            	$('#tbody2').empty().html(model).closest('.table').show();
+				}
+			}
+		})
+
+		// 查询
+		$form.on('submit', function() {
+			var filterData = $form.serializeArray();
+			page.request(filterData);
+			return false;
+		})
+	},
+	bindEvent: function() {
+		var that = this,
+			$tbody = $('#tbody'),
+			materialID; 
+
+		// 记录为缺失流水
+		$tbody.on('click', '.record1', function() {
+			var id = $(this).parent().data('id');
+			fx.confirm('是否记录为缺失流水？', function() {
+				alert(9)
+			})
+		})
+		
+		// 记录缺失资料
+		$tbody.on('click', '.record2', function() {
+			$('#tempForm').find('.cbx-on').removeClass('cbx-on');
+			materialID = $(this).parent().data('id');
+			layer.open({
+				area: '540px',
+				type: 1,
+				title: false,
+				content: $('#tempForm')
+			})
+		})
+		// 提交
+		$('#material').on('click', function() {
+			var data = [];
+			var id = materialID;
+			$('#tempForm').find('.cbx-on').each(function(i, item) {
+				data.push(this.innerHTML);
+			})
+			if (data.length === 0) {
+				$.notify({
+					'type': 'danger',
+					'title': '请选择一项'
+				})
+			} else {
+				layer.closeAll();
+			}
+		})
+
+		// 修改为正常流水
+		$tbody.on('click', '.record3', function() {
+			var id = $(this).parent().data('id');
+			fx.confirm('是否记录为正常流水？', function() {
+				alert(9)
+			})
+		})
+
+	},
+	cbx: function() {
+		$('#tempForm').on('click', '.cbx', function() {
+			$(this).toggleClass('cbx-on');
+		})
+	}
+}
+
+</script>
+</body>
+</html>

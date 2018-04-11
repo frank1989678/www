@@ -1,0 +1,35 @@
+/*body{background:url(../images/bg-page.jpg) no-repeat 50% 0 fixed;}*/
+/*.header{background:url(../images/bg-page.jpg);}*/
+.metro{min-width:1000px;margin:120px 30px 30px;padding:15px;background:url(../images/bg-page-mask.png);overflow:hidden;*zoom:1;}
+.metro a{position:relative;display:block;color:#fff;height:100%;transition:all .3s;background:#6d95e1 no-repeat 50% 30%;}
+.metro span{position:absolute;left:30px;right:30px;bottom:20px;font-size:24px;}
+.metro .box{float:left;width:25%;height:270px;padding:15px;}
+.metro .box2{height:420px;}
+.metro .box3{height:690px;}
+.metro .box-1{width:18%;}
+.metro .box-2{width:23%;}
+.metro .box-3{width:41%;}
+.metro .box-4{width:36%;}
+.metro .bg-1 a{background-color:#6d95e1;}
+.metro .bg-1 a:hover{background-color:#98b9ed;}
+.metro .bg-2 a{background-color:#46c4c5;}
+.metro .bg-2 a:hover{background-color:#6dd1ce;}
+.metro .bg-3 a{background-color:#ee965c;}
+.metro .bg-3 a:hover{background-color:#faba89;}
+.metro .bg-4 a{background-color:#ed91ac;}
+.metro .bg-4 a:hover{background-color:#fac0d0;}
+.metro .bg-5 a{background-color:#349ee5;}
+.metro .bg-5 a:hover{background-color:#5ebcf2;}
+.metro .bg-6 a{background-color:#ef7c74;}
+.metro .bg-6 a:hover{background-color:#fcada4;}
+.metro .bg-7 a{background-color:#7f81dd;}
+.metro .bg-7 a:hover{background-color:#abaeeb;}
+
+.metro .icon{position:absolute;top:0;left:0;right:0;bottom:36px;background:no-repeat 50% 50%;}
+.metro .icon-1{background-image:url(../images/metro/ico-1.png);}
+.metro .icon-2{background-image:url(../images/metro/ico-2.png);}
+.metro .icon-3{background-image:url(../images/metro/ico-3.png);}
+.metro .icon-4{background-image:url(../images/metro/ico-4.png);}
+.metro .icon-5{background-image:url(../images/metro/ico-5.png);}
+.metro .icon-6{background-image:url(../images/metro/ico-6.png);}
+.metro .icon-7{background-image:url(../images/metro/ico-7.png);}

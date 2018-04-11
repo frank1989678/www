@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>车管所智能管控平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">车管所智能管控平台</a>
+	</div>
+	<div class="user">
+        <span>当前在线人数：<em>15</em></span>
+        <i>|</i>
+        <span>历史登录人数：<em>430</em></span>
+        <i>|</i>
+        <span>admin</span>
+        <i>|</i>
+        <a href="login.html" class="logout"></a>
+    </div>
+</div>
+<!-- header end -->
+
+<div class="side-menu">
+    <!-- menu.html -->
+</div>
+
+<div class="content">
+    <div class="box">
+        <div class="box-tit">
+            <span class="t1">窗口任务调整</span>
+        </div>
+
+        <div class="filter tr">
+            <button type="button" class="ubtn ubtn-primary" onclick="F5()">刷新</button>
+        </div>
+        <div class="table">
+            <table class="border tc">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>窗口名称</th>
+                        <th>窗口状态</th>
+                        <th>分配业务数</th>
+                        <th>已办理业务数</th>
+                        <th>未办理业务数</th>
+                        <th>借调业务数</th>
+                        <th>被借业务数</th>
+                        <th>实际办理业务数</th>
+                        <th>完成度</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>0号取号台</td>
+                        <td>停用</td>
+                        <td>100</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>张三</td>
+                        <td>80%</td>
+                        <td>
+                            <span class="ubtn ubtn-link" onclick="adjust(1)">调整任务</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>1号取号台</td>
+                        <td>启用</td>
+                        <td>100</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>张三</td>
+                        <td>80%</td>
+                        <td>
+                            <span class="ubtn ubtn-link" onclick="adjust(2)">调整任务</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>2号取号台</td>
+                        <td>启用</td>
+                        <td>100</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>张三</td>
+                        <td>80%</td>
+                        <td>
+                            <span class="ubtn ubtn-link" onclick="adjust(3)">调整任务</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pages">
+            <input value="100" id="totalSize"  type="hidden">
+            <input value="5" id="currentSize" type="hidden">
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+	<span>湖北省宏锐慧通信息技术有限公司</span>
+</div>
+
+
+<!-- 调整任务 -->
+<div class="form layer-form" id="tempForm1">
+    <div class="ftit">调整窗口的任务</div>
+    <div class="table">
+        <table class="border tc">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>号牌</th>
+                    <th>业务类型</th>
+                    <th>分配时间</th>
+                    <th>办理窗口</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>机动车临牌核发</td>
+                    <td>2018-1-24 9:01:02</td>
+                    <td>
+                        <select name="slt1" class="slt">
+                            <option value="1">1号窗口</option>
+                            <option value="2">2号窗口</option>
+                            <option value="10">10号窗口</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>6</td>
+                    <td>机动车临牌核发</td>
+                    <td>2018-1-24 9:01:02</td>
+                    <td>
+                        <select name="slt2" class="slt">
+                            <option value="1">1号窗口</option>
+                            <option value="2">2号窗口</option>
+                            <option value="10">10号窗口</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>8</td>
+                    <td>机动车临牌核发</td>
+                    <td>2018-1-24 9:01:02</td>
+                    <td>
+                        <select name="slt3" class="slt">
+                            <option value="1">1号窗口</option>
+                            <option value="2">2号窗口</option>
+                            <option value="10">10号窗口</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="buttons">
+        <input type="hidden" name="uid" class="ipt" value="0">
+        <button type="submit" class="ubtn ubtn-primary submit">确定</button>
+        <button type="button" class="ubtn ubtn-gray layer-close">取消</button>
+    </div>
+</div>
+<!-- end 调整任务 -->
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/jquery.pagination.min.js"></script>
+<script src="assets/js/common.js"></script>
+
+<script>
+    $.ajax({
+        url: 'menu.html',
+        cache: false,
+        async: false,
+        success: function(res) {
+            $('.side-menu').html(res)
+        }
+    })
+</script>
+
+<script>
+// 刷新
+function F5() {
+    window.location.reload(true);
+}
+
+/**
+ * 调整任务
+ * @param  {Number} id 任务id
+ */
+function adjust(id) {
+    if (id) {
+        $.ajax({
+            url: '',
+            data: {id: id},
+            // dataType: 'json',
+            cache: false,
+            success: function(res) {
+                res = {
+                    data: {
+                        'name1': '',
+                        'name2': true,
+                        'name3': true
+                    }
+                }
+                var $temp = $('#tempForm1');
+                $temp.find('.cbx').each(function(i, item) {
+                    this.checked = res.data[this.name];
+                })
+                $temp.find('.ipt[name="uid"]').val(id);
+                layer.open({
+                    area: '560px',
+                    type: 1,
+                    title: false,
+                    content: $temp
+                })
+            }
+        })
+    }
+}
+
+$(function() {
+    var lock = false;
+    var $model = $('#tempForm1');
+
+    // 保存业务授权
+    $model.on('click', '.submit', function() {
+        var id = $model.find('.ipt[name="uid"]').val();
+            ids = {};
+        if (lock) {
+            return;
+        }
+        $model.find('.slt').each(function() {
+            ids[this.name] = this.value;
+        })
+        $.ajax({
+            url: '',
+            data: {id: id, ids: ids},
+            beforeSend: function() {
+                lock = true;
+            },
+            complete: function() {
+                lock = false;
+            },
+            success: function(res) {
+                layer.closeAll();
+            }
+        })
+    })
+
+    // 分页
+    $('.pages').initPage();
+})
+</script>
+</body>
+</html>

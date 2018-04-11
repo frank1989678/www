@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>更换主题</title>
+    <meta name="renderer" content="webkit" />
+    <style>
+	body,form{margin:0;padding:0;}
+	body{background:#fff;color:#5a738e;font:14px/1.5 arial,tahoma;}
+	input,button{font-size:100%;outline:none;}
+	button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}
+	::-ms-clear,::-ms-reveal{display:none;}
+	.fa-form{width:470px;padding-top:30px;}
+	.fa-form .item{position:relative;margin-bottom:20px;padding-left:170px;}
+	.fa-form .txt{position:absolute;top:0;left:0;width:160px;line-height:32px;color:#999;text-align:right;}
+	.fa-form .txt i{margin-right:6px;color:#d74141;vertical-align:middle;font:700 14px tahoma;}
+	.fa-form .cnt{position:relative;min-height:32px;line-height:32px;}
+	.fa-form .cnt em{margin:0 4px;}
+	.fa-form .cnt .ipt{width:230px;height:30px;line-height:30px;padding:0 10px;font-size:12px;border:1px solid #ccc;border-radius:3px;}
+	.fa-form .msg-box{position:absolute;top:33px;left:5px;z-index:9999;display:block;line-height:18px;padding:2px 5px;background:#d74141;color:#fff;}
+	.fa-form .msg-box:after{content:"";position:absolute;top:-10px;left:10px;border:5px dashed transparent;border-bottom:5px solid #d74141;}
+	.fa-form .msg-box .error{color:#fff;}
+	.fa-form .button{padding:10px 30px 0 0;text-align:center;}
+    .fa-form .title{margin:0 40px 20px;padding-bottom:10px;line-height:20px;font-size:16px;border-bottom:1px solid #ddd;}
+    .fa-form .title:before{content:'';display:inline-block;width:5px;height:20px;margin-right:10px;background:#dd4635;vertical-align:middle;border-radius:3px;}
+    .ubtn{width:80px;line-height:30px;padding:0 8px;cursor:pointer;color:#fff;border:0;transition:all .2s;border-radius:3px;}
+    .ubtn-red{background:#dd4635;}
+    .ubtn-red:hover{background:#c63f30;}
+    .ubtn-gray{background:#b7b7b7;}
+    .ubtn-gray:hover{background:#a4a4a4;}
+    ._cbx{vertical-align:-2px;}
+    </style>
+</head>
+
+<body>
+<form id="myform">
+    <div class="fa-form fa-form-layer">
+        <div class="title">更换主题</div>
+        <div class="item">
+            <div class="txt">平台名称：</div>
+            <div class="cnt">
+                <input class="ipt" name="name" type="text">
+            </div>
+        </div>
+        <div class="item">
+            <div class="txt">平台英文名称：</div>
+            <div class="cnt">
+                <input class="ipt" name="en" type="text">
+            </div>
+        </div>
+        <div class="item">
+            <div class="txt">平台logo：</div>
+            <div class="cnt">
+                <input class="ipt" name="logo" type="file">
+            </div>
+        </div>
+        <div class="item">
+            <div class="txt">界面颜色：</div>
+            <div class="cnt">
+                <label><input name="theme" value="red" type="radio" class="_cbx">红色</label>
+                <label><input name="theme" value="yellow" type="radio" class="_cbx">黄色</label>
+                <label><input name="theme" value="blue" type="radio" class="_cbx">蓝色</label>
+                <label><input name="theme" value="green" type="radio" class="_cbx">绿色</label>
+            </div>
+        </div>
+        <div class="button">
+            <button type="reset" class="ubtn ubtn-gray">取消</button>
+            <button type="submit" class="ubtn ubtn-red">保存</button>
+        </div>
+    </div>
+</form>
+
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/validator/jquery.validator.min.js"></script>
+<script>
+	var _global = {
+		fn: {
+			init: function() {
+				this.checkForm();
+			},
+			checkForm: function() {
+				var self = this;
+				$('#myform').validator({
+                    fields: {
+                        oldpwd: '原密码: required',
+                        newpwd: '新密码: required',
+                        againpwd: '确认密码: required; match(newpwd)'
+                    },
+                    valid : function(form) {
+                        self.success();
+                    }
+                });
+
+                // 取消按钮
+                $('#myform').on('reset', function() {
+                	try{
+	                	window.parent.layer.closeAll();
+	            	}catch(err) {}
+                })
+			},
+			// 密码修改成功后关闭弹层并提示
+			success: function() {
+            	try{
+	            	window.parent.$.notify({
+	            		type: 'success',
+			            title: '密码修改成功'
+	            	})
+            		window.parent.layer.closeAll();
+            	}catch(err) {}
+			}
+		}
+	}
+	$(function() {
+		_global.fn.init();
+	})
+</script>
+</body>
+</html>

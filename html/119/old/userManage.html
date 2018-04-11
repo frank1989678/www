@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>武汉119作战指挥中心调度平台</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+		<a href="index.html">武汉119作战指挥中心调度平台</a>
+	</div>
+	<div class="nav">
+		<ul>
+			<li>
+				<dl>
+					<dt><i class="ico ico-1"></i>地图管控</dt>
+					<dd>
+						<a href="track.html">车辆监控</a>
+						<a href="dispatcherManage.html">调度管理</a>
+						<a href="trackHis.html">历史轨迹</a>
+						<a href="railManage.html">电子围栏</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-2"></i>视频监控</dt>
+					<dd>
+						<a href="ocxClient.html">多车视频监控</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-3"></i>信息报表</dt>
+					<dd>
+						<a href="alarmHotSpot.html">警情记录</a>
+						<a href="alarmRecord.html">报警记录</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-4"></i>系统管理</dt>
+					<dd>
+						<a href="carManage.html">车辆管理</a>
+						<a href="orgManage.html">机构管理</a>
+						<a href="userManage.html">用户管理</a>
+						<a href="roleManage.html">角色管理</a>
+						<a href="purviewManage.html">权限管理</a>
+						<a href="contactsManage.html">通讯录管理</a>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+	<div class="user">
+		<span>yitop</span>
+		<i>|</i>
+		<a href="javascript:;" id="mdyPwd">修改密码</a>
+		<i>|</i>
+		<a href="javascript:;" id="mdyTheme">主题</a>
+		<i>|</i>
+		<a href="login.html" class="ico ico-logout"></a>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="wrapper">
+
+	<div class="box">
+		<div class="tit">用户管理</div>
+
+		<div class="filter">
+			<form name="filterForm" id="filter" action="javascript:return false;" method="GET">
+				<label class="for">用户名：</label>
+				<input type="text" name="username" class="ipt" />
+				<label class="for">用户关联机构：</label>
+				<input type="text" name="org" class="ipt" />
+				<button type="submit" class="ubtn ubtn-red">查询</button>
+				<button type="button" class="ubtn ubtn-red" onclick="_add()">新增</button>
+			</form>
+		</div>
+
+		<div class="table">
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						<th>用户注册时间</th>
+						<th>用户名</th>
+						<th>用户关联机构</th>
+						<th>用户姓名</th>
+						<th>用户电话</th>
+						<th>用户激活状态</th>
+						<th>用户角色</th>
+						<th width="130">操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody"></tbody>
+			</table>
+		</div>
+		
+		<div class="operate">
+			<div class="pagination"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 新增&编辑 -->
+<div class="form layer-form" id="tempForm">
+	<div class="ftit">添加</div>
+	<form name="form1" onsubmit="return false;">
+		<div class="item req">
+            <div class="txt">用户名：</div>
+            <div class="cnt">
+            	<input type="text" name="username" class="ipt"  />
+            </div>
+        </div>
+		<div class="item req">
+            <div class="txt">用户关联机构：</div>
+            <div class="cnt">
+				<select name="team" class="slt select2">
+					<option value="特勤一中队">特勤一中队</option>
+					<option value="特勤二中队">特勤二中队</option>
+					<option value="特勤三中队">特勤三中队</option>
+				</select>
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">用户姓名：</div>
+            <div class="cnt">
+            	<input type="text" name="realname" class="ipt" />
+            </div>
+        </div>
+		<div class="item">
+            <div class="txt">用户电话：</div>
+            <div class="cnt">
+            	<input type="text" name="mobile" class="ipt" />
+            </div>
+        </div>
+		<div class="item req">
+            <div class="txt">用户激活状态：</div>
+            <div class="cnt">
+				<select name="team" class="slt select2">
+					<option value="已激活">已激活</option>
+					<option value="未激活">未激活</option>
+				</select>
+            </div>
+        </div>
+		<div class="item req">
+            <div class="txt">角色选择：</div>
+            <div class="cnt">
+				<select name="team" class="slt select2">
+					<option value="值班员">值班员</option>
+					<option value="指挥员">指挥员</option>
+					<option value="系统管理员">系统管理员</option>
+				</select>
+            </div>
+        </div>
+	    <div class="buttons">
+	        <button type="button" class="ubtn ubtn-gray layer-close">取消</button>
+	        <button type="submit" class="ubtn ubtn-red submit" onclick="_submitForm()">确定</button>
+	    </div>
+	</form>
+</div>
+<!-- end 新增&编辑 -->
+
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<!-- 页面专用 -->
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/ajaxPage.js"></script>
+<script src="assets/js/listPage.js"></script>
+<script id="tableTemp" type="text/html">
+	{{each list as item i}}
+	<tr>
+		<td><i class="cbx" data-id="{{item.id}}"></i></td>
+		<td>{{item.datetime}}</td>
+		<td>{{item.username}}</td>
+		<td>{{item.team}}</td>
+		<td>{{item.realname}}</td>
+		<td>{{item.mobile}}</td>
+		<td>{{item.status}}</td>
+		<td>{{item.role}}</td>
+		<td>
+			<button type="button" disabled class="ubtn ubtn-primary jedit" onclick="_edit({{item.id}})">编辑</button>
+			<button type="button" disabled class="ubtn ubtn-red jdel" onclick="_del({{item.id}})">删除</button>
+		</td>
+	</tr>
+	{{/each}}
+</script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+	    "totalSize": 18,
+	    "list|10": [{
+		    "id": "@increment",
+	        "datetime": "20170901 08:21",
+	        "username": "admin",
+	        "team": "特勤一中队",
+	        "realname": "@cname",
+	        "mobile": /^1[345678]\d{9}$/,
+	        "status": "已激活",
+	        "role": "指挥员"
+		}]
+	});
+
+
+	Mock.mock('http://h.cn', {
+		"result": "SUCCESS",
+	    "data": {
+	        "id": "@increment",
+	        "datetime": "20170901 08:21",
+	        "carNumber": "鄂A10001",
+	        "carType": "01",
+	        "team": "特勤一中队",
+	        "purpose": "消防车",
+	        "type": "充气车",
+	        "icon": "assets/images/icon/xfc.png",
+	        "username": "张三",
+	        "mobile": /^1[345678]\d{9}$/,
+	        "IMEI": "35419703175816",
+	        "SIM": "13600000000",
+	        "video": "博实结",
+	        "vSIM": "13600000000"
+		}
+	});
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+
+<script>
+var PAGENAME = '用户';
+var iid = 0;
+// 提交表单
+function _submitForm() {
+	var $temp = $('#tempForm');
+	var $form = $temp.find('form');
+	var pass = true;
+	var tips = function() {
+		$.notify({
+			title: PAGENAME + '信息没有填写完全',
+			type: 'warning'
+		})
+		pass = false;
+	}
+	$form.find('.req input, .req select').each(function() {
+		if (this.value == '') {
+			tips();
+			return false;
+		}
+	})
+	$form.find('._cbx').each(function() {
+		if ($(this).find('input:checked').length === 0 && pass) {
+			tips();
+			return false;
+		}
+	})
+	if (pass) {
+		// 根据iid的值来判断是新增(等于0时)或修改
+		// 提交表单
+		var data = {
+			iid: iid
+		}
+		$.each($form.serializeArray(), function(i, item) {
+			data[item.name] = item.value;
+		})
+		$.ajax({
+			url: '',
+			data: data,
+			success: function() {}
+		})
+	}
+}
+
+// 新增
+function _add() {
+	var $temp = $('#tempForm');
+	var $form = $temp.find('form');
+	iid = 0; // 保存iid
+	$form[0].reset();
+	$form.prev('.title').html('新增' + PAGENAME);
+	$form.find('.select2').trigger('change.select2');
+	layer.open({
+		fix: false,
+		offset: '30px',
+		area: '570px',
+		type: 1,
+		title: false,
+		content: $temp
+	})
+}
+
+// 编辑
+function _edit(id) {
+	var $temp = $('#tempForm');
+	var $form = $temp.find('form');
+	iid = id; // 保存iid
+	$form[0].reset();
+	$form.prev('.title').html(PAGENAME + '信息编辑');
+	if (id) {
+		$.ajax({
+			url: 'http://h.cn',
+			type: 'POST',
+			data: {id: id},
+			dataType: 'json',
+			success: function(res) {
+				$form.find('.ipt, .slt').each(function(i, item) {
+					this.value = res.data[this.name] || '';
+				})
+				$form.find('.select2').trigger('change.select2');
+				layer.open({
+					fix: false,
+					offset: '30px',
+					area: '570px',
+					type: 1,
+					title: false,
+					content: $temp
+				})
+			}
+		})
+	}
+}
+
+// 删除一行
+function _del(id) {
+	layer.confirm('确定要删除该' + PAGENAME + '么？', function(k) {
+		$.ajax({
+			url: '/abc/del',
+			data: {id: id},
+			success: function(res) {
+				if (res.result === "SUCCESS") {
+					$.notify({
+						title: "删除成功",
+						type: "success"
+					})
+				}
+			}
+		})
+		layer.close(k);
+	})
+}
+
+var _global = {
+	init: function() {
+		this.check();
+		this.filter();
+	},
+	check: function() {
+		var $tbody = $('#tbody');
+		// 复选框
+		$tbody.on('click', '.cbx', function() {
+			var disable = $(this).hasClass('cbx-on');
+			$(this).toggleClass('cbx-on');
+			$(this).closest('tr').find('.ubtn').prop('disabled', disable);
+		})
+	},
+	filter: function() {
+		var that = this;
+		var $form = $('#filter');
+		var page =  new Page({
+			request: false,
+			pageIndex: 1, // 当前页
+			pageSize: 10, // 每页显示10条
+			url: 'http://g.cn',
+			callback: function(res) {
+				$('#tbody').empty().html(template('tableTemp', res));
+			}
+		})
+		
+		// 查询
+		$form.on('submit', function() {
+			var filterData = $form.serializeArray();
+			page.request(true, filterData);
+			return false;
+		})
+	}
+}
+</script>
+</body>
+</html>

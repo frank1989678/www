@@ -1,0 +1,32 @@
+.BMapLib_Drawing{position:fixed;top:80px;right:20px;}
+.BMapLib_Drawing .BMapLib_box{width:38px;height:38px;margin:0 3px;padding:0;cursor:pointer;border-radius:3px;vertical-align:top;border-radius:3px;box-shadow:0 2px 2px rgba(0,0,0,.35);background:#fff url(../images/bg_drawing_tool.png);}
+
+/*拖动地图图标*/
+.BMapLib_Drawing .BMapLib_hander{background-position:-12px -3px;}
+.BMapLib_Drawing .BMapLib_hander:hover,
+.BMapLib_Drawing .BMapLib_hander_hover{background-position:-12px -56px;}
+
+/*画点图标*/
+.BMapLib_Drawing .BMapLib_marker{background-position:-65px -3px;}
+.BMapLib_Drawing .BMapLib_marker:hover,
+.BMapLib_Drawing .BMapLib_marker_hover{background-position:-65px -52px;}
+
+/*画圆图标*/
+.BMapLib_Drawing .BMapLib_circle{background-position:-143px -3px;}
+.BMapLib_Drawing .BMapLib_circle:hover,
+.BMapLib_Drawing .BMapLib_circle_hover{background-position:-143px -56px;}
+
+/*画线图标*/
+.BMapLib_Drawing .BMapLib_polyline{background-position:-207px -3px;}
+.BMapLib_Drawing .BMapLib_polyline:hover,
+.BMapLib_Drawing .BMapLib_polyline_hover{background-position:-207px -56px;}
+
+/*画多边形图标*/
+.BMapLib_Drawing .BMapLib_polygon{background-position:-273px -3px;}
+.BMapLib_Drawing .BMapLib_polygon:hover,
+.BMapLib_Drawing .BMapLib_polygon_hover{background-position:-273px -56px;}
+
+/*画矩形图标*/
+.BMapLib_Drawing .BMapLib_rectangle{background-position:-325px 0;}
+.BMapLib_Drawing .BMapLib_rectangle_hover:hover,
+.BMapLib_Drawing .BMapLib_rectangle_hover{background-position:-325px -56px;}

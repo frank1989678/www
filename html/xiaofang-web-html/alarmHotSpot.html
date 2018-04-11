@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>警情记录</title>
+    <meta name="renderer" content="webkit" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/plugins/select2/select2.css" />
+</head>
+<body>
+
+<!-- header begin -->
+<div class="header cf">
+	<div class="logo">
+        <a href="index.html">武汉119作战指挥中心调度平台<em>Intelligent command platform for fire fighting</em></a>
+	</div>
+	<div class="nav">
+		<ul>
+			<li>
+				<dl>
+				<dt><i class="ico ico-1"></i>每日警情</dt>
+					<dd>
+						<a href="track.html">车辆监控</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-2"></i>历史统计</dt>
+					<dd>
+						<a href="alarmHotSpot.html">警情记录</a>
+						<a href="alarmRecord.html">报警记录</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-3"></i>车辆监控</dt>
+					<dd>
+						<a href="ocxClient.html">多车视频监控</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-3"></i>视频通话</dt>
+					<dd>
+						<a href="videoConference.html">视频会议</a>
+					</dd>
+				</dl>
+			</li>
+
+			<li>
+				<dl>
+					<dt><i class="ico ico-5"></i>地图管控</dt>
+					<dd>
+						<a href="track.html">车辆监控</a>
+						<a href="dispatcherManage.html">调度管理</a>
+						<a href="trackHis.html">历史轨迹</a>
+						<a href="railManage.html">电子围栏</a>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><i class="ico ico-6"></i>系统管理</dt>
+					<dd>
+						<a href="carManage.html">车辆管理</a>
+						<a href="orgManage.html">机构管理</a>
+						<a href="userManage.html">用户管理</a>
+						<a href="roleManage.html">角色管理</a>
+						<a href="purviewManage.html">权限管理</a>
+						<a href="contactsManage.html">通讯录管理</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="admin">
+				指挥长 <em>欢迎登录</em>
+			</li>
+			<li class="dropdown">
+				<dl class="menu">
+	                <dt>设置</dt>
+	                <dd>
+	                    <a href="javascript:;" id="mdyH1">配置标题</a>
+	                    <a href="javascript:;" id="mdyPwd">修改密码</a>
+	                    <a href="login.html">退出</a>
+	                </dd>
+	            </dl>
+			</li>
+		</ul>
+	</div>
+</div>
+<!-- header end -->
+
+<div class="wrapper">
+
+	<div class="box">
+		<div class="tit">警情记录</div>
+
+		<div class="filter">
+			<form name="filterForm" id="filter" action="javascript:return false;" method="GET">
+				<label class="for">查询时间：</label>
+				<span class="queryTime">
+				<input type="text" name="queryStartTime" id="queryStartTime" class="ipt" />
+				<em>至</em>
+				<input type="text" name="queryEndTime" id="queryEndTime" class="ipt" />
+				</span>
+				<label class="for">接警车辆：</label>
+				<input type="text" name="carNumber" class="ipt" />
+				<label class="for">警情类别：</label>
+				<select name="type" class="slt select2">
+					<option value="">火警</option>
+					<option value="">社会救援</option>
+				</select>
+				<label class="for">警情级别：</label>
+				<select name="level" class="slt select2">
+					<option value="">一级警情</option>
+					<option value="">二级警情</option>
+				</select>
+
+				<button type="submit" class="ubtn ubtn-red">查询</button>
+			</form>
+		</div>
+
+		<div class="table">
+			<table>
+				<thead>
+					<tr>
+						<th>警情立案时间</th>
+						<th>警情级别</th>
+						<th>警情类别</th>
+						<th>警情燃烧对象</th>
+						<th>警情地点（修正后的）</th>
+						<th>报警人姓名</th>
+						<th>报警人电话</th>
+						<th>报警内容</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="tbody"></tbody>
+			</table>
+		</div>
+		
+		<div class="operate">
+			<div class="pagination"></div>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+    <span>湖北省宏锐慧通信息技术有限公司</span>
+</div>
+
+<!-- 公用 -->
+<script src="assets/js/jquery191.js"></script>
+<script src="assets/plugins/layer/layer.js"></script>
+<script src="assets/js/common.js"></script>
+
+<!-- 页面专用 -->
+<script src="assets/plugins/select2/select2.js"></script>
+<script src="assets/js/art.template.js"></script>
+<script src="assets/js/ajaxPage.js"></script>
+<script src="assets/plugins/datepicker/WdatePicker.js"></script>
+<script src="http://webapi.amap.com/maps?v=1.3&key=9d870244cd940650899a73c0566d7652&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder"></script>
+<script src="assets/plugins/zTreeStyle/jquery.ztree.min.js"></script>
+<script src="assets/js/alarm.js"></script>
+<script id="tableTemp" type="text/html">
+	{{each list as item i}}
+	<tr>
+		<td>{{item.datetime}}</td>
+		<td>{{item.level}}</td>
+		<td>{{item.type}}</td>
+		<td>{{item.object}}</td>
+		<td>{{item.region}}</td>
+		<td>{{item.realname}}</td>
+		<td>{{item.mobile}}</td>
+		<td>{{item.content}}</td>
+		<td>
+			<button type="button" class="ubtn ubtn-primary" onclick="_showDetail('{{item.id}}')">详情</button>
+		</td>
+	</tr>
+	{{/each}}
+</script>
+
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) -->
+<script src="assets/js/mock.js"></script>
+<script>
+	Mock.mock('http://g.cn', {
+		"result": "SUCCESS",
+	    "totalSize": 18,
+	    "list|10": [{
+		    "id": "@increment",
+	        "datetime": "20170901 08:21",
+	        "level": "二级",
+	        "type": "火警",
+	        "object": "居民住宅",
+	        "region": "武汉市书城路",
+	        "realname": "@cname",
+	        "mobile": /^1[345678]\d{9}$/,
+	        "content": "出门忘记带家里钥匙了",
+	        "team": "洪山大队",
+	        "time": "20170901 08:21",
+	        "carNumber": "鄂A10001",
+	        "car": "鄂A10001",
+	        "beginTime": "20170901 08:21",
+	        "bendTime": "20170901 08:31"
+		}]
+	});
+</script>
+<!-- 拦截ajax请求并返回虚拟数据(只做演示使用，开发时请删除) end -->
+
+
+<script>
+
+var _global = {
+	init: function() {
+		this.jeDate();
+		this.check();
+		this.filter();
+		this.select2();
+	},
+	jeDate: function() {
+		$('#queryStartTime').on('click', function() {
+            WdatePicker({
+                autoPickDate: true,
+                maxDate: "#F{$dp.$D('queryEndTime')}",
+                dateFmt: 'yyyy/MM/dd HH:mm:ss'
+            })
+        })
+        $('#queryEndTime').on('click', function() {
+            WdatePicker({
+                autoPickDate: true,
+                minDate: '#F{$dp.$D(\'queryStartTime\')}',
+                dateFmt: 'yyyy/MM/dd HH:mm:ss'
+            });
+        })
+	},
+	select2: function() {
+		$('.select2').select2({
+			minimumResultsForSearch: -1
+		})
+	},
+	check: function() {
+		var $tbody = $('#tbody');
+		// 复选框
+		$tbody.on('click', '.cbx', function() {
+			var disable = $(this).hasClass('cbx-on');
+			$(this).toggleClass('cbx-on');
+			$(this).closest('tr').find('.ubtn').prop('disabled', disable);
+		})
+	},
+	filter: function() {
+		var that = this;
+		var $form = $('#filter');
+		var page =  new Page({
+			request: false,
+			pageIndex: 1, // 当前页
+			pageSize: 10, // 每页显示10条
+			url: 'http://g.cn',
+			callback: function(res) {
+				$('#tbody').empty().html(template('tableTemp', res));
+			}
+		})
+		
+		// 查询
+		$form.on('submit', function() {
+			var filterData = $form.serializeArray();
+			page.request(true, filterData);
+			return false;
+		})
+
+
+	}
+}
+</script>
+</body>
+</html>
