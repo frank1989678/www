@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="content_box"></div>
+        <input type="text" name="inputBox" id="inputBox" value="" />
+        <button class="postMessage">发消息</button>
+    </body>
+
+    <script>
+        $(".postMessage").click(function() {
+            getMessage()
+        })
+
+            RongIMClient.init("c9kqb3rdcomoj"); //这是初始化，需要填参数就是你的APPKEY。这个不难理解。
+            var token = "WsOfFQOvy/v3nZ80UpjcOO9l67FGL9fs1E72VNcKY11y1jg3lz2Y6w8Rm/HZ6EyrhVc9pd7SHAsQspRYfSvwo21Y8SDjLVSLxh4/gZ9YyFI=";
+            // 连接融云服务器。
+            RongIMClient.connect(token, {
+                onSuccess: function(userId) {
+                    console.log("Login successfully." + userId);
+                    //userId是申请token时的填写的id，到时候可以封装在下面的extra中传过去
+                },
+                onTokenIncorrect: function() {
+                    console.log('token无效');
+                },
+                onError: function(errorCode) {
+                    var info = '';
+                    switch(errorCode) {
+                        case RongIMLib.ErrorCode.TIMEOUT:
+                            info = '超时';
+                            //链接超时进行重新的链接start
+                            var callback = {
+                                onSuccess: function(userId) {
+                                    console.log("Reconnect successfully." + userId);
+                                },
+                                onTokenIncorrect: function() {
+                                    console.log('token无效');
+                                },
+                                onError: function(errorCode) {
+                                    console.log(errorcode);
+                                }
+                            };
+                            var config = {
+                                // 默认 false, true 启用自动重连，启用则为必选参数
+                                auto: true,
+                                // 重试频率 [100, 1000, 3000, 6000, 10000, 18000] 单位为毫秒，可选
+                                url: 'cdn.ronghub.com/RongIMLib-2.2.6.min.js',
+                                // 网络嗅探地址 [http(s)://]cdn.ronghub.com/RongIMLib-2.2.6.min.js 可选
+                                rate: [100, 1000, 3000, 6000, 10000]
+                            };
+                            RongIMClient.reconnect(callback, config);
+                            //链接超时进行重新链接end
+                            break;
+                        case RongIMLib.ErrorCode.UNKNOWN_ERROR:
+                            info = '未知错误';
+                            break;
+                        case RongIMLib.ErrorCode.UNACCEPTABLE_PaROTOCOL_VERSION:
+                            info = '不可接受的协议版本';
+                            break;
+                        case RongIMLib.ErrorCode.IDENTIFIER_REJECTED:
+                            info = 'appkey不正确';
+                            break;
+                        case RongIMLib.ErrorCode.SERVER_UNAVAILABLE:
+                            info = '服务器不可用';
+                            break;
+                    }
+                    console.log(errorCode);
+                }
+            });
+            // 设置连接监听状态 （ status 标识当前连接状态 ）
+            // 连接状态监听器
+            RongIMClient.setConnectionStatusListener({
+                onChanged: function(status) {
+                    switch(status) {
+                        case RongIMLib.ConnectionStatus.CONNECTED:
+                            console.log('链接成功');
+                            break;
+                        case RongIMLib.ConnectionStatus.CONNECTING:
+                            console.log('正在链接');
+                            break;
+                        case RongIMLib.ConnectionStatus.DISCONNECTED:
+                            console.log('断开连接');
+                            break;
+                        case RongIMLib.ConnectionStatus.KICKED_OFFLINE_BY_OTHER_CLIENT:
+                            console.log('其他设备登录');
+                            break;
+                        case RongIMLib.ConnectionStatus.DOMAIN_INCORRECT:
+                            console.log('域名不正确');
+                            break;
+                        case RongIMLib.ConnectionStatus.NETWORK_UNAVAILABLE:
+                            console.log('网络不可用');
+                            break;
+                    }
+                }
+            });
+            // 消息监听器
+            RongIMClient.setOnReceiveMessageListener({
+                // 接收到的消息
+                onReceived: function(message) {
+                    // 判断消息类型
+                    switch(message.messageType) {
+                        case RongIMClient.MessageType.TextMessage:
+                            // message.content.content => 消息内容
+                            console.log(message.content.content);
+                            $(".content_box").text(message.content.content)
+                            break;
+                        case RongIMClient.MessageType.VoiceMessage:
+                            // 对声音进行预加载                
+                            // message.content.content 格式为 AMR 格式的 base64 码
+                            console.log(message.content.content);
+                            break;
+                        case RongIMClient.MessageType.ImageMessage:
+                            // message.content.content => 图片缩略图 base64。
+                            // message.content.imageUri => 原图 URL。
+                            console.log(message.content.content);
+                            break;
+                        case RongIMClient.MessageType.DiscussionNotificationMessage:
+                            // message.content.extension => 讨论组中的人员。
+                            console.log(message.content.content);
+                            break;
+                        case RongIMClient.MessageType.LocationMessage:
+                            // message.content.latiude => 纬度。
+                            // message.content.longitude => 经度。
+                            // message.content.content => 位置图片 base64。
+                            console.log(message.content.content);
+                            break;
+                        case RongIMClient.MessageType.RichContentMessage:
+                            // message.content.content => 文本消息内容。
+                            // message.content.imageUri => 图片 base64。
+                            // message.content.url => 原图 URL。
+                            console.log(message.content.content);
+                            break;
+                        case RongIMClient.MessageType.InformationNotificationMessage:
+                            // do something...
+                            console.log(message.content.content);
+                            break;
+                        case RongIMClient.MessageType.ContactNotificationMessage:
+                            // do something...
+                            console.log(message.content.content);
+                            break;
+                        case RongIMClient.MessageType.ProfileNotificationMessage:
+                            // do something...
+                            console.log(message.content.content);
+                            break;
+                        case RongIMClient.MessageType.CommandNotificationMessage:
+                            // do something...
+                            console.log(message.content.content);
+                            break;
+                        case RongIMClient.MessageType.CommandMessage:
+                            // do something...
+                            console.log(message.content.content);
+                            break;
+                        case RongIMClient.MessageType.UnknownMessage:
+                            console.log(message.content.content);
+                            // do something...
+                            break;
+                        default:
+                            console.log(message.content.content);
+                            // do something...
+                    }
+                }
+            });
+
+            function getMessage() {
+
+                //生成聊天内容
+                $('.content_box').append();
+                //在页面追加你要生成的内容
+
+                // 定义消息类型,文字消息使用 RongIMLib.TextMessage
+                var msg = new RongIMLib.TextMessage({
+                    content: $("#inputBox").val(),
+                    extra: "附加要传递的值"
+                });
+
+                var conversationtype = RongIMLib.ConversationType.PRIVATE; // 私聊
+                var targetId = "3045462476240907"; // 目标 Id
+
+                RongIMClient.getInstance().sendMessage(conversationtype, targetId, msg, {
+                    // 发送消息成功
+                    onSuccess: function(message) {
+                        console.log(message)
+                        //message 为发送的消息对象并且包含服务器返回的消息唯一Id和发送消息时间戳
+                        console.log("Send successfully");
+                    },
+                    onError: function(errorCode, message) {
+                        var info = '';
+                        switch(errorCode) {
+                            case RongIMLib.ErrorCode.TIMEOUT:
+                                info = '超时';
+                                break;
+                            case RongIMLib.ErrorCode.UNKNOWN_ERROR:
+                                info = '未知错误';
+                                break;
+                            case RongIMLib.ErrorCode.REJECTED_BY_BLACKLIST:
+                                info = '在黑名单中，无法向对方发送消息';
+                                break;
+                            case RongIMLib.ErrorCode.NOT_IN_DISCUSSION:
+                                info = '不在讨论组中';
+                                break;
+                            case RongIMLib.ErrorCode.NOT_IN_GROUP:
+                                info = '不在群组中';
+                                break;
+                            case RongIMLib.ErrorCode.NOT_IN_CHATROOM:
+                                info = '不在聊天室中';
+                                break;
+                            default:
+                                info = "x";
+                                break;
+                        }
+                        console.log('发送失败:' + info);
+                    }
+                });
+            }
+        </script>
+</body>
+</html>
