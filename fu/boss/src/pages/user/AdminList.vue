@@ -39,13 +39,13 @@
 
         <!--工具条-->
         <el-col :span="24" class="toolbar page">
-            <el-pagination layout="prev, pager, next" @current-change="onChangePage" :page-size="20" :total="total">
+            <el-pagination layout="prev, pager, next" @current-change="onChangePage" :page-size="pageSize" :total="total">
             </el-pagination>
         </el-col>
 
         <!--新增界面-->
         <el-dialog :title="dialogTitle" v-model="addFormVisible" :close-on-click-modal="false">
-            <el-form :model="addFormData" label-width="80px" :rules="addFormRules" ref="addFormData">
+            <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="80px">
                 <el-form-item label="登录名" prop="username">
                     <el-input v-model="addFormData.username" auto-complete="off"></el-input>
                 </el-form-item>
@@ -76,7 +76,8 @@ export default {
                 date: ''
             },
             total: 0,
-            page: 1,
+            pageNum: 1,
+            pageSize: 1,
             listLoading: false,
             users: [],
 
@@ -201,7 +202,8 @@ export default {
         //获取用户列表
         onGetAdminList() {
             const para = {
-                page: this.page,
+                pageNum: this.pageNum,
+                pageSize: this.pageSize,
                 name: this.filters.name,
                 date: this.filters.date
             };
@@ -214,7 +216,7 @@ export default {
         },
         // 页码
         onChangePage(val) {
-            this.page = val;
+            this.pageNum = val;
             this.onGetAdminList();
         }
     },
@@ -224,13 +226,3 @@ export default {
 }
 </script>
 
-<style>
-.page {
-    padding: 10px 0;
-    text-align: right;
-}
-
-.page .el-pagination {
-    padding: 0;
-}
-</style>

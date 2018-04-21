@@ -1,14 +1,12 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import Mock from 'mockjs';
-import {
-	LoginUsers,
-	Users,
-	Admin
-} from './data';
 
-let _Users = Users;
-let _Admin = Admin;
+import * as data from './data';
+
+let _Users = data.Users;
+let _Admin = data.Admin;
+let _GameList = data.GameList;
 
 export default {
 	bootstrap() {
@@ -75,7 +73,7 @@ export default {
 			});
 		});
 
-		//修改管理员
+		//修改用户
 		mock.onPost('/user/edit').reply(config => {
 			const { id } = qs.parse(config.data);
 			_Users.some(u => {
@@ -191,6 +189,42 @@ export default {
 			return new Promise((resolve, reject) => {
 				resolve([200, {
 					status: 200,
+					msg: '修改成功'
+				}]);
+			});
+		});
+
+
+
+		//获取游戏列表（分页）
+		mock.onGet('/game/list').reply(config => {
+			let { page, status } = config.params;
+			let mockGameList = _GameList.filter(user => {
+				if (name && user.username.indexOf(name) == -1) return false;
+				return true;
+			});
+			let total = mockGameList.length;
+			mockGameList = mockGameList.filter((u, index) => index < 20 * page && index >= 20 * (page - 1));
+			return new Promise((resolve, reject) => {
+				resolve([200, {
+					total: total,
+					list: mockGameList
+				}]);
+			});
+		});
+
+		//修改游戏状态
+		mock.onPost('/game/gameEdit').reply(config => {
+			const { id } = qs.parse(config.data);
+			_GameList.some(u => {
+		        if (u.id == id) {
+		        	u.status = !u.status;
+					return true;
+		        }
+	      	});
+			return new Promise((resolve, reject) => {
+				resolve([200, {
+					code: 200,
 					msg: '修改成功'
 				}]);
 			});

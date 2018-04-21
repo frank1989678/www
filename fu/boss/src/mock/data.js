@@ -39,4 +39,17 @@ for (let i = 0; i < 86; i++) {
   }));
 }
 
-export { LoginUsers, Users, Admin };
+const GameList = [];
+for (let i = 0; i < 86; i++) {
+  GameList.push(Mock.mock({
+    id: /^\d{4}$/,
+    name: '王者荣耀',
+    sort: 1,
+    status: Mock.Random.boolean(),
+    charges: Mock.Random.float(0, 1),
+    icon: ''
+  }));
+}
+
+
+export { LoginUsers, Users, Admin, GameList };

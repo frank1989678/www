@@ -50,7 +50,8 @@ export default {
                 date: ''
             },
             total: 0,
-            page: 1,
+            pageNum: 1,
+            pageSize: 10,
             listLoading: false,
             users: []
         }
@@ -84,7 +85,8 @@ export default {
         //获取用户列表
         onGetUserList() {
             const para = {
-                page: this.page,
+                pageNum: this.pageNum,
+                pageSize: this.pageSize,
                 name: this.filters.name,
                 date: this.filters.date
             };
