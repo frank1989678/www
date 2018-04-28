@@ -13,6 +13,9 @@
                 <el-form-item>
                     <el-button type="primary" @click="onGetUserList">查询</el-button>
                 </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="onOpenForm()">新增</el-button>
+                </el-form-item>
             </el-form>
         </el-col>
 
@@ -36,6 +39,48 @@
                 </template>
             </el-table-column>
         </el-table>
+
+        <!--工具条-->
+        <el-col :span="24" class="toolbar page">
+            <el-pagination layout="prev, pager, next" @current-change="onChangePage" :page-size="pageSize" :total="total">
+            </el-pagination>
+        </el-col>
+
+        <!--新增界面-->
+        <el-dialog :title="dialogTitle" :visible.sync="addFormVisible" :close-on-click-modal="false" width="30%">
+            <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="80px">
+                <el-form-item label="手机号" prop="mobile">
+                    <el-input v-model="addFormData.mobile" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="昵称" prop="name">
+                    <el-input v-model="addFormData.nickname" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="性别" prop="gender">
+                    <el-radio v-model="addFormData.gender" label="0" checked>不公开</el-radio>
+                    <el-radio v-model="addFormData.gender" label="1">男</el-radio>
+                    <el-radio v-model="addFormData.gender" label="2">女</el-radio>
+                </el-form-item>
+                <el-form-item label="年龄" prop="age">
+                    <el-input v-model="addFormData.age" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="真实姓名" prop="realname">
+                    <el-input v-model="addFormData.realname" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="身份证" prop="idcard">
+                    <el-input v-model="addFormData.idcard" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="省" prop="province">
+                    <el-input v-model="addFormData.province" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="市" prop="country">
+                    <el-input v-model="addFormData.country" auto-complete="off"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click.native="addFormVisible = false">取消</el-button>
+                <el-button type="primary" @click.native="onFormSubmit" :loading="addFormLoading">提交</el-button>
+            </div>
+        </el-dialog>
     </section>
 </template>
 
@@ -55,7 +100,28 @@ export default {
             pageNum: 1,
             pageSize: 10,
             listLoading: false,
-            list: []
+            list: [],
+
+            dialogTitle: '新增',
+            addFormVisible: false, //新增界面是否显示
+            addFormLoading: false,
+            addFormData: {
+                id: '',
+                mobile: '',
+                nickname: '',
+                gender: '0',
+                age: '',
+                realname: '',
+                idcard: '',
+                province: '',
+                country: ''
+            },
+            addFormRules: {
+                mobile: [
+                    { required: true, message: '请输入手机号' },
+                    { pattern: /^1[3-9]\d{9}$/, message: '手机号码格式错误', trigger: 'blur' }
+                ]
+            }
         }
     },
     methods: {
@@ -67,6 +133,62 @@ export default {
             }
             this.filters.startTime = k[0];
             this.filters.endTime = k[1];
+        },
+        //新增、编辑表单，id=null时新增，否则为编辑
+        onOpenForm(row) {
+            this.addFormVisible = true;
+            if (row && row.id !== null) {
+                this.dialogTitle = '编辑';
+                this.addFormData = {
+                    id: row.id,
+                    username: row.username,
+                    name: row.name,
+                    password: row.password
+                };
+            } else {
+                this.dialogTitle = '新增';
+                this.addFormData = {
+                    id: null,
+                    username: '',
+                    name: '',
+                    password: ''
+                };
+            }
+        },
+        // 提交表单
+        onFormSubmit: function() {
+            this.$refs.addFormData.validate((valid) => {
+                if (valid) {
+                    this.addFormLoading = true;
+                    const para = Object.assign({}, this.addFormData);
+                    if (this.addFormData.id === null) {
+                        api.postAddAdmin(para).then(res => {
+                            this.handleResult(res);
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    } else {
+                        api.postEditAdmin(para).then(res => {
+                            this.handleResult(res);
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    }                   
+                }
+            });
+        },
+        // 新增、编辑结果
+        handleResult(res) {
+            this.addFormLoading = false;
+            const { msg, status } = res;
+            if (status !== 200) {
+                this.$message.error(msg);
+            } else {
+                this.$message.success(msg);
+                this.$refs['addFormData'].resetFields();
+                this.addFormVisible = false;
+                this.onGetAdminList();
+            }
         },
         //陪玩师
         formatPlayer(row, column) {
