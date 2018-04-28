@@ -1,0 +1,21 @@
+<import src="../../../components/select/select.wxml"/>
+
+<view class="wrap">
+	<view class="tab" bindtap="showSelect">
+		<view class="item">
+			<view class="dt" data-key="hidden1">{{name1}} <i class="arrow"></i></view>
+			<view class="dd" wx:if="{{hidden1}}">
+				<view class="li" wx:for="{{list1}}" data-key="{{item.key}}" data-val="{{item.name}}" data-name="name1" wx:key="{{item.key}}">{{item.name}}</view>
+			</view>
+		</view>
+		<view class="item">
+			<view class="dt" data-key="hidden2">{{name2}} <i class="arrow"></i></view>
+			<view class="dd" wx:if="{{hidden2}}">
+				<view class="li" wx:for="{{list2}}" data-key="{{item.key}}" data-val="{{item.name}}" data-name="name2" wx:key="{{item.key}}">{{item.name}}</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+
+

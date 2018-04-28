@@ -1,6 +1,4 @@
 <?php
-header("Access-Control-Allow-Origin:*");  // 允许跨域
-header('Access-Control-Allow-Headers:x-requested-with,content-type');
 
 $username = isset($_POST['username']) ? $_POST['username'] : "admin";
 $password = isset($_POST['password']) ? $_POST['password'] : "123456";

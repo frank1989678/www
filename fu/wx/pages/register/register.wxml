@@ -1,0 +1,34 @@
+<view class="container">
+    <form class="fu-form" bindsubmit="formSubmit" bindreset="formReset">
+        <text class="title">注册王者陪玩</text>
+        <view class="row">
+            <label class="for">+86</label>
+            <input id="mobile" class="ipt" placeholder="请输入手机号" bindblur="changeInput" focus />
+        </view>
+        <view class="row">
+            <label class="for">验证码</label>
+            <input id="code" class="ipt" placeholder="请输入验证码" bindblur="changeInput" />
+            <text class="btn1" bindtap="sendCode">{{btnText}}</text>
+        </view>
+        <view class="row">
+            <label class="for">密码</label>
+            <input id="password" class="ipt" type="password" placeholder="请输入密码" bindblur="changeInput" data-n="password" />
+        </view>
+        <view class="row">
+            <label class="for">确认</label>
+            <input id="pwd2" class="ipt" type="password" placeholder="请输入确认密码" bindblur="changeInput" />
+        </view>
+        <view class="row">
+            <label class="for">昵称</label>
+            <input id="nickname" class="ipt" placeholder="请输入昵称" bindblur="changeInput" />
+            <text class="tip">提示：昵称确定后不可修改</text>
+        </view>
+        <view class="button">
+            <button type="default" form-type="submit" class="primary" disabled="{{disabled}}" bindtap="submitForm">注册</button>
+        </view>
+        <view class="btm">
+            已有账号？
+            <navigator class="link" url="/pages/login/login"> 去登录 </navigator>
+        </view>
+    </form>
+</view>

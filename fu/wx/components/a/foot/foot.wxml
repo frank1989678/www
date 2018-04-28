@@ -1,0 +1,15 @@
+<!--components/a/foot/foot.wxml-->
+<template name="foot">
+	<view class="fu-foot">
+
+		<navigator class="link curr" wx:if="{{curr === 1}}"><i class="ico ico1"></i>接单</navigator>
+		<navigator class="link" wx:else url="/pages/a/orderList/orderList"><i class="ico ico1"></i>接单</navigator>
+
+		<navigator class="link curr" wx:if="{{curr === 2}}"><i class="ico ico2"></i>认证</navigator>
+		<navigator class="link" wx:else url="/pages/a/orderList/orderList"><i class="ico ico2"></i>认证</navigator>
+
+		<navigator class="link curr" wx:if="{{curr === 3}}"><i class="ico ico3"></i>订单</navigator>
+		<navigator class="link" wx:else url="/pages/a/orderList/orderList"><i class="ico ico3"></i>订单</navigator>
+
+	</view>
+</template>

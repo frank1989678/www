@@ -1,0 +1,23 @@
+<view class="login">
+	<text class="hd">登录王者陪玩</text>
+	<form>
+		<view class="item">
+			<input type="text" placeholder="手机号" auto-focus  bindinput="onMobileInput"/>
+		</view>
+		<view class="item">
+			<input type="text" placeholder="密码" password="true" bindinput="onPasswordInput"/> 
+		</view>
+		<view class="item">
+			<label class="checkbox">
+				<checkbox value="" checked=""/>记住我
+			</label>
+			<text class="abs">忘记密码？</text>
+		</view>
+		<view class="button">
+			<button bindtap="onSubmitLoginForm" disabled="{{!btnActive}}" class="btn{{btnActive ? ' active' : ''}}">登录</button>  
+			<label class="tips">
+				没有账号?<text class="link" bindtap="goRegister"> 立即注册 </text>	
+			</label>
+		</view>
+	</form>	
+</view>

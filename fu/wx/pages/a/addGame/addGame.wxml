@@ -1,0 +1,37 @@
+<!--pages/a/addGame/addGame.wxml-->
+<view class="wrap">
+	<form class="addform" bindsubmit="formSubmit" bindreset="formReset">
+        <view class="row">
+            <label class="for">游戏</label>
+            <text class="val"> {{ name }}</text>
+            <i class="ico {{more ? 'ico-arrow-down' : 'ico-arrow-up'}}" bindtap="showMore"></i>
+			
+			<view class="list">
+				<text class="li {{item.checked ? 'curr' : '' }}"  bindtap="chooseGame" data-key="{{item.key}}"  wx:for="{{list}}" wx:key="{{item.key}}" wx:if="{{more || index < 2}}"> {{item.name}} </text>
+			</view>
+
+        </view>
+        <view class="row">
+            <label class="for">价格</label>
+            <text class="val"> {{ price }} 元 </text>
+			<i class="ico ico-arrow-right"></i>
+			<i class="btn" bindtap="setPrice"></i>
+        </view>
+        <view class="row">
+            <label class="for">单位</label>
+            <text class="val"> {{ unit }} </text>
+			<i class="ico ico-arrow-right"></i>
+			<i class="btn" bindtap="setUnit"></i>
+        </view>
+
+        <view class="button">
+            <button type="default" form-type="submit" class="primary" bindtap="submitForm">保存</button>
+        </view>
+    </form>
+</view>
+
+<modal hidden="{{hidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="savePrice" bindcancel="setPrice">
+	<div class="main">
+    	<input name="code" class="ipt" type="number" placeholder-style="placeholder" placeholder="请输入价格..." bindblur="priceInput" />
+	</div>
+</modal>

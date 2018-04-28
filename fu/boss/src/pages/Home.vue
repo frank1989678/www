@@ -1,30 +1,23 @@
 <template>
-	<el-row class="container">
-		<el-col :span="24" class="header">
-			<el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
-				{{ collapsed? '' : sysName }}
-			</el-col>
-			<el-col :span="10">
-				<div class="tools" @click.prevent="collapse">
-					<i class="fa fa-align-justify"></i>
-				</div>
-			</el-col>
-			<el-col :span="4" class="userinfo">
+	<div class="wrapper">
+		<div class="header">
+			<div class="logo">{{ sysName }}</div>
+			<div class="user">
 				<el-dropdown trigger="hover">
-					<span class="el-dropdown-link userinfo-inner">
+					<span class="hd">
 						<em class="cname">{{surname}}</em> 
 						Hi, {{sysUserName}}
 						<i class="el-icon-arrow-down el-icon--right"></i>
 					</span>
 					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item>我的消息</el-dropdown-item>
-						<el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
+						<el-dropdown-item><i class="icon icon-mail"></i>我的消息</el-dropdown-item>
+						<el-dropdown-item @click.native="logout"><i class="icon icon-off"></i>退出登录</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
-			</el-col>
-		</el-col>
-		<el-col :span="24" class="main">
-			<aside :class="collapsed?'menu-collapsed':'menu-expanded'">
+			</div>
+		</div>
+		<div class="main">
+			<aside class="menu-expanded sidebar">
 				<!--导航菜单-->
 				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect"
 					 unique-opened router v-show="!collapsed">
@@ -36,46 +29,26 @@
 						<el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path"><i :class="item.iconCls"></i>{{item.children[0].name}}</el-menu-item>
 					</template>
 				</el-menu>
-				<!--导航菜单-折叠后-->
-				<ul class="el-menu el-menu-vertical-demo collapsed" v-show="collapsed" ref="menuCollapsed">
-					<li v-for="(item,index) in $router.options.routes" v-if="!item.hidden" class="el-submenu item">
-						<template v-if="!item.leaf">
-							<div class="el-submenu__title" style="padding-left: 20px;" @mouseover="showMenu(index,true)" @mouseout="showMenu(index,false)"><i :class="item.iconCls"></i></div>
-							<ul class="el-menu submenu" :class="'submenu-hook-'+index" @mouseover="showMenu(index,true)" @mouseout="showMenu(index,false)"> 
-								<li v-for="child in item.children" v-if="!child.hidden" :key="child.path" class="el-menu-item" style="padding-left: 40px;" :class="$route.path==child.path?'is-active':''" @click="$router.push(child.path)">{{child.name}}</li>
-							</ul>
-						</template>
-						<template v-else>
-							<li class="el-submenu">
-								<div class="el-submenu__title el-menu-item" style="padding-left: 20px;height: 56px;line-height: 56px;padding: 0 20px;" :class="$route.path==item.children[0].path?'is-active':''" @click="$router.push(item.children[0].path)"><i :class="item.iconCls"></i></div>
-							</li>
-						</template>
-					</li>
-				</ul>
 			</aside>
-			<section class="content-container">
-				<div class="grid-content bg-purple-light">
-					<el-col :span="24" class="breadcrumb-container"  style="display:none;">
-						<strong class="title">{{$route.name}}</strong>
-						<el-breadcrumb separator="/" class="breadcrumb-inner">
-							<el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
-								{{ item.name }}
-							</el-breadcrumb-item>
-						</el-breadcrumb>
-					</el-col>
-					<el-col :span="24" class="content-wrapper">
-						<transition name="fade" mode="out-in">
-							<router-view></router-view>
-						</transition>
-					</el-col>
-				</div>
-			</section>
-		</el-col>
-	</el-row>
+
+			<div class="content-container">
+				<el-breadcrumb separator="/" class="breadcrumb">
+					<el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
+						{{ item.name }}
+					</el-breadcrumb-item>
+				</el-breadcrumb>
+
+				<transition name="fade" mode="out-in">
+					<router-view></router-view>
+				</transition>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
-	import * as api from '@/api/api';
+	import * as api from '@/utils/api';
+	import * as lib from '@/utils/lib';
 	export default {
 		data() {
 			return {
@@ -111,13 +84,14 @@
 			//退出登录
 			logout: function () {
 				var _this = this;
-				this.$confirm('确认退出吗?', '提示', {
-					//type: 'warning'
-				}).then(() => {
-					api.Logout();
-				}).catch(err => {
-					console.log(err)
-				});
+				lib.logout();
+				// this.$confirm('确认退出吗?', '提示', {
+				// 	//type: 'warning'
+				// }).then(() => {
+				// 	lib.logout();
+				// }).catch(err => {
+				// 	console.log(err)
+				// });
 			},
 			//折叠导航栏
 			collapse:function(){

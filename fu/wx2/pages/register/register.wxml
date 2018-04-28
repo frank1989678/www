@@ -1,0 +1,28 @@
+<view class="register">
+	<text class="hd">注册王者陪玩</text>
+	<form>
+		<view class="item">
+			<input type="text" placeholder="手机号" auto-focus  bindinput="onMobileInput"/>
+		</view>
+		<view class="item">
+			<input type="text" placeholder="验证码" bindinput="onCodeInput"/>
+			<button class="btn" bindtap="onSendCode">{{btnText}}</button>
+		</view>
+		<view class="item">
+			<input type="text" placeholder="密码" password="true" bindinput="onPasswordInput"/> 
+		</view>
+		<view class="item">
+			<input type="text" placeholder="确认密码" password="true" bindinput="onPasswordComfirm"/> 
+		</view>
+		<view class="item">
+			<input type="text" placeholder="输入昵称" bindinput="onNickNameInput"/> 
+			<text class="tips">昵称确定后不可修改</text>		
+		</view>
+		<view class="button">
+			<button bindtap="onSubmitRegisterForm" class="active">确认</button>  
+			<label class="tips">
+				已有账号?<text class="link" bindtap="goLogin"> 去登录 </text>	
+			</label>
+		</view>
+	</form>	
+</view>

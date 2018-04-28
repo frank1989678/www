@@ -1,0 +1,10 @@
+.info{text-align:center;padding:20px 0;border-bottom:1px solid #ddd;overflow:hidden;}
+.info .row{padding-bottom:20px;overflow:hidden;}
+.info .col{float:left;width:50%;}
+.info .col:nth-child(2){border-right:1px solid #ddd;margin-right:-1px;}
+.info .num{font-size:18px;font-weight:400;margin-right:3px;}
+.info .sub{display:block;font-size:12px;}
+
+.form{padding:0 15px;}
+.form .item{position:relative;line-height:44px;}
+.form .item .abs{position:absolute;top:0;right:0;}

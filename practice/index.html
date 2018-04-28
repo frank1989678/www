@@ -13,6 +13,11 @@ li:before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:
 li:hover:before{background:#999;}
 .ipt{border:0;border-bottom:1px solid #ddd;height:30px;width:50px;}
 .plus{height:100px;}
+
+button[disabled]{opacity:0.5;}
+.button{margin-top:60px;position:relative;padding-bottom:40px;width:300px;margin:0 auto;}
+.button .primary{background:#e8645f;color:#fff;border:0;width:100%;height:46px;box-shadow:0 0 4px rgba(232, 100, 95, .3)}
+
 </style>
 </head>
 
@@ -33,45 +38,34 @@ li:hover:before{background:#999;}
         <button id="calc">calc</button>
     </div>
 
+
+    <div class="button">
+        <button class="primary">提交</button>
+        <span class="shadow"></span>
+    </div>
+
     <script src="/static/js/jquery191_develop.js"></script>
     
     <script>
     _global = {
     	init: function() {
-            var temp = [];
-            for (var i = 1; i <= 9; i++) {
-                for (var j = 1; j <= i; j++) {
-                    temp.push('<span class="li">' + j + ' * ' + i + ' = ' + (i * j) + '</span>');
+
+            $.ajax({
+                url: 'http://10.0.3.31:8080/api/v1/category/list',
+                url: 'http://10.0.3.31:8080/api/v1/tag/group/info',
+                data: {token: 'asdadsads', pageNum: 1, pageSize: 10},
+                 headers: {
+                    token: "asasdad"
+                },
+                type: 'POST',
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res)
+                },
+                error: function(err) {
+                    console.log(err)
                 }
-                temp.push('<br />')
-            } 
-            $('body').append(temp.join(''))
-
-            $('ul').on('click', 'li', function() {
-                console.log(1)
             })
-
-            $('ul').on('click.aaa', 'li', function() {
-                console.log(1)
-            })
-
-            $('ul').find('li').eq(0).trigger('click.aaa');
-
-            $("#calc").on('click', function() {
-                var a1 = $('#a1').val();
-                var a2 = $('#a2').val();
-                $('#a3').val((a1/a2).toFixed(2))
-            })
-
-            $("#a1").on('focus', function() {
-                $(this).select();
-            }).on('keyup', function(e) {
-                if (e.which === '13') {
-                    var a1 = $('#a1').val();
-                    var a2 = $('#a2').val();
-                    $('#a3').val((a1/a2).toFixed(2))
-                }
-             })
         }
     }
     _global.init();

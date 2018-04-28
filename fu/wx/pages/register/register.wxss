@@ -1,0 +1,3 @@
+/* pages/login/login.wxss */
+
+.fu-form .ipt{border-bottom:1rpx solid #e2e2e2;}

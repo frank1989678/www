@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/a/order/order",
+    "pages/a/setting/setting",
+    "pages/login/login",
+    "pages/a/addGame/addGame",
+    "pages/register/register",
+    "pages/logs/logs",
+    "components/a/foot/foot",
+    "components/select/select"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#373b3e",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "white"
+  }
+}

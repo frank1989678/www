@@ -1,0 +1,79 @@
+<view class="wrap wrap-foot">
+	<view class="bg" style="background-image:url(../../../images/bg.png)">
+		<view class="hd">
+			<text class="score"> {{ score }} </text> 
+			<text class="unit"> 分 </text>	
+			<view class="mt"> 综合评分 </view>		
+		</view>
+		<view class="bd">
+			<text class="score"> {{ count }} </text>
+			<text> 单 </text> 	
+			<view class="mt"> 本周成功订单 </view>		
+		</view>
+		<view class="bd">
+			<text class="score"> {{ income }} </text>
+			<text> 元 </text>	
+			<view class="mt"> 本周收入 </view>		
+		</view>
+	</view>
+
+	<view class="fu-block">
+		<view class="fu-item">
+			<navigator url="pages/a/addGame/addGame">
+				<i class="ico ico-plus"></i>
+				新增接单方式
+				<i class="ico ico-arrow-right"></i>
+			</navigator>
+		</view>
+	</view>
+
+	<view class="frown" wx:if="{{ list.length === 0 }}">
+		<i class="ico" style="background-image:url(../../../images/frown.png)"></i>
+		<view> 您还没有接单方式，快去添加吧！ </view>	
+	</view>
+	<view class="list" wx:else>
+		<view class="li" wx:for="{{ list }}" wx:key="{{item.key}}">
+			<view class="hd">
+				<image class="img" src="{{ item.icon }}"></image>
+				<text> {{ item.name }} </text>
+				<i class="ico ico-checked" data-val="{{item.key}}" bindtap="chooseGame" wx:if="{{item.checked}}"></i>
+				<i class="ico ico-check" data-val="{{item.key}}" bindtap="chooseGame" wx:else></i>
+				<!-- <radio class="cbx" value="{{item.key}}" checked="{{item.checked}}"/> -->
+			</view>
+			
+			<view class="bd">
+				<text class="for"> 价格 </text>	
+				<text> {{ item.price }} </text>	
+				<i class="ico ico-arrow-right"></i>
+				<i class="btn" bindtap="setPrice"></i>
+			</view>
+			
+			<view class="bd">
+				<text class="for"> 单位 </text>	
+				<text> {{ item.unit }} </text>
+				<i class="ico ico-arrow-right"></i>
+				<i class="btn" bindtap="setUnit"></i>
+			</view>
+		</view>
+
+
+		<view class="button" wx:if="{{ isOpen === false }}">
+			<button class="danger" bindtap="openStatus">开始接单</button>
+		</view>
+		<view class="button" wx:else>
+			<button class="gray" bindtap="closeStatus">停止接单</button>
+			<text class="tips">（自动接单倒计时： {{ time }} ）</text>
+		</view>
+
+	</view>
+</view>
+
+
+<modal hidden="{{hidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="savePrice" bindcancel="setPrice">
+	<div class="main">
+    	<input name="code" class="ipt" type="number" placeholder-style="placeholder" placeholder="请输入价格..." bindblur="priceInput" />
+	</div>
+</modal>
+
+<import src="../../../components/a/foot/foot.wxml"/>
+<template is="foot" data="{{curr: 1}}"/>

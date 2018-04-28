@@ -15,15 +15,16 @@
 </template>
 
 <script>
-import * as api from '@/api/api';
+import * as api from '@/utils/api';
+import * as lib from '@/utils/lib';
 
 export default {
     data() {
         return {
             logining: false,
             loginFormData: {
-                username: 'admin',
-                password: '123456'
+                username: '',
+                password: ''
             },
             rules: {
                 username: [{
@@ -45,17 +46,17 @@ export default {
             this.$refs.loginFormData.validate((valid) => {
                 if (valid) {
                     this.logining = true;
-                    api.postLogin(qs.stringify(this.loginFormData)).then(res => {
+                    api.postLogin(this.loginFormData).then(res => {
                         this.logining = false;
                         let { msg, status, data } = res;
 
-                        if (status != 200) {
+                        if (status == 200) {
+                            lib.logout({'token': data.token, 'sysUserName': data.name});
+                        } else {
                             this.$message({
                                 message: msg,
                                 type: 'error'
                             });
-                        } else {
-                            api.Logout({'token': data.username, 'sysUserName': data.name});
                         }
                     });
                 } else {
