@@ -3,13 +3,13 @@
 	<view class="fu-foot">
 
 		<navigator hover-class="none" class="link curr" wx:if="{{curr === 1}}"><i class="ico ico1"></i>接单</navigator>
-		<navigator hover-class="none" class="link" wx:else url="/pages/a/orderList/orderList"><i class="ico ico1"></i>接单</navigator>
+		<navigator hover-class="none" class="link" open-type="redirectTo" wx:else url="/pages/a/setting/setting"><i class="ico ico1"></i>接单</navigator>
 
 		<navigator hover-class="none" class="link curr" wx:if="{{curr === 2}}"><i class="ico ico2"></i>认证</navigator>
-		<navigator hover-class="none" class="link" wx:else url="/pages/a/orderList/orderList"><i class="ico ico2"></i>认证</navigator>
+		<navigator hover-class="none" class="link" open-type="redirectTo" wx:else url="/pages/a/orderList/orderList"><i class="ico ico2"></i>认证</navigator>
 
 		<navigator hover-class="none" class="link curr" wx:if="{{curr === 3}}"><i class="ico ico3"></i>订单</navigator>
-		<navigator hover-class="none" class="link" wx:else url="/pages/a/orderList/orderList"><i class="ico ico3"></i>订单</navigator>
+		<navigator hover-class="none" class="link" open-type="redirectTo" wx:else url="/pages/a/order/order"><i class="ico ico3"></i>订单</navigator>
 
 	</view>
 </template>

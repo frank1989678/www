@@ -1,0 +1,36 @@
+<!--pages/menu/menu.wxml-->
+
+<view class="li">
+	<navigator url="/pages/login/login">1绑定账号</navigator>
+</view>
+
+<view class="li">
+	<navigator url="/pages/a/setting/setting">2接单设置</navigator>
+	<view class="li">
+		<navigator url="/pages/a/wallet/wallet">2.1钱包</navigator>
+		<view class="li">
+			<navigator url="/pages/a/his/his">2.1.1零钱明细</navigator>
+			<navigator url="/pages/a/withdraw/withdraw">2.1.2提现</navigator>
+			<view class="li">
+				<navigator url="/pages/a/suc/suc">2.1.2.1零钱提现</navigator>
+			</view>
+		</view>
+
+		<view class="li">
+			<navigator url="/pages/a/order/order">2.2订单</navigator>
+			<view class="li">
+				<navigator url="/pages/a/detail/detail">2.2.1订单详情</navigator>
+				<view class="li">
+					<navigator url="/pages/a/submit/submit">2.2.1.1提交验收</navigator>
+				</view>
+			</view>
+		</view>
+
+		<view class="li">
+			<navigator url="/pages/a/addGame/addGame">2.3接单方式</navigator>
+		</view>
+	</view>
+</view>
+
+
+

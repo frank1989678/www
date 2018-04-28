@@ -1,0 +1,30 @@
+<!--pages/a/submit/submit.wxml-->
+
+<view class="wrap">
+	<view class="hd">
+		<i class="ico ico-s"></i>
+		陪玩服务截图
+		<text class="sub"> （请提交服务过程图片） </text>		
+	</view>
+
+	<view class="pic" bindtap="onPic">
+		<view class="li bbox" wx:for="{{list}}" wx:key="{{item.key}}">
+			<image class="thumb" src="{{item}}" data-preview="{{index}}"></image>
+			<i class="ico ico-del" data-del="{{index}}"></i>
+		</view>
+
+
+		<view class="li bbox" wx:if="{{list.length < maxCount}}">
+			<view class="fu-file" bindtap="upfilePic">点击上传图片</view>
+		</view>
+	</view>
+	
+	<view class="area">
+		<textarea class="ipt bbox" cursor-spacing="20px" placeholder="备注：如陪玩订单已完成..." id="note" bindinput="changeInput"></textarea>
+	</view>
+
+	<view class="button">
+		<button class="btn gray fl" bindtap="goback">取消</button>
+		<button class="btn danger fr" bindtap="submit">确认提交</button>
+	</view>
+</view>

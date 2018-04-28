@@ -1,14 +1,11 @@
-// pages/a/suc/suc.js
+// pages/menu/menu.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    msg: '提现成功',
-    price: '888.00',
-    bank: '工商银行',
-    number: '620************1234'
+  
   },
 
   /**

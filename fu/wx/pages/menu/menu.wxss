@@ -1,0 +1,3 @@
+/* pages/menu/menu.wxss */
+navigator{display:block;line-height:88rpx;}
+.li{padding-left:30rpx;}

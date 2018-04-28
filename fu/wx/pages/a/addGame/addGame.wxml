@@ -25,7 +25,7 @@
         </view>
 
         <view class="button">
-            <button form-type="submit" class="btn primary" bindtap="submitForm">保存</button>
+            <button form-type="submit" class="btn danger" bindtap="submitForm">保存</button>
         </view>
     </form>
 </view>

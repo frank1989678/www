@@ -40,5 +40,5 @@
 <view class="foot">
 	<text class="btn btn1">取消订单</text>
 	<text class="btn">联系老板</text>
-	<text class="btn primary">提交验收</text>
+	<navigator hover-class="none" class="btn primary" url="/pages/a/submit/submit">提交验收</navigator>
 </view>

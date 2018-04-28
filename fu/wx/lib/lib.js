@@ -16,6 +16,11 @@ const formatNumber = n => {
 	return n[1] ? n : '0' + n
 }
 
+// 返回上一页
+function goback() {
+	// wx.navigateBack();
+}
+
 function trim(val) {
     return val ? val.toString().replace(/^\s+|\s+$/g, '') : '';
 }

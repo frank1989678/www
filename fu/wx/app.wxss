@@ -1,6 +1,7 @@
 @import 'assets/css/icon.wxss';
 
 /**{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}*/
+.bbox{-webkit-box-sizing:border-box;box-sizing:border-box;}
 
 /**app.wxss**/
 page{color:#322f2e;font-size:28rpx;}
@@ -24,7 +25,7 @@ input:-ms-input-placeholder{color:red;}
 
 /*button*/
 .button{padding:20rpx 75rpx;text-align:center;}
-.button .btn{height:88rpx;line-height:88rpx;border:0;text-align:center;border-radius:10rpx;}
+.button .btn{height:88rpx;line-height:88rpx;border:0;text-align:center;border-radius:10rpx;font-size:28rpx;}
 .button .btn:nth-child(n+2){margin-top:40rpx;}
 .button .primary{background:#e8e8e8;color:#e8645f;/*box-shadow:6px 12px 34px rgba(232, 100, 95, 0.3);*/}
 .button .danger{background:#e8645f;color:#fff;}
@@ -64,6 +65,12 @@ input:-ms-input-placeholder{color:red;}
 .fu-foot .link{width:33.333%;color:#9b9594;font-size:20rpx;}
 .fu-foot .curr{color:#e8645f;}
 .fu-foot .ico{display:block;margin:0 auto 5rpx;vertical-align:top;}
+
+.fu-file{position:relative;width:335rpx;height:75rpx;padding-top:260rpx;background-color:#f5f5f5;border-radius:10rpx;text-align:center;color:#9b9594;font-size:24rpx;overflow:hidden;}
+.fu-file:before,
+.fu-file:after{position:absolute;content:'';background-color:#fac67a;}
+.fu-file:before{left:40%;right:40%;top:50%;height:2rpx;}
+.fu-file:after{top:40%;bottom:40%;left:50%;width:2rpx;}
 
 
 .nomore{font-size:20rpx;color:#9b9594;padding:30rpx 0;text-align:center;}

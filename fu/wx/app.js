@@ -88,7 +88,7 @@ App({
 
 		// 自定义验证机制，如果后端返回的接口提示需要登录就会清除（代码在lib.js的ajax：fail方法里面）
 		if (!wx.getStorageSync('isLogin')) {
-			this.login();
+			// this.login();
 		}
 	},
 	onLaunch: function() {

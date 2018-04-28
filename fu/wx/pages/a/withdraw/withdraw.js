@@ -54,8 +54,8 @@ Page({
     }
   },
 
-  navigateBack: function() {
-    wx.navigateBack({delta:1})
+  goback: function() {
+    wx.navigateBack();
   },
 
   /**
