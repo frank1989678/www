@@ -11,7 +11,7 @@
             <text class="btn1" bindtap="sendCode">{{btnText}}</text>
         </view>
         <view class="button">
-            <button type="default" form-type="submit" class="primary" disabled="{{disabled}}" bindtap="submitForm">绑定</button>
+            <button form-type="submit" class="btn danger" bindtap="submitForm">绑定</button>
         </view>
         <!-- <view class="btm">
             没有账号？

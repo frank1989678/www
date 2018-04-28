@@ -16,6 +16,10 @@ const formatNumber = n => {
 	return n[1] ? n : '0' + n
 }
 
+function trim(val) {
+    return val ? val.toString().replace(/^\s+|\s+$/g, '') : '';
+}
+
 function showMsg(msg) {
 	msg && wx.showToast({
 		title: msg,
@@ -31,6 +35,7 @@ function getToken() {
 
 function ajax(url, params, doSuccess, doFail, doComplete) {
 	var token = getToken();
+	wx.showLoading();
 	wx.request({
 		url: baseUrl + url,
 		data: params,
@@ -51,18 +56,20 @@ function ajax(url, params, doSuccess, doFail, doComplete) {
 			}
 			// 未登录提示
 			if (err.code === 500) {
-				wx.removeStorageSync('token')
+				wx.removeStorageSync('isLogin')
 			}
 		},
 		complete: function() {
 			if (typeof doComplete === 'function') {
 				doComplete();
 			}
+			wx.hideLoading();
 		}
 	});
 }
 
 module.exports = {
+	trim: trim,
 	baseUrl: baseUrl,
 	ajax: ajax,
 	showMsg: showMsg,

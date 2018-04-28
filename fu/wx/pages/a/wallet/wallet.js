@@ -1,13 +1,29 @@
-// pages/a/orderList/orderList.js
+// pages/a/wallet/wallet.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    money: '80.33'
   },
 
+  // 加载更多
+  loadMore: function() {
+    const para = {
+      id: this.data.id,
+      page: this.data.page
+    }
+    _lib.ajax('url', para, function(res) {
+      // this.list.push(res.list)
+      if (res.code === '') {
+
+      }
+    }, 
+    function(err) {
+
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

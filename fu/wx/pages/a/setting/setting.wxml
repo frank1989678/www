@@ -1,5 +1,5 @@
 <view class="wrap wrap-foot">
-	<view class="bg" style="background-image:url(../../../images/bg.png)">
+	<view class="bg">
 		<view class="hd">
 			<text class="score"> {{ score }} </text> 
 			<text class="unit"> 分 </text>	
@@ -10,16 +10,16 @@
 			<text> 单 </text> 	
 			<view class="mt"> 本周成功订单 </view>		
 		</view>
-		<view class="bd">
+		<navigator class="bd" url="/pages/a/wallet/wallet" hover-class="none">
 			<text class="score"> {{ income }} </text>
 			<text> 元 </text>	
 			<view class="mt"> 本周收入 </view>		
-		</view>
+		</navigator>
 	</view>
 
 	<view class="fu-block">
 		<view class="fu-item">
-			<navigator url="pages/a/addGame/addGame">
+			<navigator url="/pages/a/addGame/addGame" hover-class="none">
 				<i class="ico ico-plus"></i>
 				新增接单方式
 				<i class="ico ico-arrow-right"></i>
@@ -58,10 +58,10 @@
 
 
 		<view class="button" wx:if="{{ isOpen === false }}">
-			<button class="danger" bindtap="openStatus">开始接单</button>
+			<button class="btn danger" bindtap="openStatus">开始接单</button>
 		</view>
 		<view class="button" wx:else>
-			<button class="gray" bindtap="closeStatus">停止接单</button>
+			<button class="btn gray" bindtap="closeStatus">停止接单</button>
 			<text class="tips">（自动接单倒计时： {{ time }} ）</text>
 		</view>
 

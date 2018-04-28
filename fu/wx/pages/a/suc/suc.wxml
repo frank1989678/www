@@ -1,0 +1,22 @@
+<!--pages/a/suc/suc.wxml-->
+<view class="wrap">
+	<view class="result">
+		<i class="ico ico-ok"></i>
+		<view class="hd">{{msg}}</view>
+		<view class="bd"><i>￥</i>{{price}}</view>
+	</view>
+
+	<view class="fu-info">
+		<view class="item">
+			<text class="for">到账银行</text>
+			<text class="txt">{{bank}}</text>
+		</view>
+		<view class="item">
+			<text class="for">银行卡号</text>
+			<text class="txt">{{number}}</text>
+		</view>
+	</view>
+
+	<navigator class="btn" url="/pages/a/his/his" hover-class="none">查看明细</navigator>
+	
+</view>

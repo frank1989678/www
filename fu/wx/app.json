@@ -1,13 +1,14 @@
 {
   "pages": [
-    "pages/a/order/order",
+    "pages/a/suc/suc",
+    "pages/a/detail/detail",
+    "pages/a/wallet/wallet",
+    "pages/a/withdraw/withdraw",
     "pages/a/setting/setting",
+    "pages/a/order/order",
     "pages/login/login",
     "pages/a/addGame/addGame",
-    "pages/register/register",
-    "pages/logs/logs",
-    "components/a/foot/foot",
-    "components/select/select"
+    "pages/a/his/his"
   ],
   "window": {
     "backgroundTextStyle": "light",

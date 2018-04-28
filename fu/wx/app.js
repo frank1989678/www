@@ -1,24 +1,47 @@
 //app.js
-var _http = require('utils/util.js');
+const _lib = require('lib/lib.js');
 
 App({
 	globalData: {
 		userInfo: null,
 		ajaxUrl: '',
-		baseUrl: _http.baseUrl,
+		baseUrl: _lib.baseUrl,
 	},
-	userInfo: function() {
+	getUserInfo: function(code) {
+		wx.removeStorageSync('isLogin');
+		// 获取授权成功或失败后不会再次弹框，直接执行对应的回调
 		wx.getUserInfo({
-			withCredentials: false,
+			withCredentials: true,
 			success: res => {
-				this.globalData.user = res.userInfo;
+				let userInfo = res.userInfo;
+				userInfo.encryptedData = res.encryptedData;
+				userInfo.iv = res.iv;
+				userInfo.rawData = res.rawData;
+				userInfo.signature = res.signature;
+				wx.setStorageSync('user', userInfo);
 
-				wx.setStorageSync('user', res.userInfo);
-
-				// 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-				// 所以此处加入 callback 以防止这种情况
-				if (this.userInfoReadyCallback) {
-					this.userInfoReadyCallback(res)
+				if (code) {
+					// 发送 code 到后台换取 openId, sessionKey, unionId
+					_lib.ajax('/login', {code: code}, function(res) {
+						res = res.data;
+						try {
+							wx.setStorageSync('token', res.data.token);
+						} catch(err) {} 
+						if (res.status === 200) {
+							wx.setStorageSync('isLogin', 'true');
+						} else if (res.status === 201) {
+							// 新用户，注册并并附带发送 userInfo信息给后台创建新用户
+							wx.redirectTo({
+								url: '/pages/login/login'
+							})
+						} else {
+							wx.setStorageSync('isLogin', 'true');
+							console.log('登录异常，可能是code使用频繁导致');
+							// wx.redirectTo({
+							// 	url: '/pages/login/login'
+							// })
+						}
+					})
 				}
 			},
 			fail: err => {
@@ -29,52 +52,44 @@ App({
 			}
 		})
 	},
-	userInfoReadyCallback: function(res) {
-		// 发送用户信息后台
-		_http.ajax('/postUserInfo', {userInfo: res.userInfo}, function(res) {
-			if (res.status == 1) {
-				// 判断是否是新用户
-				// reLaunch, redirectTo
-				wx.reLaunch({
-					url: '/pages/login/login'
-				})
-			}
-		});
-	},
-	login: function() {
-		wx.login({
-			success: res => {
-				if (res.code) {
-					// 发送 res.code 到后台换取 openId, sessionKey, unionId
-					_http.ajax('/api/v1/user/login', {code: res.code}, function(res) {
-						// console.log(res)
-						wx.setStorageSync('token', res.token);
-					})
-					this.userInfo();
-				} else {
-					setTimeout( res => {
-						this.login();
-					}, 1e3);
-				}
-			}
-		})
-	},
-	checkLogin: function() {
+	checkLogin2: function() {
 		wx.checkSession({
 			success: res => {
+				console.info('session_key 未过期');
+
+				// 每次ajax请求，如果失败并且状态是500会清除token
 				if (wx.getStorageSync('token')) {
-					this.globalData.user = wx.getStorageSync('user');
 				} else {
-					// this.login();
+					this.login();
 				}
 				//session_key 未过期，并且在本生命周期一直有效
 			},
 			fail: err => {
-				this.globalData.user = '';
 				// session_key 已经失效，需要重新执行登录流程
+				console.error('session_key 未过期');
 				this.login();
 			}
 		})
+	},
+
+	login: function() {
+		var that = this;
+		// 太过频繁的登录会导致code无法被后台使用（微信的安全机制）
+		// 用户登录凭证（有效期五分钟）。开发者需要在开发者服务器后台调用 api，使用 code 换取 openid 和 session_key 等信息
+		wx.login({
+			success: function(res) {
+				// 先获取用户信息
+				res.code && that.getUserInfo(res.code);
+			}
+		})
+	},
+	// 不使用小程序的session验证机制 
+	checkLogin: function() {
+
+		// 自定义验证机制，如果后端返回的接口提示需要登录就会清除（代码在lib.js的ajax：fail方法里面）
+		if (!wx.getStorageSync('isLogin')) {
+			this.login();
+		}
 	},
 	onLaunch: function() {
 		this.checkLogin()

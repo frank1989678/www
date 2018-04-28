@@ -7,7 +7,7 @@
 .addform .row .btn{position:absolute;top:33rpx;bottom:33rpx;right:-10rpx;width:100rpx;}
 .addform .list .li{margin-right:30rpx;padding:19rpx 28rpx;font-size:22rpx;color:#9b9594;background-color:#f5f5f5;border-radius:10rpx;}
 .addform .list .curr{background-color:#fdefef;color:#e8645f;}
-.addform .button{margin-top:80rpx;padding:20rpx 75rpx;}
+.addform .button{margin-top:80rpx;}
 
 .main{padding:20rpx;}
 .main .ipt{text-align:center;border-bottom:1px solid #e2e2e2;height:110rpx;}

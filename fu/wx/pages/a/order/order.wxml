@@ -1,6 +1,6 @@
 <import src="../../../components/select/select.wxml"/>
 
-<view class="wrap">
+<view class="wrap wrap-foot">
 	<view class="tab" bindtap="showSelect">
 		<view class="item">
 			<view class="dt" data-key="hidden1">{{name1}} <i class="arrow"></i></view>
@@ -15,7 +15,39 @@
 			</view>
 		</view>
 	</view>
+	
+	<scroll-view class="list" scroll-y bindscrolltolower="loadMore" bindscroll="lazyload">
+		<view class="li" wx:for="{{ list }}" wx:key="{{item.key}}" bindtap="goPage">
+			<view class="hd">
+				<text class="fr"> {{ item.status }} </text>
+				<text> {{ item.name }} </text>
+			</view>
+			<view class="bd">
+				<image class="img" src="{{ item.icon }}"></image>
+				<view>
+					{{item.datetime}} {{item.name}} {{item.time}}*{{item.unit}}
+				</view>
+				<view class="num">
+					订单编号：{{item.id}}
+				</view>
+				<view class="rmb">
+					<i>￥</i>{{item.price}}
+				</view>
+			</view>
+			<view class="button">
+				<!-- <button class="btn orange fr" bindtap="openStatus">提交验收</button> -->
+				<!-- <button class="btn primary fr" bindtap="openStatus">查看截图</button> -->
+				<button class="btn danger fr" bindtap="openStatus">开始陪玩</button>
+				<button class="btn gray" bindtap="openStatus">联系老板</button>
+				<button class="btn gray fl" bindtap="openStatus" wx:if="{{item.type === 1}}">取消订单</button>
+			</view>
+		</view>
+		<view class="nomore">没有更多了...</view>
+	</scroll-view>
 </view>
+
+<import src="../../../components/a/foot/foot.wxml"/>
+<template is="foot" data="{{curr: 3}}"/>
 
 
 

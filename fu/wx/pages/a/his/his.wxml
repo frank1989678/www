@@ -1,0 +1,18 @@
+<!--pages/a/his/his.wxml-->
+<view class="wrap">
+	<view class="tr hd">
+		<view class="td td1">时间</view>
+		<view class="td td2">动作</view>
+		<view class="td td3">金额</view>
+		<view class="td td4">当前金额</view>
+	</view>
+	<scroll-view class="list" scroll-y bindscrolltolower="loadMore">
+		<view class="tr" wx:for="{{ list }}" wx:key="{{item.key}}">
+			<view class="td td1">{{item.datetime}}</view>
+			<view class="td td2">{{item.action}}</view>
+			<view class="td td3">{{item.cost}}</view>
+			<view class="td td4">{{item.surplus}}</view>
+		</view>
+		<view class="nomore">没有更多了...</view>
+	</scroll-view>
+</view>

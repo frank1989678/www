@@ -1,0 +1,17 @@
+<!--pages/a/wallet/wallet.wxml-->
+<view class="wrap">
+	<view class="bg">
+		<view class="hd">余额（元）</view>
+		<view class="money">{{money}}</view>
+		<navigator class="link" url="/pages/a/his/his" hover-class="none">明细</navigator>
+	</view>
+	<view class="fu-block">
+		<view class="fu-item">
+			<navigator url="/pages/a/withdraw/withdraw" hover-class="none">
+				<i class="ico ico-wallet"></i>
+				提现
+				<i class="ico ico-arrow-right"></i>
+			</navigator>
+		</view>
+	</view>
+</view>

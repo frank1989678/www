@@ -1,6 +1,6 @@
 // pages/register/register.js
-var util = require('../../utils/util.js');
-var validate = require('../../utils/validate.js');
+const _lib = require('../../lib/lib.js');
+const _validate = require('../../lib/validate.js');
 
 Page({
 
@@ -55,36 +55,29 @@ Page({
 		if (that.data.lock) {
 			// 验证码发送冷却中...
 		} else if (mobile.length === 0) {
-			util.showMsg('请输入手机号');
+			_lib.showMsg('请输入手机号');
 		} else if (!validate.isMobile(mobile)) {
-			util.showMsg('手机号格式错误');
+			_lib.showMsg('手机号格式错误');
 		} else {
 			that.setData({
 				lock: true
 			})
-			util.showMsg('验证码发送中...');
-			util.ajax({
-				url: util.baseURl + 'login.php',
-				data: {
-					mobile: mobile
-				},
-				success: function(res) {
-					if (res.data.status === 200) {
-						util.showMsg('验证码发送成功 :)');
-						that.lockSMS(5);
-					} else {
-						util.showMsg('验证码发送失败 :(');
-						that.setData({
-							lock: false
-						})
-					}
-				},
-				error: function(res) {
-					util.showMsg('网络错误，请稍后再试');
+			_lib.showMsg('验证码发送中...');
+			_lib.ajax('login.php', { mobile: mobile }, function(res) {
+				if (res.data.status === 200) {
+					_lib.showMsg('验证码发送成功 :)');
+					that.lockSMS(5);
+				} else {
+					_lib.showMsg('验证码发送失败 :(');
 					that.setData({
 						lock: false
 					})
 				}
+			}, function(err) {
+				_lib.showMsg('网络错误，请稍后再试');
+				that.setData({
+					lock: false
+				})
 			})
 		}
 	},
@@ -113,9 +106,9 @@ Page({
 	// 提交
 	submitForm: function() {
 		if (!validate.isMobile(this.data.mobile)) {
-			util.showMsg('手机号格式错误');
+			_lib.showMsg('手机号格式错误');
 		} else if (this.data.password !== this.data.pwd2) {
-			util.showMsg('两次输入的密码不一致');
+			_lib.showMsg('两次输入的密码不一致');
 		} else {
 			const para = {
 				mobile: this.data.mobile,
@@ -124,15 +117,12 @@ Page({
 				nickname: this.data.nickname
 			}
 			console.log(para);
-			util.ajax({
-				url: util.baseURl + 'login.php',
-				data: para,
-				success: function(res) {
-					util.showMsg(res.msg);
-					if (res.data.status === 200) {
-						console.log('注册成功')
-					}
+			_lib.ajax('login.php', para, function(res) {
+				_lib.showMsg(res.msg);
+				if (res.data.status === 200) {
+					console.log('注册成功')
 				}
+				
 			})
 		}
 	},
@@ -141,55 +131,6 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady: function() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
-	onShow: function() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面隐藏
-	 */
-	onHide: function() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload: function() {
-
-	},
-
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
-	onPullDownRefresh: function() {
-
-	},
-
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom: function() {
-
-	},
-
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage: function() {
 
 	}
 })

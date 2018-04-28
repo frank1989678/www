@@ -1,0 +1,38 @@
+<!--pages/a/withdraw/withdraw.wxml-->
+<view class="wrap">
+	<view class="form">
+		<view class="item tips">提现金额至少100元；提现手续费1%；1-3个工作日到账</view>
+		<view class="item hd">提现金额</view>
+		<view class="item">
+			<i class="s">￥</i>
+			<input type="digit" class="ipt" placeholder="请输入提现金额" id="money" bindblur="changeInput" />
+		</view>
+		<view class="item ft">
+			余额{{surplus}}元
+
+			<text class="btn abs" bindtap="getAll">最多提现</text>
+		</view>
+	</view>
+
+
+	<view class="form2">
+		<view class="item hd">设置提现账户</view>
+		<view class="item">
+			<text class="for">支付宝账号</text>
+			<input class="ipt abs" placeholder="请输入支付宝账号" id="account" bindblur="changeInput" />
+		</view>
+		<view class="item">
+			<text class="for">姓名</text>
+			<input class="ipt abs" placeholder="请输入真实姓名" id="realname" bindblur="changeInput" />
+		</view>
+		<view class="item tips">姓名必须是支付宝账户的真实姓名，否则将打款失败</view>
+	</view>
+
+
+
+	<view class="button">
+		<button form-type="submit" class="btn danger" bindtap="submitForm">确定</button>
+		<button class="btn gray" bindtap="navigateBack">取消</button>
+	</view>
+		
+</view>
