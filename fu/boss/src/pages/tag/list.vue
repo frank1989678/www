@@ -4,7 +4,7 @@
         <el-col :span="24" class="toolbar">
             <el-form :model="filters">
                 <el-form-item>
-					<el-button type="primary" size="small" @click="addRow(0)">添加标签</el-button>
+					<el-button type="primary" size="mini" @click="addRow(0)">添加标签</el-button>
                 </el-form-item>
             </el-form>
         </el-col>

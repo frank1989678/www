@@ -1,0 +1,19 @@
+/* pages/a/detail/detail.wxss */
+.wrap{background-color:#f5f5f5;}
+.user{padding:30rpx;background-color:#fff;}
+.user .img{width:120rpx;height:120rpx;vertical-align:middle;margin-right:30rpx;border-radius:50%;}
+.user .info{display:inline-block;vertical-align:middle;}
+.user .score{position:absolute;top:79rpx;right:40rpx;line-height:28rpx;}
+.user .score .ico{vertical-align:top;}
+.user .name{font-size:32rpx;}
+.user .tag{margin-left:30rpx;border-radius:8rpx;padding:10rpx 16rpx;color:#fff;font-size:20rpx;}
+.user .city{display:block;font-size:22rpx;margin-top:16rpx;}
+
+.fu-info .item{line-height:110rpx;}
+.fu-info .ipt{display:inline-block;width:110rpx;height:110rpx;border-left:1rpx solid #e2e2e2;border-right:1rpx solid #e2e2e2;text-align:center;vertical-align:top;margin:0 40rpx;color:#222;}
+.fu-info .area{width:200rpx;height:110rpx;text-align:right;vertical-align:top;color:#222;}
+.fu-info .ico-plus{margin-right:40rpx;}
+.fu-info .item .txt{right:0;}
+
+.foot{position:fixed;left:0;right:0;bottom:0;padding:0;text-align:center;}
+.foot .btn{display:block;background-color:#e8645f;color:#fff;border-radius:0;vertical-align:top;height:100rpx;line-height:100rpx;font-size:36rpx;}

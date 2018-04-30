@@ -1,5 +1,5 @@
 <template>
-    <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="140px" class="fu-form" size="small">
+    <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="140px" class="fu-form" size="mini">
         <h3 class="title">陪玩管理&gt;标签组管理&gt;基本信息</h3>
 
         <el-form-item label="排序ID" prop="sort" placeholder="请输入排序ID">

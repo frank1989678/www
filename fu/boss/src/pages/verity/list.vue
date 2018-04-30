@@ -2,10 +2,10 @@
     <section>
         <!--工具条-->
         <el-col :span="24" class="fu-filter">
-            <el-form :inline="true" :model="filters">
+            <el-form :inline="true" :model="filters" size="mini">
                 <el-form-item>
-                    <el-button type="primary" size="small" @click="addRow(0)">新增</el-button>
-                    <el-button type="primary" size="small" @click="onExport">导出</el-button>
+                    <el-button type="primary" @click="addRow(0)">新增</el-button>
+                    <el-button type="primary" @click="onExport">导出</el-button>
                 </el-form-item>
             </el-form>
         </el-col>

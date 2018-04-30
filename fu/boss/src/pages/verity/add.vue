@@ -1,11 +1,11 @@
 <template>
 <div>
-    <el-form ref="addFormData2" :model="addFormData2" :rules="addFormRules2" label-width="180px" class="fu-form" size="small" :disabled="formDisabled2">
+    <el-form ref="addFormData2" :model="addFormData2" :rules="addFormRules2" label-width="180px" class="fu-form" size="mini" :disabled="formDisabled2">
         <el-form-item label="实名认证用户手机号码" prop="mobile">
             <el-input v-model="addFormData2.mobile" @blur="getVerityByMobile" placeholder="请输入手机号"></el-input>
         </el-form-item>
     </el-form>
-    <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="180px" class="fu-form" size="small" :disabled="formDisabled">
+    <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="180px" class="fu-form" size="mini" :disabled="formDisabled">
         <el-form-item label="身份证图片" class="fu-upload">
             <el-upload
                 class="file el-upload-list el-upload-list--picture-card"
@@ -158,7 +158,7 @@
                 :headers="headers"
                 :on-success="uploadSuccess"
                 :before-upload="beforeUpload2">
-                <el-button size="small" type="primary">点击上传</el-button>
+                <el-button type="primary">点击上传</el-button>
             </el-upload>
         </el-form-item>
 

@@ -1,0 +1,67 @@
+<!--pages/a/detail/detail.wxml-->
+<view class="wrap wrap-foot">
+	<view class="user">
+		<image class="img" src="{{ userInfo.avatarUrl }}"></image>
+
+		<view class="info">
+			<text class="name"> {{ userInfo.nickName }} </text>
+			<text class="tag {{sex == 1 ? 'male' : 'female'}}"> {{ userInfo.tag }} </text>
+			<view class="city">
+				<i class="ico ico-map"></i>
+				{{userInfo.city}}
+			</view>
+		</view>
+		<view class="score">
+			<i class="ico ico-star ico-star{{userInfo.star}}"></i>
+			{{userInfo.score}}分
+		</view>
+	</view>
+
+	<view class="fu-info">
+		<view class="item">
+			<text class="for">品类</text>
+			<text class="txt">{{catogery}}</text>
+		</view>
+		<view class="item">
+			<text class="for">单数</text>
+			<view class="txt" bindtap="changeNum">
+				<i class="ico ico-minus" data-key="-1"></i>
+				<input type="number" id="num" class="ipt" value="{{num}}" bindinput="changeInput" />
+				<i class="ico ico-plus" data-key="1"></i>
+				{{unit}}
+			</view>
+		</view>
+		<view class="item">
+			<text class="for">备注</text>
+			<view class="txt">
+				<input id="note" class="area" bindinput="changeInput" />
+			</view>
+		</view>
+	</view>
+
+	<view class="fu-info">
+		<view class="item">
+			<text class="for">费用</text>
+			<text class="txt">￥{{price}} 元/{{unit}} x {{num}}*</text>
+		</view>
+		<view class="ft">
+			<text class="for">合计：</text>
+			<text class="txt rmb">￥{{total}} 元</text>
+		</view>
+	</view>
+
+	<view class="fu-info">
+		<view class="item">
+			<text class="for">付款方式</text>
+			<view class="txt">
+				<i class="ico ico-alipay"></i>
+				支付宝
+				<i class="ico ico-arrow-right" data-key="1"></i>
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class="foot button">
+	<navigator hover-class="none" class="btn red" url="/pages/a/submit/submit">提交订单</navigator>
+</view>

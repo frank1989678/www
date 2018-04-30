@@ -2,20 +2,20 @@
     <section>
         <!--工具条-->
         <el-col :span="24" class="fu-filter">
-            <el-form :inline="true" :model="filters">
+            <el-form :inline="true" :model="filters" size="mini">
                 <el-form-item>
-                    <el-input v-model="filters.orderId" size="small" placeholder="请输入订单号/福禄通行证" style="width:296px;"></el-input>
+                    <el-input v-model="filters.orderId" placeholder="请输入订单号/福禄通行证" style="width:296px;"></el-input>
                 </el-form-item>
                 <el-form-item label="提交时间">
-                    <el-date-picker v-model="filters.dateUTC" size="small" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" @change="onFormatDate">
+                    <el-date-picker v-model="filters.dateUTC" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" @change="onFormatDate">
                     </el-date-picker>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" size="small" @click="getList">查询</el-button>
+                    <el-button type="primary" @click="getList">查询</el-button>
                 </el-form-item>
                 <div></div>
                 <el-form-item label="游戏名称筛选">
-                    <el-select v-model="filters.categoryId" @change="getList"  size="small">
+                    <el-select v-model="filters.categoryId" @change="getList">
                         <el-option label="全部" value=""></el-option>
                         <el-option
                           v-for="item in gameList"
@@ -25,13 +25,13 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="渠道筛选" @change="getList" size="small">
+                <el-form-item label="渠道筛选" @change="getList">
                     <el-select v-model="filters.source">
                         <el-option label="全部" value=""></el-option>
                         <el-option label="福禄自营" value="1"></el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="订单状态" @change="getList" size="small">
+                <el-form-item label="订单状态" @change="getList">
                     <el-select v-model="filters.status">
                         <el-option label="全部" value=""></el-option>
                         <el-option label="交易关闭" value="0"></el-option>

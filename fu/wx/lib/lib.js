@@ -1,4 +1,5 @@
-const baseUrl = 'http://10.0.3.74:8080';
+// const baseUrl = 'http://10.0.3.74:8080';
+const baseUrl = 'http://ms676p.natappfree.cc';
 
 const formatTime = date => {
 	const year = date.getFullYear()
@@ -51,6 +52,7 @@ function ajax(url, params, doSuccess, doFail, doComplete) {
 		dataType: 'json',
 		method: 'POST',
 		success: function(res) {
+			console.log(typeof doSuccess)
 			if (typeof doSuccess === 'function') {
 				doSuccess(res);
 			}
@@ -58,13 +60,15 @@ function ajax(url, params, doSuccess, doFail, doComplete) {
 		fail: function(err) {
 			if (typeof doFail === 'function') {
 				doFail();
+			} else {
+				showMsg(err.msg)
 			}
 			// 未登录提示
 			if (err.code === 500) {
 				wx.removeStorageSync('isLogin')
 			}
 		},
-		complete: function() {
+		complete: function(com) {
 			if (typeof doComplete === 'function') {
 				doComplete();
 			}

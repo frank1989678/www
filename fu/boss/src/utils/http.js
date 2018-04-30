@@ -5,7 +5,7 @@ import { Message } from 'element-ui';
 
 // axios 配置
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL = api.baseURL; //'http://10.0.3.31:8080'; // 王彬
+axios.defaults.baseURL = api.baseURL;
 
 // http request 拦截器
 axios.interceptors.request.use(config => {

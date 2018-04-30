@@ -1,0 +1,17 @@
+<view class="wrap">
+	<view class="list">
+		<view class="li" wx:for="{{ list }}" wx:key="{{item.key}}">
+			<image class="img" src="{{ item.avatar }}"></image>
+			<i class="num" wx:if="{{item.unread}}">{{item.unread}}</i>
+			
+			<text class="name"> {{ item.name }} </text>
+			<i class="tag" wx:if="{{item.tag}}">{{item.tag}}</i>
+			<text class="msg">{{ item.msg }}</text>
+		</view>
+	</view>
+</view>
+
+
+
+<import src="../../../components/c/foot/foot.wxml"/>
+<template is="foot" data="{{curr: 2}}"/>

@@ -1,6 +1,6 @@
 <template>
     <div>
-    <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="140px" class="fu-form" size="small">
+    <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="140px" class="fu-form" size="mini">
         <h3 class="title">陪玩管理&gt;内容管理&gt;基本信息</h3>
         
         <div class="fu-upload-circle">

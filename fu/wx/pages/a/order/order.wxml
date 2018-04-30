@@ -1,5 +1,3 @@
-<import src="../../../components/select/select.wxml"/>
-
 <view class="wrap wrap-foot">
 	<view class="tab" bindtap="showSelect">
 		<view class="item">

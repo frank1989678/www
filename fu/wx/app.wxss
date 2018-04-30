@@ -14,6 +14,16 @@ page{color:#322f2e;font-size:28rpx;}
 .rmb{color:#e8645f;}
 .rmb i{font-size:20rpx;}
 
+.tag1{background-color:#9cbaff;}
+.tag2{background-color:#ff9ca3;}
+.tag3{background-color:#ffca85;}
+
+.online,
+.offline{width:60rpx;height:30rpx;background-color:rgba(0,0,0,0.5);border-radius:15rpx 0 0 15rpx;opacity:0.5;font-size:18rpx;position:relative;text-align:center;color:#fff;padding-left:20rpx;}
+.online:before,
+.offline:before{content:'';position:absolute;top:8rpx;left:8rpx;width:14rpx;height:14rpx;border-radius:50%;}
+.online:before{background-color:#48faa4;}
+.offline:before{background-color:#aaa;}
 
 button[disabled]{opacity:0.5;}
 input::-webkit-input-placeholder{color:red;}
@@ -31,6 +41,8 @@ input:-ms-input-placeholder{color:red;}
 .button .danger{background:#e8645f;color:#fff;}
 .button .orange{background:#f8bd66;color:#fff;}
 .button .gray{background:#e8e8e8;color:#9b9594;}
+.button .red{background:linear-gradient(90deg, #f53f38 0%, #fa794c 100%);color:#fff;}
+.button .ghost{border:1rpx solid #e8645f;color:#e8645f;}
 
 
 /*form*/

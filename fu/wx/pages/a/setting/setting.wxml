@@ -20,7 +20,7 @@
 	<view class="fu-block">
 		<view class="fu-item">
 			<navigator url="/pages/a/addGame/addGame" hover-class="none">
-				<i class="ico ico-plus"></i>
+				<i class="ico ico-plus-o"></i>
 				新增接单方式
 				<i class="ico ico-arrow-right"></i>
 			</navigator>

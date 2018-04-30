@@ -1,0 +1,58 @@
+<view class="wrap wrap-foot">
+	<view class="bg">
+		<navigator class="ico ico-setx fr" url="/pages/a/wallet/wallet" hover-class="none"></navigator>
+		<image class="img" src="{{ userInfo.avatarUrl }}"></image>
+		<view class="user">
+			<text class="name"> {{ userInfo.nickName }} </text>
+			<i class="ico {{ userInfo.verity ? 'ico-verity' : 'ico-unverity'}}"></i>
+			<text class="mobile">{{ userInfo.mobile }}</text>
+		</view>
+	</view>
+
+	<view class="fu-block">
+		<view class="fu-item" wx:if="{{userInfo.verity}}">
+			<navigator url="/pages/a/order/order" hover-class="none">
+				<i class="ico ico-v"></i>
+				前往接单
+				<i class="ico ico-arrow-right"></i>
+			</navigator>
+		</view>
+		<view class="fu-item" wx:else>
+			<navigator url="/pages/a/addGame/addGame" hover-class="none">
+				<i class="ico ico-v"></i>
+				成为陪玩师
+				<i class="ico ico-arrow-right"></i>
+			</navigator>
+		</view>
+	</view>
+
+	<view class="fu-block larger">
+		<view class="fu-item">
+			<navigator url="/pages/c/order/order" hover-class="none">
+				<i class="ico ico-order"></i>
+				我的订单
+				<i class="ico ico-arrow-right"></i>
+			</navigator>
+		</view>
+		<view class="fu-item">
+			<navigator url="/pages/a/addGame/addGame" hover-class="none">
+				<i class="ico ico-set"></i>
+				功能设置
+				<i class="ico ico-arrow-right"></i>
+			</navigator>
+		</view>
+		<view class="fu-item">
+			<navigator url="/pages/a/addGame/addGame" hover-class="none">
+				<i class="ico ico-service"></i>
+				客服中心
+				<i class="ico ico-arrow-right"></i>
+			</navigator>
+		</view>
+	</view>
+
+</view>
+
+
+
+<import src="../../../components/c/foot/foot.wxml"/>
+<template is="foot" data="{{curr: 3}}"/>

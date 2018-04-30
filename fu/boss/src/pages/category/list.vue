@@ -2,12 +2,12 @@
     <section>
         <!--工具条-->
         <el-col :span="24" class="toolbar">
-            <el-form :inline="true" :model="filters">
+            <el-form :inline="true" :model="filters" size="mini">
                 <el-form-item style="float:right;">
-					<el-button type="primary" size="small" @click="addRow(0)">添加内容</el-button>
+					<el-button type="primary" @click="addRow(0)">添加内容</el-button>
                 </el-form-item>
                 <el-form-item label="状态筛选：">
-                    <el-select v-model="filters.status" size="small" placeholder="全部" @change="filterStatus">
+                    <el-select v-model="filters.status" placeholder="全部" @change="filterStatus">
 					    <el-option
 					      v-for="item in filters.statusOptions"
 					      :key="item.value"

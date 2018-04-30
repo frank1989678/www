@@ -2,7 +2,7 @@
     <section>
         <!--工具条-->
         <el-col :span="24" class="toolbar">
-            <el-form :inline="true" :model="filters">
+            <el-form :inline="true" :model="filters" size="mini">
                 <el-form-item>
                     <el-input v-model="filters.username" placeholder="登录名"></el-input>
                 </el-form-item>
@@ -32,8 +32,8 @@
             <el-table-column prop="createTime" label="创建时间"></el-table-column>
             <!-- <el-table-column label="操作" width="160px" align="center">
                 <template slot-scope="scope">
-                    <el-button type="primary" size="small" @click="onOpenForm(scope.row)">修改</el-button>
-                    <el-button type="danger" size="small" @click="onDelAdmin(scope.row.id)">删除</el-button>
+                    <el-button type="primary" size="mini" @click="onOpenForm(scope.row)">修改</el-button>
+                    <el-button type="danger" size="mini" @click="onDelAdmin(scope.row.id)">删除</el-button>
                 </template>
             </el-table-column> -->
         </el-table>
@@ -45,8 +45,8 @@
         </el-col>
 
         <!--新增界面-->
-        <el-dialog :title="dialogTitle" :visible.sync="addFormVisible" :close-on-click-modal="false" width="30%">
-            <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="80px">
+        <el-dialog :title="dialogTitle" :visible.sync="addFormVisible" :close-on-click-modal="false" width="520px" class="fu-dialog">
+            <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="80px" size="mini">
                 <el-form-item label="登录名" prop="username">
                     <el-input v-model="addFormData.username" auto-complete="off"></el-input>
                 </el-form-item>
@@ -57,9 +57,9 @@
                     <el-input v-model="addFormData.password" auto-complete="off"></el-input>
                 </el-form-item>
             </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click.native="addFormVisible = false">取消</el-button>
-                <el-button type="primary" @click.native="onFormSubmit" :loading="addFormLoading">提交</el-button>
+            <div class="tr">
+                <el-button size="mini" @click.native="addFormVisible = false">取消</el-button>
+                <el-button size="mini" type="primary" @click.native="onFormSubmit" :loading="addFormLoading">提交</el-button>
             </div>
         </el-dialog>
     </section>

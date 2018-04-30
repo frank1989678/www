@@ -1,6 +1,7 @@
 // pages/login/login.js
 const _lib = require('../../lib/lib.js');
 const _reg = require('../../lib/reg.js');
+const _api = require('../../lib/api.js');
 
 Page({
 
@@ -104,16 +105,14 @@ Page({
 		} else if (this.data.code == '') {
 			_lib.showMsg('请输入验证码');
 		} else {
-			// wx.showLoading({
-			// 	title: '请稍后...'
-			// }); // 关闭统一放在complete里面
 			let para = wx.getStorageSync('user') || {};
 			para.mobile = this.data.mobile;
 			para.verifyCode = this.data.code;
 
-			_lib.ajax('/api/v1/user/mobile/bind', para, function(res) {
-				res = res.data;
-				_lib.showMsg(res.msg);
+			_lib.ajax(_api.LOGIN, para, function(res) {
+				console.log(res)
+				_lib.showMsg(res.data.msg);
+				// 判断是调到c端还是b端用户界面
 				if (res.data.status === 200) {
 					wx.reLaunch({
 						url: '/pages/setting/setting'

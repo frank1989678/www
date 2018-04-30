@@ -1,12 +1,12 @@
 <template>
     <div>
-    <el-form ref="addFormData2" :model="addFormData2" :rules="addFormRules2" :label-width="labelWidth" class="fu-form" size="small">
+    <el-form ref="addFormData2" :model="addFormData2" :rules="addFormRules2" :label-width="labelWidth" class="fu-form" size="mini">
         <el-form-item label="实名认证手机号" prop="mobile">
             <el-input v-model="addFormData2.mobile" @blur="getVerityByMobile" placeholder="请输入手机号"></el-input>
         </el-form-item>
     </el-form>
 
-    <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" :label-width="labelWidth" class="fu-form" size="small" :disabled="formDisabled">
+    <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" :label-width="labelWidth" class="fu-form" size="mini" :disabled="formDisabled">
         <el-form-item label="技能名称" prop="categoryId">
             <el-select v-model="addFormData.categoryId" @change="getDanAndTag">
                 <el-option

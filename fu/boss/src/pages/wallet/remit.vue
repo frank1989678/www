@@ -2,9 +2,9 @@
     <section>
         <!--工具条-->
         <el-col :span="24" class="fu-filter">
-            <el-form :inline="true" :model="filters">
+            <el-form :inline="true" :model="filters" size="mini">
                 <el-form-item>
-                    <el-button type="primary" size="small" @click="onOpenRemit()">加零钱</el-button>
+                    <el-button type="primary" @click="onOpenRemit()">加零钱</el-button>
                 </el-form-item>
             </el-form>
         </el-col>

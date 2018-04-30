@@ -1,0 +1,53 @@
+
+<view class="wrap wrap-foot">
+	<swiper indicator-dots="true" autoplay="true" circular="true" previous-margin="20rpx" next-margin="20rpx" indicator-color="rgba(255, 255, 255, 0.5)" indicator-active-color="#f53f38" class="swiper">
+		<block wx:for="{{imgUrls}}" wx:key="item">
+		<swiper-item class="item">
+			<image class="img" src="{{item}}" width="690rpx" height="300rpx"/>
+		</swiper-item>
+		</block>
+	</swiper>
+
+
+	<view class="cat">
+		<view class="li" wx:for="{{cat}}" wx:if="{{index < 7}}" wx:key="item.id" data-key="{{item.id}}">
+			<image class="img" src="{{item.icon}}"/>
+			<text class="txt">{{item.name}}</text>
+		</view>
+
+		<view class="li" wx:if="{{cat.length > 7}}">
+			<image class="img" src="../../../images/ico-more.png"/>
+			<text class="txt">更多</text>
+		</view>
+	</view>
+
+	<view class="list" wx:for="{{list}}" wx:key="item.key">
+		<view class="hd">
+			<text class="tit">{{item.catName}}</text>
+			<navigator class="more" hover-class="none" open-type="redirectTo" url="/pages/a/setting/setting">更多<i class="ico ico-arrow-r"></i></navigator>
+		</view>
+
+		<div class="item" wx:for="{{item.list}}" wx:for-item="user" wx:for-index="idx" wx:key="item.key">
+			<image class="img" src="{{user.url}}"/>
+			<i class="online" wx:if="{{user.online}}">在线</i>
+			<i class="offline" wx:else>离线</i>
+
+			<view class="attr">
+				{{user.nickname}} <i class="tag tag{{user.sex}}">{{user.tag}}</i>
+			</view>
+
+			<view class="city"><i class="ico ico-map"></i>{{user.city}}</view>
+			<view class="price">
+				<i class="rmb">￥{{user.price}}</i> <i class="unit">{{user.unit}} </i>
+			</view>
+
+		</div>
+
+	</view>
+</view>
+
+<import src="../../../components/a/foot/foot.wxml"/>
+<template is="foot" data="{{curr: 1}}"/>
+
+
+

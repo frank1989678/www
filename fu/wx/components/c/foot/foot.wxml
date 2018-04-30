@@ -1,0 +1,13 @@
+<!--components/a/foot/foot.wxml-->
+<template name="foot">
+	<view class="fu-foot">
+		<view class="link curr" wx:if="{{curr === 1}}"><i class="ico ico1"></i>首页</view>
+		<navigator class="link" hover-class="none" open-type="redirectTo" wx:else url="/pages/a/setting/setting"><i class="ico ico1"></i>首页</navigator>
+
+		<view class="link curr" wx:if="{{curr === 2}}"><i class="ico ico1"></i>消息</view>
+		<navigator class="link" hover-class="none" open-type="redirectTo" wx:else url="/pages/a/setting/setting"><i class="ico ico1"></i>消息</navigator>
+
+		<view class="link curr" wx:if="{{curr === 3}}"><i class="ico ico1"></i>我的</view>
+		<navigator class="link" hover-class="none" open-type="redirectTo" wx:else url="/pages/a/setting/setting"><i class="ico ico1"></i>我的</navigator>
+	</view>
+</template>

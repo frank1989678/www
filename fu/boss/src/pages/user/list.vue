@@ -2,7 +2,7 @@
     <section>
         <!--工具条-->
         <el-col :span="24" class="toolbar">
-            <el-form :inline="true" :model="filters" size="small">
+            <el-form :inline="true" :model="filters" size="mini">
                 <el-form-item label="用户ID">
                     <el-input v-model="filters.name" placeholder="用户ID"></el-input>
                 </el-form-item>
@@ -47,8 +47,8 @@
         </el-col>
 
         <!--新增界面-->
-        <el-dialog :title="dialogTitle" :visible.sync="addFormVisible" :close-on-click-modal="false" width="30%">
-            <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="80px">
+        <el-dialog :title="dialogTitle" :visible.sync="addFormVisible" :close-on-click-modal="false" class="fu-dialog" width="520px">
+            <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="70px" size="mini">
                 <el-form-item label="手机号" prop="mobile">
                     <el-input v-model="addFormData.mobile" auto-complete="off"></el-input>
                 </el-form-item>
@@ -75,11 +75,12 @@
                 <el-form-item label="市" prop="country">
                     <el-input v-model="addFormData.country" auto-complete="off"></el-input>
                 </el-form-item>
+
+                <div class="tr">
+                    <el-button size="mini" @click.native="addFormVisible = false">取消</el-button>
+                    <el-button size="mini" type="primary" @click.native="onFormSubmit" :loading="addFormLoading">提交</el-button>
+                </div>
             </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click.native="addFormVisible = false">取消</el-button>
-                <el-button type="primary" @click.native="onFormSubmit" :loading="addFormLoading">提交</el-button>
-            </div>
         </el-dialog>
     </section>
 </template>
@@ -237,6 +238,11 @@ export default {
             }).catch(err => {
                 console.log(err)
             })
+        },
+        // 页码
+        onChangePage(val) {
+            this.pageNum = val;
+            this.onGetAdminList();
         }
     },
     mounted() {

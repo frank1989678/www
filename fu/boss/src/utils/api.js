@@ -1,5 +1,5 @@
 import router from '@/router';
-export const baseURL = 'http://10.0.3.31:8080';
+export const baseURL = process.env.BASE_API;
 
 export function fetch(url, params) {
     return new Promise((resolve, reject) => {

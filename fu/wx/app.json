@@ -1,5 +1,12 @@
 {
   "pages": [
+    "pages/c/msg/msg",
+    "pages/c/detail/detail",
+    "pages/c/order/order",
+    "pages/c/list/list",
+    "pages/c/index/index",
+    "pages/login/login",
+    "pages/c/center/center",
     "pages/menu/menu",
     "pages/a/submit/submit",
     "pages/a/detail/detail",
@@ -9,8 +16,7 @@
     "pages/a/setting/setting",
     "pages/a/order/order",
     "pages/a/addGame/addGame",
-    "pages/a/his/his",
-    "pages/login/login"
+    "pages/a/his/his"
   ],
   "window": {
     "backgroundTextStyle": "light",
