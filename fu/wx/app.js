@@ -19,11 +19,11 @@ App({
 				userInfo.rawData = res.rawData;
 				userInfo.signature = res.signature;
 				wx.setStorageSync('user', userInfo);
+				wx.setStorageSync('myUsername', userInfo.nickName);
 
 				if (code) {
 					// 发送 code 到后台换取 openId, sessionKey, unionId
 					_lib.ajax('/login', {code: code}, function(res) {
-						res = res.data;
 						try {
 							wx.setStorageSync('token', res.data.token);
 						} catch(err) {} 
@@ -67,15 +67,13 @@ App({
 			fail: err => {
 				// session_key 已经失效，需要重新执行登录流程
 				console.error('session_key 未过期');
-				this.login();
+				// this.login();
 			}
 		})
 	},
 
 	login: function() {
 		var that = this;
-		// 太过频繁的登录会导致code无法被后台使用（微信的安全机制）
-		// 用户登录凭证（有效期五分钟）。开发者需要在开发者服务器后台调用 api，使用 code 换取 openid 和 session_key 等信息
 		wx.login({
 			success: function(res) {
 				// 先获取用户信息
@@ -86,12 +84,13 @@ App({
 	// 不使用小程序的session验证机制 
 	checkLogin: function() {
 
-		// 自定义验证机制，如果后端返回的接口提示需要登录就会清除（代码在lib.js的ajax：fail方法里面）
+		// 自定义验证机制，如果后端返回的接口提示需要登录就会清除（代码在lib.js的ajax：complete方法里面）
 		if (!wx.getStorageSync('isLogin')) {
-			// this.login();
+			_lib.login();
 		}
 	},
 	onLaunch: function() {
-		this.checkLogin()
+		_lib.login();
+		// this.checkLogin()
 	}
 })

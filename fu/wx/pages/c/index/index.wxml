@@ -15,10 +15,10 @@
 			<text class="txt">{{item.name}}</text>
 		</view>
 
-		<view class="li" wx:if="{{cat.length > 7}}">
+		<navigator class="li" hover-class="none" open-type="redirectTo" url="/pages/a/cat/cat" wx:if="{{cat.length > 7}}">
 			<image class="img" src="../../../images/ico-more.png"/>
 			<text class="txt">更多</text>
-		</view>
+		</navigator>
 	</view>
 
 	<view class="list" wx:for="{{list}}" wx:key="item.key">

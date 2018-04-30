@@ -1,12 +1,21 @@
 <view class="wrap">
 	<view class="list">
 		<view class="li" wx:for="{{ list }}" wx:key="{{item.key}}">
-			<image class="img" src="{{ item.avatar }}"></image>
-			<i class="num" wx:if="{{item.unread}}">{{item.unread}}</i>
+			<view class="avatar" data-path="/pages/c/card/card?id={{item.key}}" bindtap="goPage">
+				<image class="img" src="{{ item.avatar }}"></image>
+				<i class="num" wx:if="{{item.unread}}">{{item.unread}}</i>
+			</view>
 			
-			<text class="name"> {{ item.name }} </text>
-			<i class="tag" wx:if="{{item.tag}}">{{item.tag}}</i>
-			<text class="msg">{{ item.msg }}</text>
+			<view data-path="/pages/c/im/im?id={{item.key}}&name={{item.name}}" bindtap="goPage">
+				<view class="name">
+					{{ item.name }} 
+					<i class="tag" wx:if="{{item.tag}}">{{item.tag}}</i>
+				</view>
+				<view class="msg">
+					{{ item.msg }}
+				</view>
+			</view>
+
 		</view>
 	</view>
 </view>

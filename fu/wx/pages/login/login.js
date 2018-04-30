@@ -55,13 +55,11 @@ Page({
 				lock: true
 			})
 			_lib.showMsg('验证码发送中...');
-			_lib.ajax('/api/v1/user/mobile/sms', {mobile: mobile}, function(res) {
-				res = res.data;
-				if (res.data.status === 200) {
-					_lib.showMsg('验证码发送成功 :)');
+			_lib.ajax(_api.SMS, {mobile: mobile}, function(res) {
+				_lib.showMsg(res.msg);
+				if (res.status === 200) {
 					that.lockSMS(60);
 				} else {
-					_lib.showMsg('验证码发送失败 :(');
 					that.setData({
 						lock: false
 					})
@@ -105,19 +103,31 @@ Page({
 		} else if (this.data.code == '') {
 			_lib.showMsg('请输入验证码');
 		} else {
-			let para = wx.getStorageSync('user') || {};
-			para.mobile = this.data.mobile;
-			para.verifyCode = this.data.code;
+			let user = wx.getStorageSync('user') || {};
+			user.mobile = this.data.mobile;
+			user.verifyCode = this.data.code;
+			// let para = {
+			// 	// nickname: user.nickName,
+			// 	nickName: user.nickName,
+			// 	// headUrl: user.avatarUrl,
+			// 	avatarUrl: user.avatarUrl,
+			// 	gender: user.gender,
+			// 	language: user.language,
+			// 	city: user.city,
+			// 	province: user.province,
+			// 	country: user.country,
+			// 	mobile: this.data.mobile,
+			// 	verifyCode: this.data.code
+			// }
 
-			_lib.ajax(_api.LOGIN, para, function(res) {
-				console.log(res)
-				_lib.showMsg(res.data.msg);
+			_lib.ajax(_api.LOGIN, user, function(res) {
+				_lib.showMsg(res.msg);
 				// 判断是调到c端还是b端用户界面
-				if (res.data.status === 200) {
+				if (res.status === 200) {
 					wx.reLaunch({
 						url: '/pages/setting/setting'
 					})
-					console.log('注册成功')
+					// console.log('注册成功')
 				}
 			})
 		}

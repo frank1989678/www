@@ -5,7 +5,7 @@
 		<view class="item hd">提现金额</view>
 		<view class="item">
 			<i class="s">￥</i>
-			<input type="digit" class="ipt" placeholder="请输入提现金额" id="money" bindblur="changeInput" />
+			<input type="digit" class="ipt" value="{{money}}" placeholder="请输入提现金额" id="money" bindblur="changeInput" />
 		</view>
 		<view class="item ft">
 			余额{{surplus}}元

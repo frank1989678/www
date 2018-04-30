@@ -38,6 +38,75 @@ function getToken() {
 	return token;
 }
 
+function postLogin(code) {
+	ajax('/login', {code: code}, function(res) {
+		wx.setStorageSync('token', res.data.token || '');
+
+		if (res.status === 200) {
+			wx.setStorageSync('isLogin', 'true');
+
+		} else if (res.status === 201) {
+			// 新用户，注册并并附带发送 userInfo信息给后台创建新用户
+			wx.redirectTo({
+				url: '/pages/login/login'
+			})
+			wx.setStorageSync('custom', true);
+		} else {
+			wx.setStorageSync('isLogin', 'true');
+			// console.log('登录异常，可能是code使用频繁导致');
+		}
+	})
+}
+
+function getUserInfo(code) {
+	wx.getUserInfo({
+		withCredentials: true,
+		success: res => {
+			let userInfo = res.userInfo;
+			userInfo.encryptedData = res.encryptedData;
+			userInfo.iv = res.iv;
+			userInfo.signature = res.signature;
+			wx.setStorageSync('user', userInfo);
+			wx.setStorageSync('myUsername', userInfo.nickName);	
+			postLogin(code);
+		},
+		fail: err => {
+			wx.showModal({
+				title: '警告',
+				content: '您点击了拒绝授权，将无法正常使用******的功能体验。请10分钟后再次点击授权，或者删除小程序重新进入。'
+			}) 
+		}
+	})
+}
+
+function goRegister() {
+	// 新用户，注册并并附带发送 userInfo信息给后台创建新用户
+	wx.redirectTo({
+		url: '/pages/login/login'
+	})
+}
+
+function login() {
+	const custom = wx.getStorageSync('custom');
+	const isLogin = wx.getStorageSync('isLogin');
+	console.log(custom, isLogin)
+	return;
+	// custom在上线时要删掉，暂时因绑定接口不通，code请求太频繁而加到判断条件
+	if (custom) {
+		wx.redirectTo({
+			url: '/pages/login/login'
+		})
+	} else if (isLogin) {
+		// 已登录
+	} else {
+		wx.login({
+			success: function(res) {
+				res.code && getUserInfo(res.code);
+			}
+		})
+	}
+}
+
 
 function ajax(url, params, doSuccess, doFail, doComplete) {
 	var token = getToken();
@@ -52,25 +121,24 @@ function ajax(url, params, doSuccess, doFail, doComplete) {
 		dataType: 'json',
 		method: 'POST',
 		success: function(res) {
-			console.log(typeof doSuccess)
 			if (typeof doSuccess === 'function') {
-				doSuccess(res);
+				doSuccess(res.data);
 			}
 		},
 		fail: function(err) {
 			if (typeof doFail === 'function') {
 				doFail();
-			} else {
-				showMsg(err.msg)
-			}
-			// 未登录提示
-			if (err.code === 500) {
-				wx.removeStorageSync('isLogin')
 			}
 		},
-		complete: function(com) {
+		complete: function(res) {
 			if (typeof doComplete === 'function') {
 				doComplete();
+			}
+			// 未登录提示
+			if (res.data.status == 501) {
+				wx.removeStorageSync('isLogin');
+				wx.removeStorageSync('custom');
+				login();
 			}
 			wx.hideLoading();
 		}
@@ -81,6 +149,7 @@ module.exports = {
 	trim: trim,
 	baseUrl: baseUrl,
 	ajax: ajax,
+	login: login,
 	showMsg: showMsg,
 	getToken: getToken,
 	formatTime: formatTime

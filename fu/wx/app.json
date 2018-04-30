@@ -1,13 +1,24 @@
 {
   "pages": [
+    "pages/c/card/card",
+    "pages/menu/menu",
+  
+    "pages/login/login",
     "pages/c/msg/msg",
-    "pages/c/detail/detail",
+    "pages/c/im/im",
+    "pages/c/set/set",
+
+    "pages/c/appeal/appeal",
+    "pages/c/submit/submit",
+    "pages/c/score/score",
+    "pages/c/cat/cat",
+    "pages/c/detail2/detail2",
     "pages/c/order/order",
+    "pages/c/detail/detail",
     "pages/c/list/list",
     "pages/c/index/index",
-    "pages/login/login",
     "pages/c/center/center",
-    "pages/menu/menu",
+
     "pages/a/submit/submit",
     "pages/a/detail/detail",
     "pages/a/suc/suc",

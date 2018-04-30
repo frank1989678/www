@@ -7,11 +7,16 @@
 	</view>
 	<view class="fu-block">
 		<view class="fu-item">
-			<navigator url="/pages/a/withdraw/withdraw" hover-class="none">
+			<navigator url="/pages/a/withdraw/withdraw" hover-class="none" wx:if="{{money>0}}">
 				<i class="ico ico-wallet"></i>
 				提现
 				<i class="ico ico-arrow-right"></i>
 			</navigator>
+			<view bindtap="tips">
+				<i class="ico ico-wallet"></i>
+				提现
+				<i class="ico ico-arrow-right"></i>
+			</view>
 		</view>
 	</view>
 </view>

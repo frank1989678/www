@@ -1,5 +1,6 @@
 // pages/a/withdraw/withdraw.js
 
+const _api = require('../../../lib/api.js');
 const _lib = require('../../../lib/lib.js');
 const _reg = require('../../../lib/reg.js');
 
@@ -19,6 +20,14 @@ Page({
     const key = e.target.id;
     this.setData({
       [key]: _lib.trim(e.detail.value)
+    })
+  },
+  // 获取零钱
+  getBalance: function() {
+    _lib.ajax(_api.BALANCE, {}, res => {
+      this.setData({
+        surplus: res.data || 0
+      })
     })
   },
 
@@ -62,7 +71,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.getBalance();
   },
 
   /**
