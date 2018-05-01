@@ -13,6 +13,9 @@ module.exports = {
 	// 游戏分类下商品列表接口
 	CATLIST: 'api/v1/category/product/list',
 
+	CENTER: '/api/v1/user/get',
+	UPDATEINFO: '/api/v1/user/update',
+
 
 	// b端==========================================================================
 	BALANCE: '/api/v1/user/balance/get'

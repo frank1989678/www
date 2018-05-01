@@ -1,0 +1,5 @@
+/* pages/c/cat/cat.wxss */
+.cat{padding:50rpx 30rpx;overflow:hidden;background-color:#fff;}
+.cat .li{float:left;width:25%;text-align:center;}
+.cat .img{width:96rpx;height:96rpx;border-radius:50%;vertical-align:top;}
+.cat .txt{font-size:24rpx;color:#666;display:block;height:60rpx;padding-top:20rpx;}

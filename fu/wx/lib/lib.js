@@ -90,7 +90,7 @@ function login() {
 	const custom = wx.getStorageSync('custom');
 	const isLogin = wx.getStorageSync('isLogin');
 	console.log(custom, isLogin)
-	return;
+	// return;
 	// custom在上线时要删掉，暂时因绑定接口不通，code请求太频繁而加到判断条件
 	if (custom) {
 		wx.redirectTo({
@@ -145,6 +145,16 @@ function ajax(url, params, doSuccess, doFail, doComplete) {
 	});
 }
 
+function getAstro(month, day) {
+	var s = "魔羯水瓶双鱼牡羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯";
+	var arr = [20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22];
+	return s.substr(month * 2 - (day < arr[month - 1] ? 2 : 0), 2);
+}
+
+function formatSex(type) {
+	return type == 1 ? '男' : type == 2 ? '女' : '未知';
+}
+
 module.exports = {
 	trim: trim,
 	baseUrl: baseUrl,
@@ -152,5 +162,7 @@ module.exports = {
 	login: login,
 	showMsg: showMsg,
 	getToken: getToken,
+	getAstro: getAstro,
+	formatSex: formatSex,
 	formatTime: formatTime
 }

@@ -1,0 +1,9 @@
+<!--pages/c/cat/cat.wxml-->
+<view class="wrap wrap-foot">
+	<view class="cat">
+		<view class="li" wx:for="{{cat}}" wx:key="item.id" data-key="{{item.id}}">
+			<image class="img" src="{{item.icon}}"/>
+			<text class="txt">{{item.name}}</text>
+		</view>
+	</view>
+</view>

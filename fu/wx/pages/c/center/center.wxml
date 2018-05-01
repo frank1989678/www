@@ -1,16 +1,16 @@
 <view class="wrap wrap-foot">
 	<view class="bg">
-		<navigator class="ico ico-setx fr" url="/pages/a/wallet/wallet" hover-class="none"></navigator>
-		<image class="img" src="{{ userInfo.avatarUrl }}"></image>
+		<navigator class="ico ico-setx fr" url="/pages/c/set/set" hover-class="none"></navigator>
+		<image class="img" src="{{ avatarUrl }}"></image>
 		<view class="user">
-			<text class="name"> {{ userInfo.nickName }} </text>
-			<i class="ico {{ userInfo.verity ? 'ico-verity' : 'ico-unverity'}}"></i>
-			<text class="mobile">{{ userInfo.mobile }}</text>
+			<text class="name"> {{ nickName }} </text>
+			<i class="ico {{ verity ? 'ico-verity' : 'ico-unverity'}}"></i>
+			<text class="mobile">{{ mobile }}</text>
 		</view>
 	</view>
 
 	<view class="fu-block">
-		<view class="fu-item" wx:if="{{userInfo.verity}}">
+		<view class="fu-item" wx:if="{{verity}}">
 			<navigator url="/pages/a/order/order" hover-class="none">
 				<i class="ico ico-v"></i>
 				前往接单

@@ -1,12 +1,13 @@
 {
   "pages": [
+    "pages/c/set/set",
+    "pages/c/center/center",
     "pages/c/card/card",
     "pages/menu/menu",
   
     "pages/login/login",
     "pages/c/msg/msg",
     "pages/c/im/im",
-    "pages/c/set/set",
 
     "pages/c/appeal/appeal",
     "pages/c/submit/submit",
@@ -17,7 +18,6 @@
     "pages/c/detail/detail",
     "pages/c/list/list",
     "pages/c/index/index",
-    "pages/c/center/center",
 
     "pages/a/submit/submit",
     "pages/a/detail/detail",
