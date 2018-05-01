@@ -5,17 +5,17 @@
   "author": "zhouxj <frank1989678@126.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js  --host 10.0.2.109",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
   "dependencies": {
     "axios": "^0.15.3",
-    "element-ui": "^1.2.8",
+    "element-ui": "^2.3.6",
     "font-awesome": "^4.7.0",
     "js-cookie": "2.2.0",
     "mockjs": "^1.0.1-beta3",
-    "node-sass": "^4.5.0",
+    "node-sass": "^4.9.0",
     "nprogress": "^0.2.0",
     "sass-loader": "^6.0.2",
     "vue": "^2.5.2",
