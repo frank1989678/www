@@ -9,7 +9,7 @@
 .cat .img{width:96rpx;height:96rpx;border-radius:50%;}
 .cat .txt{font-size:24rpx;color:#666;display:block;height:58rpx;}
 
-.list{margin-top:20rpx;padding:10rpx 20rpx;background-color:#fff;}
+.list{margin-top:20rpx;padding:10rpx 20rpx;background-color:#fff;overflow:hidden;}
 .list .hd{position:relative;line-height:90rpx;padding:0 10rpx 0 34rpx;overflow:hidden;}
 .list .hd:before{content:'';position:absolute;top:30rpx;left:10rpx;width:4rpx;height:30rpx;background-color:#e8645f;}
 .list .hd .ico{}
@@ -19,9 +19,11 @@
 
 .list .item{position:relative;float:left;width:335rpx;padding:10rpx;}
 .list .item .img{width:335rpx;height:335rpx;border-radius:10rpx;}
-.list .item .attr{color:#222;margin:10rpx 0;}
+.list .item .attr{color:#222;margin:10rpx 0;white-space:nowrap;overflow:hidden;height:40rpx;}
+.list .item .attr .tag:first-child{margin-left:20rpx;}
+.list .item .attr .tag{margin-right:10rpx;}
 .list .item .price{}
-.list .item .unit{font-size:22rpx;color:#aaa;}
+.list .item .unit{font-size:22rpx;color:#aaa;margin-left:10rpx;}
 .list .item .tag{border-radius:8rpx;padding:4rpx 16rpx;color:#fff;font-size:20rpx;}
 .list .item .online,
 .list .item .offline{position:absolute;top:20rpx;right:10rpx;}
@@ -35,6 +37,7 @@
 .list .button{padding:0 30rpx 50rpx;overflow:hidden;text-align:right;}
 .list .button .btn{display:inline-block;width:200rpx;height:70rpx;line-height:70rpx;vertical-align:top;margin:0;margin-right:45rpx;}
 .list .button .red{margin-right:0;}
+.list .page{clear:both;padding:30rpx 0;text-align:center;color:#f53f38;}
 
 .nomore{margin-top:-20rpx;}
 

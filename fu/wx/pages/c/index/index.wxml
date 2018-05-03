@@ -20,33 +20,33 @@
 			<text class="txt">更多</text>
 		</navigator>
 	</view>
-
+	
 	<view class="list" wx:for="{{list}}" wx:key="item.key">
 		<view class="hd">
 			<text class="tit">{{item.catName}}</text>
-			<navigator class="more" hover-class="none" open-type="redirectTo" url="/pages/a/setting/setting">更多<i class="ico ico-arrow-r"></i></navigator>
+			<navigator class="more" hover-class="none" open-type="redirectTo" url="/pages/a/list/list?id={{item.id}}&name={{item.catName}}">更多<i class="ico ico-arrow-r"></i></navigator>
 		</view>
 
-		<div class="item" wx:for="{{item.list}}" wx:for-item="user" wx:for-index="idx" wx:key="item.key">
-			<image class="img" src="{{user.url}}"/>
-			<i class="online" wx:if="{{user.online}}">在线</i>
+		<navigator class="item" wx:for="{{item.list}}" wx:for-item="user" wx:for-index="idx" wx:key="item.key" hover-class="none" url="/pages/c/detail/detail?id={{item.user.id}}">
+			<image class="img" src="{{user.mainPhoto}}"/>
+			<i class="online" wx:if="{{user.onLine }}">在线</i>
 			<i class="offline" wx:else>离线</i>
 
 			<view class="attr">
-				{{user.nickname}} <i class="tag tag{{user.sex}}">{{user.tag}}</i>
+				{{user.nickName}} <i class="tag tag{{tagId}}" wx:if="{{tagId < 2}}" wx:for="{{user.personTags}}" wx:for-item="tagName" wx:for-index="tagId" wx:key="tagId">{{tagName}}</i>
 			</view>
 
-			<view class="city"><i class="ico ico-map"></i>{{user.city}}</view>
+			<view class="city" wx:if="{{user.city}}"><i class="ico ico-map"></i>{{user.city}}</view>
 			<view class="price">
-				<i class="rmb">￥{{user.price}}</i> <i class="unit">{{user.unit}} </i>
+				<i class="rmb">￥{{user.price}}</i> <i class="unit">/{{user.unit}} </i>
 			</view>
+		</navigator>
 
-		</div>
-
+		<view class="page" wx:if="{{item.nomore}}" bindtap="getMore" data-id="{{index}}">查看更多<i class="ico ico-arrow-right2"></i></view>
 	</view>
 </view>
 
-<import src="../../../components/a/foot/foot.wxml"/>
+<import src="../../../components/c/foot/foot.wxml"/>
 <template is="foot" data="{{curr: 1}}"/>
 
 

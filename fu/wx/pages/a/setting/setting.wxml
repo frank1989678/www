@@ -32,36 +32,34 @@
 		<view> 您还没有接单方式，快去添加吧！ </view>	
 	</view>
 	<view class="list" wx:else>
-		<view class="li" wx:for="{{ list }}" wx:key="{{item.key}}">
+		<view class="li" wx:for="{{ list }}" wx:key="{{item.id}}">
 			<view class="hd">
-				<image class="img" src="{{ item.icon }}"></image>
-				<text> {{ item.name }} </text>
-				<i class="ico ico-checked" data-val="{{item.key}}" bindtap="chooseGame" wx:if="{{item.checked}}"></i>
-				<i class="ico ico-check" data-val="{{item.key}}" bindtap="chooseGame" wx:else></i>
-				<!-- <radio class="cbx" value="{{item.key}}" checked="{{item.checked}}"/> -->
+				<image class="img" src="{{ item.categoryIcon }}"></image>
+				<text> {{ item.productName }} </text>
+				<i class="ico ico-check{{item.status?'ed':''}}" data-status="{{item.status}}" data-id="{{item.id}}" bindtap="activeGame"></i>
 			</view>
 			
 			<view class="bd">
 				<text class="for"> 价格 </text>	
 				<text> {{ item.price }} </text>	
 				<i class="ico ico-arrow-right"></i>
-				<i class="btn" bindtap="setPrice"></i>
+				<i class="btn" bindtap="setPrice" data-id="{{item}}"></i>
 			</view>
 			
 			<view class="bd">
 				<text class="for"> 单位 </text>	
 				<text> {{ item.unit }} </text>
 				<i class="ico ico-arrow-right"></i>
-				<i class="btn" bindtap="setUnit"></i>
+				<i class="btn" bindtap="setUnit" data-id="{{item}}"></i>
 			</view>
 		</view>
 
 
 		<view class="button" wx:if="{{ isOpen === false }}">
-			<button class="btn danger" bindtap="openStatus">开始接单</button>
+			<button plain="true" class="btn danger" bindtap="openStatus">开始接单</button>
 		</view>
 		<view class="button" wx:else>
-			<button class="btn gray" bindtap="closeStatus">停止接单</button>
+			<button plain="true" class="btn gray" bindtap="closeStatus">停止接单</button>
 			<text class="tips">（自动接单倒计时： {{ time }} ）</text>
 		</view>
 
@@ -71,7 +69,7 @@
 
 <modal hidden="{{hidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="savePrice" bindcancel="setPrice">
 	<div class="main">
-    	<input name="code" class="ipt" type="number" placeholder-style="placeholder" placeholder="请输入价格..." bindblur="priceInput" />
+    	<input class="ipt" type="number" placeholder-style="placeholder" placeholder="请输入价格..." bindblur="priceInput" value="{{val}}" />
 	</div>
 </modal>
 

@@ -1,11 +1,10 @@
 /* pages/a/suc/suc.wxss */
 .wrap{background-color:#f5f5f5;}
 
-.result{padding:50rpx 0;text-align:center;background-color:#fff;}
+.result{padding:50rpx 0;margin-bottom:40rpx;text-align:center;background-color:#fff;}
 .result .hd{padding:40rpx 0 30rpx;}
 .result .bd{font-size:50rpx;}
 .result .bd i{font-size:30rpx;}
-
-.fu-info{margin:0 0 40rpx;}
+.result .tips{padding:40rpx 30rpx 0;color:#9b9594;line-height:40rpx;}
 
 .btn{background-color:#fff;line-height:100rpx;text-align:center;font-size:32rpx;color:#e8645f;}

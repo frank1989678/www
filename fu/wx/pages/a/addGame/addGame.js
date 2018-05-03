@@ -1,52 +1,20 @@
 // pages/a/addGame/addGame.js
+const _api = require('../../../lib/api.js');
 const _lib = require('../../../lib/lib.js');
 Page({
 	data: {
 		name: '',
 		price: '',
 		unit: '',
+		unitId: '',
+		unitList: [],
 
 		price1: '',
-		openId: '',
+		techAuthId: '',
 		hidden: true,
 		more: false, // 显示更多
 
-		list: [{
-			'name': '绝地求生',
-			'key': '1',
-			'checked': false,
-			'icon': 'http://localhost/wallpaper/avatar/01.png',
-			'price': 14,
-			'unit': '元'
-		}, {
-			'name': '王者荣耀',
-			'key': '2',
-			'checked': false,
-			'icon': 'http://localhost/wallpaper/avatar/02.png',
-			'price': 14,
-			'unit': '小时'
-		}, {
-			'name': '刺激战场',
-			'key': '3',
-			'checked': false,
-			'icon': 'http://localhost/wallpaper/avatar/02.png',
-			'price': 14,
-			'unit': '小时'
-		}, {
-			'name': '英雄联盟',
-			'key': '4',
-			'checked': false,
-			'icon': 'http://localhost/wallpaper/avatar/02.png',
-			'price': 14,
-			'unit': '小时'
-		}, {
-			'name': '穿越火线',
-			'key': '5',
-			'checked': false,
-			'icon': 'http://localhost/wallpaper/avatar/02.png',
-			'price': 14,
-			'unit': '小时'
-		}],
+		list: []
 	},
 
 	// 显示更多
@@ -60,12 +28,14 @@ Page({
 	chooseGame: function(e) {
 		const key = e.target.dataset.key;
 		const list = this.data.list;
+		let cid = '';
 		let name = '';
 		let i = 0;
 		let count = list.length;
 		for (; i < count; i++) {
-			if (list[i].key === key) {
-				name = list[i].name;
+			if (list[i].id === key) {
+				name = list[i].categoryName;
+				cid = list[i].categoryId;
 				list[i].checked = true;
 			} else {
 				list[i].checked = false;
@@ -74,8 +44,45 @@ Page({
 		this.setData({
 			name: name,
 			list: list,
-			openId: key
+			techAuthId: key
 		})
+		this.getUnit(cid);
+	},
+
+	getUnit: function(id) {
+		const that = this;
+		_lib.ajax(_api.b.getSalesmode, {categoryId: id}, function(res) {
+			if (res.status === 200) {
+				that.setData({
+					unitList: res.data
+				})
+			}
+		})
+	},
+	// 选择单位
+	setUnit: function() {
+		const that = this;
+		const list = this.data.unitList;
+		const name = [];
+		const id = [];
+		for (let i in list) {
+			name.push(list[i].name);
+			id.push(list[i].id);
+		}
+		if (list.length === 0) {
+			_lib.showMsg('请先选择游戏');
+		} else {
+			wx.showActionSheet({
+				itemList: name,
+				success: function(res) {
+					that.setData({
+						unit: name[res.tapIndex],
+						unitId: id[res.tapIndex]
+					})
+				}
+			})
+		}
+		
 	},
 
 	// 修改价格
@@ -89,7 +96,9 @@ Page({
 		let val = this.data.price1;
 		if (isNaN(val)) {
 			_lib.showMsg('只能输入数字')
-		} else {
+		}else if (val > 99) {
+			_lib.showMsg('价格不能大于99')
+		}  else {
 			this.setData({
 				price: val,
 				hidden: true
@@ -103,47 +112,44 @@ Page({
 			price1: val
 		})
 	},
-	// 选择单位
-	setUnit: function() {
-		const that = this;
-		const unit = ['30分钟', '1小时', '2小时']
-		wx.showActionSheet({
-			itemList: unit,
-			success: function(res) {
-				that.setData({
-					unit: unit[res.tapIndex]
-				})
-			}
-		})
-	},
 
 	// 保存
 	submitForm: function() {
 		const para = {
-			openId: this.data.openId,
+			techAuthId: this.data.techAuthId,
 			price: this.data.price,
-			unit: this.data.unit
+			unitId: this.data.unitId
 		}
-		if (para.openId === '') {
+		if (para.techAuthId === '') {
 			_lib.showMsg('请选择游戏');
 		} else if (para.price === '') {
 			_lib.showMsg('请输入价格');
 		} else if (para.unit === '') {
 			_lib.showMsg('请选择单位');
 		} else {
-			_lib.ajax('', para, function(res) {
-				if (res.status == 200 || 22 > 3) {
-					wx.reLaunch({
-						url: '/pages/a/setting/setting'
-					})
+			_lib.ajax(_api.b.addProduct, para, function(res) {
+				if (res.status == 200) {
+					_lib.goback();
+				} else {
+					_lib.showMsg(res.msg);
 				}
 			});
 		}
+	},
+	getList: function() {
+		const that = this;
+		_lib.ajax(_api.b.getProduct, {}, function(res) {
+			if (res.status === 200) {
+				that.setData({
+					list: res.data
+				})
+			}
+		})
 	},
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
-
+		this.getList();
 	}
 })

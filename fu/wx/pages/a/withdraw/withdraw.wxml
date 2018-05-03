@@ -1,7 +1,7 @@
 <!--pages/a/withdraw/withdraw.wxml-->
 <view class="wrap">
 	<view class="form">
-		<view class="item tips">提现金额至少100元；提现手续费1%；1-3个工作日到账</view>
+		<view class="item tips">提现金额至少{{minMoney}}元；提现手续费1%；1-3个工作日到账</view>
 		<view class="item hd">提现金额</view>
 		<view class="item">
 			<i class="s">￥</i>
@@ -31,8 +31,8 @@
 
 
 	<view class="button">
-		<button form-type="submit" class="btn danger" bindtap="submitForm">确定</button>
-		<button class="btn gray" bindtap="goback">取消</button>
+		<button plain="true" form-type="submit" class="btn danger" bindtap="submitForm">确定</button>
+		<button plain="true" class="btn gray" bindtap="goback">取消</button>
 	</view>
 		
 </view>

@@ -106,26 +106,24 @@ Page({
 			let user = wx.getStorageSync('user') || {};
 			user.mobile = this.data.mobile;
 			user.verifyCode = this.data.code;
-			// let para = {
-			// 	// nickname: user.nickName,
-			// 	nickName: user.nickName,
-			// 	// headUrl: user.avatarUrl,
-			// 	avatarUrl: user.avatarUrl,
-			// 	gender: user.gender,
-			// 	language: user.language,
-			// 	city: user.city,
-			// 	province: user.province,
-			// 	country: user.country,
-			// 	mobile: this.data.mobile,
-			// 	verifyCode: this.data.code
-			// }
+			let para = {
+				nickName: user.nickName,
+				avatarUrl: user.avatarUrl,
+				gender: user.gender,
+				language: user.language,
+				city: user.city,
+				province: user.province,
+				country: user.country,
+				mobile: this.data.mobile,
+				verifyCode: this.data.code
+			}
 
 			_lib.ajax(_api.LOGIN, user, function(res) {
 				_lib.showMsg(res.msg);
 				// 判断是调到c端还是b端用户界面
 				if (res.status === 200) {
 					wx.reLaunch({
-						url: '/pages/setting/setting'
+						url: '/pages/c/center/center'
 					})
 					// console.log('注册成功')
 				}

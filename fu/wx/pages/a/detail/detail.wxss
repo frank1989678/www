@@ -6,5 +6,5 @@
 
 .foot{position:fixed;left:0;right:0;bottom:0;height:100rpx;display:flex;text-align:center;}
 .foot .btn{width:29%;line-height:100rpx;color:#aaa;font-size:32rpx;}
-.foot .btn1{border-right:1px solid #e2e2e2;}
+.foot .btn1{border-right:1px solid #e6e6e6;}
 .foot .primary{width:42%;background-color:#e8645f;color:#fff;}

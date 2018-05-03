@@ -16,7 +16,7 @@
 
 .list{padding:1rpx;}
 .list .li{margin:20rpx 30rpx;padding:0 30rpx;background-color:#fff;border-radius:10rpx;}
-.list .hd{position:relative;padding:20rpx 0;border-bottom:1rpx solid #e2e2e2;}
+.list .hd{position:relative;padding:20rpx 0;border-bottom:1rpx solid #e6e6e6;}
 .list .hd .img{width:90rpx;height:90rpx;border-radius:50%;vertical-align:middle;margin-right:30rpx;}
 .list .hd .ico{position:absolute;top:40rpx;right:0;}
 .list .bd{position:relative;line-height:88rpx;text-align:right;padding-right:40rpx;}
@@ -24,6 +24,7 @@
 .list .bd .ico{position:absolute;top:22rpx;right:-10rpx;}
 .list .bd .btn{position:absolute;top:33rpx;bottom:33rpx;right:-10rpx;width:100rpx;}
 
+.main .ipt{text-align:center;border-bottom:1px solid #e6e6e6;height:110rpx;}
 
 .button .tips{color:#e8645f;display:block;padding-top:10rpx;font-size:20rpx;}
 

@@ -54,10 +54,88 @@ Page({
 			'msg': '小医仙会撒娇承包服务贴心，全能为，可凶可怂你...',
 			'avatar': 'http://localhost/wallpaper/avatar/07.png',
 			'unread': 2
-		}]
-	},
-	getUser: function() {
+		}],
 
+		userInfo: {
+			avatarUrl: '',
+			nickName: '',
+			score: '',
+			star: '',
+			age: '',
+			sex: '2',
+			tag: ''
+		},
+		price: 72.33,
+		unit: '小时',
+		gameList: [
+      		{'key': 1, 'name': '绝地求生'},
+      		{'key': 2, 'name': '王者荣耀'}
+      	],
+      	total: '2155',
+      	score: 4.9,
+		src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E061FF02C31F716658E5C81F5594D561F2E88B854E81CAAB7806D5E4F103E55D33C16F3FAC506D1AB172DE8600B37E43FAD&fromtag=46',
+	},
+
+	listenBgVoice: function() {
+		const that = this;
+		wx.onBackgroundAudioPlay(function() {
+			that.setData({
+				playing: true
+			})
+		})
+		wx.onBackgroundAudioPause(function() {
+			that.setData({
+				playing: false
+			})
+		})
+		wx.onBackgroundAudioStop(function() {
+			that.setData({
+				playing: false
+			})
+		})
+	},
+
+	getDuration: function(src, call) {
+		const audio = wx.createInnerAudioContext('myAudio');
+		audio.src = src;
+		const timer = setInterval(function() {
+			const duration = audio.duration;
+			if (duration > 0) {
+				clearInterval(timer);
+				call(duration)
+			}
+		}, 1e3)
+	},
+
+	playSound: function(e) {
+		const that = this;
+		const filePath = e.currentTarget.dataset.url;
+		if (filePath) {
+			if (this.data.playing) {
+				wx.stopBackgroundAudio();
+			} else {
+				wx.playBackgroundAudio({
+					dataUrl: filePath
+				})
+			}
+		}
+	},
+	// 读取本地存储的用户信息
+	getUserInfo: function() {
+		const userInfo = wx.getStorageSync('user');
+		this.setData({
+			userInfo: {
+				avatarUrl: userInfo.avatarUrl,
+				nickName: userInfo.nickName,
+				score: '5.0',
+				star: 5,
+				age: '22',
+				sex: '1',
+				tag: '♂ 22',
+				city: '武汉市',
+				time: '一天前'
+			}
+		})
 	},
 	/**
 	 * 生命周期函数--监听页面加载
@@ -81,17 +159,23 @@ Page({
 			inputMessage: '',
 			chatMsg: wx.getStorageSync(name + myName) || []
 		})
+
+		// 设置标题
 		wx.setNavigationBarTitle({
 			title: name
 		})
 
-        var options = {
-            apiUrl: WebIM.config.apiURL,
-            user: 'frank',
-            pwd: '1989',
-            appKey: '1183180421228734#game-play'
-        }
-		WebIM.conn.open(options)
+		var options = {
+			apiUrl: WebIM.config.apiURL,
+			user: 'frank',
+			pwd: '1989',
+			appKey: '1183180421228734#game-play'
+		}
+		WebIM.conn.open(options);
+
+
+		this.listenBgVoice();
+		this.getUserInfo();
 	},
 
 	onShow: function() {
@@ -163,7 +247,7 @@ Page({
 			},
 			success: function(res) {
 				console.log('success')
-				// 取消录音发放状态 -> 退出不发送
+					// 取消录音发放状态 -> 退出不发送
 				if (self.data.recordStatus == RecordStatus.RELEASE) {
 					console.log('user canceled')
 					return
@@ -184,7 +268,7 @@ Page({
 	},
 	handleRecordingCancel: function() {
 		console.log('handleRecordingCancel')
-		// 向上滑动状态停止：取消录音发放
+			// 向上滑动状态停止：取消录音发放
 		if (this.data.recordStatus == RecordStatus.SWIPE) {
 			this.setData({
 				recordStatus: RecordStatus.RELEASE
@@ -279,7 +363,7 @@ Page({
 				}
 				msg.set(option)
 				WebIM.conn.send(msg.body)
-				// 本地消息展示
+					// 本地消息展示
 				var time = WebIM.time()
 				var msgData = {
 					info: {
@@ -298,7 +382,7 @@ Page({
 				}
 				that.data.chatMsg.push(msgData)
 				console.log(that.data.chatMsg)
-				// 存储到本地消息
+					// 存储到本地消息
 				var myName = wx.getStorageSync('myUsername')
 				wx.setStorage({
 					key: that.data.yourname + myName,
@@ -356,7 +440,7 @@ Page({
 				mid: msg.id
 			}
 			that.data.chatMsg.push(msgData)
-			// console.log(that.data.chatMsg)
+				// console.log(that.data.chatMsg)
 
 			wx.setStorage({
 				key: that.data.yourname + myName,
@@ -591,28 +675,28 @@ Page({
 	receiveImage: function(msg, type) {
 		var that = this
 		var myName = wx.getStorageSync('myUsername')
-		//console.log(msg)
+			//console.log(msg)
 		if (msg) {
 			//console.log(msg)
 			var time = WebIM.time()
 			var msgData = {
-				info: {
-					from: msg.from,
-					to: msg.to
-				},
-				username: msg.from,
-				yourname: msg.from,
-				msg: {
-					type: 'img',
-					data: msg.url
-				},
-				style: '',
-				time: time,
-				mid: 'img' + msg.id
-			}
-			//console.log(msgData)
+					info: {
+						from: msg.from,
+						to: msg.to
+					},
+					username: msg.from,
+					yourname: msg.from,
+					msg: {
+						type: 'img',
+						data: msg.url
+					},
+					style: '',
+					time: time,
+					mid: 'img' + msg.id
+				}
+				//console.log(msgData)
 			that.data.chatMsg.push(msgData)
-			//console.log(that.data.chatMsg)
+				//console.log(that.data.chatMsg)
 			wx.setStorage({
 				key: that.data.yourname + myName,
 				data: that.data.chatMsg,
@@ -634,28 +718,28 @@ Page({
 	receiveVideo: function(msg, type) {
 		var that = this
 		var myName = wx.getStorageSync('myUsername')
-		//console.log(msg)
+			//console.log(msg)
 		if (msg) {
 			//console.log(msg)
 			var time = WebIM.time()
 			var msgData = {
-				info: {
-					from: msg.from,
-					to: msg.to
-				},
-				username: msg.from,
-				yourname: msg.from,
-				msg: {
-					type: 'video',
-					data: msg.url
-				},
-				style: '',
-				time: time,
-				mid: 'video' + msg.id
-			}
-			//console.log(msgData)
+					info: {
+						from: msg.from,
+						to: msg.to
+					},
+					username: msg.from,
+					yourname: msg.from,
+					msg: {
+						type: 'video',
+						data: msg.url
+					},
+					style: '',
+					time: time,
+					mid: 'video' + msg.id
+				}
+				//console.log(msgData)
 			that.data.chatMsg.push(msgData)
-			//console.log(that.data.chatMsg)
+				//console.log(that.data.chatMsg)
 			wx.setStorage({
 				key: that.data.yourname + myName,
 				data: that.data.chatMsg,
@@ -710,7 +794,7 @@ Page({
 	upLoadImage: function(res, that) {
 		//console.log(res)
 		var tempFilePaths = res.tempFilePaths
-		//console.log(tempFilePaths)
+			//console.log(tempFilePaths)
 		wx.getImageInfo({
 			src: res.tempFilePaths[0],
 			success: function(res) {
@@ -739,20 +823,20 @@ Page({
 						success: function(res) {
 							var data = res.data
 							var dataObj = JSON.parse(data)
-							// console.log(dataObj)
+								// console.log(dataObj)
 							var id = WebIM.conn.getUniqueId(); // 生成本地消息id
 							var msg = new WebIM.message('img', id);
 							var file = {
-								type: 'img',
-								size: {
-									width: width,
-									height: height
-								},
-								'url': dataObj.uri + '/' + dataObj.entities[0].uuid,
-								'filetype': filetype,
-								'filename': tempFilePaths[0]
-							}
-							//console.log(file)
+									type: 'img',
+									size: {
+										width: width,
+										height: height
+									},
+									'url': dataObj.uri + '/' + dataObj.entities[0].uuid,
+									'filetype': filetype,
+									'filename': tempFilePaths[0]
+								}
+								//console.log(file)
 							var option = {
 								apiUrl: WebIM.config.apiURL,
 								body: file,
@@ -784,7 +868,7 @@ Page({
 									mid: msg.id
 								}
 								that.data.chatMsg.push(msgData)
-								//console.log(that.data.chatMsg)
+									//console.log(that.data.chatMsg)
 								var myName = wx.getStorageSync('myUsername')
 								wx.setStorage({
 									key: that.data.yourname + myName,

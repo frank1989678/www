@@ -1,4 +1,5 @@
 // pages/a/orderList/orderList.js
+const _api = require('../../../lib/api.js');
 const _lib = require('../../../lib/lib.js');
 Page({
 	data: {
@@ -7,78 +8,114 @@ Page({
 		income: '0',
 		price: '',
 		unit: '',
-		list: [{
-			'name': '绝地求生',
-			'key': '1',
-			'checked': false,
-			'icon': 'http://localhost/wallpaper/avatar/01.png',
-			'price': 14,
-			'unit': '元'
-		}, {
-			'name': '王者荣耀',
-			'key': '2',
-			'checked': false,
-			'icon': 'http://localhost/wallpaper/avatar/02.png',
-			'price': 14,
-			'unit': '小时'
-		}],
+		list: [],
 
-		second: 20,
+		second: 0,
 		time: '',
 
 		hidden: true,
 		openId: '',
-		isOpen: false
+		isOpen: false,
+
+		val: '',
+
+		update: {
+			unitId: '',
+			price: '',
+			techAuthId: '',
+			id: ''
+		}
 	},
 
-	// 选择游戏
-	chooseGame: function(e) {
-		if (this.data.isOpen) {
+	// 激活游戏
+	activeGame: function(e) {
+		const that = this;
+		const para = {
+			id: e.target.dataset.id,
+			status: !e.target.dataset.status
+		}
+		if (this.data.second > 0) {
 			return;
 		}
-		const key = e.target.dataset.val;
-		const list = this.data.list;
-		let i = 0;
-		let count = list.length;
-		for (; i < count; i++) {
-			list[i].checked = list[i].key === key;
-		}
-		this.setData({
-			list: list,
-			openId: key
+		_lib.ajax(_api.b.activeProduct, para, function(res) {
+			if (res.status === 200) {
+				that.getList();
+			}
 		})
 	},
 
 	// 开始接单
 	openStatus: function() {
-		if (this.data.openId) {
-			this.setData({
-				isOpen: true
-			})
+		const that = this;
+		const unit = ['半小时', '1小时', '3小时'];
+		const time = [0.5, 1, 3];
 
-		} else {
-			lib.showMsg('请选择游戏');
-		}
+		// _lib.showMsg('请选择游戏');
+
+		wx.showActionSheet({
+			itemList: unit,
+			success: function(res) {
+				const para = {
+					hour: time[res.tapIndex]
+				}
+				_lib.ajax(_api.b.start, para, function(res) {
+					if (res.status === 200) {
+						that.setData({
+							isOpen: true,
+							second: para.hour * 60 * 60
+						})
+						
+						that.cutDown();
+					}
+				})
+				
+			}
+		})
 	},
 	// 停止接单
-	clsoeStatus: function() {
-
+	closeStatus: function() {
+		const that = this;
+		_lib.ajax(_api.b.stop, {}, function(res) {
+		if (res.status === 200) {
+				clearInterval(that.timer);
+				that.setData({
+					isOpen: false,
+					second: 0
+				})
+			}
+		})
 	},
-
 	// 修改价格
 	setPrice: function(e) {
+		const item = e.target.dataset.id;
 		this.setData({
 			hidden: !this.data.hidden
 		})
+		if (typeof item === 'object') {
+			const para = {
+				unitId: '',
+				techAuthId: '',
+				price: item.price,
+				id: item.id
+			}
+			this.setData({
+				update: para
+			})
+		}
 	},
 	// 保存价格
 	savePrice: function() {
 		let val = this.data.price1;
 		if (isNaN(val)) {
-			lib.showMsg('只能输入数字')
+			_lib.showMsg('只能输入数字')
+		} else if (val > 99) {
+			_lib.showMsg('价格不能大于99')
 		} else {
+			let para = this.data.update;
+			para.price = val;
+			this.update(para);
 			this.setData({
-				price: val,
+				val: '',
 				hidden: true
 			})
 		}
@@ -90,16 +127,48 @@ Page({
 			price1: val
 		})
 	},
-	// 选择单位
-	setUnit: function() {
+	getUnit: function(item) {
 		const that = this;
-		const unit = ['30分钟', '1小时', '2小时']
-		wx.showActionSheet({
-			itemList: unit,
-			success: function(res) {
-				that.setData({
-					unit: unit[res.tapIndex]
+		_lib.ajax(_api.b.getSalesmode, {categoryId: item.id}, function(res) {
+			if (res.status === 200) {
+				const unit = res.data;
+				const name = [];
+				const id = [];
+				for (let i in unit) {
+					name.push(unit[i].name);
+					id.push(unit[i].id);
+				}
+				wx.showActionSheet({
+					itemList: name,
+					success: function(res) {
+						item.unitId = id[res.tapIndex]
+						that.update(item);						
+					}
 				})
+			}
+		})
+	},
+	// 选择单位
+	setUnit: function(e) {
+		const that = this;
+		const item = e.target.dataset.id;
+		if (this.data.second > 0 || typeof item !== 'object') {
+			return;
+		}
+		this.getUnit(item);
+	},
+
+	update: function(item) {
+		const that = this;
+		const para = {
+			unitId: item.unitId,
+			price: item.price,
+			techAuthId: item.techAuthId,
+			id: item.id
+		}
+		_lib.ajax(_api.b.updateProduct, para, function(res) {
+			if (res.status === 200) {
+				that.getList();
 			}
 		})
 	},
@@ -107,38 +176,78 @@ Page({
 	// 倒计时
 	cutDown: function() {
 		const that = this;
-		let second = this.data.second;
 		const showTime = function() {
 			var hh = Math.floor(second / 3600 % 24);
-			var mm = Math.floor(second / 60 % 24);
+			var mm = Math.floor(second / 60 % 60);
 			var ss = Math.floor(second % 60);
 			var time = hh + ' 小时 ' + mm + ' 分 ' + ss + ' 秒'
 			that.setData({
+				isOpen: true,
 				time: time
 			})
 		}
-		if (this.data.second > 0) {
-			this.setData({
-				isOpen: true
-			})
-		} else {
+
+		let second = this.data.second;
+
+		if (second > 0) {
 			showTime();
+			that.timer = setInterval(function() {
+				showTime();
+				second--;
+				if (second <= 0) {
+					clearInterval(that.timer);
+					that.setData({
+						isOpen: false
+					})
+				}
+			}, 1e3);
 		}
-		var timer = setInterval(function() {
-			second--;
-			showTime();
-			if (second <= 0) {
-				clearInterval(timer);
+	},
+	getList: function() {
+		const that = this;
+		_lib.ajax(_api.b.getActiveList, {}, function(res) {
+			that.setData({
+				list: res.data
+			})
+		})
+	},
+	// 查询倒计时
+	getSecond: function() {
+		const that = this;
+		_lib.ajax(_api.b.getSeconds, {}, function(res) {
+			if (res.status === 200 && res.data.HOUR) {
+				const t3 = res.data.HOUR * 60 * 60;
+				const t1 = res.data.START_TIME;
+				const t2 = res.data.CURRENT_TIME;
+				const t4 = Math.max(t3 - (t2 - t1) / 1e3, 0);
 				that.setData({
-					isOpen: false
+					second: t4
+				})
+				that.cutDown();
+			}
+		})
+	},
+	// 用户收入评分和单数信息接口
+	getInfo: function() {
+		const that = this;
+		_lib.ajax(_api.b.weekInfo, {}, function(res) {
+			if (res.status === 200) {
+				that.setData({
+					score: res.data.scoreAvg,
+					income: res.data.weekIncome,
+					count: res.data.weekOrderCount
 				})
 			}
-		}, 1e3);
+		})
 	},
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
-		this.cutDown();
+		this.getInfo();
+	},
+	onShow: function() {
+		this.getSecond();
+		this.getList();
 	}
 })

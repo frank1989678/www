@@ -14,10 +14,10 @@ App({
 			withCredentials: true,
 			success: res => {
 				let userInfo = res.userInfo;
-				userInfo.encryptedData = res.encryptedData;
-				userInfo.iv = res.iv;
-				userInfo.rawData = res.rawData;
-				userInfo.signature = res.signature;
+				// userInfo.encryptedData = res.encryptedData;
+				// userInfo.iv = res.iv;
+				// userInfo.rawData = res.rawData;
+				// userInfo.signature = res.signature;
 				wx.setStorageSync('user', userInfo);
 				wx.setStorageSync('myUsername', userInfo.nickName);
 
@@ -85,12 +85,15 @@ App({
 	checkLogin: function() {
 
 		// 自定义验证机制，如果后端返回的接口提示需要登录就会清除（代码在lib.js的ajax：complete方法里面）
-		if (!wx.getStorageSync('isLogin')) {
-			_lib.login();
-		}
+		// if (!wx.getStorageSync('isLogin')) {
+		// _lib.login();
+		// }
 	},
 	onLaunch: function() {
-		_lib.login();
+		setTimeout(function() {
+			wx.setStorageSync('times', 0);
+			_lib.login();
+		}, 500)
 		// this.checkLogin()
 	}
 })

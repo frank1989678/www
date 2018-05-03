@@ -8,11 +8,13 @@
 	</view>
 	<scroll-view class="list" scroll-y bindscrolltolower="loadMore">
 		<view class="tr" wx:for="{{ list }}" wx:key="{{item.key}}">
-			<view class="td td1">{{item.datetime}}</view>
-			<view class="td td2">{{item.action}}</view>
-			<view class="td td3">{{item.cost}}</view>
-			<view class="td td4">{{item.surplus}}</view>
+			<view class="td td1">{{item.createTime}}</view>
+			<view class="td td2">{{item.actionText}}</view>
+			<view class="td td3">{{item.money}}</view>
+			<view class="td td4">{{item.sum}}</view>
 		</view>
-		<view class="nomore">没有更多了...</view>
+
+		<view class="nomore" wx:if="{{nomore}}">加载中...</view>
+		<view class="nomore" wx:else>没有更多了...</view>
 	</scroll-view>
 </view>

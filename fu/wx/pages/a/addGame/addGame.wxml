@@ -1,13 +1,13 @@
 <!--pages/a/addGame/addGame.wxml-->
 <view class="wrap">
-	<form class="addform" bindsubmit="formSubmit" bindreset="formReset">
+	<form class="addform">
         <view class="row">
             <label class="for">游戏</label>
             <text class="val"> {{ name }}</text>
-            <i class="ico {{more ? 'ico-arrow-down' : 'ico-arrow-up'}}" bindtap="showMore"></i>
+            <i class="ico {{more ? 'ico-arrow-down' : 'ico-arrow-up'}}" bindtap="showMore" wx:if="{{list.length > 7}}"></i>
 			
 			<view class="list">
-				<text class="li {{item.checked ? 'curr' : '' }}"  bindtap="chooseGame" data-key="{{item.key}}"  wx:for="{{list}}" wx:key="{{item.key}}" wx:if="{{more || index < 2}}"> {{item.name}} </text>
+				<text class="li {{item.checked ? 'curr' : '' }}"  bindtap="chooseGame" data-key="{{item.id}}"  wx:for="{{list}}" wx:key="{{item.id}}" wx:if="{{more || index < 7}}"> {{item.categoryName}} </text>
 			</view>
 
         </view>

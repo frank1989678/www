@@ -3,8 +3,8 @@
 .tr{display:flex;padding-right:30rpx;font-size:24rpx;line-height:52rpx;}
 .hd{line-height:88rpx;background:#f5f5f5;}
 .td{padding-left:30rpx;-webkit-box-sizing:border-box;box-sizing:border-box;}
-.td1{width:34%;}
-.td2{width:20%;}
+.td1{width:38%;white-space:nowrap;}
+.td2{width:16%;}
 .td3{width:23%;}
 .td4{width:23%;}
 

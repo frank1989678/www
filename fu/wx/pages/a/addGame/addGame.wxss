@@ -1,6 +1,6 @@
 /* pages/a/addGame/addGame.wxss */
 .addform{display:block;padding:40rpx 30rpx;font-size:32rpx;}
-.addform .row{position:relative;line-height:88rpx;padding:11rpx 0;border-bottom:1px solid #e2e2e2;}
+.addform .row{position:relative;line-height:88rpx;padding:11rpx 0;border-bottom:1px solid #e6e6e6;}
 .addform .row .for{}
 .addform .row .val{position:absolute;top:11rpx;right:40rpx;color:#9b9594;}
 .addform .row .ico{position:absolute;top:33rpx;right:-10rpx;}
@@ -10,4 +10,4 @@
 .addform .button{margin-top:80rpx;}
 
 .main{padding:20rpx;}
-.main .ipt{text-align:center;border-bottom:1px solid #e2e2e2;height:110rpx;}
+.main .ipt{text-align:center;border-bottom:1px solid #e6e6e6;height:110rpx;}

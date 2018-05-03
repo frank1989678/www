@@ -1,9 +1,9 @@
 <!--pages/c/cat/cat.wxml-->
 <view class="wrap wrap-foot">
 	<view class="cat">
-		<view class="li" wx:for="{{cat}}" wx:key="item.id" data-key="{{item.id}}">
+	<navigator class="li" url="/pages/c/list/list?id={{item.id}}&name={{item.name}}" open-type="redirectTo" hover-class="none" wx:for="{{list}}" wx:key="item.id">
 			<image class="img" src="{{item.icon}}"/>
 			<text class="txt">{{item.name}}</text>
-		</view>
+		</navigator>
 	</view>
 </view>

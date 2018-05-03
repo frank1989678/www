@@ -10,12 +10,12 @@
 .user .city{display:block;font-size:22rpx;margin-top:16rpx;}
 
 .fu-info .item{line-height:110rpx;}
-.fu-info .ipt{display:inline-block;width:110rpx;height:110rpx;border-left:1rpx solid #e2e2e2;border-right:1rpx solid #e2e2e2;text-align:center;vertical-align:top;margin:0 40rpx;color:#222;}
+.fu-info .ipt{display:inline-block;width:110rpx;height:110rpx;border-left:1rpx solid #e6e6e6;border-right:1rpx solid #e6e6e6;text-align:center;vertical-align:top;margin:0 40rpx;color:#222;}
 .fu-info .area{width:200rpx;height:110rpx;text-align:right;vertical-align:top;color:#222;}
 .fu-info .ico-plus{margin-right:40rpx;}
 .fu-info .item .txt{right:0;}
 
 .foot{position:fixed;left:0;right:0;bottom:0;height:100rpx;padding:0;display:flex;text-align:center;}
 .foot .btn{width:29%;line-height:100rpx;height:100rpx;font-size:36rpx;margin:0!important;border-radius:0;color:#aaa;}
-.foot .btn1{border-right:1px solid #e2e2e2;}
+.foot .btn1{border-right:1px solid #e6e6e6;}
 .foot .red{width:42%;color:#fff;}

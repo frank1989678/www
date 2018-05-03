@@ -8,6 +8,6 @@
 .pic .li .ico-del{position:absolute;top:-10rpx;right:-10rpx;}
 
 
-.area{margin:0 30rpx;padding:40rpx 0 40rpx;border-bottom:1px solid #e2e2e2;color:#aaa;}
+.area{margin:0 30rpx;padding:40rpx 0 40rpx;border-bottom:1px solid #e6e6e6;color:#aaa;}
 
 .button{padding:50rpx 30rpx 0;}

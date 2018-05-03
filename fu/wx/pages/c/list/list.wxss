@@ -3,7 +3,7 @@
 
 .tab{display:flex;line-height:80rpx;background-color:#fff;text-align:center;}
 .tab .item{width:50%;height:80rpx;position:relative;z-index:9;}
-.tab .item:first-child:after{content:'';position:absolute;top:0;left:100%;bottom:0;background-color:#e2e2e2;width:1px;}
+.tab .item:first-child:after{content:'';position:absolute;top:0;left:100%;bottom:0;background-color:#e6e6e6;width:1px;}
 .tab .dt{color:#9b9594;}
 .tab .dt .arrow{display:inline-block;width:0;height:0;margin-left:6rpx;border:12rpx dashed transparent;border-top:12rpx solid #d5d5d5;border-bottom:0;vertical-align:middle;}
 .tab .dd{position:absolute;top:100%;left:0;right:0;background-color:#fff;box-shadow:0 0 2px rgba(0,0,0,.5);}

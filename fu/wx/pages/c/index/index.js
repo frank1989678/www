@@ -13,38 +13,12 @@ Page({
 			'../../../images/ico/3.jpg'
 		],
 
-		cat: [
-			{'id':'1','name':'王者荣耀', 'icon':'../../../images/g1.png'},
-			{'id':'2','name':'王者荣耀', 'icon':'../../../images/g2.png'},
-			{'id':'3','name':'王者荣耀', 'icon':'../../../images/g3.png'},
-			{'id':'4','name':'王者荣耀', 'icon':'../../../images/g4.png'},
-			{'id':'5','name':'王者荣耀', 'icon':'../../../images/g5.png'},
-			{'id':'6','name':'王者荣耀', 'icon':'../../../images/g6.png'},
-			{'id':'7','name':'王者荣耀', 'icon':'../../../images/g7.png'},
-			{'id':'8','name':'王者荣耀', 'icon':'../../../images/g8.png'}
-		],
+		cat: [],
 
-		list: [
-			{
-				'catName': '王者荣耀',
-				'list': [
-					{'online':0, 'url': '../../../images/ico/3.jpg','sex': 2,'tag':'萝莉','price':'72.00','unit':'小时','city':'武汉','nickname':'frank'},
-					{'online':1, 'url': '../../../images/ico/2.jpg','sex': 1,'tag':'鲜肉','price':'72.00','unit':'小时','city':'武汉','nickname':'自在'},
-					{'online':1, 'url': '../../../images/ico/3.jpg','sex': 1,'tag':'鲜肉','price':'72.00','unit':'小时','city':'武汉','nickname':'自在'}
-				]
-			}
-		],
+		list: {},
 
 		pageNum: 1,
-		pageSize: 20
-	},
-
-	// 加载更多
-	loadMore: function() {
-		const para = {
-			id: this.data.id,
-			page: this.data.page
-		}
+		pageSize: 4
 	},
 
 	// lazyload
@@ -60,16 +34,64 @@ Page({
 	},
 
 	// 全部游戏分类接口
-	getCategory: function() {
+	getAllProduct: function() {
 		const that = this;
-		_lib.ajax(_api.CATEGORY, {}, function(res) {
-			console.log(res)
-			if (res.data.status === 200) {
+		_lib.ajax(_api.category, {}, function(res) {
+			if (res.status === 200) {
+				let cat = res.data;
+				let list = that.data.list;
+				for (let i in cat) {
+					const para = {
+						catName: cat[i].name,
+						categoryId: cat[i].id,
+						list: [],
+						pageSize: 4,
+						pageNum: 1,
+						nomore: true
+					}
+					list[cat[i].id] = para;
+				}
 				that.setData({
-					cat: res.data.data
+					cat: cat,
+					list: list
+				})
+				that.getAllCatGame();
+			}
+		})
+	},
+	getAllCatGame: function() {
+		const list = this.data.list;
+
+		for (let i in list) {
+			this.getCatGame( i);
+		}
+	},
+	getCatGame: function(i) {
+		const that = this;
+		const list = this.data.list;
+		const para = {
+			categoryId: list[i].categoryId,
+			pageSize: list[i].pageSize,
+			pageNum: list[i].pageNum
+		}
+		_lib.ajax(_api.catGames, para, function(res) {
+			if (res.status === 200) {
+				let list = that.data.list;
+				let item = list[i];
+				item.pageNum = para.pageNum + 1;
+				item.nomore = res.data.hasNextPage;
+				item.list = item.list.concat(res.data.list || []);
+				that.setData({
+					list: list
 				})
 			}
 		})
+	},
+
+	// 查看更多
+	getMore: function(e) {
+		const idx = e.target.dataset.id;
+		this.getCatGame(idx)
 	},
 
 	getList: function() {
@@ -80,7 +102,7 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
-		// this.getCategory();
+		this.getAllProduct();
 		// this.getList();
 	},
 

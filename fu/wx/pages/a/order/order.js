@@ -1,52 +1,48 @@
 // pages/a/order/order.js
+const _api = require('../../../lib/api.js');
 const _lib = require('../../../lib/lib.js');
-Page({
 
-	/**
-	 * 页面的初始数据
-	 */
+Page({
 	data: {
-		list1: [
-			{'name': '所有技能','key': '0'},
-			{'name': '王者荣耀','key': '1'},
-			{'name': '绝地求生','key': '2'},
-			{'name': '英雄联盟','key': '3'},
-			{'name': '穿越火线','key': '4'},
-			{'name': '吃鸡战场','key': '5'}
-		],
-		name1: '所有技能',hidden1: false,
-		list2: [
-			{'name': '全部状态','key': '0'},
-			{'name': '陪玩成功','key': '1'},
-			{'name': '交易关闭','key': '2'}
-		],
+		list1: [],
+		name1: '所有技能',
+		hidden1: false,
+		name1_id: '',
+
+		list2: [],
 		name2: '全部状态',
 		hidden2: false,
-		list: [
-			{'id':'12345678912','datetime':'18-04-19 18:47:30','name': '绝地求生',"status": "等待陪玩",'key': '1','icon': 'http://localhost/wallpaper/avatar/01.png','price': 14,'unit': '元', 'type': 1},
-			{'id':'12345678912','datetime':'18-04-19 18:47:30','name': '王者荣耀',"status": "陪玩中",'key': '2','icon': 'http://localhost/wallpaper/avatar/02.png','price': 14,'unit': '小时', 'type': 1}
-		]
+		name2_id: 0,
+
+		list: [],
+		pageNum: 1,
+		pageSize: 10,
+
+        nomore: true
 	},
 
 	showSelect: function(e) {
 		var key = e.target.dataset.key || '';
 		var name = e.target.dataset.name;
 		var val = e.target.dataset.val;
-		if (key.indexOf('hidden') > -1) {
-			this.setData({
-				hidden1: false,
-				hidden2: false,
-				[key]: true
-			})
-		}
 
 		if (name) {
 			this.setData({
 				hidden1: false,
 				hidden2: false,
-				[name]: val
+				[name]: val,
+				[name + '_id']: key
+			})
+			this.getList();
+		} else if (key.indexOf('hidden') > -1) {
+			const status = this.data[key];
+			this.setData({
+				hidden1: false,
+				hidden2: false,
+				[key]: !status
 			})
 		}
+
 	},
 
 	bindPickerChange: function(e) {
@@ -55,19 +51,29 @@ Page({
 
 	// 加载更多
 	loadMore: function() {
-		const para = {
-			id: this.data.id,
-			page: this.data.page
-		}
-		_lib.ajax('url', para, function(res) {
-			// this.list.push(res.list)
-			if (res.code === '') {
-
-			}
-		}, 
-		function(err) {
-
-		})
+		const that = this;
+        if (this.data.nomore) {
+            const list = this.data.list;
+            const para = {
+				pageNum: this.data.pageNum,
+				pageSize: this.data.pageSize,
+				categoryId: this.data.name1_id,
+				status: this.data.name2_id
+            }
+            _lib.ajax(_api.b.getUserOrder, para, function(res) {
+                if (res.status === 200) {
+                    let list2 = res.data.list;
+                    for (let i in list2) {
+                    	list2[i].tag = list2[i].name.split('-')[0];
+                    }
+                    that.setData({
+                        list: list.concat(list2),
+                        pageNum: para.pageNum + 1,
+                        nomore: res.data.hasNextPage
+                    })
+                }
+            })
+        }
 	},
 
 	// lazyload
@@ -82,59 +88,49 @@ Page({
 		})
 	},
 
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
+	// 全部游戏列表
+	getAllProduct: function() {
+		const that = this;
+		_lib.ajax(_api.category, {}, function(res) {
+			if (res.status === 200) {
+				let list = res.data;
+				list.unshift({'name': '所有技能','id': ''});
+				that.setData({
+					list1: list,
+					name1_id: 0
+				})
+			}
+		})
+	},
+	// 全部订单状态
+	getAllStatus: function() {
+		const that = this;
+		_lib.ajax(_api.b.orderStatus, {}, function(res) {
+			if (res.status === 200) {
+				let list = res.data;
+				that.setData({
+					list2: list,
+					name2: list[0],
+					name2_id: 0
+				})
+			}
+		})
+	},
+
+
+	getList: function() {
+		this.setData({
+			nomore: true
+		})
+		this.loadMore();
+	},
+	// 获取筛选条件列表
+	getFilter: function() {
+		this.getAllProduct();
+		this.getAllStatus();
+	},
 	onLoad: function(options) {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady: function() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
-	onShow: function() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面隐藏
-	 */
-	onHide: function() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload: function() {
-
-	},
-
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
-	onPullDownRefresh: function() {
-
-	},
-
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom: function() {
-
-	},
-
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage: function() {
-
+		this.getFilter();
+		this.getList();
 	}
 })

@@ -1,31 +1,30 @@
 {
   "pages": [
+    "pages/c/index/index",
+    "pages/menu/menu",
+    "pages/c/im/im",
+    "pages/login/login",
+  
     "pages/c/set/set",
     "pages/c/center/center",
     "pages/c/card/card",
-    "pages/menu/menu",
-  
-    "pages/login/login",
     "pages/c/msg/msg",
-    "pages/c/im/im",
-
     "pages/c/appeal/appeal",
     "pages/c/submit/submit",
     "pages/c/score/score",
     "pages/c/cat/cat",
+    "pages/c/detail/detail",
     "pages/c/detail2/detail2",
     "pages/c/order/order",
-    "pages/c/detail/detail",
     "pages/c/list/list",
-    "pages/c/index/index",
 
     "pages/a/submit/submit",
+    "pages/a/order/order",
     "pages/a/detail/detail",
     "pages/a/suc/suc",
     "pages/a/wallet/wallet",
     "pages/a/withdraw/withdraw",
     "pages/a/setting/setting",
-    "pages/a/order/order",
     "pages/a/addGame/addGame",
     "pages/a/his/his"
   ],

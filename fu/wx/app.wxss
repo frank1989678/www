@@ -16,9 +16,10 @@ page{color:#322f2e;font-size:28rpx;}
 
 .male{background-color:#9cbaff;}
 .female{background-color:#ff9ca3;}
-.tag1{background-color:#9cbaff;}
-.tag2{background-color:#ff9ca3;}
-.tag3{background-color:#ffca85;}
+.tag0{background-color:#9cbaff;}
+.tag1{background-color:#ff9ca3;}
+.tag2{background-color:#ffca85;}
+.tag3{background-color:#84dea8;}
 
 .online,
 .offline{width:60rpx;height:30rpx;background-color:rgba(0,0,0,0.5);border-radius:15rpx 0 0 15rpx;opacity:0.5;font-size:18rpx;position:relative;text-align:center;color:#fff;padding-left:20rpx;}

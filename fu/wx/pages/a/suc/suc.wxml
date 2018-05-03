@@ -2,21 +2,13 @@
 <view class="wrap">
 	<view class="result">
 		<i class="ico ico-ok"></i>
-		<view class="hd">{{msg}}</view>
+		<view class="hd">提现申请成功</view>
 		<view class="bd"><i>￥</i>{{price}}</view>
-	</view>
-
-	<view class="fu-info">
-		<view class="item">
-			<text class="for">到账银行</text>
-			<text class="txt">{{bank}}</text>
-		</view>
-		<view class="item">
-			<text class="for">银行卡号</text>
-			<text class="txt">{{number}}</text>
+		<view class="tips">
+			<view>提现金额将在3个工作日以内到达您的支付宝账户，</view>
+			<view>请耐心等待</view>
 		</view>
 	</view>
 
 	<navigator class="btn" url="/pages/a/his/his" hover-class="none">查看明细</navigator>
-	
 </view>

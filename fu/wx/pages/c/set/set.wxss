@@ -3,9 +3,9 @@
 
 .info{margin-top:20rpx;background-color:#fff;padding:0 30rpx;}
 .item{position:relative;line-height:110rpx;}
-.item:nth-child(n+2){border-top:1rpx solid #e2e2e2}
+.item:nth-child(n+2){border-top:1rpx solid #e6e6e6}
 .item .txt{position:absolute;top:0;right:0;color:#9b9594;}
-.item .ipt{display:inline-block;width:110rpx;height:110rpx;border-left:1rpx solid #e2e2e2;border-right:1rpx solid #e2e2e2;text-align:center;vertical-align:top;margin:0 40rpx;color:#222;}
+.item .ipt{display:inline-block;width:110rpx;height:110rpx;border-left:1rpx solid #e6e6e6;border-right:1rpx solid #e6e6e6;text-align:center;vertical-align:top;margin:0 40rpx;color:#222;}
 
 .item .btn{position:absolute;top:0;bottom:0;right:-10rpx;width:200rpx;}
 .item .picker{position:absolute;top:0;bottom:0;right:30rpx;width:600rpx;text-align:right;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
@@ -15,4 +15,4 @@
 .avatar .img{width:120rpx;height:120rpx;border-radius:50%;}
 
 .main{padding:20rpx;}
-.main .ipt{text-align:center;border-bottom:1px solid #e2e2e2;height:110rpx;}
+.main .ipt{text-align:center;border-bottom:1px solid #e6e6e6;height:110rpx;}
