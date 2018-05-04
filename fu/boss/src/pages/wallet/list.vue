@@ -3,23 +3,28 @@
 
         <!--列表-->
         <el-table :data="list" highlight-current-row border v-loading="listLoading" style="width: 100%;">
-            <el-table-column prop="id" label="申请id" width="100px" fixed></el-table-column>
-            <el-table-column prop="name" label="申请时间" width="200px" align="center" ></el-table-column>
-            <el-table-column prop="name" label="申请用户id" width="200px" align="center" ></el-table-column>
-            <el-table-column prop="name" label="申请用户昵称" width="200px" align="center" ></el-table-column>
-            <el-table-column prop="name" label="申请用户联系方式" width="200px" align="center" ></el-table-column>
-            <el-table-column prop="name" label="申请金额" width="200px" align="center" ></el-table-column>
-            <el-table-column prop="name" label="支付宝账号" width="200px" align="center" ></el-table-column>
-            <el-table-column prop="name" label="支付宝姓名" width="200px" align="center" ></el-table-column>
-            <el-table-column prop="name" label="备注" width="200px" align="center" ></el-table-column>
-            <el-table-column prop="name" label="状态" width="200px" align="center" ></el-table-column>
-            <el-table-column label="操作" width="80px" align="center" fixed="right">
+            <el-table-column prop="cashId" label="申请id" width="100px" fixed></el-table-column>
+            <el-table-column prop="createTime" label="申请时间" width="200px" align="center" ></el-table-column>
+            <el-table-column prop="userId" label="申请用户id" width="200px" align="center" ></el-table-column>
+            <el-table-column prop="nickname" label="申请用户昵称" width="200px" align="center" ></el-table-column>
+            <el-table-column prop="mobile" label="申请用户联系方式" width="200px" align="center" ></el-table-column>
+            <el-table-column prop="money" label="申请金额" width="200px" align="center" ></el-table-column>
+            <el-table-column prop="accNo" label="支付宝账号" width="200px" align="center" ></el-table-column>
+            <el-table-column prop="accUser" label="支付宝姓名" width="200px" align="center" ></el-table-column>
+            <el-table-column prop="comment" label="备注" width="200px" align="center" ></el-table-column>
+            <el-table-column label="状态" width="200px" align="center" >
                 <template slot-scope="scope">
-                    <el-button type="primary" size="mini" v-if="scope.row.status === 1">已打款</el-button>
-                    <el-button type="primary" size="mini" v-else @click="onOpenRemit(scope.row.id)">打款</el-button>
+                    <span v-if="scope.row.cashStatus === 1">已处理</span>
+                    <span v-else>未处理</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="name" label="操作人" width="200px" align="center" fixed="right"></el-table-column>
+            <el-table-column label="操作" width="100px" align="center" fixed="right">
+                <template slot-scope="scope">
+                    <el-button type="success" size="mini" v-if="scope.row.cashStatus === 1">已打款</el-button>
+                    <el-button type="primary" size="mini" v-else @click="onOpenRemit(scope.row.cashId)">打款</el-button>
+                </template>
+            </el-table-column>
+            <el-table-column prop="operator" label="操作人" width="200px" align="center" fixed="right"></el-table-column>
         </el-table>
 
         <!--工具条-->
@@ -30,15 +35,15 @@
 
         <!--打款-->
         <el-dialog title="打款备注" :visible.sync="dialogVisible" :close-on-click-modal="false" width="30%">
-            <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="80px">
-                <el-form-item label="打款说明" prop="intro">
-                    <el-input v-model="addFormData.intro" type="textarea" rows="5" auto-complete="off" resize="none"></el-input>
+            <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="80px" size="mini">
+                <el-form-item label="打款说明" prop="comment">
+                    <el-input v-model="addFormData.comment" type="textarea" rows="5" auto-complete="off" resize="none"></el-input>
                     <span>请将打款记录和时间点填在说明里面，方便后续查找对账</span>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button @click.native="dialogVisible = false">取消</el-button>
-                <el-button type="primary" @click.native="onRemitSubmit" :loading="listLoading">提交</el-button>
+                <el-button size="mini" @click.native="dialogVisible = false">取消</el-button>
+                <el-button size="mini" type="primary" @click.native="onRemitSubmit" :loading="listLoading">提交</el-button>
             </div>
         </el-dialog>
     </section>
@@ -69,11 +74,11 @@ export default {
 
             dialogVisible: false,
             addFormData: {
-                id: '',
-                intro: ''
+                cashId: '',
+                comment: ''
             },
             addFormRules: {
-                intro: [{
+                comment: [{
                     required: true,
                     message: '请输入打款说明',
                     trigger: 'blur'
@@ -88,11 +93,12 @@ export default {
                 if (valid) {
                     this.listLoading = true;
                     const para = Object.assign({}, this.addFormData);
-                    api.postEditAdmin(para).then(res => {
+                    api.addDraw(para).then(res => {
                         this.listLoading = false;
-                        lib.ajaxResult(res);
+                        lib.ajaxResult(this, res);
                         if (res.status == '200') {
                             this.dialogVisible = false;
+                            this.getList();
                         }
                     }).catch(err => {
                         console.log(err);
@@ -103,7 +109,7 @@ export default {
         // 打款dialog
         onOpenRemit(id) {
             this.dialogVisible = true;
-            this.addFormData.id = id;
+            this.addFormData.cashId = id;
         },
         //获取列表
         getList() {

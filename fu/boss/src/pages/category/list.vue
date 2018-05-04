@@ -73,7 +73,10 @@ export default {
         },
         // 修改状态
         switchStatus(row) {
-			const para = { id: row.id };
+			const para = { 
+                id: row.id,
+                status: row.status
+            };
 			this.listLoading = true;
             api.saveCategory(para).then(res => {
 	            this.listLoading = false;

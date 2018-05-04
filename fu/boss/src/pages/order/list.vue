@@ -3,11 +3,14 @@
         <!--工具条-->
         <el-col :span="24" class="fu-filter">
             <el-form :inline="true" :model="filters" size="mini">
-                <el-form-item>
-                    <el-input v-model="filters.orderId" placeholder="请输入订单号/福禄通行证" style="width:296px;"></el-input>
+                <el-form-item label="玩家手机号">
+                    <el-input v-model="filters.userMobile" placeholder="玩家手机号"></el-input>
+                </el-form-item>
+                <el-form-item label="订单号">
+                    <el-input v-model="filters.orderNo" placeholder="订单号"></el-input>
                 </el-form-item>
                 <el-form-item label="提交时间">
-                    <el-date-picker v-model="filters.dateUTC" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" @change="onFormatDate">
+                    <el-date-picker v-model="dateUTC" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" @change="onFormatDate">
                     </el-date-picker>
                 </el-form-item>
                 <el-form-item>
@@ -25,17 +28,21 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="渠道筛选" @change="getList">
+                <!-- <el-form-item label="渠道筛选" @change="getList">
                     <el-select v-model="filters.source">
                         <el-option label="全部" value=""></el-option>
                         <el-option label="福禄自营" value="1"></el-option>
                     </el-select>
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item label="订单状态" @change="getList">
                     <el-select v-model="filters.status">
                         <el-option label="全部" value=""></el-option>
-                        <el-option label="交易关闭" value="0"></el-option>
-                        <el-option label="陪玩成功" value="1"></el-option>
+                        <el-option
+                          v-for="item in statusList"
+                          :key="item.status"
+                          :label="item.msg"
+                          :value="item.status">
+                        </el-option>
                     </el-select>
                 </el-form-item>
             </el-form>
@@ -43,58 +50,72 @@
 
         <!--列表-->
         <el-table :data="list" highlight-current-row border v-loading="listLoading" style="width: 100%;">
-            <el-table-column prop="id" label="ID" width="80px" fixed sortable></el-table-column>
-            <el-table-column prop="name" width="200px" align="center" label="订单号"></el-table-column>
-            <el-table-column width="140px" align="center" label="福禄通行证">
+            <el-table-column type="index" label="ID" width="80px" fixed sortable></el-table-column>
+            <el-table-column prop="orderNo" width="200px" align="center" label="订单号"></el-table-column>
+            <el-table-column prop="name" width="140px" align="center" label="福禄通行证">
                 <template slot-scope="scope">
-                    <el-tooltip placement="right" open-delay="300">
-                        <div slot="content">通行证号<br/>用户昵称</div>
-                        <label class="fu-tooltip">福禄通行证</label>
+                    <el-tooltip placement="right" :open-delay="delay">
+                        <div slot="content">
+                            通行证号：{{scope.row.userMobile}} <br/>
+                            用户昵称：{{scope.row.userNickname}}
+                        </div>
+                        <label class="fu-tooltip">{{scope.row.userMobile}}</label>
                     </el-tooltip>
                 </template>
             </el-table-column>
-            <el-table-column prop="most" width="100px" align="center" label="订单状态" :formatter="formatStatus"></el-table-column>
-            <el-table-column prop="most" width="200px" align="center" label="服务类型-技能"></el-table-column>
+            <el-table-column prop="status" width="100px" align="center" label="订单状态" :formatter="formatStatus"></el-table-column>
+            <el-table-column prop="" width="200px" align="center" label="服务类型-技能"></el-table-column>
 
             <el-table-column width="140px" align="center" label="账号资料">
                 <template slot-scope="scope">
-                    <el-tooltip placement="right" open-delay="300">
+                    <el-tooltip placement="right" :open-delay="delay">
                         <div slot="content">
-                            区服、账号、联系电话、陪玩要求
+                            区服:<br>
+                            账号：{{scope.row.userMobile}} <br>
+                            联系电话：{{scope.row.userMobile}} <br>
+                            陪玩要求：{{scope.row.remark}}
                         </div>
                         <label class="fu-tooltip">账号资料</label>
                     </el-tooltip>
                 </template>
             </el-table-column>
-            <el-table-column prop="most" width="100px" align="center" label="单价"></el-table-column>
-            <el-table-column prop="most" width="100px" align="center" label="数量"></el-table-column>
+            <el-table-column prop="price" width="100px" align="center" label="单价"></el-table-column>
+            <el-table-column prop="amount" width="100px" align="center" label="数量"></el-table-column>
 
             <el-table-column width="140px" align="center" label="实付金额">
                 <template slot-scope="scope">
-                    <el-tooltip placement="right" open-delay="300">
+                    <el-tooltip placement="right" :open-delay="delay">
                         <div slot="content">
+                            实付:{{scope.row.totalMoney}} <br>
                             售价、优惠券抵扣、积分抵扣、实付、支付方式、费率、到账金额
                         </div>
                         <label class="fu-tooltip">实付金额</label>
                     </el-tooltip>
                 </template>
             </el-table-column>
-            <el-table-column prop="most" width="300px" align="center" label="支付打手金额/平台收入"></el-table-column>
-            <el-table-column prop="most" width="300px" align="center" label="下单/支付/验收时间">
+            <el-table-column prop="commissionMoney" width="300px" align="center" label="支付打手金额/平台收入">
                 <template slot-scope="scope">
-                    <el-tooltip placement="right" open-delay="300">
-                        <div slot="content">下单：支付：验收时间</div>
-                        <label class="fu-tooltip">打手通行证</label>
+                    {{scope.row.totalMoney - scope.row.commissionMoney}}/{{scope.row.commissionMoney}}
+                </template>
+            </el-table-column>
+            <el-table-column prop="status" width="300px" align="center" label="下单/支付/验收时间">
+                <template slot-scope="scope">
+                    <el-tooltip placement="right" :open-delay="delay">
+                        <div slot="content">下单：{{scope.row.createTime}} <br> 支付：验收时间</div>
+                        <label class="fu-tooltip">{{scope.row.createTime}}</label>
                     </el-tooltip>
                 </template>
             </el-table-column>
-            <el-table-column prop="most" width="100px" align="center" label="下单渠道"></el-table-column>
-            <el-table-column prop="most" width="150px" align="center" label="总服务时间"></el-table-column>
-            <el-table-column prop="most" width="150px" align="center" label="打手通行证">
+            <!-- <el-table-column prop="most" width="100px" align="center" label="下单渠道"></el-table-column> -->
+            <el-table-column prop="" width="150px" align="center" label="总服务时间"></el-table-column>
+            <el-table-column width="150px" align="center" label="打手通行证">
                 <template slot-scope="scope">
-                    <el-tooltip placement="right" open-delay="300">
-                        <div slot="content">打手通行证号、打手昵称</div>
-                        <label class="fu-tooltip">打手通行证</label>
+                    <el-tooltip placement="right" :open-delay="delay">
+                        <div slot="content">
+                            打手通行证号：{{scope.row.serverMobile}}、<br>
+                            打手昵称：{{scope.row.serverNickname}}
+                        </div>
+                        <label class="fu-tooltip">{{scope.row.serverMobile}}</label>
                     </el-tooltip>
                 </template>
             </el-table-column>
@@ -123,20 +144,25 @@ export default {
     data() {
         return {
             filters: {
-                orderId: '',
-                source: '',
                 status: '',
                 startTime: '',
                 endTime: '',
-                categoryId: ''
+                categoryId: '',
+                userMobile: '',
+                orderNo: ''
             },
+            delay: 300,
+            dateUTC: '',
             total: 0,
             pageNum: 1,
             pageSize: 10,
             listLoading: false,
             list: [],
 
-            gameList: []
+            gameList: [],
+            statusList: [],
+
+            status: {}
         }
     },
     methods: {
@@ -151,6 +177,7 @@ export default {
         },
         // 订单状态
         formatStatus(row, column) {
+            return this.status[row.status]
             // 待付款、陪玩中、验收中、订单异常（请联系客服处理）、订单异常（已处理）、陪玩成功、交易关闭、已协商处理
             // switch (row.status) {
             //     case '1':
@@ -192,15 +219,36 @@ export default {
                 }
             })
         },
+        // 查询状态列表
+        getStatusList(userId) {
+            const that = this;
+            api.getStatusList().then(res => {
+                if (res.status == '200') {
+                    this.statusList = res.data;
+
+                    res.data.forEach(item => {
+                        this.status[item.status] = item.msg;
+                    })
+                    // console.log(this.status);
+                }
+            })
+        },
         //获取列表
         getList() {
+            const filters = this.filters;
             let para = {
                 pageNum: this.pageNum,
                 pageSize: this.pageSize
             };
-            para = Object.assign(para, this.filters);
+            for (let i in filters) {
+                if (filters[i] !== '') {
+                    para[i] = filters[i];
+                }
+            }
+
+            // para = Object.assign(para, this.filters);
             this.listLoading = true;
-            api.getTagList(para).then(res => {
+            api.getOrderList(para).then(res => {
                 this.listLoading = false;
                 this.showMsg(res, false);
                 this.total = res.data.total || 0;
@@ -229,6 +277,7 @@ export default {
     },
     mounted() {
         this.getGameList();
+        this.getStatusList();
         this.getList();
     }
 }

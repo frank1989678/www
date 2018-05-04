@@ -26,7 +26,7 @@ export const unLockUser = params => { return axios.post('/api/v1/user/unlock', q
 
 // 管理员
 export const getAdminList = params => { return axios.post('/api/v1/admin/list', qs.stringify(params)).then(res => res.data)};
-export const postAddAdmin = params => { return axios.post('api/v1/admin/save', qs.stringify(params)).then(res => res.data)};
+export const postAddAdmin = params => { return axios.post('/api/v1/admin/save', qs.stringify(params)).then(res => res.data)};
 export const postEditAdmin = params => { return axios.post('${base}/user/adminEdit', qs.stringify(params)).then(res => res.data)};
 export const postDelAdmin = params => { return axios.post('${base}/user/adminDel', qs.stringify(params)).then(res => res.data)};
 

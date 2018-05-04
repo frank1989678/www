@@ -11,14 +11,14 @@
 
         <!--列表-->
         <el-table :data="list" highlight-current-row border v-loading="listLoading" style="width: 100%;">
-            <el-table-column prop="id" label="被加款用户id"></el-table-column>
-            <el-table-column prop="name" label="用户联系方式" align="center" ></el-table-column>
-            <el-table-column prop="name" label="用户昵称" align="center" ></el-table-column>
-            <el-table-column prop="name" label="加款金额" align="center" ></el-table-column>
-            <el-table-column prop="name" label="操作人" align="center" ></el-table-column>
-            <el-table-column prop="name" label="操作时间" align="center" ></el-table-column>
-            <el-table-column prop="name" label="备注" align="center" ></el-table-column>
-            <el-table-column prop="name" label="状态" align="center" ></el-table-column>
+            <el-table-column prop="targetId" label="被加款用户id"></el-table-column>
+            <el-table-column prop="mobile" label="用户联系方式" align="center" ></el-table-column>
+            <el-table-column prop="nickname" label="用户昵称" align="center" ></el-table-column>
+            <el-table-column prop="money" label="加款金额" align="center" ></el-table-column>
+            <el-table-column prop="operatorId" label="操作人" align="center" ></el-table-column>
+            <el-table-column prop="createTime" label="操作时间" align="center" ></el-table-column>
+            <el-table-column prop="remark" label="备注" align="center" ></el-table-column>
+            <el-table-column prop="cashStatus" label="状态" align="center" ></el-table-column>
         </el-table>
 
         <!--工具条-->
@@ -29,20 +29,20 @@
 
         <!--打款-->
         <el-dialog title="打款备注" :visible.sync="dialogVisible" :close-on-click-modal="false" width="30%">
-            <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="80px">
+            <el-form ref="addFormData" :model="addFormData" :rules="addFormRules" label-width="80px" size="mini">
                 <el-form-item label="手机号" prop="mobile">
                     <el-input v-model="addFormData.mobile" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="加款金额" prop="money">
                     <el-input v-model.number="addFormData.money" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="打款说明" prop="intro">
-                    <el-input v-model="addFormData.intro" type="textarea" rows="5" auto-complete="off" resize="none"></el-input>
+                <el-form-item label="打款说明" prop="remark">
+                    <el-input v-model="addFormData.remark" type="textarea" rows="5" auto-complete="off" resize="none"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button @click.native="dialogVisible = false">取消</el-button>
-                <el-button type="primary" @click.native="onRemitSubmit" :loading="addFormLoading">提交</el-button>
+                <el-button size="mini" @click.native="dialogVisible = false">取消</el-button>
+                <el-button size="mini" type="primary" @click.native="onRemitSubmit" :loading="addFormLoading">提交</el-button>
             </div>
         </el-dialog>
     </section>
@@ -74,7 +74,7 @@ export default {
             addFormData: {
                 mobile: '',
                 money: '',
-                intro: ''
+                remark: ''
             },
             addFormRules: {
             	mobile: [
@@ -83,9 +83,9 @@ export default {
     			],
     			money: [
                     { required: true, message: '请输入金额', trigger: 'blur' },
-                    { type: 'number', message: '必须为数字', trigger: 'blur' }
+                    { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '金额输入错误', trigger: 'blur' }
     			],
-    			intro: [
+    			remark: [
                     { required: true, message: '请输入打款说明', trigger: 'blur' }
     			]
             }
@@ -95,7 +95,6 @@ export default {
         // 打款dialog
         onOpenRemit(id) {
             this.dialogVisible = true;
-            this.addFormData.id = id;
         },
         // 提交打款
         onRemitSubmit(id) {
@@ -103,9 +102,9 @@ export default {
                 if (valid) {
                     this.addFormLoading = true;
                     const para = Object.assign({}, this.addFormData);
-                    api.postEditAdmin(para).then(res => {
+                    api.addMoney(para).then(res => {
                         this.addFormLoading = false;
-                        lib.ajaxResult(res);
+                        lib.ajaxResult(this, res);
                         if (res.status == '200') {
                         	this.getList();
                             this.dialogVisible = false;
@@ -120,15 +119,15 @@ export default {
         getList() {
             let para = {
                 pageNum: this.pageNum,
-                pageSize: this.pageSize
+                pageSize: this.pageSize,
+                operatorId: '' // 当前管理员的id
             };
-            para = Object.assign(para, this.filters);
             this.listLoading = true;
-            api.getTagList(para).then(res => {
+            api.getMoneyList(para).then(res => {
                 this.listLoading = false;
                 this.total = res.data.total || 0;
                 this.list = res.data.list || [];
-                lib.ajaxResult(res);
+                lib.ajaxResult(this, res);
             });
         },
         // 页码

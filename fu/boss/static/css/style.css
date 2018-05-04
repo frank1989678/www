@@ -60,7 +60,7 @@ td,th{vertical-align:middle}
 .wrapper .user{position:absolute;top:0;right:0;text-align:right;padding-right:35px;}
 .wrapper .user .hd{color:#fff;}
 .wrapper .user .cname{position:relative;display:inline-block;background:#7bd59f;color:#fff;width:30px;height:30px;line-height:30px;margin-right:10px;text-align:center;border-radius:50%;}
-.wrapper .logo{width:230px;height:60px;font-size:22px;padding:0 20px 0 60px;border-right:1px solid #eee;background:url('../static/images/logo.png') no-repeat 20px 50%;}
+.wrapper .logo{width:230px;height:60px;font-size:22px;padding:0 20px 0 60px;border-right:1px solid #eee;background:url('../images/logo.png') no-repeat 20px 50%;}
 .wrapper .main{position:absolute;top:60px;bottom:0;left:0;right:0;overflow:hidden;}
 .wrapper .sidebar{width:230px;position:absolute;top:0;left:0;bottom:0;}
 .wrapper .el-menu{height:100%;}
@@ -79,6 +79,7 @@ td,th{vertical-align:middle}
 .fu-upload .img{width:100%;height:100%;display:block;vertical-align:top;}
 .fu-upload .tips{position:absolute;bottom:0;left:-1px;right:-1px;padding:5px;line-height:18px;background:rgba(0,0,0,.4);color:#fff;}
 .fu-upload .el-icon-plus{font-size:28px;color:#8c939d;line-height:150px;}
+.fu-upload .file2 .el-upload{width:150px;}
 .el-upload-list__item-status-label{display:none!important;}
 
 .fu-upload-circle{}

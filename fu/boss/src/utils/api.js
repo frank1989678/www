@@ -1,5 +1,6 @@
 import router from '@/router';
 export const baseURL = process.env.BASE_API;
+// export const baseURL = 'http://10.0.3.74:8081';
 
 export function fetch(url, params) {
     return new Promise((resolve, reject) => {
@@ -23,10 +24,11 @@ export const upfile = params => { return fetch('/api/v1/global/upload', params) 
 export const getUserList = params => { return fetch('/api/v1/user/list', params) };
 export const lockUser = params => { return fetch('/api/v1/user/lock', params) };
 export const unLockUser = params => { return fetch('/api/v1/user/unlock', params) };
+export const addUser = params => { return fetch('/api/v1/user/save', params) };
 
 // 管理员
 export const getAdminList = params => { return fetch('/api/v1/admin/list', params) };
-export const postAddAdmin = params => { return fetch('api/v1/admin/save', params) };
+export const postAddAdmin = params => { return fetch('/api/v1/admin/save', params) };
 export const postEditAdmin = params => { return fetch('${base}/user/adminEdit', params) };
 export const postDelAdmin = params => { return fetch('${base}/user/adminDel', params) };
 
@@ -81,3 +83,13 @@ export const saveSkill = params => { return fetch('/api/v1/user/tech-auth/save',
 
 // 查询提现列表
 export const getWalletList = params => { return fetch('/api/v1/cashDraws/list', params) };
+export const addDraw = params => { return fetch('/api/v1/cashDraws/draw', params) };
+
+// 加零钱
+export const getMoneyList = params => { return fetch('/api/v1/moneyDetails/list', params) };
+export const addMoney = params => { return fetch('/api/v1/moneyDetails/save', params) };
+
+// 订单筛选
+export const getStatusList = params => { return fetch('/api/v1/order/status-all', params) };
+export const getOrderList = params => { return fetch('/api/v1/order/list', params) };
+

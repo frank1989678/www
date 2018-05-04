@@ -92,7 +92,7 @@
 
         <el-form-item label="头像与主图" class="fu-upload">
             <el-upload
-                class="file el-upload-list el-upload-list--picture-card"
+                class="file file2 el-upload-list el-upload-list--picture-card"
                 :data="{name: 'headUrl'}"
                 :action="action"
                 :show-file-list="false"
@@ -112,7 +112,7 @@
                 <i class="tips">头像</i>
             </el-upload>
             <el-upload
-                class="file el-upload-list el-upload-list--picture-card"
+                class="file file2 el-upload-list el-upload-list--picture-card"
                 :data="{name: 'mainPicUrl'}"
                 :action="action"
                 :show-file-list="false"
@@ -155,6 +155,7 @@
             <el-upload
                 :data="{name: 'voiceUrl'}"
                 :action="action"
+                :show-file-list="false"
                 :headers="headers"
                 :on-success="uploadSuccess"
                 :before-upload="beforeUpload2">
@@ -319,6 +320,7 @@ export default {
             // 上传控件无法使用对象里面的属性，这里在最外层定义了一个变量
             this.portraitUrls = obj.portraitList || [];
             this.addFormData.portraitUrls = [];
+            this.addFormData.voiceUrl = obj.voiceList[0].url;
         },
         //新增、编辑表单，id=null时新增，否则为编辑，后端会自动识别
         onFormSubmit() {
@@ -374,6 +376,7 @@ export default {
             }
             this.addFormData[res.msg] = res.data;
             this['modify_' + res.msg] = true;
+            console.log(res.msg)
         },
         // 写真上传成功
         uploadSuccess2(res, file) {
@@ -391,7 +394,7 @@ export default {
         },
         // 判断声音类型(默认：'mp3')、文件大小(小于2MB)
         beforeUpload2(file) {
-            return lib.checkFileType(this, file, {allowed: ['mp3']});
+            return lib.checkFileType(this, file, {allowed: ['mp3', 'm4a']});
         },
         // 预览
         handlePreview(file) {

@@ -63,7 +63,7 @@
                 </template>
             </el-table-column>
 
-            <el-table-column label="语音介绍" width="150px" align="center">
+            <el-table-column label="语音介绍" width="350px" align="center">
                 <template slot-scope="scope">
                     <audio autostart="true" controls="true" v-if="scope.row.voiceUrl" class="vioce">
                         <source :src="scope.row.voiceUrl" type="audio/mpeg"/>
@@ -193,6 +193,10 @@ export default {
                                 row.idCardHandUrl = item.url;
                             }
                         })
+                        try {
+                            row.voiceUrl = row.voiceList[0].url;
+                        } catch(err) {}
+
                     })
 	                this.total = res.data.total || 0;
 	                this.list = list;

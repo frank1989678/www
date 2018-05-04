@@ -52,7 +52,7 @@
                 <el-form-item label="手机号" prop="mobile">
                     <el-input v-model="addFormData.mobile" auto-complete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="昵称" prop="name">
+                <el-form-item label="昵称" prop="nickname">
                     <el-input v-model="addFormData.nickname" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="性别" prop="gender">
@@ -121,6 +121,12 @@ export default {
                 mobile: [
                     { required: true, message: '请输入手机号' },
                     { pattern: /^1[3-9]\d{9}$/, message: '手机号码格式错误', trigger: 'blur' }
+                ],
+                nickname: [
+                    { required: true, message: '请输入昵称' }
+                ],
+                gender: [
+                    { required: true, message: '请选择性别' }
                 ]
             }
         }
@@ -163,7 +169,7 @@ export default {
                     this.addFormLoading = true;
                     const para = Object.assign({}, this.addFormData);
                     if (this.addFormData.id === null) {
-                        api.postAddAdmin(para).then(res => {
+                        api.addUser(para).then(res => {
                             this.handleResult(res);
                         }).catch(err => {
                             console.log(err);
@@ -188,7 +194,7 @@ export default {
                 this.$message.success(msg);
                 this.$refs['addFormData'].resetFields();
                 this.addFormVisible = false;
-                this.onGetAdminList();
+                this.onGetUserList();
             }
         },
         //陪玩师
@@ -242,7 +248,7 @@ export default {
         // 页码
         onChangePage(val) {
             this.pageNum = val;
-            this.onGetAdminList();
+            this.onGetUserList();
         }
     },
     mounted() {
