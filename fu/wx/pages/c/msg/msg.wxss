@@ -1,9 +1,0 @@
-/* pages/a/orderList/orderList.wxss */
-.list{padding:0 30rpx;}
-.li{position:relative;min-height:96rpx;padding:30rpx 0 30rpx 126rpx;border-bottom:1px solid #e6e6e6;}
-.li .avatar{position:absolute;position:absolute;top:30rpx;left:0;width:96rpx;height:96rpx;}
-.li .avatar .img{width:96rpx;height:96rpx;border-radius:50%;}
-.li .avatar .num{position:absolute;top:0;left:72rpx;font-size:24rpx;background-color:#f53f38;border:1rpx solid #fff;border-radius:50%;color:#fff;text-align:center;line-height:34rpx;min-width:34rpx;}
-.li .name{color:#222;}
-.li .name .tag{display:inline-block;margin-left:30rpx;padding:2rpx 8rpx;background-color:#fa794c;color:#fff;font-size:24rpx;border-radius:10rpx;}
-.li .msg{display:block;margin-top:20rpx;color:#aaa;font-size:24rpx;}

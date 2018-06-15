@@ -1,5 +1,0 @@
-/* components/select/select.wxss */
-
-.select .dt{color:#9b9594;}
-.select .dt .arrow{display:inline-block;width:0;height:0;margin-left:6rpx;border:12rpx dashed transparent;border-top:12rpx solid #d5d5d5;border-bottom:0;vertical-align:middle;}
-.select .dd{position:absolute;top:100%;left:0;right:0;background-color:#fff;box-shadow:0 0 2px rgba(0,0,0,.5);display:none;}
