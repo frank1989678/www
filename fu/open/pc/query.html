@@ -26,7 +26,7 @@
         <ul>
             <li>
                 <label class="for">兑换码：</label>
-                <span class="txt" data-key="code"></span>
+                <span class="txt" data-key="series"></span>
             </li>
             <li>
                 <label class="for">服务：</label>
@@ -34,7 +34,7 @@
             </li>
             <li>
                 <label class="for">跨区：</label>
-                <span class="txt" data-key="region"></span>
+                <span class="txt" data-key="gameArea"></span>
             </li>
             <li>
                 <label class="for">角色名：</label>
@@ -46,9 +46,9 @@
             </li>
             <li>
                 <label class="for">状态：</label>
-                <span class="txt" data-key="status"></span>
+                <span class="txt" data-key="statusStr"></span>
             </li>
-            <li class="tips">
+            <li class="tip">
                 提示：后续您可以通过兑换码来查询订单状态。
             </li>
         </ul>
@@ -66,29 +66,51 @@
 <script src="js/jquery191.js"></script>
 <script>
 !(function($) {
-    function getParams() {
-        var ret = {},
-            params = window.location.search.replace(/^\?/,'').split('&'),
-            len = params.length, i = 0, s;
+    var baseURL = 'https://t-api-play.wzpeilian.com';
 
-        for (;i<len;i++) {
-            if (!params[i]) { 
-                continue; 
-            }
-            s = params[i].split('=');
-            ret[s[0]] = s[1];
-        }
-        return ret;
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
     }
 
     function query(code) {
-        
+        console.log(code)
+        $.ajax({
+            url: baseURL + '/open/v1/cdk/query',
+            type: 'POST',
+            dataType: 'json',
+            data: {series: code},
+            success: function(res) {
+                console.log(res)
+                if (res.status === 200) {
+                    var data = res.data || [];
+                    $('.result').show().find('.txt').each(function() {
+                        var key = $(this).data('key');
+                        $(this).html(data[key] || '');
+                    })
+                    $('.form2').hide();
+                    $('.err').hide();
+                } else {
+                    $('.err').html(res.msg).show();
+                    $('.result').hide()
+                    $('.form2').show();
+                }
+            },
+            error: function() {
+                $('.err').html('网络错误').show();
+                $('.result').hide()
+                $('.form2').show();
+            }
+        })
     }
 
-    var series = getParams('series');
+    var series = getQueryString('series');
 
     if (series) {
-
+        console.log(series)
+        query(series);
     }
 
     $('.ipt').on('focus', function() {
@@ -97,8 +119,9 @@
 
     $('#myform').on('submit', function() {
         var pass = true;
+        var val = '';
         $('.ipt').each(function() {
-            var val = $.trim(this.value);
+            val = $.trim(this.value);
             if (val.length === 0) {
                 pass = false;
                 $(this).next('.err').html($(this).data('msg')).show();
@@ -108,6 +131,7 @@
             return pass;
         })
         if( pass ) {
+            query(val)
             var data = {
                 code: 'axsda11596asd92dd11',
                 type: '卢克',
@@ -117,11 +141,7 @@
                 rolename: '咳咳达',
                 status: '等待接单',
             }
-            $('.result').show().find('.txt').each(function() {
-                var key = $(this).data('key');
-                $(this).html(data[key] || '');
-            })
-            $('.form2').hide();
+            
         }
         return false;
     })

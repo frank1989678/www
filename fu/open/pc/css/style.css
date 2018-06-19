@@ -47,10 +47,10 @@ input:-ms-input-placeholder{color:#fff;opacity:1;}
 
 .form2{padding-top:93px;}
 .result{display:none;}
-.result li{padding-bottom:0;padding-left:180px;}
-.result .for{text-align:right;line-height:45px;width:150px;padding-right:30px;}
-.result .txt{color:#fff;height:45px;line-height:45px;display:block;font-size:20px;}
-.result .tips{padding:72px 0 0;font-size:16px;color:#edc68c;text-align:center;}
+.result li{padding-bottom:0;padding-left:130px;}
+.result .for{text-align:right;line-height:45px;width:110px;padding-right:30px;font-size:18px;}
+.result .txt{color:#fff;height:45px;line-height:45px;display:block;font-size:18px;white-space:nowrap;}
+.result .tip{padding:72px 0 0;font-size:16px;color:#edc68c;text-align:center;}
 
 .foot{padding:35px 0;text-align:center;}
 .foot .txt{line-height:1;padding-top:24px;font-size:16px;color:#c7c6c5;}
