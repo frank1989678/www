@@ -164,6 +164,8 @@
                 success: function(res) {
                     if (res.status === 200) {
                         location.href = 'query.html?series=' + series;
+                    } else if (res.status) {
+                        alert(res.msg)
                     }
                 }
             })

@@ -35,7 +35,7 @@
                 <label class="for">服务：</label>
                 <span class="txt" data-key="type"></span>
             </li>
-            <li>
+            <li class="region">
                 <label class="for">跨区：</label>
                 <span class="txt" data-key="gameArea"></span>
             </li>
@@ -94,6 +94,11 @@
                         var key = $(this).data('key');
                         $(this).html(data[key] || '');
                     })
+                    if (data.type.indexOf('阿古斯') === -1) {
+                        $('.region').show();
+                    } else {                            
+                        $('.region').hide();
+                    }
                     $('.form2').hide();
                     $('.err').hide();
                 } else {
@@ -136,16 +141,6 @@
         })
         if( pass ) {
             query(val)
-            var data = {
-                code: 'axsda11596asd92dd11',
-                type: '卢克',
-                region: '跨1',
-                rolename: '',
-                mobile: '1379521691',
-                rolename: '咳咳达',
-                status: '等待接单',
-            }
-            
         }
         return false;
     })
