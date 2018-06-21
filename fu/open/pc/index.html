@@ -10,7 +10,7 @@
 <body>
 <div class="wrap">
 <div class="form">
-    <form name="myform" id="myform">
+    <form name="myform" id="myform" onsubmit="return false">
         <ul>
             <li>
                 <label class="for">兑&nbsp;&nbsp;换&nbsp;&nbsp;码</label>
@@ -47,7 +47,7 @@
             </li>
             <li>
                 <label class="for">手机号码</label>
-                <input type="text" name="mobile" class="ipt" autocomplete="off" placeholder="" data-msg="请输入手机号码">
+                <input type="text" name="mobile" class="ipt" autocomplete="off" placeholder="请输入手机号，便于陪玩师与您联系" data-msg="请输入手机号码">
                 <span class="err"></span>
             </li>
             <li class="button">
@@ -66,6 +66,36 @@
 </div>
 </div>
 
+
+<div class="dialog">
+    <div class="mask"></div>
+    <div class="main">
+        <button type="button" class="close"></button>
+        <div class="hd">请确认以下信息</div>
+        <div class="cont">
+            <div class="item">
+                <label class="for">服务类型：</label>
+                <span class="txt" data-key="type"></span>
+            </div>
+            <div class="item">
+                <label class="for">跨&#12288;&#12288;区：</label>
+                <span class="txt" data-key="gameArea"></span>
+            </div>
+            <div class="item">
+                <label class="for">角色名城：</label>
+                <span class="txt ell" data-key="rolename"></span>
+            </div>
+            <div class="item">
+                <label class="for">手机号码：</label>
+                <span class="txt ell" data-key="mobile"></span>
+            </div>
+            <div class="ft">
+                <button type="button" class="confirm">已确认，提交申请</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 公用 -->
 <script src="js/jquery191.js"></script>
 <script>
@@ -74,10 +104,13 @@
     var series = '';
     var lastKey = '';
     var baseURL = 'https://t-api-play.wzpeilian.com';
+    var mydate = {};
 
     $('.ipt').on('focus', function() {
         $(this).next('.err').hide().empty();
     })
+
+    $('#myform')[0].reset();
 
     $('body').on('click', function() {
         $('.slt-open').removeClass('slt-open');
@@ -139,6 +172,7 @@
         $('.ipt').each(function() {
             var val = $.trim(this.value);
             if (this.name === 'type') {
+                para[this.name] = val;
                 // 服务类型
             } else if (this.name === 'gameArea' && $('.region').is(':hidden')) {
                 // wow没有跨区
@@ -155,22 +189,32 @@
             return pass;
         })
         if (pass) {
-            console.log(para)
-            $.ajax({
-                url: baseURL + '/open/v1/cdk/order',
-                type: 'POST',
-                dataType: 'json',
-                data: para,
-                success: function(res) {
-                    if (res.status === 200) {
-                        location.href = 'query.html?series=' + series;
-                    } else if (res.status) {
-                        alert(res.msg)
-                    }
-                }
+            mydate = para;
+            $('.dialog').fadeIn(300).find('.txt').each(function() {
+                var key = $(this).data('key');
+                $(this).html(para[key] || '');
             })
+            delete para['type'];
         }
         return false;
+    })
+    $('.close').on('click', function() {
+        $('.dialog').fadeOut(300);
+    })
+    $('.confirm').on('click', function() {
+        $.ajax({
+            url: baseURL + '/open/v1/cdk/order',
+            type: 'POST',
+            dataType: 'json',
+            data: mydate,
+            success: function(res) {
+                if (res.status === 200) {
+                    location.href = 'query.html?series=' + series;
+                } else if (res.status) {
+                    alert(res.msg)
+                }
+            }
+        })
     })
 })(jQuery)
 
