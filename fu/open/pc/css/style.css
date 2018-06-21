@@ -61,8 +61,11 @@ input:-ms-input-placeholder{color:#d9bfbf;}
 .result li{padding-bottom:0;padding-left:130px;}
 .result .for{text-align:right;line-height:45px;width:110px;padding-right:30px;font-size:18px;}
 .result .txt{color:#fff;height:45px;line-height:45px;display:block;font-size:18px;white-space:nowrap;}
-.result .tip{padding:72px 0 0;font-size:16px;color:#edc68c;text-align:center;}
+.result .tip{margin-top:20px;padding:0;font-size:16px;color:#d4a972;text-align:center;background-color:#000;background-color:rgba(0,0,0,0.25);line-height:30px;}
 .result .ell{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.result .btn-back{padding-top:30px;padding-left:0;text-align:center;}
+.result .back{color:#f7d483;opacity:0.8;filter:alpha(opacity=80);}
+.result .back:hover{opacity:1;filter:alpha(opacity=100);}
 
 .foot{padding:35px 0;text-align:center;}
 .foot .txt{line-height:1;padding-top:24px;font-size:16px;color:#c7c6c5;}
