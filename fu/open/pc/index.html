@@ -77,7 +77,7 @@
                 <label class="for">服务类型：</label>
                 <span class="txt" data-key="type"></span>
             </div>
-            <div class="item">
+            <div class="item region2">
                 <label class="for">跨&#12288;&#12288;区：</label>
                 <span class="txt" data-key="gameArea"></span>
             </div>
@@ -194,6 +194,11 @@
                 var key = $(this).data('key');
                 $(this).html(para[key] || '');
             })
+            if (para.gameArea) {
+                $('.region2').show();
+            } else {
+                $('.region2').hide();
+            }
             delete para['type'];
         }
         return false;
