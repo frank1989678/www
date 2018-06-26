@@ -103,7 +103,7 @@
     var sessionKey = '';
     var series = '';
     var lastKey = '';
-    var baseURL = 'https://api-play.wzpeilian.com';
+    var baseURL = 'https://t-api-play.wzpeilian.com';
     var mydate = {};
 
     $('.ipt').on('focus', function() {
@@ -150,7 +150,7 @@
                         $('.ipt[name="type"]').val(res.data.type);
                         $this.next('.err').hide();
                         var stype = res.data.type;
-                        if (stype.indexOf('阿古斯') === -1) {
+                        if (stype.indexOf('卢克') > -1 || stype.indexOf('安图恩') > -1 || stype.indexOf('超时空') > -1) {
                             $('.region').show();
                         } else {                            
                             $('.region').hide().find('.ipt').val('');
