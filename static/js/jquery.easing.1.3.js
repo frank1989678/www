@@ -1,4 +1,4 @@
-/*
+
  * jQuery Easing v1.3 - http://gsgd.co.uk/sandbox/jquery/easing/
  *
  * Uses the built in easing capabilities added In jQuery 1.1
@@ -34,7 +34,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE. 
  *
 */
-
+// durTime, 0, posY, duration
 // t: current time, b: begInnIng value, c: change In value, d: duration
 jQuery.easing['jswing'] = jQuery.easing['swing'];
 
@@ -202,4 +202,4 @@ jQuery.extend( jQuery.easing,
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
  * OF THE POSSIBILITY OF SUCH DAMAGE. 
  *
- */
+ 

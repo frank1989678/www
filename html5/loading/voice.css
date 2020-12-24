@@ -1,0 +1,22 @@
+.cricleplay{position:relative;width:8px;height:14px;margin:100px auto;display:block;background-color:#f5453a;}
+.voice-bg .sounds .i{position:absolute;border-radius:50%;vertical-align:middle;border:1px solid transparent;border-right-color:#fff;box-sizing:border-box;top:50%;left:0;}
+.voice-bg .sounds .a1{width:6px;height:6px;margin:-3px 0 0 -3px;}
+.voice-bg .sounds .a2{width:14px;height:14px;margin:-7px 0 0 -7px;}
+.voice-bg .sounds .a3{width:22px;height:22px;margin:-11px 0 0 -11px;}
+body{background-color:#f5453a}
+
+.playing .a2{animation:show2 1s infinite;opacity:1;}
+.playing .a3{animation:show3 1s infinite;opacity:1;}
+@keyframes show2 {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes show3 {
+    0% { opacity: 0; }
+    60% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}

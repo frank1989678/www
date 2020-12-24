@@ -1,8 +1,0 @@
-<template name="quantity">
-	<view class="quantity">
-        <button class="ico ico-minus" bindtap="minus"></button>
-        <input type="number" class="ipt" value="{{inputValue}}" bindinput="quantityBlur" data-min="{{min}}" />
-        <button class="ico ico-plus" bindtap="plus"></button>
-        <text class="unit">{{unit}}</text>
-    </view>
-</template>

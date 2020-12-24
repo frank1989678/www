@@ -1,2 +1,0 @@
-<view class="loading" hidden="{{nomore}}">加载中...</view>
-<view class="nomore" hidden="{{!nomore}}">没有更多了:)</view>

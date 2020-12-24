@@ -5,6 +5,9 @@
 -ms-user-select: none;
 user-select: none;
 
+.m-prize-bd{-webkit-overflow-scrolling:touch;}
+.m-prize-bd::-webkit-scrollbar{display: none;}
+
 
 ::-webkit-scrollbar{width:14px;height:14px;}
 ::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:999px;border:5px solid transparent;}

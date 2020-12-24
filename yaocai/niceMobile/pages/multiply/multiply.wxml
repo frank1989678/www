@@ -1,7 +1,0 @@
-<view wx:for="{{[1,2,3,4,5,6,7,8,9]}}" wx:for-item="i">
-  <block wx:for="{{[1,2,3,4,5,6,7,8,9]}}" wx:for-item="j">
-    <text wx:if="{{j <= i}}"  class="li">
-     {{j}}*{{i}}={{i * j}}
-    </text>
-  </block>
-</view>

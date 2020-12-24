@@ -1,9 +1,0 @@
-<!--components/a/foot/foot.wxml-->
-<template name="select">
-	<view class="dl">
-		<view class="dt" bindtap="showSelect" data-key="{{hidden}}">{{name}} <i class="arrow"></i></view>
-		<view class="dd" wx:if="{{}}">
-			<view class="li" wx:for="{{list}}" data-key="{{item.key}}" wx:key="{{item.key}}">{{item.name}}</view>
-		</view>
-	</view>
-</template>

@@ -1,0 +1,39 @@
+.xxaa .inner{position:relative;height:660px;overflow:hidden;}
+    .xxaa .item{width:244px;height:330px;text-align:center;transition:0.3s;perspective:800px;backface-visibility:hidden;position:relative;}
+    .xxaa .txt1{z-index:2;}
+    .front{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url(./card1.png);background-size:cover;}
+    .back{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url(./card2.png);background-size:cover;}
+    .xxaa .txt2,
+    .xxaa .txt1{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;line-height:180px;color:#fff;}
+    .xxaa .look .txt2{animation:multiflip1 10s both;}
+    .xxaa .look .txt1{animation:multiflip2 10s both;}
+
+
+    @keyframes multiflip1{
+  0%{transform:rotate3d(0,1,0,0);}
+  50%{transform:rotate3d(0,1,0,190deg);}
+  70%{transform:rotate3d(0,1,0,170deg);}
+  80%{transform:rotate3d(0,1,0,180deg);}
+  95%{transform:rotate3d(0,1,0,175deg);}
+  100%{transform:rotate3d(0,1,0,180deg);}
+}
+@keyframes multiflip2{
+  0%{transform:rotate3d(0,1,0,180deg);}
+  50%{transform:rotate3d(0,1,0,370deg);}
+  70%{transform:rotate3d(0,1,0,350deg);}
+  80%{transform:rotate3d(0,1,0,360deg);}
+  95%{transform:rotate3d(0,1,0,355deg);}
+  100%{transform:rotate3d(0,1,0,360deg);}
+}
+
+
+    <div class="xxaa">
+      <div class="item" :class="{'look': xxaa}" @click="xxaa = !xxaa">
+          <div class="txt1">
+            <span class="front">背面</span>
+          </div>
+          <div class="txt2">
+              <span class="back">正面</span>
+          </div>
+      </div>
+    </div>

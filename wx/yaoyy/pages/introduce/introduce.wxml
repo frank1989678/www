@@ -1,5 +1,0 @@
-<swiper indicator-dots="true" duration="500" circular="true" vertical="true">
-	<block wx:for="{{pages}}">
-		<swiper-item class="page page{{index}}"></swiper-item>
-	</block>
-</swiper>

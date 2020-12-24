@@ -1,6 +1,0 @@
-/* 代码整理：大头网 www.datouwang.com */
-ul#gallery { list-style:none; width:660px; margin:0 auto 10px; padding-left:20px; border:1px solid #d3d3d3; background:#fff; overflow:hidden; } 
- ul#gallery li { width:200px; height:200px; float:left; margin:20px 20px 20px 0; }    
- ul#gallery li a.smallimage { background:#333; /*添加一个黑色的背景为图片变暗的效果做铺垫*/ display:block; width:200px; height:200px; }   
- #bigimage { position:absolute; display:none; /*大图片的父标签设置相对定位并将显示样式设置为隐藏*/ }   
- #bigimage img { width:400px; height:400px; padding:5px; background:#fff; border:1px solid #e3e3e3; }
