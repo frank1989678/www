@@ -17,7 +17,7 @@ var fireworkTypes = {
 		color = color.replace('$r', r);
 		color = color.replace('$g', g);
 		color = color.replace('$b', b);
-		return 'rgb(255,120,0)';
+		// return 'rgb(255,120,0)';
 		return color;
 	},
 	makeDoubleFullCircleFirework: function(fire) {
@@ -241,9 +241,8 @@ function getCanvasSize() {
 					far: Math.random() * range + (center.y - range),
 					size: Math.random() + 0.5,
 					delay: Math.round(Math.random() * range) + range * 4,
-					hold: false,
 					alpha: 1,
-					fill: '#ff3'
+					fill: '#f00'
 				};
 				fire.base = {
 					x: fire.x,
@@ -252,7 +251,7 @@ function getCanvasSize() {
 					vy: fire.vy
 				};
 				listFires.push(fire);
-				count -= 8;
+				// count -= 1;
 			}
 		},
 
@@ -264,7 +263,6 @@ function getCanvasSize() {
 		onFire: function() {
 			const that = this;
 			that.update();
-			// that.draw();
 
 			// requestAnimationFrame(this.onFire.bind(this));
 			that.timerId = window.requestAnimationFrame( function() {
@@ -273,13 +271,13 @@ function getCanvasSize() {
 		},
 
 		update: function() {
-			var mode = 1;
+			var mode = 21;
 			ctx.globalAlpha = 0.2;
 			if (mode == 1) {
 				var img = this.img;
 				ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, winSize.width, winSize.height);
 			} else {
-				ctx.fillStyle = '#F42E74';
+				ctx.fillStyle = '#000';
 				ctx.fillRect(0, 0, canvas.width, canvas.height);
 			}
 
@@ -305,7 +303,6 @@ function getCanvasSize() {
 					// reset
 					fire.y = fire.base.y;
 					fire.x = fire.base.x;
-
 					fire.vx = fire.base.vx;
 					fire.vy = fire.base.vy;
 					fire.ax = Math.random() * 0.06 - 0.03;
@@ -347,7 +344,6 @@ function getCanvasSize() {
 				ctx.fillStyle = firework.fill;
 				ctx.fill();
 			}
-
 			while (lights.length) {
 				var light = lights.pop();
 				var gradient = ctx.createRadialGradient(light.x, light.y, 0, light.x, light.y, light.radius);
