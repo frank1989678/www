@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>翻牌效果</title>
+  <style>
+  .stage{position:relative;overflow:hidden;perspective:1000px;}
+  .card{width:184px;height:122px;transform-style:preserve-3d;position:relative;margin:0 auto;}
+  .face{position:absolute;top:0;left:0;width:100%;height:100%;line-height:122px;backface-visibility:hidden;overflow:hidden;text-align:center;}
+  .back{background:#000;color:#fff;}
+  .front{transform: rotate3d(0,1,0,-180deg);background:#999;color:#000;}
+  .light{animation: flip3 1s ease-in-out forwards;}
+  .dark{animation:flip2 1s ease-in-out forwards;}
+  @keyframes flip3{
+    0% {transform: rotate3d(0,1,0,0);}
+    50% {transform: rotate3d(0,1,0,-190deg);}
+    70% {transform: rotate3d(0,1,0,-172deg);}
+    80% {transform: rotate3d(0,1,0,-180deg);}
+    95% {transform: rotate3d(0,1,0,-178deg);}
+    100% { transform: rotate3d(0,1,0,-180deg);}
+  }
+  @keyframes flip2{
+    0% {transform: rotate3d(0,1,0,-180deg);}
+    50% {transform: rotate3d(0,1,0,10deg);}
+    70% {transform: rotate3d(0,1,0,8deg);}
+    80% {transform: rotate3d(0,1,0,0deg);}
+    95% {transform: rotate3d(0,1,0,2deg);}
+    100% { transform: rotate3d(0,1,0,0deg);}
+  }
+  </style>
+</head>
+<body>
+<div class="stage">
+  <div class="card" onclick="toggle()">
+    <span class="face front">前面</span>
+    <span class="face back">背面</span>
+  </div>
+</div>
+<script type="text/javascript">
+  function abc() {
+    document.querySelector('.card').classList.remove('light');
+    setTimeout( () => {
+      document.querySelector('.card').classList.add('light');
+    }, 10);
+  }
+  var isLight = false;
+  function toggle() {
+    if (isLight) {
+      document.querySelector('.card').classList.remove('light');
+      document.querySelector('.card').classList.add('dark');
+    } else {
+      document.querySelector('.card').classList.remove('dark');
+      document.querySelector('.card').classList.add('light');
+    }
+    isLight = !isLight;
+  }
+</script>
+</body>
+</html>

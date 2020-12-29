@@ -89,11 +89,11 @@ function getDoc() {
  * @param  {Number} lowerValue 最小数
  * @param  {Number} upperValue 最大数
  */
-function selectFrom(lowerValue, upperValue) {
-    return Math.floor(Math.random() * (upperValue - lowerValue + 1)) + lowerValue;
+function selectFrom(a, b) {
+    return Math.floor(Math.random() * (b - a + 1)) + a;
 }
 function getRandomNum(a, b) {
-    return a + Math.round(Math.random() * (b - a))
+    return Math.round(Math.random() * (b - a)) + a;
 }
 
 
